@@ -29,18 +29,20 @@ interface WorkSnapContainerProps {
  */
 export function WorkSnapContainer({ cases }: WorkSnapContainerProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  // Hide pagination dots when no slide is intersecting (user is in the footer).
+  const [anySlideVisible, setAnySlideVisible] = useState(true);
   const slideRefs = useRef<(HTMLElement | null)[]>([]);
+  const visibilityMap = useRef<Record<number, boolean>>({});
   const prefersReduced = useReducedMotion();
 
   // Enable full-page snap on the root scroll container for this route only.
+  // "proximity" (not "mandatory") lets the user scroll past the last slide to
+  // reach the SiteFooter without being snapped back.
   useEffect(() => {
     const html = document.documentElement;
-    html.style.scrollSnapType = "y mandatory";
-    // Prevent the browser from interrupting snap with content-based scroll.
-    html.style.scrollBehavior = "smooth";
+    html.style.scrollSnapType = "y proximity";
     return () => {
       html.style.scrollSnapType = "";
-      html.style.scrollBehavior = "";
     };
   }, []);
 
@@ -52,9 +54,12 @@ export function WorkSnapContainer({ cases }: WorkSnapContainerProps) {
       if (!slide) return;
       const observer = new IntersectionObserver(
         ([entry]) => {
+          visibilityMap.current[index] = entry.isIntersecting;
+          const anyVisible = Object.values(visibilityMap.current).some(Boolean);
+          setAnySlideVisible(anyVisible);
           if (entry.isIntersecting) setActiveIndex(index);
         },
-        { threshold: 0.5 },
+        { threshold: 0.8 },
       );
       observer.observe(slide);
       observers.push(observer);
@@ -120,7 +125,10 @@ export function WorkSnapContainer({ cases }: WorkSnapContainerProps) {
           and the CTA links inside each slide. */}
       <nav
         aria-label="Case study navigation"
-        className="fixed top-1/2 right-4 z-50 hidden -translate-y-1/2 flex-col gap-1 md:right-8 md:flex"
+        aria-hidden={!anySlideVisible}
+        className={`fixed top-1/2 right-4 z-50 hidden -translate-y-1/2 flex-col gap-1 transition-opacity duration-300 md:right-8 md:flex ${
+          anySlideVisible ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
+        }`}
       >
         {cases.map((cs, i) => (
           <button

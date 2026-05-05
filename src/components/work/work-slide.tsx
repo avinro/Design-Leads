@@ -55,10 +55,10 @@ export function WorkSlide({ case_, index, isActive, ref }: WorkSlideProps) {
 
       {/* Foreground content — pinned to slide bottom */}
       <motion.div
-        className="relative z-10 flex h-full flex-col justify-end px-4 pt-14 pb-[var(--space-cta-bar)] sm:px-6 md:pb-16 lg:px-8"
-        initial={{ opacity: 0, y: 16 }}
-        animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0.5, y: 0 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
+        className="relative z-10 flex h-full flex-col justify-center px-4 pt-14 pb-[var(--space-cta-bar)] sm:px-6 md:pb-0 lg:px-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isActive ? 1 : 0.4 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <div className="mx-auto w-full max-w-7xl">
           {/* Index number */}
