@@ -37,8 +37,10 @@ yarn-error.log*
 # vercel
 .vercel
 
-# cursor
-.cursor/
+# cursor — ignore everything except the committed rules
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/*.mdc
 
 # typescript
 *.tsbuildinfo

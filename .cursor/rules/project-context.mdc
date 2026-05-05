@@ -1,0 +1,58 @@
+---
+description: Product context and roadmap for the Product Design Leads platform
+alwaysApply: true
+---
+
+# Project Context: Product Design Leads
+
+This is a Next.js 16 + TypeScript + Supabase monorepo for a solo product designer. It is organized in 4 phases, all sharing the same stack, design system, and Vercel deploy pipeline.
+
+## Stack
+
+- Next.js 16 App Router + TypeScript
+- Tailwind v4 + shadcn/ui
+- Supabase (Auth, Postgres, Storage, RLS)
+- Gemini Flash Lite (AI features)
+- Vercel (hosting + preview deploys)
+- Linear (project management, team key: PRO)
+
+## Phase 0 — Foundations (Urgent, in progress)
+
+Shared base for all phases.
+
+- Repo init, Supabase clients, design tokens, ESLint/Prettier/Husky/CI, Vercel deploy.
+- Linear issues: PRO-5 through PRO-10 (identifiers use prefix F0-*).
+- Gate to Phase 1: all F0 issues done, CI green, domain live.
+
+## Phase 1 — Portfolio Web (High priority, backlog)
+
+Public portfolio at `avinro.com` with 3 case studies, SEO, and a contact form.
+
+- Key pages: `/`, `/work`, `/work/[slug]`, `/about`, `/contact`, `/lab`.
+- KPIs: Lighthouse mobile >= 90, LCP < 2s, CLS < 0.1.
+- Linear issues: PRO identifiers with prefix F1-*.
+
+## Phase 2 — Outreach LimaLeads (Medium priority, backlog)
+
+Private backoffice for Apollo lead import, pipeline management, email sequences, and AI email drafting with Gemini Flash Lite.
+
+- Data: `companies`, `contacts`, `leads`, `sequences`, `sequence_runs`, `messages`, `templates`.
+- KPIs: Apollo CSV import < 60s for 1k leads, pipeline >= 5 stages, Gemini draft < 3s.
+- Linear issues: PRO identifiers with prefix F2-*.
+- Gate to Phase 3: Phase 1 live, Phase 2 KPIs met.
+
+## Phase 3 — Client Portal (Low priority, backlog)
+
+Private per-client space with project status, deliverables, feedback, and AI summaries.
+
+- Auth: Supabase magic link. RLS by `account_id`. Owner sees everything; clients see only their account.
+- Data: `accounts`, `account_members`, `projects`, `milestones`, `deliverables`, `comments`, `intake_forms`.
+- Linear issues: PRO identifiers with prefix F3-*.
+
+## Decision rules
+
+- When requirements conflict, defer to the Linear issue's Acceptance Criteria.
+- Work phases sequentially: do not start Phase N+1 issues until the gate for Phase N is met.
+- Never commit secrets (`.env`, credentials).
+- Comments in code must be in English.
+- All UI must be built mobile-first.

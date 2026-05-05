@@ -1,0 +1,34 @@
+---
+description: All UI must be built mobile-first — base Tailwind classes target mobile, responsive prefixes are additive
+alwaysApply: true
+---
+
+# Mobile-First UI
+
+All UI code must follow a mobile-first approach. The base viewport to design for is approximately 375 px wide.
+
+## Rules
+
+- **Base classes target mobile.** Write styles for small screens first, without any responsive prefix.
+- **Responsive prefixes are additive.** Use `sm:`, `md:`, `lg:`, `xl:`, `2xl:` only to expand or adjust the layout at larger breakpoints.
+- **Never use `max-sm:` or similar max-width prefixes** to hide or override desktop styles on mobile. This is a desktop-first pattern and is not allowed.
+
+## Example
+
+```tsx
+// Correct — mobile-first
+<div className="flex flex-col gap-4 md:flex-row md:gap-8">
+
+// Incorrect — desktop-first with mobile override
+<div className="flex flex-row gap-8 max-md:flex-col max-md:gap-4">
+```
+
+## Breakpoints (Tailwind v4 defaults)
+
+| Prefix | Min-width |
+| ------ | --------- |
+| `sm:`  | 640 px    |
+| `md:`  | 768 px    |
+| `lg:`  | 1024 px   |
+| `xl:`  | 1280 px   |
+| `2xl:` | 1536 px   |

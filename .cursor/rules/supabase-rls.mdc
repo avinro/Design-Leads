@@ -1,0 +1,56 @@
+---
+description: RLS must be enabled on every Supabase table that stores third-party data before any code reads or writes it
+alwaysApply: true
+---
+
+# Supabase Row Level Security (RLS)
+
+Every Supabase table that stores third-party data **must** have Row Level Security enabled with at least one policy before any application code reads from or writes to it.
+
+## Tables in scope
+
+### Phase 2 — Outreach LimaLeads
+
+| Table            | Data stored                          |
+| ---------------- | ------------------------------------ |
+| `companies`      | Apollo-imported company records      |
+| `contacts`       | Apollo-imported contact records      |
+| `leads`          | Pipeline entries per contact         |
+| `sequences`      | Email sequence definitions           |
+| `sequence_runs`  | Per-lead sequence execution state    |
+| `messages`       | Sent/drafted email messages          |
+| `templates`      | Reusable email templates             |
+| `reminders`      | Follow-up reminders per lead         |
+| `ai_logs`        | Gemini call logs (tokens, cost, etc) |
+
+### Phase 3 — Client Portal
+
+| Table             | Data stored                           |
+| ----------------- | ------------------------------------- |
+| `accounts`        | Client accounts                       |
+| `account_members` | Users belonging to an account         |
+| `projects`        | Projects scoped to an account         |
+| `milestones`      | Project milestones                    |
+| `deliverables`    | Files and links per milestone         |
+| `comments`        | Threaded comments on deliverables     |
+| `intake_forms`    | Client onboarding intake responses    |
+
+## Migration checklist
+
+When creating a migration that adds any of the above tables, always include:
+
+```sql
+alter table <table_name> enable row level security;
+
+-- At minimum, a restrictive default (deny all):
+create policy "deny all by default" on <table_name>
+  as restrictive
+  for all
+  using (false);
+```
+
+Then add the real access policies required by the feature.
+
+## Enforcement
+
+If a PR creates a new table in scope without RLS enabled, block the PR and request the migration to be updated before merging.

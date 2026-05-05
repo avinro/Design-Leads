@@ -1,0 +1,13 @@
+---
+description: When user says "next issue", review commits and Linear issues first
+alwaysApply: true
+---
+
+# Next Issue Workflow
+
+When the user says **"next issue"**, follow this sequence:
+
+1. **Review recent commits** — Check what changes have been made recently
+2. **Review Linear issues** — Check the status of tasks in progress or available
+
+This provides context about the project state before tackling the next task.
