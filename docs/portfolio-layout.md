@@ -107,6 +107,92 @@ Gap semantics:
 
 > Note: `GridItem` only exposes the `lg` span. Mobile is always single-column. If a layout needs different column tracks at other breakpoints, drop down to plain Tailwind grid utilities — the `Grid/GridItem` API is intentionally narrow.
 
+## Home page composition (PRO-13 — rotation rebrand)
+
+> **Direction change**: The previous editorial-minimalist direction (plain mono kicker, no JS animation, pure CSS entrance staggers) was superseded by the rotation rebrand after PRO-13. The restraint-as-signal brand premise was traded for an expressive React Bits-inspired direction where **rotation is the dominant motion language**. The CTA contract, accessibility requirements, and layout primitives remain intact.
+
+The public home (`/`) is assembled from section components that live in `src/components/site/`. All copy is centralised in `src/lib/content/home.ts`.
+
+### Section tree (rotation rebrand)
+
+```
+RootLayout
+└── <main id="main-content">
+    ├── <HomeHero>       min-h-screen; CircularText absolute on wide grid right edge (md+)
+    ├── <WorkDivider>    CurvedLoop chapter break (decorative, aria-hidden)
+    ├── <SelectedWork>   Section, numbered editorial rows (flex-col, no Grid)
+    ├── <SocialProof>    Section, large-type testimonial
+    └── <AboutTeaser>    Section, Container width="narrow", bio-as-heading
+```
+
+Global chrome in `RootLayout`:
+
+- `<SiteHeader>` — sticky top, skip link, primary CTA ("Let's talk") at `md+`
+- `<SiteFooter>` — full-screen dark closing section: final CTA + small CircularText wordmark echo + nav + copyright
+- `<MobileCtaBar>` — fixed bottom, `md:hidden`, `pb-[env(safe-area-inset-bottom)]`
+
+### Motion components
+
+Two wrapper components live in `src/components/motion/`. Both are `"use client"`, lazy-loaded via `next/dynamic({ ssr: false })` in their consuming sections.
+
+| Component      | Source          | Role in page                                              |
+| -------------- | --------------- | --------------------------------------------------------- |
+| `CircularText` | React Bits port | Hero (220px, 1rem, grid-right) + footer echo (88px, slow) |
+| `CurvedLoop`   | React Bits port | WorkDivider chapter break                                 |
+
+**Reduced-motion contract**: Both wrappers call `useReducedMotion()` from `motion/react`. When `prefers-reduced-motion: reduce` is set:
+
+- `CircularText` renders letters statically positioned around the circle. No rotation, no hover handlers.
+- `CurvedLoop` skips the `requestAnimationFrame` loop entirely. Text renders on its SVG path statically.
+
+Layout and content remain identical in both motion states.
+
+### Motion cadence tokens
+
+| Token                  | Value | Used by                       |
+| ---------------------- | ----- | ----------------------------- |
+| `--motion-spin-slow`   | `30`  | Footer CircularText echo      |
+| `--motion-spin-medium` | `20`  | Hero CircularText protagonist |
+
+Values are unitless numbers (seconds) passed to `CircularText`'s `spinDuration` prop.
+
+### Editorial type system
+
+Three fluid display tokens live in `globals.css` alongside the Tailwind scale. Applied via `style={{ fontSize: "var(--text-display-*)" }}`.
+
+| Token               | Value                           | Used by                   |
+| ------------------- | ------------------------------- | ------------------------- |
+| `--text-display-sm` | `clamp(1.75rem, 3.5vw, 2.5rem)` | `SocialProof` large quote |
+| `--text-display-md` | `clamp(3.5rem, 8vw, 6rem)`      | Footer CTA heading        |
+| `--text-display-lg` | `clamp(4rem, 12vw, 9rem)`       | `HomeHero` h1             |
+
+### Section design patterns
+
+- **Hero layout**: single column of copy. A ghost strip mirrors `Container width="wide"` (`max-w-7xl` + `px-4 sm:px-6 lg:px-8`); `CircularText` is `absolute right-0` inside that strip so it sits on the inner right edge of the editorial grid (not the viewport). Shown from `md` up only.
+- **WorkDivider**: `aria-hidden="true"` div containing a `CurvedLoop`. Carries the "SELECTED WORK" signal that used to live in the removed section kicker.
+- **Editorial rows** (`SelectedWork`): projects are numbered `01`/`02`/`03` flex rows. Static numeric index retained (CircularText echoes limited to hero and footer to avoid visual noise).
+- **Footer closing section**: `bg-foreground text-background` on `<SiteFooter>`. The final CTA heading + text-link live inside the footer, followed by the wordmark/nav/copyright block. This avoids stacking a CTA section and footer as two separate endings.
+
+### CTA strategy — one and only one primary CTA
+
+- **`md+`**: `SiteHeader` renders the primary `Button` ("Let's talk") in a sticky bar at the top.
+- **`<md`**: `MobileCtaBar` renders the same CTA in a fixed bar at the bottom.
+- **In-page/footer sections**: `HomeHero` uses `variant="outline"`; the footer CTA uses a plain text-link. Neither competes with the persistent primary CTA.
+
+### Accessibility additions (ui-ux-pro-max §1)
+
+- Skip link (`href="#main-content"`) is the first focusable element in `SiteHeader`; it becomes visible on keyboard focus.
+- `<main id="main-content">` is the skip link target.
+- `scroll-padding-top: 4rem` in `globals.css` prevents the sticky header from covering anchor targets or keyboard-focused elements.
+- Decorative elements (gradient swatch, logo placeholders, quotation mark ornament) carry `aria-hidden="true"`.
+- Touch targets meet ≥44px via `min-h-[44px]` on interactive row content and the sticky CTA button.
+
+### Spacing tokens
+
+| Token             | Value    | Use                                                             |
+| ----------------- | -------- | --------------------------------------------------------------- |
+| `--space-cta-bar` | `4.5rem` | Bottom padding on `SiteFooter` on `<md` to clear `MobileCtaBar` |
+
 ## Validation checklist (ui-ux-pro-max §5)
 
 Apply on every portfolio page before merging:
@@ -118,3 +204,6 @@ Apply on every portfolio page before merging:
 - viewport-units — `min-h-dvh` instead of `100vh` (already applied in [`src/app/layout.tsx`](../src/app/layout.tsx)).
 - horizontal-scroll — verified at 375 px that nothing overflows.
 - safe-area — `Container` gutters keep content away from screen edges.
+- skip-link — `SiteHeader` includes a visible-on-focus skip link targeting `#main-content`.
+- single-primary-cta — only `SiteHeader` (md+) and `MobileCtaBar` (<md) use `variant="default"`.
+- touch-targets — interactive elements have a minimum 44px touch area.
