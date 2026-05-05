@@ -1,4 +1,5 @@
 import { homeContent } from "@/lib/content/home";
+import { getPublishedCaseStudies } from "@/lib/content/case-studies";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { WorkCard } from "./work-card";
@@ -14,9 +15,15 @@ import { WorkCard } from "./work-card";
  *
  *   The section heading "Selected work" sits above the rows as a small mono
  *   kicker — not an h2 competing with the editorial row titles.
+ *
+ * Data source (PRO-14):
+ *   Case cards are now derived from the MDX content layer (published only),
+ *   sorted by frontmatter.order. homeContent.selectedWork retains only the
+ *   section title and framing copy.
  */
 export function SelectedWork() {
   const { selectedWork } = homeContent;
+  const cases = getPublishedCaseStudies();
 
   return (
     <Section>
@@ -34,8 +41,18 @@ export function SelectedWork() {
 
           {/* Editorial rows — no Grid, straight flex-col */}
           <div>
-            {selectedWork.cases.map((case_, i) => (
-              <WorkCard key={case_.slug} case_={case_} index={i + 1} />
+            {cases.map((cs, i) => (
+              <WorkCard
+                key={cs.frontmatter.slug}
+                case_={{
+                  slug: cs.frontmatter.slug,
+                  title: cs.frontmatter.title,
+                  summary: cs.frontmatter.summary,
+                  tags: cs.frontmatter.tags,
+                  gradient: cs.frontmatter.gradient,
+                }}
+                index={i + 1}
+              />
             ))}
           </div>
         </div>
