@@ -1,0 +1,20 @@
+---
+description: All inline comments and JSDoc in source code must be written in English
+alwaysApply: true
+---
+
+# English Comments
+
+All comments inside source files must be written in English. This applies to:
+
+- Inline comments (`//`, `/* */`)
+- JSDoc (`/** */`)
+- TSDoc annotations
+- Comments in CSS / SCSS / Tailwind plugin files
+
+This rule applies regardless of the developer's native language.
+
+## What this does NOT restrict
+
+- User-facing text in the UI (labels, placeholders, error messages) — these may be in any language as required by the product
+- Content in `*.md` documentation files — prose documentation may be in any language

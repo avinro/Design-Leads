@@ -1,0 +1,57 @@
+---
+description: All commits must follow the Conventional Commits spec enforced by commitlint
+alwaysApply: true
+---
+
+# Conventional Commits
+
+All commits in this repo must follow the [Conventional Commits](https://www.conventionalcommits.org/) spec. This is enforced automatically by `commitlint` via Husky on every commit.
+
+## Format
+
+```
+<type>(<scope>): <subject>
+```
+
+- **type** — required, lowercase
+- **scope** — optional, lowercase, describes what was changed
+- **subject** — required, imperative present tense, no trailing period
+
+## Allowed types
+
+| Type       | When to use                                         |
+| ---------- | --------------------------------------------------- |
+| `feat`     | New feature or behavior visible to the user         |
+| `fix`      | Bug fix                                             |
+| `docs`     | Documentation only                                  |
+| `style`    | Formatting, whitespace — no logic change            |
+| `refactor` | Code change that is neither a feat nor a fix        |
+| `test`     | Adding or updating tests                            |
+| `chore`    | Build process, deps, tooling — no production code   |
+| `ci`       | CI/CD configuration files and scripts               |
+| `perf`     | Performance improvement                             |
+| `revert`   | Reverts a previous commit                           |
+
+## Scope examples (this project)
+
+`auth`, `design`, `infra`, `portfolio`, `outreach`, `portal`, `agents`, `env`, `db`, `ai`
+
+## Examples
+
+```
+feat(portfolio): add hero section with CTA
+fix(auth): handle expired session token on server
+docs(agents): document project rules and conventions (PRO-11)
+chore(env): add Gemini API key placeholder to env example
+refactor(design): extract token values to CSS custom properties
+```
+
+## Breaking changes
+
+Append `!` after the type/scope and add a `BREAKING CHANGE:` footer:
+
+```
+feat(auth)!: replace cookie session with JWT
+
+BREAKING CHANGE: existing sessions will be invalidated on deploy
+```

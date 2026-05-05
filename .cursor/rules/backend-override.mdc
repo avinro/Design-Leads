@@ -1,0 +1,10 @@
+---
+description: Superseded — see backend-authorization.mdc for the current backend policy
+alwaysApply: false
+---
+
+# Superseded
+
+This rule has been replaced by [`backend-authorization.mdc`](backend-authorization.mdc), which defines the correct backend authorization policy for this project.
+
+The previous content of this rule ("backend changes are always allowed in this repo") was too broad and conflicted with the user's standing authorization requirement.
