@@ -9,9 +9,7 @@ import { getSupabaseEnv } from "./env";
  * navigations to Server Components keep a valid session even though
  * Server Components themselves cannot mutate cookies.
  */
-export async function updateSession(
-  request: NextRequest,
-): Promise<NextResponse> {
+export async function updateSession(request: NextRequest): Promise<NextResponse> {
   const { supabaseUrl, supabaseAnonKey } = getSupabaseEnv();
 
   let response = NextResponse.next({ request });

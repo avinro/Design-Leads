@@ -6,13 +6,13 @@ Strategic design leadership — brand identity, UX systems, and client portals.
 
 ## Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Framework | Next.js 16 (App Router) |
-| Language | TypeScript 5 (strict mode) |
-| Styling | Tailwind CSS v4 + shadcn/ui (radix-nova) |
-| Fonts | Geist Sans + Geist Mono (next/font) |
-| Runtime | Node.js ≥ 24 |
+| Layer     | Technology                               |
+| --------- | ---------------------------------------- |
+| Framework | Next.js 16 (App Router)                  |
+| Language  | TypeScript 5 (strict mode)               |
+| Styling   | Tailwind CSS v4 + shadcn/ui (radix-nova) |
+| Fonts     | Geist Sans + Geist Mono (next/font)      |
+| Runtime   | Node.js ≥ 24                             |
 
 ## Folder structure
 
@@ -77,6 +77,7 @@ PRO-7 (F0-3) will define the full token system (colour palette, typography scale
 ## Agent and developer conventions
 
 `AGENTS.md` (added in PRO-11 / F0-7) documents the rules for AI agents and contributors:
+
 - No backend changes without explicit authorisation
 - All code comments in English
 - Mobile-first CSS — base classes target 375 px; breakpoints expand upward
@@ -84,9 +85,9 @@ PRO-7 (F0-3) will define the full token system (colour palette, typography scale
 
 ## Phases
 
-| Phase | Scope |
-|-------|-------|
-| 0 | Foundations (this scaffold) |
-| 1 | Portfolio / public site |
-| 2 | LimaLeads outreach system |
-| 3 | Client portal |
+| Phase | Scope                       |
+| ----- | --------------------------- |
+| 0     | Foundations (this scaffold) |
+| 1     | Portfolio / public site     |
+| 2     | LimaLeads outreach system   |
+| 3     | Client portal               |
