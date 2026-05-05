@@ -30,6 +30,12 @@ export interface CircularTextProps {
   className?: string;
   /** Accessible label for the circular text (read instead of individual letters). */
   "aria-label"?: string;
+  /**
+   * CSS font-size value for each letter span. Defaults to a computed value
+   * proportional to the circle size (size * 0.12). Pass a CSS string like
+   * "1rem" or "14px" to override.
+   */
+  fontSize?: string;
 }
 
 function buildRotationTransition(duration: number, from: number, loop = true) {
@@ -57,6 +63,7 @@ export function CircularText({
   onHover = "speedUp",
   className,
   "aria-label": ariaLabel,
+  fontSize,
 }: CircularTextProps) {
   const letters = Array.from(text);
   const controls = useAnimation();
@@ -146,7 +153,7 @@ export function CircularText({
             style={{
               transform,
               WebkitTransform: transform,
-              fontSize: Math.max(12, size * 0.12),
+              fontSize: fontSize ?? Math.max(12, size * 0.12),
               transition: "all 0.5s cubic-bezier(0, 0, 0, 1)",
             }}
           >

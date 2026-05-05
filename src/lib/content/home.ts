@@ -78,7 +78,7 @@ export const homeContent: HomeContent = {
     headline: "I turn product vision into shipped experiences.",
     subheadline:
       "Most projects fail in the gap between idea and execution. I help teams close it — from early concept to a product they can actually ship.",
-    circularText: "STRATEGY * EXECUTION * SHIPPED * ",
+    circularText: "Strategy & execution · Product design · ",
     secondaryCta: "See the work",
     secondaryCtaHref: "/work",
   },
