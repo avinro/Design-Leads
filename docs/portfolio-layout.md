@@ -122,14 +122,13 @@ RootLayout
     ├── <WorkDivider>    CurvedLoop chapter break (decorative, aria-hidden)
     ├── <SelectedWork>   Section, numbered editorial rows (flex-col, no Grid)
     ├── <SocialProof>    Section, large-type testimonial
-    ├── <AboutTeaser>    Section, Container width="narrow", bio-as-heading
-    └── <FinalCta>       Section spacing="hero", full-bleed dark inversion
+    └── <AboutTeaser>    Section, Container width="narrow", bio-as-heading
 ```
 
 Global chrome in `RootLayout`:
 
 - `<SiteHeader>` — sticky top, skip link, primary CTA ("Let's talk") at `md+`
-- `<SiteFooter>` — small CircularText wordmark echo + nav + copyright, full-screen height
+- `<SiteFooter>` — full-screen dark closing section: final CTA + small CircularText wordmark echo + nav + copyright
 - `<MobileCtaBar>` — fixed bottom, `md:hidden`, `pb-[env(safe-area-inset-bottom)]`
 
 ### Motion components
@@ -164,7 +163,7 @@ Three fluid display tokens live in `globals.css` alongside the Tailwind scale. A
 | Token               | Value                           | Used by                   |
 | ------------------- | ------------------------------- | ------------------------- |
 | `--text-display-sm` | `clamp(1.75rem, 3.5vw, 2.5rem)` | `SocialProof` large quote |
-| `--text-display-md` | `clamp(3.5rem, 8vw, 6rem)`      | `FinalCta` heading        |
+| `--text-display-md` | `clamp(3.5rem, 8vw, 6rem)`      | Footer CTA heading        |
 | `--text-display-lg` | `clamp(4rem, 12vw, 9rem)`       | `HomeHero` h1             |
 
 ### Section design patterns
@@ -172,14 +171,13 @@ Three fluid display tokens live in `globals.css` alongside the Tailwind scale. A
 - **Hero layout**: single column of copy. A ghost strip mirrors `Container width="wide"` (`max-w-7xl` + `px-4 sm:px-6 lg:px-8`); `CircularText` is `absolute right-0` inside that strip so it sits on the inner right edge of the editorial grid (not the viewport). Shown from `md` up only.
 - **WorkDivider**: `aria-hidden="true"` div containing a `CurvedLoop`. Carries the "SELECTED WORK" signal that used to live in the removed section kicker.
 - **Editorial rows** (`SelectedWork`): projects are numbered `01`/`02`/`03` flex rows. Static numeric index retained (CircularText echoes limited to hero and footer to avoid visual noise).
-- **Full-bleed inversion** (`FinalCta`): `bg-foreground text-background` on the `<Section>` element.
-- **Footer**: `min-h-screen` height with `mt-auto` content so it forms a clear closing page. Wordmark replaced with slow-spinning CircularText that still links to `/`.
+- **Footer closing section**: `bg-foreground text-background` on `<SiteFooter>`. The final CTA heading + text-link live inside the footer, followed by the wordmark/nav/copyright block. This avoids stacking a CTA section and footer as two separate endings.
 
 ### CTA strategy — one and only one primary CTA
 
 - **`md+`**: `SiteHeader` renders the primary `Button` ("Let's talk") in a sticky bar at the top.
 - **`<md`**: `MobileCtaBar` renders the same CTA in a fixed bar at the bottom.
-- **In-page sections**: `HomeHero` uses `variant="outline"`; `FinalCta` uses a plain text-link. Neither competes with the persistent primary CTA.
+- **In-page/footer sections**: `HomeHero` uses `variant="outline"`; the footer CTA uses a plain text-link. Neither competes with the persistent primary CTA.
 
 ### Accessibility additions (ui-ux-pro-max §1)
 

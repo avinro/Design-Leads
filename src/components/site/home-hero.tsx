@@ -64,7 +64,7 @@ export function HomeHero() {
               text={hero.circularText}
               spinDuration={20}
               onHover="slowDown"
-              size={200}
+              size={180}
               fontSize="1rem"
               aria-label="Strategy and execution · Product design"
               className="text-foreground/60"
@@ -80,8 +80,8 @@ export function HomeHero() {
             className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both font-display font-semibold text-balance duration-700"
             style={{
               fontSize: "var(--text-display-lg)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.04em",
+              lineHeight: 0.9,
+              letterSpacing: "-0.05em",
             }}
           >
             {hero.headline}

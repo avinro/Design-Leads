@@ -5,7 +5,6 @@ import { WorkDivider } from "@/components/site/work-divider";
 import { SelectedWork } from "@/components/site/selected-work";
 import { SocialProof } from "@/components/site/social-proof";
 import { AboutTeaser } from "@/components/site/about-teaser";
-import { FinalCta } from "@/components/site/final-cta";
 
 /*
  * Home page metadata — Open Graph and Twitter cards are wired to the
@@ -51,7 +50,9 @@ export const metadata: Metadata = {
  *   3. SelectedWork — 3 case study editorial rows
  *   4. SocialProof  — testimonial + decorative logo row
  *   5. AboutTeaser  — short bio + link to /about
- *   6. FinalCta     — closing heading + secondary supporting CTA
+ *
+ * The closing CTA lives inside SiteFooter so the page has one cohesive
+ * full-screen closing section rather than a separate CTA block plus footer.
  *
  * The <main> id="main-content" is the target for the skip link rendered in
  * SiteHeader, allowing keyboard users to bypass navigation directly.
@@ -64,7 +65,6 @@ export default function Home() {
       <SelectedWork />
       <SocialProof />
       <AboutTeaser />
-      <FinalCta />
     </main>
   );
 }

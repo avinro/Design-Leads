@@ -113,7 +113,7 @@
    * to keep Tailwind's JIT from needing to see the clamp() string.
    *
    * --text-display-sm   used by: SocialProof large quote
-   * --text-display-md   used by: FinalCta heading
+   * --text-display-md   used by: footer CTA heading
    * --text-display-lg   used by: HomeHero h1
    */
   --text-display-sm: clamp(1.75rem, 3.5vw, 2.5rem);
