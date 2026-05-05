@@ -33,9 +33,8 @@ describe("SiteHeader", () => {
 
   it("renders primary CTA inside a nav element (visible at md+)", () => {
     const html = renderToStaticMarkup(<SiteHeader />);
-    // The CTA button wraps a Link to /contact — href should appear
-    // Primary CTA href comes from homeContent.primaryCta.href = "/contact"
-    expect(html).toContain("Book a call");
+    // Primary CTA label comes from homeContent.primaryCta.label = "Let's talk"
+    expect(html).toContain("Let&#x27;s talk");
     // It is inside the md:flex nav, so md:flex must be present
     expect(html).toContain("md:flex");
   });

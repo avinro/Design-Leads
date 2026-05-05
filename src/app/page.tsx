@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { HomeHero } from "@/components/site/home-hero";
+import { WorkDivider } from "@/components/site/work-divider";
 import { SelectedWork } from "@/components/site/selected-work";
 import { SocialProof } from "@/components/site/social-proof";
 import { AboutTeaser } from "@/components/site/about-teaser";
@@ -45,11 +46,12 @@ export const metadata: Metadata = {
  * Home page — public portfolio landing.
  *
  * Sections:
- *   1. HomeHero    — headline, sub, secondary CTA
- *   2. SelectedWork — 2 case study cards
- *   3. SocialProof — testimonial + decorative logo row
- *   4. AboutTeaser — short bio + link to /about
- *   5. FinalCta    — closing heading + secondary supporting CTA
+ *   1. HomeHero     — headline, sub, secondary CTA + CircularText protagonist
+ *   2. WorkDivider  — CurvedLoop chapter break
+ *   3. SelectedWork — 3 case study editorial rows
+ *   4. SocialProof  — testimonial + decorative logo row
+ *   5. AboutTeaser  — short bio + link to /about
+ *   6. FinalCta     — closing heading + secondary supporting CTA
  *
  * The <main> id="main-content" is the target for the skip link rendered in
  * SiteHeader, allowing keyboard users to bypass navigation directly.
@@ -58,6 +60,7 @@ export default function Home() {
   return (
     <main id="main-content">
       <HomeHero />
+      <WorkDivider />
       <SelectedWork />
       <SocialProof />
       <AboutTeaser />

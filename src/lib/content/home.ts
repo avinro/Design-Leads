@@ -23,13 +23,24 @@ export interface Testimonial {
 
 export interface HomeContent {
   hero: {
-    /** Small mono label above the headline — practice type and year */
-    kicker: string;
     headline: string;
     subheadline: string;
+    /**
+     * Text rendered inside the CircularText component — the rotation visual
+     * protagonist. Repeat the phrase with a separator (e.g. " * ") so the
+     * circle looks full. Keep under ~24 chars per phrase to fit the circle.
+     */
+    circularText: string;
     /** Secondary in-page CTA — outline button, NOT the persistent primary */
     secondaryCta: string;
     secondaryCtaHref: string;
+  };
+  /**
+   * Copy for the CurvedLoop chapter break between hero and selected work.
+   * Use a short phrase with a separator that tiles naturally on a curve.
+   */
+  workDivider: {
+    text: string;
   };
   selectedWork: {
     sectionTitle: string;
@@ -64,12 +75,15 @@ export interface HomeContent {
 
 export const homeContent: HomeContent = {
   hero: {
-    kicker: "Strategy & execution · Product design",
     headline: "I turn product vision into shipped experiences.",
     subheadline:
       "Most projects fail in the gap between idea and execution. I help teams close it — from early concept to a product they can actually ship.",
+    circularText: "STRATEGY * EXECUTION * SHIPPED * ",
     secondaryCta: "See the work",
     secondaryCtaHref: "/work",
+  },
+  workDivider: {
+    text: "SELECTED WORK \u2022 ",
   },
   selectedWork: {
     sectionTitle: "Selected work",

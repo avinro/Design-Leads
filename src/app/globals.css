@@ -120,6 +120,17 @@
   --text-display-md: clamp(3.5rem, 8vw, 6rem);
   --text-display-lg: clamp(4rem, 12vw, 9rem);
 
+  /* ── Motion cadence (rotation rebrand) ──────────────────────────────
+   * Centralised spin durations so all rotating elements share the same
+   * cadence vocabulary. Consumed by CircularText via its spinDuration prop
+   * by passing the resolved CSS variable value.
+   *
+   * --motion-spin-slow    footer wordmark echo — very gentle (30 s)
+   * --motion-spin-medium  hero protagonist     — perceptible but calm (20 s)
+   */
+  --motion-spin-slow: 30;
+  --motion-spin-medium: 20;
+
   /* ── Portfolio spacing scale (PRO-12) ────────────────────────────────
    * Semantic vertical-rhythm tokens consumed by layout primitives
    * (Container, Section, Grid). Values use clamp() so spacing scales

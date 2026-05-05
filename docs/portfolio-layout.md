@@ -107,31 +107,59 @@ Gap semantics:
 
 > Note: `GridItem` only exposes the `lg` span. Mobile is always single-column. If a layout needs different column tracks at other breakpoints, drop down to plain Tailwind grid utilities — the `Grid/GridItem` API is intentionally narrow.
 
-## Home page composition (PRO-13)
+## Home page composition (PRO-13 — rotation rebrand)
 
-The public home (`/`) is assembled from section components that live in `src/components/site/`. All copy is centralised in `src/lib/content/home.ts` so a future content issue can swap placeholder text without touching component files.
+> **Direction change**: The previous editorial-minimalist direction (plain mono kicker, no JS animation, pure CSS entrance staggers) was superseded by the rotation rebrand after PRO-13. The restraint-as-signal brand premise was traded for an expressive React Bits-inspired direction where **rotation is the dominant motion language**. The CTA contract, accessibility requirements, and layout primitives remain intact.
 
-### Section tree
+The public home (`/`) is assembled from section components that live in `src/components/site/`. All copy is centralised in `src/lib/content/home.ts`.
+
+### Section tree (rotation rebrand)
 
 ```
 RootLayout
 └── <main id="main-content">
-    ├── <HomeHero>       Section spacing="hero", Container width="wide"
+    ├── <HomeHero>       min-h-screen, two-column lg+; CircularText right col
+    ├── <WorkDivider>    CurvedLoop chapter break (decorative, aria-hidden)
     ├── <SelectedWork>   Section, numbered editorial rows (flex-col, no Grid)
     ├── <SocialProof>    Section, large-type testimonial
     ├── <AboutTeaser>    Section, Container width="narrow", bio-as-heading
-    └── <FinalCta>       Section spacing="hero", full-bleed dark inversion, text-link only
+    └── <FinalCta>       Section spacing="hero", full-bleed dark inversion
 ```
 
 Global chrome in `RootLayout`:
 
-- `<SiteHeader>` — sticky top, skip link, primary CTA at `md+`
-- `<SiteFooter>` — wordmark + nav + copyright, `pb-[var(--space-cta-bar)] md:pb-0`
+- `<SiteHeader>` — sticky top, skip link, primary CTA ("Let's talk") at `md+`
+- `<SiteFooter>` — small CircularText wordmark echo + nav + copyright, full-screen height
 - `<MobileCtaBar>` — fixed bottom, `md:hidden`, `pb-[env(safe-area-inset-bottom)]`
 
-### Editorial type system (PRO-13 visual refinement)
+### Motion components
 
-Three fluid display tokens live in `globals.css` alongside the Tailwind scale. They are applied via `style={{ fontSize: "var(--text-display-*)" }}` because `clamp()` values cannot be used as Tailwind utility classes.
+Two wrapper components live in `src/components/motion/`. Both are `"use client"`, lazy-loaded via `next/dynamic({ ssr: false })` in their consuming sections.
+
+| Component      | Source          | Role in page                                        |
+| -------------- | --------------- | --------------------------------------------------- |
+| `CircularText` | React Bits port | Hero protagonist (320px) + footer echo (88px, slow) |
+| `CurvedLoop`   | React Bits port | WorkDivider chapter break                           |
+
+**Reduced-motion contract**: Both wrappers call `useReducedMotion()` from `motion/react`. When `prefers-reduced-motion: reduce` is set:
+
+- `CircularText` renders letters statically positioned around the circle. No rotation, no hover handlers.
+- `CurvedLoop` skips the `requestAnimationFrame` loop entirely. Text renders on its SVG path statically.
+
+Layout and content remain identical in both motion states.
+
+### Motion cadence tokens
+
+| Token                  | Value | Used by                       |
+| ---------------------- | ----- | ----------------------------- |
+| `--motion-spin-slow`   | `30`  | Footer CircularText echo      |
+| `--motion-spin-medium` | `20`  | Hero CircularText protagonist |
+
+Values are unitless numbers (seconds) passed to `CircularText`'s `spinDuration` prop.
+
+### Editorial type system
+
+Three fluid display tokens live in `globals.css` alongside the Tailwind scale. Applied via `style={{ fontSize: "var(--text-display-*)" }}`.
 
 | Token               | Value                           | Used by                   |
 | ------------------- | ------------------------------- | ------------------------- |
@@ -139,22 +167,19 @@ Three fluid display tokens live in `globals.css` alongside the Tailwind scale. T
 | `--text-display-md` | `clamp(3.5rem, 8vw, 6rem)`      | `FinalCta` heading        |
 | `--text-display-lg` | `clamp(4rem, 12vw, 9rem)`       | `HomeHero` h1             |
 
-All three use `font-display` (Google Sans Flex), `tracking-tight` (`-0.04em`), and `line-height: 0.95` for editorial tightness.
-
 ### Section design patterns
 
-- **Kicker**: sections use a small `font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground` label instead of a competing `<h2>`. This reserves the heading level for the actual content.
-- **Editorial rows** (`SelectedWork`): projects are numbered `01`/`02` flex rows. The gradient swatch is a `h-[3px]` full-width bar (`aria-hidden`). No `Grid`/`GridItem` — those are reserved for multi-column case-study pages.
-- **Full-bleed inversion** (`FinalCta`): `bg-foreground text-background` on the `<Section>` element creates a dark block spanning the full viewport width. Contrast: `--foreground` on `--background` ≈ 17:1 (AAA). Dark mode inverts naturally.
-- **Entrance motion** (`HomeHero`): CSS-only stagger using `tw-animate-css` utilities (`animate-in fade-in slide-in-from-bottom-* fill-mode-both duration-* delay-*`). The `fill-mode-both` class ensures elements start in the `from` state before the animation plays. All utilities respect `prefers-reduced-motion: reduce` automatically.
+- **Hero layout**: two-column at `lg+` (copy left, CircularText right). Single-column on mobile — CircularText hidden on `<md` so it never pushes the CTA below the fold.
+- **WorkDivider**: `aria-hidden="true"` div containing a `CurvedLoop`. Carries the "SELECTED WORK" signal that used to live in the removed section kicker.
+- **Editorial rows** (`SelectedWork`): projects are numbered `01`/`02`/`03` flex rows. Static numeric index retained (CircularText echoes limited to hero and footer to avoid visual noise).
+- **Full-bleed inversion** (`FinalCta`): `bg-foreground text-background` on the `<Section>` element.
+- **Footer**: `min-h-screen` height with `mt-auto` content so it forms a clear closing page. Wordmark replaced with slow-spinning CircularText that still links to `/`.
 
 ### CTA strategy — one and only one primary CTA
 
-`ui-ux-pro-max §4 primary-action` requires exactly one primary CTA visible at any scroll depth:
-
-- **`md+`**: `SiteHeader` renders the primary `Button` ("Book a call") in a sticky bar at the top.
+- **`md+`**: `SiteHeader` renders the primary `Button` ("Let's talk") in a sticky bar at the top.
 - **`<md`**: `MobileCtaBar` renders the same CTA in a fixed bar at the bottom.
-- **In-page sections**: `HomeHero` uses `variant="outline"`; `FinalCta` uses a plain text-link (`<Link>` with underline border). Neither competes with the persistent primary CTA.
+- **In-page sections**: `HomeHero` uses `variant="outline"`; `FinalCta` uses a plain text-link. Neither competes with the persistent primary CTA.
 
 ### Accessibility additions (ui-ux-pro-max §1)
 
