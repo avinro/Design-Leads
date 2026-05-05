@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <radialGradient id="glow-dec" cx="40%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#6D28D9" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#09090B"/>
+  <rect width="1200" height="800" fill="url(#glow-dec)"/>
+  <!-- Diamond / decision fork shapes -->
+  <!-- Central decision diamond -->
+  <polygon points="600,200 780,400 600,600 420,400" fill="none" stroke="#8B5CF6" stroke-width="1.5" opacity="0.4"/>
+  <polygon points="600,250 740,400 600,550 460,400" fill="#8B5CF6" opacity="0.08"/>
+  <!-- Fork lines -->
+  <line x1="420" y1="400" x2="180" y2="250" stroke="#A78BFA" stroke-width="1.5" opacity="0.3"/>
+  <line x1="420" y1="400" x2="180" y2="550" stroke="#7C3AED" stroke-width="1.5" opacity="0.3"/>
+  <line x1="780" y1="400" x2="1020" y2="250" stroke="#A78BFA" stroke-width="1.5" opacity="0.3"/>
+  <line x1="780" y1="400" x2="1020" y2="550" stroke="#7C3AED" stroke-width="1.5" opacity="0.3"/>
+  <!-- Option A nodes (unchosen) -->
+  <circle cx="180" cy="250" r="18" fill="#27272A" stroke="#7C3AED" stroke-width="1" opacity="0.6"/>
+  <circle cx="180" cy="550" r="18" fill="#27272A" stroke="#7C3AED" stroke-width="1" opacity="0.6"/>
+  <!-- Option B nodes (chosen) -->
+  <circle cx="1020" cy="250" r="22" fill="#8B5CF6" opacity="0.5"/>
+  <circle cx="1020" cy="550" r="22" fill="#8B5CF6" opacity="0.5"/>
+  <!-- Checkmark on chosen -->
+  <path d="M 1009 250 L 1017 258 L 1031 242" stroke="#FAFAFA" stroke-width="2.5" fill="none" opacity="0.8"/>
+  <path d="M 1009 550 L 1017 558 L 1031 542" stroke="#FAFAFA" stroke-width="2.5" fill="none" opacity="0.8"/>
+  <!-- X on unchosen -->
+  <line x1="172" y1="242" x2="188" y2="258" stroke="#52525B" stroke-width="2" opacity="0.7"/>
+  <line x1="188" y1="242" x2="172" y2="258" stroke="#52525B" stroke-width="2" opacity="0.7"/>
+  <line x1="172" y1="542" x2="188" y2="558" stroke="#52525B" stroke-width="2" opacity="0.7"/>
+  <line x1="188" y1="542" x2="172" y2="558" stroke="#52525B" stroke-width="2" opacity="0.7"/>
+</svg>

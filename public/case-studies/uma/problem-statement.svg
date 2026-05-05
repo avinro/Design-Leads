@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <radialGradient id="glow-a" cx="30%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow-b" cx="80%" cy="25%" r="40%">
+      <stop offset="0%" stop-color="#6D28D9" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#09090B"/>
+  <rect width="1200" height="800" fill="url(#glow-a)"/>
+  <rect width="1200" height="800" fill="url(#glow-b)"/>
+  <!-- Scattered dots  ambiguity / chaos -->
+  <circle cx="180" cy="140" r="3" fill="#8B5CF6" opacity="0.6"/>
+  <circle cx="340" cy="90" r="5" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="520" cy="200" r="2" fill="#8B5CF6" opacity="0.7"/>
+  <circle cx="710" cy="60" r="4" fill="#7C3AED" opacity="0.5"/>
+  <circle cx="900" cy="170" r="3" fill="#8B5CF6" opacity="0.6"/>
+  <circle cx="1050" cy="95" r="6" fill="#A78BFA" opacity="0.35"/>
+  <circle cx="130" cy="350" r="4" fill="#7C3AED" opacity="0.5"/>
+  <circle cx="290" cy="440" r="2" fill="#8B5CF6" opacity="0.7"/>
+  <circle cx="460" cy="310" r="5" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="640" cy="480" r="3" fill="#8B5CF6" opacity="0.6"/>
+  <circle cx="820" cy="330" r="4" fill="#6D28D9" opacity="0.5"/>
+  <circle cx="990" cy="420" r="2" fill="#A78BFA" opacity="0.7"/>
+  <circle cx="1100" cy="310" r="5" fill="#8B5CF6" opacity="0.4"/>
+  <circle cx="200" cy="600" r="3" fill="#7C3AED" opacity="0.55"/>
+  <circle cx="380" cy="660" r="6" fill="#8B5CF6" opacity="0.35"/>
+  <circle cx="570" cy="590" r="2" fill="#A78BFA" opacity="0.7"/>
+  <circle cx="750" cy="700" r="4" fill="#8B5CF6" opacity="0.5"/>
+  <circle cx="930" cy="620" r="3" fill="#6D28D9" opacity="0.6"/>
+  <circle cx="1080" cy="680" r="5" fill="#A78BFA" opacity="0.4"/>
+  <!-- Large diffuse circle as focal -->
+  <circle cx="320" cy="480" r="160" fill="none" stroke="#8B5CF6" stroke-width="1" opacity="0.2"/>
+  <circle cx="320" cy="480" r="240" fill="none" stroke="#8B5CF6" stroke-width="0.5" opacity="0.1"/>
+  <!-- Question mark motif  abstract, large -->
+  <text x="820" y="520" font-family="Georgia, serif" font-size="320" font-weight="700" fill="#8B5CF6" opacity="0.07" text-anchor="middle">?</text>
+</svg>

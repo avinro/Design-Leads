@@ -19,6 +19,18 @@ import { z } from "zod";
 // Frontmatter schema
 // ---------------------------------------------------------------------------
 
+const SectionImageSchema = z.object({
+  /**
+   * Matches the id that rehype-slug generates for the corresponding ## heading.
+   * Use the slugified form of the heading text, e.g. "problem-statement".
+   */
+  id: z.string().min(1),
+  /** Absolute path under /public (e.g. /case-studies/uma/problem-statement.svg). */
+  image: z.string().min(1),
+});
+
+export type SectionImage = z.infer<typeof SectionImageSchema>;
+
 const CaseStudyFrontmatterSchema = z.object({
   title: z.string().min(1),
   slug: z.string().min(1),
@@ -34,6 +46,11 @@ const CaseStudyFrontmatterSchema = z.object({
   tags: z.array(z.string()).min(1),
   gradient: z.string().min(1),
   draft: z.boolean().optional().default(false),
+  /**
+   * Per-section background images for the sticky scrolly-telling effect.
+   * Optional — falls back to a single coverImage if omitted (e.g. project-3).
+   */
+  sections: z.array(SectionImageSchema).min(1).optional(),
 });
 
 export type CaseStudyFrontmatter = z.infer<typeof CaseStudyFrontmatterSchema>;

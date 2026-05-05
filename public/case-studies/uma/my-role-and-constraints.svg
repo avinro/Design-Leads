@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <radialGradient id="glow-role" cx="65%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#09090B"/>
+  <rect width="1200" height="800" fill="url(#glow-role)"/>
+  <!-- Structured grid  constraints / ownership -->
+  <line x1="0" y1="200" x2="1200" y2="200" stroke="#8B5CF6" stroke-width="0.5" opacity="0.2"/>
+  <line x1="0" y1="400" x2="1200" y2="400" stroke="#8B5CF6" stroke-width="0.5" opacity="0.2"/>
+  <line x1="0" y1="600" x2="1200" y2="600" stroke="#8B5CF6" stroke-width="0.5" opacity="0.2"/>
+  <line x1="300" y1="0" x2="300" y2="800" stroke="#8B5CF6" stroke-width="0.5" opacity="0.2"/>
+  <line x1="600" y1="0" x2="600" y2="800" stroke="#8B5CF6" stroke-width="0.5" opacity="0.2"/>
+  <line x1="900" y1="0" x2="900" y2="800" stroke="#8B5CF6" stroke-width="0.5" opacity="0.2"/>
+  <!-- Bold role indicator bar -->
+  <rect x="0" y="0" width="8" height="800" fill="#8B5CF6" opacity="0.6"/>
+  <!-- Three constraint bars -->
+  <rect x="100" y="180" width="400" height="6" rx="3" fill="#A78BFA" opacity="0.5"/>
+  <rect x="100" y="230" width="280" height="6" rx="3" fill="#8B5CF6" opacity="0.4"/>
+  <rect x="100" y="280" width="340" height="6" rx="3" fill="#7C3AED" opacity="0.4"/>
+  <!-- Person silhouette  minimal -->
+  <circle cx="900" cy="340" r="60" fill="#8B5CF6" opacity="0.12"/>
+  <circle cx="900" cy="280" r="28" fill="#8B5CF6" opacity="0.18"/>
+  <!-- Corner brackets -->
+  <path d="M 80 80 L 80 30 L 130 30" stroke="#8B5CF6" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M 1120 720 L 1120 770 L 1070 770" stroke="#8B5CF6" stroke-width="2" fill="none" opacity="0.4"/>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <radialGradient id="glow-hd-proc" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#09090B"/>
+  <rect width="1200" height="800" fill="url(#glow-hd-proc)"/>
+  <!-- Audit grid  rows of components -->
+  <rect x="100" y="180" width="120" height="32" rx="4" fill="#FB923C" opacity="0.22"/>
+  <rect x="240" y="180" width="120" height="32" rx="4" fill="#FB923C" opacity="0.18"/>
+  <rect x="380" y="180" width="120" height="32" rx="4" fill="#FB923C" opacity="0.15"/>
+  <rect x="520" y="180" width="120" height="32" rx="4" fill="#F97316" opacity="0.22"/>
+  <rect x="660" y="180" width="120" height="32" rx="4" fill="#F97316" opacity="0.18"/>
+  <rect x="800" y="180" width="120" height="32" rx="4" fill="#E11D48" opacity="0.15"/>
+  <rect x="940" y="180" width="120" height="32" rx="4" fill="#E11D48" opacity="0.18"/>
+  <rect x="100" y="230" width="120" height="32" rx="4" fill="#F97316" opacity="0.15"/>
+  <rect x="240" y="230" width="120" height="32" rx="4" fill="#FB923C" opacity="0.2"/>
+  <rect x="380" y="230" width="120" height="32" rx="4" fill="#E11D48" opacity="0.18"/>
+  <rect x="520" y="230" width="120" height="32" rx="4" fill="#FB923C" opacity="0.14"/>
+  <rect x="660" y="230" width="120" height="32" rx="4" fill="#F97316" opacity="0.2"/>
+  <rect x="800" y="230" width="120" height="32" rx="4" fill="#FB923C" opacity="0.15"/>
+  <rect x="940" y="230" width="120" height="32" rx="4" fill="#F97316" opacity="0.17"/>
+  <rect x="100" y="280" width="120" height="32" rx="4" fill="#E11D48" opacity="0.18"/>
+  <rect x="240" y="280" width="120" height="32" rx="4" fill="#FB923C" opacity="0.12"/>
+  <rect x="380" y="280" width="120" height="32" rx="4" fill="#F97316" opacity="0.2"/>
+  <!-- Token architecture diagram below -->
+  <!-- Layer 1 box -->
+  <rect x="350" y="450" width="500" height="50" rx="6" fill="none" stroke="#FB923C" stroke-width="1.5" opacity="0.5"/>
+  <rect x="350" y="520" width="500" height="50" rx="6" fill="none" stroke="#F97316" stroke-width="1.5" opacity="0.4"/>
+  <rect x="350" y="590" width="500" height="50" rx="6" fill="none" stroke="#E11D48" stroke-width="1.5" opacity="0.35"/>
+  <!-- Connecting lines -->
+  <line x1="600" y1="500" x2="600" y2="520" stroke="#FB923C" stroke-width="1" opacity="0.3"/>
+  <line x1="600" y1="570" x2="600" y2="590" stroke="#F97316" stroke-width="1" opacity="0.3"/>
+  <!-- Large number -->
+  <text x="900" y="700" font-family="system-ui, sans-serif" font-size="180" font-weight="800" fill="#FB923C" opacity="0.06" text-anchor="middle">214</text>
+</svg>

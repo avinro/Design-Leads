@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <radialGradient id="glow-hd-role" cx="60%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#09090B"/>
+  <rect width="1200" height="800" fill="url(#glow-hd-role)"/>
+  <!-- Overlapping circles representing 3 tech stacks / teams -->
+  <circle cx="440" cy="380" r="180" fill="none" stroke="#FB923C" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="600" cy="380" r="180" fill="none" stroke="#F97316" stroke-width="1.5" opacity="0.35"/>
+  <circle cx="760" cy="380" r="180" fill="none" stroke="#E11D48" stroke-width="1.5" opacity="0.35"/>
+  <!-- Overlap fill zones -->
+  <!-- React Native + React overlap -->
+  <path d="M 519 250 A 180 180 0 0 1 519 510 A 180 180 0 0 1 519 250 Z" fill="#FB923C" opacity="0.05"/>
+  <!-- React + Vue overlap -->
+  <path d="M 681 250 A 180 180 0 0 0 681 510 A 180 180 0 0 0 681 250 Z" fill="#E11D48" opacity="0.05"/>
+  <!-- Architect node in the center -->
+  <circle cx="600" cy="380" r="28" fill="#FB923C" opacity="0.4"/>
+  <circle cx="600" cy="380" r="14" fill="#FB923C" opacity="0.7"/>
+  <!-- Bold left bar -->
+  <rect x="0" y="0" width="8" height="800" fill="#FB923C" opacity="0.6"/>
+  <!-- Stack labels simulation -->
+  <rect x="340" y="580" width="140" height="4" rx="2" fill="#FB923C" opacity="0.3"/>
+  <rect x="530" y="580" width="140" height="4" rx="2" fill="#F97316" opacity="0.3"/>
+  <rect x="720" y="580" width="140" height="4" rx="2" fill="#E11D48" opacity="0.3"/>
+</svg>

@@ -101,4 +101,47 @@ describe("case-studies content layer", () => {
     const cs = getCaseStudyBySlug("project-3");
     expect(cs?.frontmatter.draft).toBe(true);
   });
+
+  // ---------------------------------------------------------------------------
+  // sections field — optional per-section background images
+  // ---------------------------------------------------------------------------
+
+  it("uma has a sections array with at least one entry", () => {
+    const cs = getCaseStudyBySlug("uma");
+    expect(cs?.frontmatter.sections).toBeDefined();
+    expect(cs?.frontmatter.sections?.length).toBeGreaterThan(0);
+  });
+
+  it("hello-dojo has a sections array with at least one entry", () => {
+    const cs = getCaseStudyBySlug("hello-dojo");
+    expect(cs?.frontmatter.sections).toBeDefined();
+    expect(cs?.frontmatter.sections?.length).toBeGreaterThan(0);
+  });
+
+  it("project-3 has no sections (optional field, falls back to coverImage)", () => {
+    const cs = getCaseStudyBySlug("project-3");
+    expect(cs?.frontmatter.sections).toBeUndefined();
+  });
+
+  it("each section entry has a non-empty id and image", () => {
+    const cs = getCaseStudyBySlug("uma");
+    cs?.frontmatter.sections?.forEach((section) => {
+      expect(section.id.length).toBeGreaterThan(0);
+      expect(section.image.length).toBeGreaterThan(0);
+    });
+  });
+
+  it("uma sections ids align with the expected rehype-slug heading ids", () => {
+    const cs = getCaseStudyBySlug("uma");
+    const ids = cs?.frontmatter.sections?.map((s) => s.id) ?? [];
+    const expected = [
+      "problem-statement",
+      "my-role-and-constraints",
+      "process",
+      "key-decisions-and-trade-offs",
+      "results-and-impact",
+      "learnings",
+    ];
+    expect(ids).toEqual(expected);
+  });
 });

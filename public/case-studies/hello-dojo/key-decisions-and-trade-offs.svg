@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <radialGradient id="glow-hd-dec" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#09090B"/>
+  <rect width="1200" height="800" fill="url(#glow-hd-dec)"/>
+  <!-- Token-first decision: nested cube isometric hint -->
+  <!-- Layer 3 (front) -->
+  <polygon points="600,340 740,420 600,500 460,420" fill="#FB923C" opacity="0.12"/>
+  <polygon points="600,340 740,420 740,340 600,260" fill="#F97316" opacity="0.08"/>
+  <polygon points="600,340 460,420 460,340 600,260" fill="#E11D48" opacity="0.08"/>
+  <!-- Layer 2 (mid) -->
+  <polygon points="600,220 780,320 600,420 420,320" fill="none" stroke="#FB923C" stroke-width="1.5" opacity="0.35"/>
+  <!-- Layer 1 (back) -->
+  <polygon points="600,100 820,220 600,340 380,220" fill="none" stroke="#FB923C" stroke-width="1" opacity="0.2"/>
+  <!-- Cube edges -->
+  <line x1="600" y1="340" x2="600" y2="500" stroke="#FB923C" stroke-width="1" opacity="0.3"/>
+  <line x1="740" y1="420" x2="740" y2="340" stroke="#F97316" stroke-width="1" opacity="0.3"/>
+  <line x1="460" y1="420" x2="460" y2="340" stroke="#E11D48" stroke-width="1" opacity="0.3"/>
+  <!-- Layer labels on right -->
+  <rect x="880" y="200" width="200" height="4" rx="2" fill="#FB923C" opacity="0.3"/>
+  <rect x="880" y="320" width="200" height="4" rx="2" fill="#F97316" opacity="0.3"/>
+  <rect x="880" y="440" width="200" height="4" rx="2" fill="#E11D48" opacity="0.3"/>
+  <!-- Vertical connector dots -->
+  <circle cx="870" cy="200" r="4" fill="#FB923C" opacity="0.5"/>
+  <circle cx="870" cy="320" r="4" fill="#F97316" opacity="0.5"/>
+  <circle cx="870" cy="440" r="4" fill="#E11D48" opacity="0.5"/>
+  <line x1="870" y1="204" x2="870" y2="316" stroke="#52525B" stroke-width="1" opacity="0.4"/>
+  <line x1="870" y1="324" x2="870" y2="436" stroke="#52525B" stroke-width="1" opacity="0.4"/>
+</svg>

@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -7,11 +6,12 @@ import {
   getCaseStudyBySlug,
   getCaseStudySlugs,
   getPublishedCaseStudies,
+  type SectionImage,
 } from "@/lib/content/case-studies";
 import { mdxOptions } from "@/lib/mdx/options";
-import { mdxComponents } from "@/components/mdx/components";
+import { caseStudyMdxComponents } from "@/components/case-study/case-study-mdx-components";
+import { StickyBackground } from "@/components/case-study/sticky-background";
 import { Container } from "@/components/layout/container";
-import { Section } from "@/components/layout/section";
 
 // ---------------------------------------------------------------------------
 // Static generation
@@ -67,90 +67,84 @@ export async function generateMetadata({
       description,
       images: [`/work/${slug}/opengraph-image`],
     },
-    // Draft pages are not indexed — they are still built for preview purposes.
+    // Draft pages are not indexed — still built for preview purposes.
     ...(frontmatter.draft ? { robots: { index: false, follow: false } } : {}),
   };
 }
 
 // ---------------------------------------------------------------------------
-// Reading time chip
+// Reading time chip — light text over scrim
 // ---------------------------------------------------------------------------
 
 function ReadingTimeChip({ text }: { text: string }) {
-  return <span className="text-muted-foreground font-mono text-xs tabular-nums">{text}</span>;
+  return <span className="font-mono text-xs text-zinc-300 tabular-nums">{text}</span>;
 }
 
 // ---------------------------------------------------------------------------
-// Metadata strip (cover, client, role, year, read time)
+// Foreground intro (replaces the old cover-image CoverMeta)
+// Rendered over the first sticky background image.
 // ---------------------------------------------------------------------------
 
-interface CoverMetaProps {
+interface ForegroundIntroProps {
   title: string;
   client: string;
   role: string;
   year: number;
   coverage: string[];
-  coverImage: string;
   readingTimeText: string;
 }
 
-function CoverMeta({
+function ForegroundIntro({
   title,
   client,
   role,
   year,
   coverage,
-  coverImage,
   readingTimeText,
-}: CoverMetaProps) {
+}: ForegroundIntroProps) {
   return (
-    <div className="flex flex-col gap-8">
-      {/* Cover image with reserved aspect ratio to prevent CLS */}
-      <div className="relative aspect-[16/7] w-full overflow-hidden rounded-xl">
-        <Image
-          src={coverImage}
-          alt={`Cover image for ${title}`}
-          fill
-          priority
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
-          className="object-cover"
-        />
-      </div>
+    <div className="flex flex-col gap-6">
+      {/* Back link */}
+      <Link
+        href="/work"
+        className="flex min-h-[44px] w-fit items-center gap-2 font-mono text-xs tracking-widest text-zinc-400 uppercase transition-colors hover:text-zinc-200 focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:outline-none"
+      >
+        ← Work
+      </Link>
 
-      {/* Metadata strip */}
-      <div className="border-border/40 grid grid-cols-2 gap-4 border-t pt-6 sm:grid-cols-4">
+      {/* Page h1 — heading hierarchy: only one h1 per page, owned by the template */}
+      <h1 className="font-display text-4xl font-semibold tracking-tight text-zinc-50 sm:text-5xl lg:text-6xl">
+        {title}
+      </h1>
+
+      {/* Metadata strip — 2-col on mobile, 4-col on sm+ */}
+      <div className="grid grid-cols-2 gap-4 border-t border-white/15 pt-6 sm:grid-cols-4">
         <div className="flex flex-col gap-1">
-          <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
-            Client
-          </span>
-          <span className="text-sm font-medium">{client}</span>
+          <span className="font-mono text-xs tracking-widest text-zinc-400 uppercase">Client</span>
+          <span className="text-sm font-medium text-zinc-100">{client}</span>
         </div>
         <div className="flex flex-col gap-1">
-          <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
-            Role
-          </span>
-          <span className="text-sm font-medium">{role}</span>
+          <span className="font-mono text-xs tracking-widest text-zinc-400 uppercase">Role</span>
+          <span className="text-sm font-medium text-zinc-100">{role}</span>
         </div>
         <div className="flex flex-col gap-1">
-          <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
-            Year
-          </span>
-          <span className="text-sm font-medium tabular-nums">{year}</span>
+          <span className="font-mono text-xs tracking-widest text-zinc-400 uppercase">Year</span>
+          <span className="text-sm font-medium text-zinc-100 tabular-nums">{year}</span>
         </div>
         <div className="flex flex-col gap-1">
-          <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+          <span className="font-mono text-xs tracking-widest text-zinc-400 uppercase">
             Read time
           </span>
           <ReadingTimeChip text={readingTimeText} />
         </div>
       </div>
 
-      {/* Coverage tags */}
+      {/* Coverage tags / badges */}
       <div className="flex flex-wrap gap-2">
         {coverage.map((tag) => (
           <span
             key={tag}
-            className="bg-muted text-muted-foreground rounded-full px-3 py-1 font-mono text-xs tracking-wide uppercase"
+            className="rounded-full bg-white/10 px-3 py-1 font-mono text-xs tracking-wide text-zinc-50 uppercase ring-1 ring-white/15"
           >
             {tag}
           </span>
@@ -161,7 +155,7 @@ function CoverMeta({
 }
 
 // ---------------------------------------------------------------------------
-// Next case study CTA
+// Next case study CTA — styled for light-on-scrim context
 // ---------------------------------------------------------------------------
 
 interface NextCaseCTAProps {
@@ -171,21 +165,19 @@ interface NextCaseCTAProps {
 
 function NextCaseCTA({ nextTitle, nextSlug }: NextCaseCTAProps) {
   return (
-    <div className="border-border/40 mt-16 border-t pt-12">
-      <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
-        Next case study
-      </p>
+    <div className="mt-16 border-t border-white/15 pt-12">
+      <p className="font-mono text-xs tracking-widest text-zinc-400 uppercase">Next case study</p>
       <Link
         href={`/work/${nextSlug}`}
         aria-label={`Next case study: ${nextTitle}`}
-        className="group focus-visible:ring-ring mt-4 flex min-h-[44px] items-center gap-3 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+        className="group mt-4 flex min-h-[44px] items-center gap-3 transition-colors focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
-        <span className="font-display text-2xl font-semibold tracking-tight transition-transform group-hover:translate-x-1 sm:text-3xl">
+        <span className="font-display text-2xl font-semibold tracking-tight text-zinc-50 transition-transform group-hover:translate-x-1 sm:text-3xl">
           {nextTitle}
         </span>
         <span
           aria-hidden="true"
-          className="text-muted-foreground shrink-0 transition-transform group-hover:translate-x-2"
+          className="shrink-0 text-zinc-300 transition-transform group-hover:translate-x-2"
         >
           →
         </span>
@@ -205,6 +197,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   const { frontmatter, content, readingTime } = cs;
 
+  // Build sections for StickyBackground: use frontmatter.sections if present,
+  // otherwise fall back to a single entry with the coverImage.
+  const bgSections: SectionImage[] = frontmatter.sections ?? [
+    { id: "cover", image: frontmatter.coverImage },
+  ];
+
   // Determine the next published case study (wraps around).
   const published = getPublishedCaseStudies();
   const currentIdx = published.findIndex((p) => p.frontmatter.slug === slug);
@@ -215,37 +213,51 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <main id="main-content">
-      {/* Hero section — cover + metadata strip */}
-      <Section spacing="hero">
-        <Container>
-          {/* Page h1 — lives here, not in MDX body (heading-hierarchy rule) */}
-          <h1 className="font-display mb-8 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-            {frontmatter.title}
-          </h1>
+      {/*
+       * Sticky background layout:
+       *   1. StickyBackground occupies h-[100dvh] in document flow with sticky top-0.
+       *   2. The foreground div uses -mt-[100dvh] to visually pull itself up and
+       *      overlap the sticky layer, while leaving the natural scroll height intact.
+       *   3. z-10 on the foreground ensures it renders above the background/scrim.
+       */}
+      <div className="relative">
+        <StickyBackground sections={bgSections} />
 
-          <CoverMeta
-            title={frontmatter.title}
-            client={frontmatter.client}
-            role={frontmatter.role}
-            year={frontmatter.year}
-            coverage={frontmatter.coverage}
-            coverImage={frontmatter.coverImage}
-            readingTimeText={readingTime.text}
-          />
-        </Container>
-      </Section>
+        {/* Foreground — scrolls over the sticky background */}
+        <div className="relative z-10 -mt-[100dvh]">
+          {/* First screen: intro fills viewport, content anchored to bottom */}
+          <div className="flex min-h-[100dvh] flex-col justify-end px-4 pt-20 pb-12 sm:px-6 sm:pt-28 sm:pb-16 lg:px-8">
+            <Container>
+              <ForegroundIntro
+                title={frontmatter.title}
+                client={frontmatter.client}
+                role={frontmatter.role}
+                year={frontmatter.year}
+                coverage={frontmatter.coverage}
+                readingTimeText={readingTime.text}
+              />
+            </Container>
+          </div>
 
-      {/* MDX body — constrained to max-w-prose for line-length compliance */}
-      <Section>
-        <Container width="narrow">
-          <MDXRemote source={content} components={mdxComponents} options={mdxOptions} />
+          {/* MDX body — constrained to max-w-prose for line-length compliance */}
+          <div className="pb-24">
+            <Container width="narrow">
+              <MDXRemote
+                source={content}
+                components={caseStudyMdxComponents}
+                options={mdxOptions}
+              />
 
-          {/* Next case study CTA */}
-          {nextCs && (
-            <NextCaseCTA nextTitle={nextCs.frontmatter.title} nextSlug={nextCs.frontmatter.slug} />
-          )}
-        </Container>
-      </Section>
+              {nextCs && (
+                <NextCaseCTA
+                  nextTitle={nextCs.frontmatter.title}
+                  nextSlug={nextCs.frontmatter.slug}
+                />
+              )}
+            </Container>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <radialGradient id="glow-proc" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#09090B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="800" fill="#09090B"/>
+  <rect width="1200" height="800" fill="url(#glow-proc)"/>
+  <!-- Flowing curves  research / discovery wave -->
+  <path d="M -50 400 C 150 200, 350 600, 550 380 S 850 150, 1050 380 S 1200 500, 1300 350"
+        stroke="#8B5CF6" stroke-width="2" fill="none" opacity="0.35"/>
+  <path d="M -50 450 C 150 250, 350 650, 550 430 S 850 200, 1050 430 S 1200 550, 1300 400"
+        stroke="#A78BFA" stroke-width="1" fill="none" opacity="0.2"/>
+  <path d="M -50 350 C 150 150, 350 550, 550 330 S 850 100, 1050 330 S 1200 450, 1300 300"
+        stroke="#7C3AED" stroke-width="1" fill="none" opacity="0.2"/>
+  <!-- Step nodes on the path -->
+  <circle cx="200" cy="290" r="12" fill="#8B5CF6" opacity="0.5"/>
+  <circle cx="550" cy="380" r="12" fill="#A78BFA" opacity="0.5"/>
+  <circle cx="900" cy="260" r="12" fill="#8B5CF6" opacity="0.5"/>
+  <!-- Small labels simulation -->
+  <rect x="170" y="315" width="64" height="4" rx="2" fill="#A78BFA" opacity="0.3"/>
+  <rect x="520" y="405" width="64" height="4" rx="2" fill="#A78BFA" opacity="0.3"/>
+  <rect x="870" y="285" width="64" height="4" rx="2" fill="#A78BFA" opacity="0.3"/>
+  <!-- Large background number -->
+  <text x="600" y="580" font-family="system-ui, sans-serif" font-size="280" font-weight="800" fill="#8B5CF6" opacity="0.05" text-anchor="middle">03</text>
+</svg>
