@@ -118,7 +118,7 @@ The public home (`/`) is assembled from section components that live in `src/com
 ```
 RootLayout
 └── <main id="main-content">
-    ├── <HomeHero>       min-h-screen, two-column lg+; CircularText right col
+    ├── <HomeHero>       min-h-screen; CircularText absolute on wide grid right edge (md+)
     ├── <WorkDivider>    CurvedLoop chapter break (decorative, aria-hidden)
     ├── <SelectedWork>   Section, numbered editorial rows (flex-col, no Grid)
     ├── <SocialProof>    Section, large-type testimonial
@@ -136,10 +136,10 @@ Global chrome in `RootLayout`:
 
 Two wrapper components live in `src/components/motion/`. Both are `"use client"`, lazy-loaded via `next/dynamic({ ssr: false })` in their consuming sections.
 
-| Component      | Source          | Role in page                                        |
-| -------------- | --------------- | --------------------------------------------------- |
-| `CircularText` | React Bits port | Hero protagonist (320px) + footer echo (88px, slow) |
-| `CurvedLoop`   | React Bits port | WorkDivider chapter break                           |
+| Component      | Source          | Role in page                                              |
+| -------------- | --------------- | --------------------------------------------------------- |
+| `CircularText` | React Bits port | Hero (280px, 1rem, grid-right) + footer echo (88px, slow) |
+| `CurvedLoop`   | React Bits port | WorkDivider chapter break                                 |
 
 **Reduced-motion contract**: Both wrappers call `useReducedMotion()` from `motion/react`. When `prefers-reduced-motion: reduce` is set:
 
@@ -169,7 +169,7 @@ Three fluid display tokens live in `globals.css` alongside the Tailwind scale. A
 
 ### Section design patterns
 
-- **Hero layout**: two-column at `lg+` (copy left, CircularText right). Single-column on mobile — CircularText hidden on `<md` so it never pushes the CTA below the fold.
+- **Hero layout**: single column of copy. A ghost strip mirrors `Container width="wide"` (`max-w-7xl` + `px-4 sm:px-6 lg:px-8`); `CircularText` is `absolute right-0` inside that strip so it sits on the inner right edge of the editorial grid (not the viewport). Shown from `md` up only.
 - **WorkDivider**: `aria-hidden="true"` div containing a `CurvedLoop`. Carries the "SELECTED WORK" signal that used to live in the removed section kicker.
 - **Editorial rows** (`SelectedWork`): projects are numbered `01`/`02`/`03` flex rows. Static numeric index retained (CircularText echoes limited to hero and footer to avoid visual noise).
 - **Full-bleed inversion** (`FinalCta`): `bg-foreground text-background` on the `<Section>` element.
