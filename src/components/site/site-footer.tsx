@@ -22,8 +22,8 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-border/40 border-t pb-[var(--space-cta-bar)] md:pb-0">
-      <div className="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:px-8">
+    <footer className="border-border/40 flex min-h-screen flex-col border-t pb-[var(--space-cta-bar)] md:pb-0">
+      <div className="mx-auto mt-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:px-8">
         {/* Wordmark */}
         <Link
           href="/"

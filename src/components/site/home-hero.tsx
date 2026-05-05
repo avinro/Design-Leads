@@ -9,15 +9,16 @@ import { Section } from "@/components/layout/section";
  * HomeHero — above-the-fold section.
  *
  * Design intent (PRO-13 visual refinement):
+ *   - Section fills the full viewport height (min-h-screen) with the content
+ *     centred vertically — gives the headline room to breathe as a standalone
+ *     typographic moment before the user scrolls into the work.
  *   - Type is the entire visual. --text-display-lg scales from 4rem to 9rem
  *     via clamp so the headline fills the viewport at any width.
  *   - Kicker (mono, small, tracked) anchors the editorial tone above the h1.
  *   - Entrance stagger: kicker → headline → sub → CTA row. Total ~600ms via
  *     tw-animate-css CSS-only utilities which respect prefers-reduced-motion.
- *   - Line-height 0.95 and tracking -0.04em give the headline tight, printed
+ *   - Line-height 1.2 and tracking -0.04em give the headline tight, printed
  *     magazine character — Google Sans Flex supports these optical extremes.
- *   - Value prop ("Available for new projects") lives beside the secondary CTA
- *     as a lightweight signal, not as a floating chip above the heading.
  *
  * CTA rule: only outline/link variants here. Primary CTA lives in SiteHeader
  * (md+) and MobileCtaBar (<md) — never duplicated in-page content.
@@ -26,7 +27,7 @@ export function HomeHero() {
   const { hero } = homeContent;
 
   return (
-    <Section as="header" spacing="hero">
+    <Section as="header" spacing="hero" className="flex min-h-screen flex-col justify-center">
       <Container width="wide">
         <div className="flex flex-col gap-8 sm:gap-12">
           {/* Kicker — editorial mono label */}
@@ -39,7 +40,7 @@ export function HomeHero() {
             className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both font-display font-semibold text-balance delay-100 duration-700"
             style={{
               fontSize: "var(--text-display-lg)",
-              lineHeight: 0.95,
+              lineHeight: 1.2,
               letterSpacing: "-0.04em",
             }}
           >
@@ -51,18 +52,12 @@ export function HomeHero() {
             {hero.subheadline}
           </p>
 
-          {/* Secondary CTA + availability note */}
-          <div className="animate-in fade-in fill-mode-both flex flex-wrap items-center gap-4 delay-300 duration-700 sm:gap-6">
+          {/* Secondary in-page CTA */}
+          <div className="animate-in fade-in fill-mode-both delay-300 duration-700">
             <Button asChild variant="outline" size="lg">
               <Link href={hero.secondaryCtaHref}>{hero.secondaryCta}</Link>
             </Button>
-            <span className="text-muted-foreground text-sm">{hero.valueProp}</span>
           </div>
-
-          {/* Bonus line — sharp framing statement below the CTA row */}
-          <p className="animate-in fade-in fill-mode-both text-muted-foreground max-w-xl text-sm italic delay-[400ms] duration-700">
-            {hero.bonusLine}
-          </p>
         </div>
       </Container>
     </Section>

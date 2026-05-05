@@ -27,13 +27,6 @@ export interface HomeContent {
     kicker: string;
     headline: string;
     subheadline: string;
-    /**
-     * Italicised line rendered below the CTA row — a single sharp statement
-     * that frames the value proposition.
-     */
-    bonusLine: string;
-    /** Short status note displayed beside the secondary in-page CTA */
-    valueProp: string;
     /** Secondary in-page CTA — outline button, NOT the persistent primary */
     secondaryCta: string;
     secondaryCtaHref: string;
@@ -71,12 +64,10 @@ export interface HomeContent {
 
 export const homeContent: HomeContent = {
   hero: {
-    kicker: "Independent practice · 2026",
+    kicker: "Strategy & execution · Product design",
     headline: "I turn product vision into shipped experiences.",
     subheadline:
-      "I work at the intersection of strategy and execution — helping teams go from early concept to a product they can actually ship.",
-    bonusLine: "Most projects fail in the gap between idea and execution. That's where I work.",
-    valueProp: "Open to new projects",
+      "Most projects fail in the gap between idea and execution. I help teams close it — from early concept to a product they can actually ship.",
     secondaryCta: "See the work",
     secondaryCtaHref: "/work",
   },
@@ -99,6 +90,13 @@ export const homeContent: HomeContent = {
           "Designed the full product ecosystem — customer app, driver app, vendor portal — and unified them into a single design system that the team can actually maintain.",
         tags: ["Product design", "Multi-app system", "Design system"],
         gradient: "from-orange-400 to-rose-600",
+      },
+      {
+        slug: "project-3",
+        title: "Project 3",
+        summary: "Placeholder — replace with real project copy.",
+        tags: ["Product design", "Strategy"],
+        gradient: "from-sky-400 to-indigo-600",
       },
     ],
   },
