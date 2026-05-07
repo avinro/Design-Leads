@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { MobileCtaBar } from "@/components/site/mobile-cta-bar";
+import { SITE_URL, SITE_NAME, OWNER_JOB_TITLE } from "@/lib/seo/site";
 
 /*
  * Google Sans Flex — variable display/heading font (OFL).
@@ -41,12 +42,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Avinro — Product Designer",
-    template: "%s | Avinro",
+    default: `${SITE_NAME} — ${OWNER_JOB_TITLE}`,
+    template: `%s | ${SITE_NAME}`,
   },
   description:
     "Product designer crafting thoughtful UX systems, brand identities, and digital products.",
-  metadataBase: new URL("https://avinro.com"),
+  metadataBase: new URL(SITE_URL),
 };
 
 export default function RootLayout({

@@ -8,6 +8,8 @@ import {
   getCaseStudySlugs,
   getPublishedCaseStudies,
 } from "@/lib/content/case-studies";
+import { SITE_URL, SITE_NAME } from "@/lib/seo/site";
+import { CreativeWorkJsonLd } from "@/lib/seo/json-ld";
 import { mdxOptions } from "@/lib/mdx/options";
 import { mdxComponents, Stats } from "@/components/mdx/components";
 import { Container } from "@/components/layout/container";
@@ -35,9 +37,9 @@ export async function generateMetadata({
   if (!cs) return {};
 
   const { frontmatter } = cs;
-  const title = `${frontmatter.title} | Avinro`;
+  const title = `${frontmatter.title} | ${SITE_NAME}`;
   const description = frontmatter.outcome;
-  const url = `https://avinro.com/work/${slug}`;
+  const url = `${SITE_URL}/work/${slug}`;
 
   return {
     title,
@@ -49,7 +51,7 @@ export async function generateMetadata({
       title,
       description,
       url,
-      siteName: "Avinro",
+      siteName: SITE_NAME,
       locale: "en_US",
       type: "article",
       images: [
@@ -215,6 +217,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
 
   return (
     <main id="main-content">
+      {/* JSON-LD structured data — only for published case studies (drafts are noindex) */}
+      {!frontmatter.draft && <CreativeWorkJsonLd cs={cs} slug={slug} />}
       {/* Hero section — cover + metadata strip */}
       <Section spacing="hero">
         <Container>

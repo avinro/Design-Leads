@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { SITE_URL, SITE_NAME, OWNER_JOB_TITLE } from "@/lib/seo/site";
+import { PersonJsonLd } from "@/lib/seo/json-ld";
 import { HomeHero } from "@/components/site/home-hero";
 import { WorkDivider } from "@/components/site/work-divider";
 import { SelectedWork } from "@/components/site/selected-work";
@@ -11,16 +13,21 @@ import { AboutTeaser } from "@/components/site/about-teaser";
  * dynamic opengraph-image.tsx handler in this directory so they update
  * automatically whenever the handler changes.
  */
+const HOME_TITLE = `${SITE_NAME} — ${OWNER_JOB_TITLE}`;
+const HOME_DESCRIPTION =
+  "Product designer crafting thoughtful UX systems, brand identities, and digital products.";
+
 export const metadata: Metadata = {
-  title: "Avinro — Product Designer",
-  description:
-    "Product designer crafting thoughtful UX systems, brand identities, and digital products.",
+  title: HOME_TITLE,
+  description: HOME_DESCRIPTION,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Avinro — Product Designer",
-    description:
-      "Product designer crafting thoughtful UX systems, brand identities, and digital products.",
-    url: "https://avinro.com",
-    siteName: "Avinro",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: "en_US",
     type: "website",
     images: [
@@ -28,15 +35,14 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Avinro — Product Designer",
+        alt: HOME_TITLE,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Avinro — Product Designer",
-    description:
-      "Product designer crafting thoughtful UX systems, brand identities, and digital products.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     images: ["/opengraph-image"],
   },
 };
@@ -60,6 +66,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main id="main-content">
+      <PersonJsonLd />
       <HomeHero />
       <WorkDivider />
       <SelectedWork />

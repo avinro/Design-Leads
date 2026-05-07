@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { aboutContent } from "@/lib/content/about";
+import { PersonJsonLd } from "@/lib/seo/json-ld";
 import type { ExperienceEntry, ToolGroup } from "@/lib/content/about";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
@@ -16,6 +17,27 @@ export const metadata: Metadata = {
     "Lead Product Designer working at the intersection of strategy, design, and execution. Background, experience, tools, and design philosophy.",
   alternates: {
     canonical: "/about",
+  },
+  openGraph: {
+    title: "Avinro — Lead Product Designer",
+    description:
+      "Lead Product Designer working at the intersection of strategy, design, and execution.",
+    url: "/about",
+    images: [
+      {
+        url: "/about/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Avinro — Lead Product Designer",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Avinro — Lead Product Designer",
+    description:
+      "Lead Product Designer working at the intersection of strategy, design, and execution.",
+    images: ["/about/opengraph-image"],
   },
 };
 
@@ -112,6 +134,7 @@ export default function AboutPage() {
 
   return (
     <main id="main-content">
+      <PersonJsonLd />
       {/* ── 1. Hero ─────────────────────────────────────────────────────── */}
       <Section spacing="hero">
         <Container>

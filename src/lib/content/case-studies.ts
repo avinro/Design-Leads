@@ -149,3 +149,32 @@ export function getCaseStudyBySlug(slug: string): CaseStudy | undefined {
 export function getCaseStudySlugs(): string[] {
   return getAll().map((cs) => cs.frontmatter.slug);
 }
+
+// ---------------------------------------------------------------------------
+// Sitemap-specific helpers — keep the CaseStudy shape clean for page use
+// ---------------------------------------------------------------------------
+
+export interface CaseStudySitemapEntry {
+  slug: string;
+  lastModified: Date;
+}
+
+/**
+ * Published case studies with real file-system mtimes for sitemap entries.
+ * Draft case studies are excluded (they carry noindex and must not appear in
+ * the sitemap).
+ */
+export function getPublishedCaseStudiesForSitemap(): CaseStudySitemapEntry[] {
+  const files = fs.readdirSync(CONTENT_DIR).filter((f) => f.endsWith(".mdx"));
+
+  return files
+    .map((file) => {
+      const raw = fs.readFileSync(path.join(CONTENT_DIR, file), "utf-8");
+      const { data } = matter(raw);
+      const result = CaseStudyFrontmatterSchema.safeParse(data);
+      if (!result.success || result.data.draft) return null;
+      const mtime = fs.statSync(path.join(CONTENT_DIR, file)).mtime;
+      return { slug: result.data.slug, lastModified: mtime };
+    })
+    .filter((entry): entry is CaseStudySitemapEntry => entry !== null);
+}
