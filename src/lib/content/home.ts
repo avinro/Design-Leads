@@ -6,6 +6,11 @@
  * shape evolves.
  */
 
+/**
+ * WorkCase shape used by WorkCard.
+ * Kept here for WorkCard's import — the actual data now comes from the MDX
+ * content layer (src/lib/content/case-studies.ts), not from homeContent.
+ */
 export interface WorkCase {
   slug: string;
   title: string;
@@ -46,7 +51,7 @@ export interface HomeContent {
     sectionTitle: string;
     /** Short framing sentence rendered below the section label */
     body: string;
-    cases: WorkCase[];
+    // cases removed (PRO-14): data is now sourced from MDX content layer.
   };
   socialProof: {
     sectionTitle: string;
@@ -88,31 +93,6 @@ export const homeContent: HomeContent = {
   selectedWork: {
     sectionTitle: "Selected work",
     body: "A selection of 0→1 products and multi-app systems. Each one started as an unclear idea — and ended up shipped.",
-    cases: [
-      {
-        slug: "uma",
-        title: "UMA",
-        summary:
-          "Took a wellness platform from early concept to a structured product with a complete UX system — ready for a dev team to pick up and build.",
-        tags: ["Product strategy", "UX system", "Web app"],
-        gradient: "from-violet-500 to-purple-700",
-      },
-      {
-        slug: "hello-dojo",
-        title: "Hello Dojo",
-        summary:
-          "Designed the full product ecosystem — customer app, driver app, vendor portal — and unified them into a single design system that the team can actually maintain.",
-        tags: ["Product design", "Multi-app system", "Design system"],
-        gradient: "from-orange-400 to-rose-600",
-      },
-      {
-        slug: "project-3",
-        title: "Project 3",
-        summary: "Placeholder — replace with real project copy.",
-        tags: ["Product design", "Strategy"],
-        gradient: "from-sky-400 to-indigo-600",
-      },
-    ],
   },
   socialProof: {
     sectionTitle: "Trusted by",

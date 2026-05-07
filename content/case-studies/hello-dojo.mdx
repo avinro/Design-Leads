@@ -1,0 +1,104 @@
+---
+title: Hello Dojo
+slug: hello-dojo
+client: Hello Dojo
+role: Lead Product Designer
+year: 2023
+coverage:
+  - research
+  - interaction
+  - visual
+  - strategy
+outcome: Unified three apps and a vendor portal into a single maintainable design system.
+coverImage: /case-studies/hello-dojo.svg
+order: 2
+
+summary: Designed the full product ecosystem — customer app, driver app, vendor portal — and unified them into a single design system that the team can actually maintain.
+tags:
+  - Product design
+  - Multi-app system
+  - Design system
+gradient: from-orange-400 to-rose-600
+---
+
+## Problem statement
+
+Hello Dojo operates three distinct surfaces — a customer ordering app, a driver delivery app, and a vendor management portal. Each had been designed independently over two years. The result was **three products that felt like strangers**: inconsistent components, conflicting interaction patterns, and a design debt backlog that was slowing every sprint.
+
+The challenge: **unify without rebuilding from scratch**, while shipping new features in parallel.
+
+## My role and constraints
+
+As Lead Product Designer, I owned the design system architecture, component library, and the surface-level redesigns across all three products.
+
+**Constraints:**
+
+- Three separate engineering teams with different tech stacks (React Native, React, Vue)
+- No shared design infrastructure existed
+- Could not pause feature development during the consolidation
+
+## Process
+
+### Audit and mapping
+
+Before designing anything new, I audited every existing component across the three surfaces.
+
+Results:
+
+- **214 unique components** identified
+- **31% overlap** in function with **0% visual consistency**
+- **6 distinct type scales** in use across the ecosystem
+
+The audit became the case for a shared design system. Numbers are more persuasive than design principles.
+
+### System architecture
+
+Designed a three-layer token architecture:
+
+```
+Layer 1: Primitives    — raw values (colors, spacing, type sizes)
+Layer 2: Semantic      — purpose-based tokens (primary, surface, on-surface)
+Layer 3: Component     — component-specific tokens (button-bg, input-border)
+```
+
+This structure allowed each app to consume the same semantic tokens while maintaining platform-appropriate visual expression. The vendor portal looks more "enterprise"; the customer app feels more "consumer" — but they share the same foundation.
+
+### Component library build
+
+Prioritised components by frequency of use × inconsistency score. Built the top 40 components first, covering approximately **78% of all UI surface area** across the three products.
+
+Each component shipped with:
+
+- Light and dark mode variants
+- All interactive states (default, hover, pressed, focused, disabled, loading)
+- Accessibility annotations
+- Engineering handoff tokens in a format each stack could consume
+
+### Integration and rollout
+
+Rather than a big-bang migration, I designed a **parallel track strategy**:
+
+- New features always use system components
+- Legacy screens are refactored in order of user frequency
+- No screen is refactored just for consistency — it must have a feature trigger
+
+This eliminated the "design debt sprint that goes nowhere" pattern.
+
+## Key decisions and trade-offs
+
+**Token-first, not component-first.** The temptation is to start building components. I started with tokens. This meant engineering could begin consuming the system before a single component was finished, and it gave us a forcing function for design decisions that might otherwise stay informal.
+
+**One icon set, three visual personalities.** Using a single icon library (Lucide) with consistent stroke weight across all surfaces, but allowing the surrounding context — spacing, color, typography — to carry the brand differentiation. This saved approximately six weeks of icon design work.
+
+## Results and impact
+
+- **40 shared components** shipped in 10 weeks
+- New feature delivery velocity increased by **35%** (measured by sprint cycle time)
+- Design QA time reduced from an average of **2 days to 4 hours** per sprint
+- The driver app received a **4.6 → 4.8** App Store rating increase in the quarter following the redesign
+
+## Learnings
+
+**A design system is a product, not a deliverable.** The most important moment was treating the system as something that needed its own roadmap, its own acceptance criteria, and its own users (the engineers and designers who would consume it).
+
+I also learned that the governance model matters as much as the components. We defined clear rules for who could extend the system, under what conditions, and how proposals were reviewed. That structure prevented the fragmentation that had created the problem in the first place.
