@@ -12,6 +12,11 @@
  *   - getCaseStudySlugs includes all slugs (including drafts)
  *   - readingTime is a non-empty string with "read" in it
  *   - frontmatter shape matches expected fields
+ *
+ * Publication contract (enforced only on non-draft entries):
+ *   - At least 5 <Figure blocks distributed across the body
+ *   - Required section headings present: Problem statement, Process, Results and impact
+ *   - Non-empty coverImage
  */
 
 import { describe, it, expect } from "vitest";
@@ -100,5 +105,43 @@ describe("case-studies content layer", () => {
   it("project-3 is marked as draft", () => {
     const cs = getCaseStudyBySlug("project-3");
     expect(cs?.frontmatter.draft).toBe(true);
+  });
+
+  // ---------------------------------------------------------------------------
+  // Publication contract — enforced only on non-draft studies
+  // ---------------------------------------------------------------------------
+
+  it("each published study has at least 5 Figure blocks in the body", () => {
+    const published = getPublishedCaseStudies();
+    published.forEach((cs) => {
+      const figureCount = (cs.content.match(/<Figure\b/g) ?? []).length;
+      expect(
+        figureCount,
+        `${cs.frontmatter.slug}: expected >= 5 <Figure> blocks, found ${String(figureCount)}`,
+      ).toBeGreaterThanOrEqual(5);
+    });
+  });
+
+  it("each published study contains the required section headings", () => {
+    const requiredHeadings = ["## Problem statement", "## Process", "## Results and impact"];
+    const published = getPublishedCaseStudies();
+    published.forEach((cs) => {
+      requiredHeadings.forEach((heading) => {
+        expect(
+          cs.content,
+          `${cs.frontmatter.slug}: missing required heading "${heading}"`,
+        ).toContain(heading);
+      });
+    });
+  });
+
+  it("each published study has a non-empty coverImage", () => {
+    const published = getPublishedCaseStudies();
+    published.forEach((cs) => {
+      expect(
+        cs.frontmatter.coverImage,
+        `${cs.frontmatter.slug}: coverImage must not be empty`,
+      ).toBeTruthy();
+    });
   });
 });
