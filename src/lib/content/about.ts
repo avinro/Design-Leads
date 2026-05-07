@@ -147,8 +147,7 @@ export const aboutContent: AboutContent = {
   cta: {
     sectionTitle: "Let's work together",
     primaryLabel: "Let's talk",
-    // TODO(PRO F1-8): change to /contact once the contact page ships.
-    primaryHref: "mailto:hello@avinro.com",
+    primaryHref: "/contact",
     resumeLabel: "Download resume",
     resumeHref: "/resume.pdf",
   },

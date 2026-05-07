@@ -52,8 +52,8 @@ describe("AboutPage", () => {
     expect(html).toContain("Portrait placeholder");
   });
 
-  it("primary CTA points to mailto:hello@avinro.com", () => {
-    expect(html).toContain('href="mailto:hello@avinro.com"');
+  it("primary CTA points to /contact", () => {
+    expect(html).toContain('href="/contact"');
   });
 
   it("resume CTA points to /resume.pdf with download attribute", () => {
