@@ -158,4 +158,6 @@ First CI run against `design-leads-gk6y88g75-avinroart-3787s-projects.vercel.app
 
 ## Verdict
 
-All hard-gate issues resolved: Accessibility failures fixed, SEO warning correctly downgraded for preview-URL behavior. The issue remains **open** pending a second CI run after this commit deploys to confirm: Accessibility >= 90 on all routes, CLS < 0.1, no new hard-gate failures.
+**Second CI run (2026-05-08, commit 34a0059):** SEO downgrade worked — all SEO are now warnings. Accessibility still at 0.87 on `/work/hello-dojo` — two new root causes identified: (a) `aria-valid-attr-value` failure on `Bar`'s `role="meter"` div; (b) WCAG AA color contrast failures in `Stats` (`text-muted-foreground/60` and `text-emerald-500` on `bg-muted/30`). Both fixed in this commit.
+
+The issue remains **open** pending a third CI run to confirm: Accessibility >= 90 on all routes, no new hard-gate failures.

@@ -373,7 +373,11 @@ export function Stats({ data, className }: StatsProps) {
         >
           {item.delta ? (
             <dd className="flex items-baseline gap-1.5">
-              <span className="font-display text-muted-foreground/60 text-xl font-semibold tabular-nums sm:text-2xl">
+              {/*
+               * delta.from: text-muted-foreground (no opacity) — muted-foreground/60
+               * failed WCAG AA contrast on bg-muted/30 at this font size.
+               */}
+              <span className="font-display text-muted-foreground text-xl font-semibold tabular-nums sm:text-2xl">
                 {item.delta.from}
               </span>
               <span className="text-muted-foreground/40 text-sm" aria-hidden="true">
@@ -382,7 +386,8 @@ export function Stats({ data, className }: StatsProps) {
               <span
                 className={cn(
                   "font-display text-xl font-semibold tabular-nums sm:text-2xl",
-                  item.sentiment === "positive" && "text-emerald-500 dark:text-emerald-400",
+                  // emerald-600 (not 500) provides sufficient contrast on bg-muted/30
+                  item.sentiment === "positive" && "text-emerald-600 dark:text-emerald-400",
                   item.sentiment === "negative" && "text-destructive",
                   (!item.sentiment || item.sentiment === "neutral") && "text-foreground",
                 )}
@@ -394,7 +399,8 @@ export function Stats({ data, className }: StatsProps) {
             <dd
               className={cn(
                 "font-display text-3xl font-semibold tabular-nums sm:text-4xl",
-                item.sentiment === "positive" && "text-emerald-500 dark:text-emerald-400",
+                // emerald-600 (not 500) — emerald-500 failed WCAG AA on bg-muted/30
+                item.sentiment === "positive" && "text-emerald-600 dark:text-emerald-400",
                 item.sentiment === "negative" && "text-destructive",
                 (!item.sentiment || item.sentiment === "neutral") && "text-foreground",
               )}
@@ -406,7 +412,9 @@ export function Stats({ data, className }: StatsProps) {
             {item.label}
           </dt>
           {item.sublabel && (
-            <span className="text-muted-foreground/60 text-xs leading-snug">{item.sublabel}</span>
+            // text-muted-foreground (no opacity) — muted-foreground/60 failed WCAG AA
+            // at text-xs on bg-muted/30.
+            <span className="text-muted-foreground text-xs leading-snug">{item.sublabel}</span>
           )}
         </div>
       ))}
@@ -523,14 +531,12 @@ export function Bar({ value, label, caption, className }: BarProps) {
           {clamped}%
         </span>
       </div>
-      <div
-        className="bg-muted/60 h-2.5 w-full overflow-hidden rounded-full"
-        role="meter"
-        aria-valuenow={clamped}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-label={label}
-      >
+      {/*
+       * The bar track is decorative — the percentage and label are already
+       * conveyed by the visible text above. aria-hidden removes it from the
+       * a11y tree so assistive tech skips the visual-only fill element.
+       */}
+      <div className="bg-muted/60 h-2.5 w-full overflow-hidden rounded-full" aria-hidden="true">
         <div
           className="bg-accent h-full rounded-full transition-none"
           style={{ width: `${String(clamped)}%` }}
