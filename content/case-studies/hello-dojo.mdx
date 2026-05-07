@@ -47,6 +47,11 @@ Hello Dojo operates three distinct surfaces — a customer ordering app, a drive
 
 The challenge: **unify without rebuilding from scratch**, while shipping new features in parallel.
 
+<Figure
+  placeholderLabel="Three-surface fragmentation — before"
+  caption="Side-by-side comparison of the customer app, driver app, and vendor portal before the design system: conflicting type scales, button styles, and interaction patterns across all three."
+/>
+
 ## My role and constraints
 
 As Lead Product Designer, I owned the design system architecture, component library, and the surface-level redesigns across all three products.
@@ -128,6 +133,11 @@ Rather than a big-bang migration, I designed a **parallel track strategy**:
 
 This eliminated the "design debt sprint that goes nowhere" pattern.
 
+<Figure
+  placeholderLabel="Parallel track migration strategy"
+  caption="Rollout playbook: new features always use system components; legacy screens are refactored in order of user frequency, triggered by a feature — never standalone."
+/>
+
 ## Key decisions and trade-offs
 
 **Token-first, not component-first.** The temptation is to start building components. I started with tokens. This meant engineering could begin consuming the system before a single component was finished, and it gave us a forcing function for design decisions that might otherwise stay informal.
@@ -135,6 +145,11 @@ This eliminated the "design debt sprint that goes nowhere" pattern.
 **One icon set, three visual personalities.** Using a single icon library (Lucide) with consistent stroke weight across all surfaces, but allowing the surrounding context — spacing, color, typography — to carry the brand differentiation. This saved approximately six weeks of icon design work.
 
 ## Results and impact
+
+<Figure
+  placeholderLabel="Three surfaces — after"
+  caption="Customer app, driver app, and vendor portal post-system: shared token layer, consistent iconography, and platform-appropriate visual personality from a single foundation."
+/>
 
 <Stats
   data={[
