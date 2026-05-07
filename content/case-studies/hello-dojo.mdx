@@ -19,6 +19,26 @@ tags:
   - Multi-app system
   - Design system
 gradient: from-orange-400 to-rose-600
+kpis:
+  - value: "40"
+    label: Shared components
+    sublabel: Shipped in 10 weeks
+    sentiment: positive
+  - value: "+35%"
+    label: Feature velocity
+    sublabel: Measured by sprint cycle time
+    sentiment: positive
+  - delta:
+      from: "2 days"
+      to: "4 hours"
+    label: Design QA per sprint
+    sentiment: positive
+  - delta:
+      from: "4.6"
+      to: "4.8"
+    label: Driver app rating
+    sublabel: App Store, post-redesign quarter
+    sentiment: positive
 ---
 
 ## Problem statement
@@ -42,12 +62,19 @@ As Lead Product Designer, I owned the design system architecture, component libr
 
 Before designing anything new, I audited every existing component across the three surfaces.
 
-Results:
-- **214 unique components** identified
-- **31% overlap** in function with **0% visual consistency**
-- **6 distinct type scales** in use across the ecosystem
+<Stats data={[
+  { value: "214", label: "Unique components", sublabel: "Across all three surfaces" },
+  { value: "31%", label: "Functional overlap", sublabel: "Zero visual consistency" },
+  { value: "6", label: "Type scales in use", sublabel: "Across the ecosystem" },
+  { value: "0%", label: "Visual consistency", sublabel: "Between surfaces" },
+]} />
 
 The audit became the case for a shared design system. Numbers are more persuasive than design principles.
+
+<Figure
+  placeholderLabel="Component audit map"
+  caption="Audit results: 214 unique components across three surfaces with 31% functional overlap but 0% visual consistency."
+/>
 
 ### System architecture
 
@@ -61,15 +88,27 @@ Layer 3: Component     — component-specific tokens (button-bg, input-border)
 
 This structure allowed each app to consume the same semantic tokens while maintaining platform-appropriate visual expression. The vendor portal looks more "enterprise"; the customer app feels more "consumer" — but they share the same foundation.
 
+<Figure
+  placeholderLabel="Token architecture diagram"
+  caption="Three-layer token architecture: primitives → semantic → component-specific tokens, shared across all three stacks."
+/>
+
 ### Component library build
 
-Prioritised components by frequency of use × inconsistency score. Built the top 40 components first, covering approximately **78% of all UI surface area** across the three products.
+Prioritised components by frequency of use × inconsistency score. Built the top 40 components first, covering approximately **78%** of all UI surface area across the three products.
+
+<Bar value={78} label="UI surface area covered by the top 40 components" caption="The remaining 22% consists of surface-specific screens refactored over time as a feature trigger, not a separate design debt sprint." />
 
 Each component shipped with:
 - Light and dark mode variants
 - All interactive states (default, hover, pressed, focused, disabled, loading)
 - Accessibility annotations
 - Engineering handoff tokens in a format each stack could consume
+
+<Figure
+  placeholderLabel="Component library overview"
+  caption="40 components shipped in 10 weeks — covering 78% of combined UI surface area across the three products."
+/>
 
 ### Integration and rollout
 
@@ -89,10 +128,24 @@ This eliminated the "design debt sprint that goes nowhere" pattern.
 
 ## Results and impact
 
-- **40 shared components** shipped in 10 weeks
-- New feature delivery velocity increased by **35%** (measured by sprint cycle time)
-- Design QA time reduced from an average of **2 days to 4 hours** per sprint
-- The driver app received a **4.6 → 4.8** App Store rating increase in the quarter following the redesign
+<Stats data={[
+  { value: "40", label: "Shared components", sublabel: "10 weeks to ship" },
+  { value: "+35%", label: "Feature velocity", sublabel: "Sprint cycle time" },
+]} />
+
+<BeforeAfter
+  label="Design QA time per sprint"
+  from="2 days"
+  to="4 hours"
+  sentiment="positive"
+/>
+
+<BeforeAfter
+  label="Driver app — App Store rating"
+  from="4.6"
+  to="4.8"
+  sentiment="positive"
+/>
 
 ## Learnings
 

@@ -19,6 +19,24 @@ import { z } from "zod";
 // Frontmatter schema
 // ---------------------------------------------------------------------------
 
+/**
+ * Schema for a single KPI item in frontmatter.
+ * Each item must have either `value` (plain stat) or `delta` (before/after).
+ */
+const KpiSchema = z
+  .object({
+    value: z.string().min(1).optional(),
+    label: z.string().min(1),
+    sublabel: z.string().optional(),
+    delta: z.object({ from: z.string().min(1), to: z.string().min(1) }).optional(),
+    sentiment: z.enum(["positive", "neutral", "negative"]).optional(),
+  })
+  .refine((k) => k.value !== undefined || k.delta !== undefined, {
+    message: "kpi must have either `value` or `delta`",
+  });
+
+export type KpiItem = z.infer<typeof KpiSchema>;
+
 const CaseStudyFrontmatterSchema = z.object({
   title: z.string().min(1),
   slug: z.string().min(1),
@@ -34,6 +52,9 @@ const CaseStudyFrontmatterSchema = z.object({
   tags: z.array(z.string()).min(1),
   gradient: z.string().min(1),
   draft: z.boolean().optional().default(false),
+  // Optional outcome KPIs — rendered as a top-of-page stat strip and
+  // available to MDX body via the <Stats /> primitive.
+  kpis: z.array(KpiSchema).max(6).optional(),
 });
 
 export type CaseStudyFrontmatter = z.infer<typeof CaseStudyFrontmatterSchema>;

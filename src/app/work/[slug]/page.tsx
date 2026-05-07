@@ -9,7 +9,7 @@ import {
   getPublishedCaseStudies,
 } from "@/lib/content/case-studies";
 import { mdxOptions } from "@/lib/mdx/options";
-import { mdxComponents } from "@/components/mdx/components";
+import { mdxComponents, Stats } from "@/components/mdx/components";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 
@@ -235,9 +235,21 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </Container>
       </Section>
 
-      {/* MDX body — constrained to max-w-prose for line-length compliance */}
+      {/* Outcome strip — top-level KPIs from frontmatter, visible before the body */}
+      {frontmatter.kpis?.length ? (
+        <Section spacing="card">
+          <Container>
+            <p className="text-muted-foreground mb-6 font-mono text-xs tracking-widest uppercase">
+              Outcome
+            </p>
+            <Stats data={frontmatter.kpis} />
+          </Container>
+        </Section>
+      ) : null}
+
+      {/* MDX body — full site width (max-w-6xl) to match all other sections */}
       <Section>
-        <Container width="narrow">
+        <Container>
           <MDXRemote source={content} components={mdxComponents} options={mdxOptions} />
 
           {/* Next case study CTA */}

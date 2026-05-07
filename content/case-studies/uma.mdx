@@ -19,6 +19,23 @@ tags:
   - UX system
   - Web app
 gradient: from-violet-500 to-purple-700
+kpis:
+  - value: "6 wks"
+    label: Delivered ahead of schedule
+    sublabel: 2 weeks early
+    sentiment: positive
+  - value: "87%"
+    label: Task completion
+    sublabel: Round 3, zero prompting
+    sentiment: positive
+  - value: "0"
+    label: Design questions in sprint 1
+    sublabel: Engineering team, post-handoff
+    sentiment: positive
+  - value: "0"
+    label: Layout changes after handoff
+    sublabel: First time for this client
+    sentiment: positive
 ---
 
 ## Problem statement
@@ -40,13 +57,20 @@ I joined as Lead Product Designer with full ownership of the UX strategy, inform
 
 ### Research and discovery
 
-Starting with a two-week research sprint, I conducted:
+Starting with a two-week research sprint, I conducted structured discovery across three tracks:
 
-- **5 stakeholder interviews** to surface conflicting assumptions about the core value proposition
-- **8 user interviews** with people managing chronic conditions (diabetes, hypertension, anxiety)
-- **Competitive audit** of 12 digital health platforms
+<Stats data={[
+  { value: "5", label: "Stakeholder interviews", sublabel: "Surfaced conflicting assumptions" },
+  { value: "8", label: "User interviews", sublabel: "Chronic condition management" },
+  { value: "12", label: "Platforms audited", sublabel: "Competitive landscape" },
+]} />
 
 The biggest insight: users don't want more tracking — they want fewer decisions. The product had to reduce cognitive load, not add to it.
+
+<Figure
+  placeholderLabel="Research synthesis"
+  caption="Affinity mapping across 8 user interviews — pain points clustered around decision fatigue, not data access."
+/>
 
 ### Ideation
 
@@ -60,6 +84,11 @@ Key decisions made in this phase:
 | Primary input method | Forms | Voice + tap | Lower friction for daily habit |
 | Progress model | Streak counter | Trend line | Less punitive when users miss days |
 
+<Figure
+  placeholderLabel="Design sprint output"
+  caption="Sprint decision matrix — narrowed from five product directions to one testable concept."
+/>
+
 ### Prototyping and testing
 
 Built three rounds of prototypes at increasing fidelity. By round three, task completion on the core check-in flow reached **87%** with zero prompting.
@@ -69,6 +98,11 @@ Round 1: Paper wireframes → concept validation
 Round 2: Figma lo-fi → flow and navigation
 Round 3: Interactive prototype → usability and delight
 ```
+
+<Figure
+  placeholderLabel="Hi-fi prototype — daily check-in"
+  caption="Round 3 interactive prototype: the daily check-in flow that achieved 87% task completion."
+/>
 
 ## Key decisions and trade-offs
 
