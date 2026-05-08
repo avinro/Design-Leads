@@ -62,7 +62,7 @@ export function ClientPortalNavLink({
         // Minimum 44×44px touch target with 8px gap between siblings
         "flex min-h-11 min-w-11 flex-col items-center justify-center gap-0.5 rounded-lg px-3 py-2",
         // Tap delay elimination
-        "touch-action-manipulation",
+        "touch-manipulation",
         // Transitions gated by motion preference
         "motion-safe:transition-colors motion-safe:duration-200",
         // Visible focus ring (never removed without replacement)
@@ -72,7 +72,7 @@ export function ClientPortalNavLink({
       )}
     >
       {icon}
-      <span className="text-[10px] leading-none font-medium">{label}</span>
+      <span className="text-[11px] leading-none font-medium">{label}</span>
     </Link>
   );
 }

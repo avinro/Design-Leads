@@ -1,7 +1,5 @@
-import { Bell, LogOut } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
 import { ClientPortalProjectSwitcher } from "./client-portal-project-switcher";
+import { ClientPortalUserMenu } from "./client-portal-user-menu";
 import type { ClientPortalContext } from "@/lib/client-portal/context";
 
 interface ClientPortalHeaderProps {
@@ -9,21 +7,28 @@ interface ClientPortalHeaderProps {
 }
 
 /**
- * Sticky portal header.
+ * Sticky portal header — server component.
  *
- * Displays: account name, active project switcher, dummy notification bell,
- * and a logout form that posts to /auth/signout.
+ * Displays: brand mark (mobile only), account name, active project pill,
+ * and a user avatar menu (client island) containing settings + sign-out.
  *
- * Notification bell is a disabled visual placeholder. No badge, no popover.
- * Replace the TODO(notifications) block when the real notifications issue ships.
+ * The notification bell is omitted for v1 and returns when PRO-45 ships.
  *
- * The logout uses a native <form> POST (not a client-side action) so it works
- * without JS and avoids importing client-side auth code in a server component.
+ * Sign-out is handled by a native form POST inside ClientPortalUserMenu
+ * so no server-side auth code is imported here.
  */
 export function ClientPortalHeader({ context }: ClientPortalHeaderProps) {
   return (
     <header className="bg-background border-border sticky top-0 z-10 flex h-14 items-center gap-3 border-b px-4">
-      {/* Account and project identity */}
+      {/* Brand sub-mark — visible only on <sm where the sidebar is hidden */}
+      <span
+        className="text-foreground mr-1 shrink-0 text-sm font-bold tracking-tight sm:hidden"
+        aria-label="Avinro client portal"
+      >
+        Avinro
+      </span>
+
+      {/* Account + project identity */}
       <div className="flex min-w-0 flex-1 items-center gap-2">
         <span className="text-muted-foreground hidden shrink-0 text-xs font-semibold tracking-wider uppercase sm:block">
           {context.account.name}
@@ -41,7 +46,7 @@ export function ClientPortalHeader({ context }: ClientPortalHeaderProps) {
           </>
         )}
 
-        {/* Mobile: show account name when no project label is available */}
+        {/* Mobile: show account name when no project label is visible */}
         {!context.hasProjects && (
           <span className="text-foreground truncate text-sm font-semibold sm:hidden">
             {context.account.name}
@@ -49,30 +54,9 @@ export function ClientPortalHeader({ context }: ClientPortalHeaderProps) {
         )}
       </div>
 
-      {/* Actions */}
-      <div className="flex shrink-0 items-center gap-1">
-        {/* TODO(notifications): replace with real notification popover */}
-        <Button
-          variant="ghost"
-          size="icon"
-          aria-label="Notifications"
-          disabled
-          className="text-muted-foreground"
-        >
-          <Bell aria-hidden="true" />
-        </Button>
-
-        <form action="/auth/signout" method="post">
-          <Button
-            type="submit"
-            variant="ghost"
-            size="icon"
-            aria-label="Sign out"
-            className="text-muted-foreground hover:text-foreground"
-          >
-            <LogOut aria-hidden="true" />
-          </Button>
-        </form>
+      {/* User menu (client island) */}
+      <div className="shrink-0">
+        <ClientPortalUserMenu displayName={context.user.displayName} email={context.user.email} />
       </div>
     </header>
   );

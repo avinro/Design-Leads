@@ -29,7 +29,7 @@ interface ClientPortalShellProps {
  */
 export function ClientPortalShell({ context, children }: ClientPortalShellProps) {
   return (
-    <SidebarProvider defaultOpen={false}>
+    <SidebarProvider defaultOpen={true}>
       <div className="flex min-h-dvh w-full">
         {/* Desktop sidebar — hidden below md, visible md+ */}
         <ClientPortalSidebar context={context} />

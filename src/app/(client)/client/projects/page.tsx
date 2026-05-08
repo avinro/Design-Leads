@@ -1,4 +1,8 @@
 import type { Metadata } from "next";
+import { FolderKanban } from "lucide-react";
+
+import { PageHeader } from "@/components/client/page-header";
+import { EmptyState } from "@/components/client/empty-state";
 
 export const metadata: Metadata = {
   title: "Projects — Client Portal",
@@ -7,9 +11,16 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-4 py-16 text-center">
-      <h1 className="text-foreground text-xl font-bold">Projects</h1>
-      <p className="text-muted-foreground mt-2 text-sm">Coming soon.</p>
+    <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
+      <PageHeader title="Projects" subtitle="All projects associated with your account." />
+
+      <div className="bg-card border-border flex flex-1 items-center justify-center rounded-xl border shadow-sm">
+        <EmptyState
+          icon={<FolderKanban className="size-6" aria-hidden="true" />}
+          title="Projects coming soon"
+          description="A full view of your projects, phases, and milestones will be available here."
+        />
+      </div>
     </div>
   );
 }

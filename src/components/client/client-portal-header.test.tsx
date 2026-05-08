@@ -7,6 +7,23 @@ vi.mock("./client-portal-project-switcher", () => ({
     activeProject ? <span>{activeProject.name}</span> : null,
 }));
 
+// Stub ClientPortalUserMenu (client island — uses Radix primitives that require
+// a browser environment). The stub preserves the sign-out form POST contract so
+// downstream tests catch any accidental auth-flow regressions.
+vi.mock("./client-portal-user-menu", () => ({
+  ClientPortalUserMenu: ({ displayName, email }: { displayName: string; email: string | null }) => (
+    <div data-testid="user-menu">
+      {email && <span data-testid="user-email">{email}</span>}
+      <span data-testid="user-initials">{displayName.slice(0, 2).toUpperCase()}</span>
+      <form action="/auth/signout" method="post">
+        <button type="submit" aria-label="Sign out">
+          Sign out
+        </button>
+      </form>
+    </div>
+  ),
+}));
+
 import { ClientPortalHeader } from "./client-portal-header";
 import type { ClientPortalContext } from "@/lib/client-portal/context";
 
@@ -24,9 +41,11 @@ const stubContext = (overrides?: Partial<ClientPortalContext>): ClientPortalCont
  *
  * Verifies:
  * - Account name is rendered
- * - Notification bell is disabled and has correct aria-label
- * - Logout form POSTs to /auth/signout
- * - No active link or state changes (header is read-only UI)
+ * - Brand sub-mark is present
+ * - Logout form POSTs to /auth/signout (sign-out contract)
+ * - Project name rendered when hasProjects is true
+ * - Project switcher hidden when hasProjects is false
+ * - User initials derived from displayName
  */
 describe("ClientPortalHeader", () => {
   it("renders the account name", () => {
@@ -34,16 +53,21 @@ describe("ClientPortalHeader", () => {
     expect(html).toContain("Acme Studio");
   });
 
-  it("renders the notification bell as disabled with aria-label", () => {
+  it("renders the Avinro brand sub-mark", () => {
     const html = renderToStaticMarkup(<ClientPortalHeader context={stubContext()} />);
-    expect(html).toContain('aria-label="Notifications"');
-    expect(html).toContain("disabled");
+    expect(html).toContain("Avinro");
   });
 
   it("renders the logout form that POSTs to /auth/signout", () => {
     const html = renderToStaticMarkup(<ClientPortalHeader context={stubContext()} />);
     expect(html).toContain('action="/auth/signout"');
     expect(html).toContain('method="post"');
+  });
+
+  it("renders user initials from displayName", () => {
+    const html = renderToStaticMarkup(<ClientPortalHeader context={stubContext()} />);
+    // displayName is "alice" → initials "AL"
+    expect(html).toContain("AL");
   });
 
   it("renders the active project name when hasProjects is true", () => {
@@ -58,5 +82,10 @@ describe("ClientPortalHeader", () => {
       />,
     );
     expect(html).not.toContain("Brand Refresh");
+  });
+
+  it("does not render a disabled notification bell (removed for v1)", () => {
+    const html = renderToStaticMarkup(<ClientPortalHeader context={stubContext()} />);
+    expect(html).not.toContain('aria-label="Notifications"');
   });
 });

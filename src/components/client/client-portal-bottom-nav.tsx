@@ -1,4 +1,4 @@
-import { FolderKanban, Files, MessageSquare, Settings, LayoutDashboard } from "lucide-react";
+import { FolderKanban, Files, MessageSquare, LayoutDashboard } from "lucide-react";
 
 import { ClientPortalNavLink } from "./client-portal-nav-link";
 
@@ -19,6 +19,8 @@ import { ClientPortalNavLink } from "./client-portal-nav-link";
  * Both trees share the same nav destinations for URL consistency.
  */
 export function ClientPortalBottomNav() {
+  // Settings is accessible via the user avatar menu in the header — keeping
+  // the bottom nav at 4 items gives each tab more touch area at 375 px.
   const items = [
     {
       href: "/client",
@@ -39,11 +41,6 @@ export function ClientPortalBottomNav() {
       href: "/client/comments",
       label: "Comments",
       icon: <MessageSquare className="size-5" aria-hidden="true" />,
-    },
-    {
-      href: "/client/settings",
-      label: "Settings",
-      icon: <Settings className="size-5" aria-hidden="true" />,
     },
   ];
 

@@ -2,6 +2,7 @@
 
 import { useActionState } from "react";
 import { useSearchParams } from "next/navigation";
+import { AlertCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,21 +29,25 @@ export function LoginForm() {
       <CardContent>
         {/* Expired / invalid link banner */}
         {errorParam === "link_invalid" && (
-          <p
+          <div
             role="alert"
-            className="bg-destructive/10 text-destructive mb-4 rounded-lg px-3 py-2 text-sm"
+            aria-live="polite"
+            className="bg-destructive/10 text-destructive mb-4 flex items-start gap-2 rounded-lg px-3 py-2 text-sm"
           >
-            Your sign-in link has expired or is invalid. Please request a new one.
-          </p>
+            <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+            <span>Your sign-in link has expired or is invalid. Please request a new one.</span>
+          </div>
         )}
 
         {state.status === "error" && (
-          <p
+          <div
             role="alert"
-            className="bg-destructive/10 text-destructive mb-4 rounded-lg px-3 py-2 text-sm"
+            aria-live="polite"
+            className="bg-destructive/10 text-destructive mb-4 flex items-start gap-2 rounded-lg px-3 py-2 text-sm"
           >
-            {state.message}
-          </p>
+            <AlertCircle className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+            <span>{state.message}</span>
+          </div>
         )}
 
         <form action={formAction} className="flex flex-col gap-4">
@@ -63,12 +68,16 @@ export function LoginForm() {
                 state.status === "error" && !!state.fieldErrors?.email ? true : undefined
               }
               aria-describedby={
-                state.status === "error" && state.fieldErrors?.email ? "email-error" : undefined
+                state.status === "error" && state.fieldErrors?.email ? "email-error" : "email-hint"
               }
             />
-            {state.status === "error" && state.fieldErrors?.email && (
+            {state.status === "error" && state.fieldErrors?.email ? (
               <p id="email-error" className="text-destructive text-xs">
                 {state.fieldErrors.email[0]}
+              </p>
+            ) : (
+              <p id="email-hint" className="text-muted-foreground text-xs">
+                Use the email your project owner invited.
               </p>
             )}
           </div>

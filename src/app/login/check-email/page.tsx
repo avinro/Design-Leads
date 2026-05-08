@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { MailCheck } from "lucide-react";
 
 import {
   Card,
@@ -30,6 +31,11 @@ export default async function CheckEmailPage({ searchParams }: Props) {
     >
       <Card className="w-full max-w-sm text-center">
         <CardHeader>
+          <div className="mb-3 flex justify-center">
+            <div className="bg-accent/10 flex size-12 items-center justify-center rounded-full">
+              <MailCheck className="text-accent size-6" aria-hidden="true" />
+            </div>
+          </div>
           <CardTitle>Check your email</CardTitle>
           <CardDescription>
             {email ? (
@@ -41,11 +47,16 @@ export default async function CheckEmailPage({ searchParams }: Props) {
             )}
           </CardDescription>
         </CardHeader>
-        <CardContent>
+
+        <CardContent className="space-y-3">
           <p className="text-muted-foreground text-sm">
-            Click the link in the email to sign in. The link expires in 1 hour.
+            Click the link in the email to sign in. Usually arrives within 30 seconds.
+          </p>
+          <p className="text-muted-foreground text-xs">
+            Don&apos;t see it? Check your spam folder.
           </p>
         </CardContent>
+
         <CardFooter className="justify-center">
           <Button variant="ghost" size="sm" asChild>
             <Link href="/login">Use a different email</Link>

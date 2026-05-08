@@ -52,13 +52,13 @@ interface ClientPortalSidebarProps {
  * The mobile bottom tab bar handles navigation below md.
  * Both nav trees share the same NAV_ITEMS constant for consistency.
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function ClientPortalSidebar(_props: ClientPortalSidebarProps) {
+export function ClientPortalSidebar({ context }: ClientPortalSidebarProps) {
   return (
     <Sidebar collapsible="icon" className="hidden md:flex">
       <SidebarHeader className="border-border border-b px-2 py-3">
-        <span className="text-foreground truncate px-2 text-xs font-semibold tracking-wider uppercase">
-          Client Portal
+        {/* Account name visible when expanded; hidden in icon-rail mode via group-data-[collapsible=icon] */}
+        <span className="text-foreground truncate px-2 text-xs font-semibold tracking-wider uppercase group-data-[collapsible=icon]:hidden">
+          {context.account.name}
         </span>
       </SidebarHeader>
 
