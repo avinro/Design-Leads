@@ -92,6 +92,9 @@ export function WorkSlide({ case_, index, isActive, ref }: WorkSlideProps) {
           <Link
             href={`/work/${frontmatter.slug}`}
             aria-label={`View case study: ${frontmatter.title}`}
+            data-work-card-slug={frontmatter.slug}
+            data-work-card-title={frontmatter.title}
+            data-work-card-source="work_listing"
             className="mt-8 inline-flex min-h-[44px] items-center gap-2 font-mono text-sm text-zinc-50 transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             View case study

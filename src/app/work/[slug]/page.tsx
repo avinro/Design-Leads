@@ -14,6 +14,7 @@ import { mdxOptions } from "@/lib/mdx/options";
 import { mdxComponents, Stats } from "@/components/mdx/components";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { CaseStudyScrollTracker } from "@/components/analytics/case-study-scroll-tracker";
 
 // ---------------------------------------------------------------------------
 // Static generation
@@ -180,6 +181,9 @@ function NextCaseCTA({ nextTitle, nextSlug }: NextCaseCTAProps) {
       <Link
         href={`/work/${nextSlug}`}
         aria-label={`Next case study: ${nextTitle}`}
+        data-cta-label={nextTitle}
+        data-cta-href={`/work/${nextSlug}`}
+        data-cta-position="next_case"
         className="group focus-visible:ring-ring mt-4 flex min-h-[44px] items-center gap-3 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
       >
         <span className="font-display text-2xl font-semibold tracking-tight transition-transform group-hover:translate-x-1 sm:text-3xl">
@@ -255,6 +259,13 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <Section>
         <Container>
           <MDXRemote source={content} components={mdxComponents} options={mdxOptions} />
+
+          {/*
+           * Scroll-depth tracker — sentinels for 25/50/75/100% milestones.
+           * Placed after MDX body so the 100% sentinel fires when the user
+           * has read the case, not just when they see the "Next case study" CTA.
+           */}
+          <CaseStudyScrollTracker slug={slug} />
 
           {/* Next case study CTA */}
           {nextCs && (

@@ -42,6 +42,9 @@ export function WorkCard({ case_, index, className }: WorkCardProps) {
     <Link
       href={`/work/${case_.slug}`}
       data-slot="work-card"
+      data-work-card-slug={case_.slug}
+      data-work-card-title={case_.title}
+      data-work-card-source="home_selected_work"
       className={cn(
         "group border-border/40 first:border-border/40 hover:border-border/80 focus-visible:ring-ring flex flex-col gap-4 border-b py-8 transition-colors duration-200 first:border-t focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
         className,

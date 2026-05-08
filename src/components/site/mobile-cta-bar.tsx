@@ -27,7 +27,14 @@ export function MobileCtaBar() {
       className="border-border/40 bg-background/95 fixed inset-x-0 bottom-0 z-40 border-t px-4 pt-3 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
     >
       <Button asChild className="min-h-[44px] w-full">
-        <Link href={primaryCta.href}>{primaryCta.label}</Link>
+        <Link
+          href={primaryCta.href}
+          data-cta-label={primaryCta.label}
+          data-cta-href={primaryCta.href}
+          data-cta-position="mobile_bar"
+        >
+          {primaryCta.label}
+        </Link>
       </Button>
       {/* Bottom padding below button so the bar doesn't clip content */}
       <div className="h-3" aria-hidden="true" />

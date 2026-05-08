@@ -5,6 +5,8 @@ import { Toaster } from "@/components/ui/sonner";
 import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { MobileCtaBar } from "@/components/site/mobile-cta-bar";
+import { PostHogProvider } from "@/components/analytics/posthog-provider";
+import { AnalyticsClickDelegator } from "@/components/analytics/click-delegator";
 import { SITE_URL, SITE_NAME, OWNER_JOB_TITLE } from "@/lib/seo/site";
 
 /*
@@ -80,6 +82,16 @@ export default function RootLayout({
         {/* SiteHeader and MobileCtaBar are global chrome shared across all pages.
          * Placing them in the root layout means /work/[slug] and future pages
          * inherit navigation and the persistent primary CTA without duplication. */}
+        {/*
+         * PostHogProvider captures App Router pageviews via usePathname +
+         * useSearchParams (wrapped in Suspense to prevent layout blocking).
+         * AnalyticsClickDelegator is a single document-level click listener
+         * that translates data-cta-* and data-work-card-* attributes into
+         * typed analytics events without converting server components to client.
+         * Both are async — no render-blocking impact on LCP.
+         */}
+        <PostHogProvider />
+        <AnalyticsClickDelegator />
         <SiteHeader />
         <div className="flex flex-1 flex-col">{children}</div>
         <SiteFooter />

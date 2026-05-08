@@ -64,7 +64,14 @@ export function SiteHeader() {
           ))}
 
           <Button asChild size="default">
-            <Link href={primaryCta.href}>{primaryCta.label}</Link>
+            <Link
+              href={primaryCta.href}
+              data-cta-label={primaryCta.label}
+              data-cta-href={primaryCta.href}
+              data-cta-position="header"
+            >
+              {primaryCta.label}
+            </Link>
           </Button>
         </nav>
       </div>

@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { submitContact } from "@/app/contact/actions";
 import { contactSchema, type ContactFormValues, type ContactState } from "@/lib/contact/schema";
 import { contactContent } from "@/lib/content/contact";
+import { trackContactFormStart, trackContactFormSubmit } from "@/lib/analytics/events";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -71,6 +72,15 @@ export function ContactForm() {
   // ── Status summary ref for focus management ─────────────────────────────
   const statusRef = React.useRef<HTMLDivElement>(null);
 
+  // ── Analytics: form_start guard ─────────────────────────────────────────
+  // Fires at most once per form mount on the first focus of a real (non-honeypot) field.
+  const formStartFired = React.useRef(false);
+  function handleFieldFocus() {
+    if (formStartFired.current) return;
+    formStartFired.current = true;
+    trackContactFormStart();
+  }
+
   // ── Sync server state → RHF field errors + focus + toast ───────────────
   React.useEffect(() => {
     if (state.status === "idle") return;
@@ -78,6 +88,7 @@ export function ContactForm() {
     if (state.status === "success") {
       form.reset();
       toast.success(successCopy.heading, { description: successCopy.body });
+      trackContactFormSubmit();
     }
 
     if (state.status === "error") {
@@ -176,6 +187,7 @@ export function ContactForm() {
                     autoComplete="name"
                     className="min-h-[44px]"
                     disabled={isPending}
+                    onFocus={handleFieldFocus}
                   />
                 </FormControl>
                 <FormMessage />
@@ -198,6 +210,7 @@ export function ContactForm() {
                     autoComplete="email"
                     className="min-h-[44px]"
                     disabled={isPending}
+                    onFocus={handleFieldFocus}
                   />
                 </FormControl>
                 <FormMessage />
@@ -220,6 +233,7 @@ export function ContactForm() {
                     autoComplete="organization"
                     className="min-h-[44px]"
                     disabled={isPending}
+                    onFocus={handleFieldFocus}
                   />
                 </FormControl>
                 <FormDescription>{copy.fields.company.description}</FormDescription>
@@ -242,6 +256,7 @@ export function ContactForm() {
                     rows={5}
                     className="min-h-[132px] resize-y"
                     disabled={isPending}
+                    onFocus={handleFieldFocus}
                   />
                 </FormControl>
                 <FormDescription>{copy.fields.message.description}</FormDescription>

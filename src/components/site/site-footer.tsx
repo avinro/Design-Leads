@@ -39,6 +39,7 @@ const footerLinks = [
   { label: "Work", href: "/work" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Privacy", href: "/privacy" },
 ] as const;
 
 export function SiteFooter() {
@@ -63,6 +64,9 @@ export function SiteFooter() {
 
           <Link
             href={finalCta.linkHref}
+            data-cta-label={finalCta.linkLabel}
+            data-cta-href={finalCta.linkHref}
+            data-cta-position="footer_link"
             className="font-display focus-visible:ring-background focus-visible:ring-offset-foreground inline-flex w-fit items-center gap-2 border-b-2 border-current pb-0.5 text-2xl font-semibold tracking-tight transition-opacity duration-150 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-3xl"
           >
             {finalCta.linkLabel}

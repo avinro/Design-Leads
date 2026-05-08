@@ -95,7 +95,14 @@ export function HomeHero() {
           {/* Secondary in-page CTA */}
           <div className="animate-in fade-in fill-mode-both delay-300 duration-700">
             <Button asChild variant="outline" size="lg">
-              <Link href={hero.secondaryCtaHref}>{hero.secondaryCta}</Link>
+              <Link
+                href={hero.secondaryCtaHref}
+                data-cta-label={hero.secondaryCta}
+                data-cta-href={hero.secondaryCtaHref}
+                data-cta-position="hero_secondary"
+              >
+                {hero.secondaryCta}
+              </Link>
             </Button>
           </div>
         </div>
