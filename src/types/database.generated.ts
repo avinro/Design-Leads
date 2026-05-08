@@ -349,6 +349,21 @@ export type Database = {
           },
         ]
       }
+      system_owners: {
+        Row: {
+          created_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -358,6 +373,7 @@ export type Database = {
       is_account_member: { Args: { p_account_id: string }; Returns: boolean }
       is_account_owner: { Args: { p_account_id: string }; Returns: boolean }
       is_project_owner: { Args: { p_project_id: string }; Returns: boolean }
+      is_system_owner: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
