@@ -22,7 +22,7 @@
     "db:stop": "supabase stop",
     "db:reset": "supabase db reset",
     "db:diff": "supabase db diff -f",
-    "gen:types": "supabase gen types typescript --local --schema public > src/types/database.ts",
+    "gen:types": "supabase gen types typescript --local --schema public > src/types/database.generated.ts",
     "test:db": "supabase test db"
   },
   "lint-staged": {
