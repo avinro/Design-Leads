@@ -220,3 +220,10 @@ insert into public.intake_forms (id, project_id, account_id, schema, responses, 
   }'::jsonb,
   now() - interval '5 days'
 ) on conflict (id) do nothing;
+
+-- ─── System owner (PRO-37) ────────────────────────────────────────────────────
+-- owner_id (00000000-0000-0000-0000-000000000001) is the platform system owner
+-- in local dev. Mirrors the single production row to be seeded post-deploy.
+insert into public.system_owners (user_id) values
+  ('00000000-0000-0000-0000-000000000001')
+on conflict do nothing;
