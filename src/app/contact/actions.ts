@@ -1,32 +1,11 @@
 "use server";
 
 import { headers } from "next/headers";
-import type { SupabaseClient } from "@supabase/supabase-js";
 
 import { contactSchema, type ContactState } from "@/lib/contact/schema";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { sendOwnerNotification } from "@/lib/email/gmail";
-
-// Row shape for contact_submissions inserts/updates.
-// Kept local because we have no generated DB types yet.
-interface ContactSubmissionInsert {
-  name: string;
-  email: string;
-  company: string | null;
-  message: string;
-  user_agent?: string;
-  ip_address?: string;
-  notification_status: string;
-}
-
-interface ContactSubmissionUpdate {
-  notification_status: string;
-  notified_at?: string;
-  notification_error?: string;
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type UntypedClient = SupabaseClient<any, any, any>;
+import type { ContactSubmissionInsert, ContactSubmissionUpdate } from "@/types/database";
 
 /*
  * submitContact — server action for the /contact form.
@@ -91,8 +70,7 @@ export async function submitContact(
   const ipAddress = rawIp ? rawIp.split(",")[0].trim() : undefined;
 
   // ── 4. Insert submission ─────────────────────────────────────────────────
-  // Cast to UntypedClient because we have no generated DB schema types yet.
-  const admin = createAdminClient() as UntypedClient;
+  const admin = createAdminClient();
 
   const insertPayload: ContactSubmissionInsert = {
     name,
@@ -108,7 +86,7 @@ export async function submitContact(
     .from("contact_submissions")
     .insert(insertPayload)
     .select("id")
-    .single<{ id: string }>();
+    .single();
 
   if (insertError ?? !inserted) {
     console.error("[contact] Insert failed:", insertError);

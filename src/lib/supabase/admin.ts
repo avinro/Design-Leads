@@ -1,6 +1,7 @@
 import "server-only";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
+import type { Database } from "@/types/database";
 import { getSupabaseEnv } from "./env";
 
 /*
@@ -25,7 +26,7 @@ function getServiceRoleKey(): string {
 }
 
 // Lazy singleton — avoids creating a new client on every request in dev.
-let adminClient: ReturnType<typeof createSupabaseClient> | undefined;
+let adminClient: ReturnType<typeof createSupabaseClient<Database>> | undefined;
 
 export function createAdminClient() {
   if (adminClient) return adminClient;
@@ -33,7 +34,7 @@ export function createAdminClient() {
   const { supabaseUrl } = getSupabaseEnv();
   const serviceRoleKey = getServiceRoleKey();
 
-  adminClient = createSupabaseClient(supabaseUrl, serviceRoleKey, {
+  adminClient = createSupabaseClient<Database>(supabaseUrl, serviceRoleKey, {
     auth: {
       // Disable auto-refresh and session persistence — admin client is
       // server-only and never represents a user session.

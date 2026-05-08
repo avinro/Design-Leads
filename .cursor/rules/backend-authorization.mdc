@@ -14,7 +14,7 @@ Do **not** make backend changes unless one of the following is true:
 
 - `supabase/migrations/` — schema changes, RLS policies, seed data
 - Server Actions and Route Handlers (`src/app/api/`, any `"use server"` file)
-- Authentication / session logic (Supabase Auth clients, middleware at `src/middleware.ts`)
+- Authentication / session logic (Supabase Auth clients, proxy/middleware at `src/proxy.ts`)
 - AI wrappers and prompt files (`src/lib/ai/`)
 - Environment variables — adding, renaming, or removing any key
 - Vercel project config (`vercel.ts`, `vercel.json`) and CI workflow files (`.github/workflows/`)
