@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { ArrowDown } from "lucide-react";
 
 import { homeContent } from "@/lib/content/home";
 import { Button } from "@/components/ui/button";
@@ -137,6 +138,16 @@ export function HomeHero() {
           </div>
         </div>
       </Container>
+      {/* Scroll indicator — bounces to invite the first scroll gesture */}
+      <div
+        aria-hidden="true"
+        className="animate-in fade-in fill-mode-both pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 delay-1000 duration-1000"
+      >
+        <ArrowDown
+          strokeWidth={1.5}
+          className="text-foreground/40 h-5 w-5 animate-bounce motion-reduce:animate-none"
+        />
+      </div>
     </Section>
   );
 }
