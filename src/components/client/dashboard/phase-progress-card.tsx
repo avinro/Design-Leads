@@ -1,15 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-
-const PHASES = ["discovery", "research", "design", "validation", "delivery"] as const;
-type Phase = (typeof PHASES)[number];
-
-const PHASE_LABELS: Record<Phase, string> = {
-  discovery: "Discovery",
-  research: "Research",
-  design: "Design",
-  validation: "Validation",
-  delivery: "Delivery",
-};
+import { PHASES, PHASE_LABELS, type Phase } from "@/lib/projects/phases";
 
 interface PhaseProgressCardProps {
   currentPhase: string;
