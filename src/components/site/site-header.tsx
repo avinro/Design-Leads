@@ -128,22 +128,30 @@ export function SiteHeader() {
         )}
       />
 
-      {/* Glass container — expands to full screen on mobile when menu is open */}
+      {/* Glass container — expands to full screen on mobile when menu is open.
+          data-glass-surface is only applied when the glass effect is active so the
+          prefers-reduced-transparency rule in globals.css does not override the
+          transparent at-rest state. */}
       <div
-        data-glass-surface
+        data-glass-surface={isScrolled || isMenuOpen ? "" : undefined}
         className={cn(
           "flex flex-col overflow-hidden",
-          "bg-background",
-          "supports-[backdrop-filter]:bg-background/55",
-          "supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150",
-          "md:supports-[backdrop-filter]:backdrop-blur-xl",
           "border-border/50",
-          "transition-[height,width,max-width,margin,border-radius,padding,background-color] duration-300 ease-in-out motion-reduce:transition-none",
+          "transition-[height,width,max-width,margin,border-radius,padding,background-color] duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] motion-reduce:transition-none",
           isMenuOpen
-            ? "supports-[backdrop-filter]:bg-background/92 mx-2 mt-2 h-[calc(100dvh-16px)] rounded-2xl border px-6"
+            ? [
+                "mx-2 mt-2 h-[calc(100dvh-16px)] rounded-2xl border px-6",
+                "bg-background supports-[backdrop-filter]:bg-background/92",
+                "supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150",
+              ]
             : isScrolled
-              ? "supports-[backdrop-filter]:bg-background/65 mx-auto mt-2 h-14 w-[calc(100%-16px)] max-w-[72rem] rounded-[28px] border px-5 sm:px-6"
-              : "supports-[backdrop-filter]:bg-background/45 mx-auto mt-0 h-14 w-full max-w-7xl rounded-none border-transparent px-4 sm:px-6 lg:px-8",
+              ? [
+                  "mx-auto mt-2 h-14 w-[calc(100%-16px)] max-w-[72rem] rounded-[28px] border px-5 sm:px-6",
+                  "bg-background supports-[backdrop-filter]:bg-background/65",
+                  "supports-[backdrop-filter]:backdrop-blur-md supports-[backdrop-filter]:backdrop-saturate-150",
+                  "md:supports-[backdrop-filter]:backdrop-blur-xl",
+                ]
+              : "mx-auto mt-0 h-14 w-full max-w-7xl rounded-none border-transparent bg-transparent px-4 sm:px-6 lg:px-8",
         )}
       >
         {/* ── Top row — always visible ─────────────────────────────────── */}
@@ -164,12 +172,12 @@ export function SiteHeader() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="focus-ring text-muted-foreground hover:text-foreground rounded-sm text-sm transition-all duration-150 hover:-translate-y-px"
+                className="focus-ring text-muted-foreground hover:text-foreground rounded-sm font-mono text-xs tracking-wider uppercase transition-all duration-150 hover:-translate-y-px"
               >
                 {link.label}
               </Link>
             ))}
-            <Button asChild size="default">
+            <Button asChild size="default" className="font-mono text-xs tracking-wider uppercase">
               <Link
                 href={primaryCta.href}
                 data-cta-label={primaryCta.label}

@@ -40,10 +40,10 @@ export function WorkDivider({ direction = "left" }: WorkDividerProps = {}) {
       <ScrollVelocity
         texts={["SELECTED WORK \u2022"]}
         velocity={velocity}
-        numCopies={8}
-        className="font-display text-foreground/55 font-semibold tracking-tight uppercase"
-        scrollerClassName="text-xl md:text-2xl"
-        parallaxClassName="py-1.5 md:py-2"
+        numCopies={20}
+        className="text-foreground/40 font-mono text-xs tracking-widest uppercase"
+        scrollerClassName=""
+        parallaxClassName="py-2 md:py-2.5"
       />
     </div>
   );
