@@ -24,7 +24,7 @@ import { SITE_URL, SITE_NAME, OWNER_JOB_TITLE } from "@/lib/seo/site";
 const googleSansFlex = Google_Sans_Flex({
   subsets: ["latin"],
   variable: "--font-display",
-  axes: ["ROND"],
+  axes: ["ROND", "opsz"],
   display: "optional",
   adjustFontFallback: false,
 });

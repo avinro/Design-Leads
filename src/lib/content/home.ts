@@ -26,6 +26,12 @@ export interface Testimonial {
   role: string;
 }
 
+export interface AboutImage {
+  src: string;
+  /** Decorative alt — empty string means aria-hidden in usage */
+  alt: string;
+}
+
 export interface HomeContent {
   hero: {
     headline: string;
@@ -76,6 +82,12 @@ export interface HomeContent {
     label: string;
     href: string;
   };
+  /**
+   * Lifestyle / personal images shown as floating cursor-trail on desktop
+   * and as a static parallax collage on mobile in the About section.
+   * Use placeholder paths until real assets are provided.
+   */
+  aboutImages: AboutImage[];
 }
 
 export const homeContent: HomeContent = {
@@ -119,4 +131,13 @@ export const homeContent: HomeContent = {
     label: "Let's talk",
     href: "/contact",
   },
+  // Lifestyle images for the About cursor-trail section.
+  // Replace these placeholder paths once real assets are available in public/.
+  aboutImages: [
+    { src: "/about/lifestyle/01.jpg", alt: "" },
+    { src: "/about/lifestyle/02.jpg", alt: "" },
+    { src: "/about/lifestyle/03.jpg", alt: "" },
+    { src: "/about/lifestyle/04.jpg", alt: "" },
+    { src: "/about/lifestyle/05.jpg", alt: "" },
+  ],
 };

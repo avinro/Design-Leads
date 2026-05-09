@@ -2,44 +2,48 @@
 
 import dynamic from "next/dynamic";
 
-import { homeContent } from "@/lib/content/home";
-
 /*
- * WorkDivider — chapter break between HomeHero and SelectedWork.
+ * WorkDivider — slim chapter-rule marquee that bookends the work section.
  *
- * Renders a CurvedLoop marquee so the page has a clear chapter transition.
- * The CurvedLoop component is lazy-loaded (`ssr: false`) because it relies
- * on SVG text measurement (getComputedTextLength) which only works in the
- * browser. The fallback is a simple invisible spacer that preserves vertical
- * rhythm without a layout shift.
+ * Designed to be placed both before and after FlowingWorkMenu. Accepts a
+ * `direction` prop so the top instance scrolls left and the bottom scrolls
+ * right, creating a balanced editorial bracket.
  *
- * Reduced-motion users see the text on its curved SVG path statically
- * (the CurvedLoop wrapper halts the rAF loop when useReducedMotion is true).
+ * Typography is h4-scale (text-xl / text-2xl) — a quiet label, not a hero band.
  *
- * aria-hidden="true" is applied in CurvedLoop itself — this is decorative
- * content; the information it carries ("Selected Work") is already in the
- * section heading below.
+ * Lazy-loaded (ssr: false) because ScrollVelocity depends on useScroll /
+ * useVelocity from motion/react which are browser-only APIs.
+ *
+ * aria-hidden: this is purely decorative; the accessible work section heading
+ * is carried by FlowingWorkMenu's nav aria-label.
  */
-const CurvedLoop = dynamic(
-  () => import("@/components/motion/curved-loop").then((m) => m.CurvedLoop),
+const ScrollVelocity = dynamic(
+  () => import("@/components/motion/scroll-velocity").then((m) => m.ScrollVelocity),
   {
     ssr: false,
-    loading: () => <div className="h-24 w-full" aria-hidden="true" />,
+    loading: () => <div className="h-10 w-full" aria-hidden="true" />,
   },
 );
 
-export function WorkDivider() {
-  const { workDivider } = homeContent;
+interface WorkDividerProps {
+  /** Direction the marquee travels. "left" = scrolls left, "right" = scrolls right. */
+  direction?: "left" | "right";
+}
+
+export function WorkDivider({ direction = "left" }: WorkDividerProps = {}) {
+  // ScrollVelocity flips sign for odd indices. With a single-item texts array
+  // the velocity prop controls direction directly — no hidden inversion.
+  const velocity = direction === "left" ? 50 : -50;
 
   return (
-    <div className="text-foreground/70 overflow-hidden">
-      <CurvedLoop
-        marqueeText={workDivider.text}
-        curveAmount={180}
-        speed={1.5}
-        direction="left"
-        interactive={false}
-        fontSize="clamp(3rem, 8vw, 6rem)"
+    <div aria-hidden="true" className="overflow-hidden py-2 md:py-3">
+      <ScrollVelocity
+        texts={["SELECTED WORK \u2022"]}
+        velocity={velocity}
+        numCopies={20}
+        className="text-foreground/40 font-mono text-xs tracking-widest uppercase"
+        scrollerClassName=""
+        parallaxClassName="py-2 md:py-2.5"
       />
     </div>
   );

@@ -1,39 +1,34 @@
-"use client";
-
-import dynamic from "next/dynamic";
 import Link from "next/link";
+import Image from "next/image";
 
 import { homeContent } from "@/lib/content/home";
 
 /*
- * SiteFooter — full-screen closing section.
+ * SiteFooter — full-screen curtain footer.
  *
- * Design intent (rotation rebrand):
- *   The final CTA now lives inside the footer instead of as a separate
- *   FinalCta section. This makes the page end with one cohesive closing
- *   section: big question + supporting text-link, then wordmark/nav/copyright.
+ * Positioning strategy:
+ *   The footer uses position: fixed; bottom: 0; z-0 so it is always "behind"
+ *   the page content. The curtain wrapper in (site)/layout.tsx sits at z-10
+ *   with mb-[100dvh], which means:
+ *     - While the user scrolls through page content, the wrapper covers the footer.
+ *     - At the very bottom of the page, the wrapper slides fully above the viewport,
+ *       revealing the footer underneath — the "lifting curtain" effect.
  *
- *   The wordmark is replaced with a small, very slowly spinning CircularText
- *   that says "AVINRO * AVINRO *". It wraps a home <Link> so it stays a
- *   clickable anchor, and carries aria-label="Avinro — home" so screen
- *   readers announce it correctly regardless of what the letters are doing.
+ *   pointer-events-none on the root prevents the hidden footer from intercepting
+ *   clicks while it is behind the content wrapper. pointer-events-auto is restored
+ *   inside the interactive container.
  *
- *   This is the cadence echo — same motion language as the hero protagonist,
- *   but --motion-spin-slow (30 s) instead of medium (20 s). The slower spin
- *   signals distance from the entry point without breaking the vocabulary.
+ * Typography:
+ *   The closing CTA heading uses letter-spacing: 0.8em (confirmed by design spec).
+ *   text-wrap: balance + max-w-3xl prevent extreme wrapping on small viewports.
+ *   font-weight is reduced to medium to counteract the visual weight added by
+ *   ultra-wide tracking at display sizes.
  *
- * pb-[var(--space-cta-bar)] reserves space on mobile so the last content
- * item is not hidden behind the fixed MobileCtaBar. md:pb-0 removes the
- * extra padding on desktop where MobileCtaBar is hidden.
+ * CircularText removed per design spec (replaced by plain Avinro text link).
+ *
+ * pb-[var(--space-cta-bar)] md:pb-0 reserves space on mobile so the last
+ * content item is not hidden behind the fixed MobileCtaBar.
  */
-
-const CircularText = dynamic(
-  () => import("@/components/motion/circular-text").then((m) => m.CircularText),
-  {
-    ssr: false,
-    loading: () => <div className="h-[88px] w-[88px] shrink-0" aria-hidden="true" />,
-  },
-);
 
 const footerLinks = [
   { label: "Work", href: "/work" },
@@ -47,27 +42,34 @@ export function SiteFooter() {
   const { finalCta } = homeContent;
 
   return (
-    <footer className="border-background/10 bg-foreground text-background flex min-h-screen flex-col border-t pb-[var(--space-cta-bar)] md:pb-0">
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-between gap-12 px-4 py-12 sm:px-6 lg:px-8">
-        {/* Closing CTA — secondary text-link, not a persistent primary button */}
+    <footer
+      data-curtain-footer
+      className="border-background/10 bg-foreground text-background pointer-events-none fixed inset-x-0 bottom-0 z-0 flex h-[100dvh] flex-col border-t"
+    >
+      {/* Interactive inner container — restores pointer events */}
+      <div className="pointer-events-auto mx-auto flex h-full w-full max-w-7xl flex-col justify-between gap-12 px-4 py-12 pb-6 sm:px-6 lg:px-8">
+        {/* Closing CTA */}
         <section
           aria-labelledby="footer-cta-title"
           className="flex flex-1 flex-col justify-center gap-8 py-12"
         >
-          <h2
+          <h3
             id="footer-cta-title"
-            className="font-display leading-tight font-semibold tracking-tight text-balance"
-            style={{ fontSize: "var(--text-display-md)" }}
+            className="font-display text-3xl font-semibold text-balance sm:text-4xl md:text-[length:var(--text-display-md)]"
+            style={{
+              letterSpacing: "-0.03em",
+              lineHeight: "0.9",
+            }}
           >
             {finalCta.heading}
-          </h2>
+          </h3>
 
           <Link
             href={finalCta.linkHref}
             data-cta-label={finalCta.linkLabel}
             data-cta-href={finalCta.linkHref}
             data-cta-position="footer_link"
-            className="font-display focus-visible:ring-background focus-visible:ring-offset-foreground inline-flex w-fit items-center gap-2 border-b-2 border-current pb-0.5 text-2xl font-semibold tracking-tight transition-opacity duration-150 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-3xl"
+            className="focus-visible:ring-background focus-visible:ring-offset-foreground font-display inline-flex w-fit items-center gap-2 border-b-2 border-current pb-0.5 text-2xl font-semibold tracking-tight transition-opacity duration-150 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-3xl"
           >
             {finalCta.linkLabel}
             <span aria-hidden="true">→</span>
@@ -75,20 +77,13 @@ export function SiteFooter() {
         </section>
 
         <div className="flex flex-col gap-8">
-          {/* Wordmark echo — small CircularText linking home */}
+          {/* Wordmark — logo, inverted for the dark footer surface */}
           <Link
             href="/"
             aria-label="Avinro — home"
-            className="focus-visible:ring-background focus-visible:ring-offset-foreground w-fit rounded-full transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="focus-ring-invert w-fit rounded-sm transition-opacity hover:opacity-70"
           >
-            <CircularText
-              text="AVINRO * AVINRO * "
-              size={88}
-              spinDuration={30}
-              onHover="speedUp"
-              aria-label="Avinro"
-              className="text-background/60"
-            />
+            <Image src="/logo.png" alt="" width={62} height={12} className="h-3 w-auto invert" />
           </Link>
 
           {/* Nav + copyright row */}
@@ -103,12 +98,6 @@ export function SiteFooter() {
                   {link.label}
                 </Link>
               ))}
-              <a
-                href="mailto:hello@avinro.com"
-                className="focus-ring-invert text-background/70 hover:text-background rounded-sm font-mono text-xs tracking-wider uppercase transition-colors"
-              >
-                Email
-              </a>
             </nav>
 
             <p className="text-background/70 font-mono text-xs">&copy; {year} Avinro</p>

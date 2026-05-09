@@ -4,19 +4,38 @@ import { describe, expect, it } from "vitest";
 import { SiteFooter } from "./site-footer";
 
 /*
- * Smoke tests for SiteFooter using react-dom/server (no jsdom needed).
+ * Smoke tests for SiteFooter.
  *
- * PRO-23 focus-ring regressions:
- *   - Footer nav links and email link must carry focus-ring-invert so they
- *     have a visible keyboard indicator on the dark bg-foreground surface.
- *   - The CircularText home link already has bespoke focus-visible classes;
- *     those are not tested here since they use Tailwind ring utilities, not
- *     the focus-ring-invert utility.
+ * Updated for the curtain footer redesign:
+ *   - CircularText is removed — no assertions for it.
+ *   - Footer is now position:fixed (curtain effect) with data-curtain-footer.
+ *   - Closing CTA heading is now an <h3> with letter-spacing: 0.8em.
+ *   - Plain Avinro wordmark link replaces the circular animated one.
+ *
+ * PRO-23 focus-ring regressions retained:
+ *   - Footer nav links must carry focus-ring-invert on the dark bg-foreground surface.
  */
 describe("SiteFooter", () => {
   it("renders a footer landmark", () => {
     const html = renderToStaticMarkup(<SiteFooter />);
     expect(html).toContain("<footer");
+  });
+
+  it("carries data-curtain-footer attribute for curtain effect and tests", () => {
+    const html = renderToStaticMarkup(<SiteFooter />);
+    expect(html).toContain("data-curtain-footer");
+  });
+
+  it("renders closing CTA as h3 (not h2)", () => {
+    const html = renderToStaticMarkup(<SiteFooter />);
+    expect(html).toContain("<h3");
+    expect(html).not.toContain('<h2 id="footer-cta-title"');
+  });
+
+  it("applies tight letter-spacing and display line-height to the CTA heading", () => {
+    const html = renderToStaticMarkup(<SiteFooter />);
+    expect(html).toContain("letter-spacing:-0.03em");
+    expect(html).toContain("line-height:0.9");
   });
 
   it("renders footer nav with aria-label", () => {
@@ -32,9 +51,18 @@ describe("SiteFooter", () => {
     expect(html).toContain('href="/privacy"');
   });
 
-  it("renders the email mailto link", () => {
+  it("does not render an email mailto link (removed per design spec)", () => {
     const html = renderToStaticMarkup(<SiteFooter />);
-    expect(html).toContain('href="mailto:hello@avinro.com"');
+    expect(html).not.toContain('href="mailto:hello@avinro.com"');
+  });
+
+  it("renders a plain text Avinro home link (no CircularText)", () => {
+    const html = renderToStaticMarkup(<SiteFooter />);
+    // Plain text wordmark link must be present
+    expect(html).toContain('aria-label="Avinro — home"');
+    // CircularText component markup must not be present
+    expect(html).not.toContain("circular-text");
+    expect(html).not.toContain("CircularText");
   });
 
   // PRO-23 — focus ring regressions
@@ -43,17 +71,7 @@ describe("SiteFooter", () => {
     const navIdx = html.indexOf('aria-label="Footer navigation"');
     expect(navIdx).toBeGreaterThan(-1);
     const navSection = html.slice(navIdx, navIdx + 1500);
-    // Each of the 4 nav links + the mailto must carry focus-ring-invert.
-    // At minimum 4 occurrences (Work, About, Contact, Privacy).
+    // 4 nav links (Work, About, Contact, Privacy) must carry focus-ring-invert.
     expect(navSection.match(/focus-ring-invert/g)?.length).toBeGreaterThanOrEqual(4);
-  });
-
-  it("applies focus-ring-invert to the mailto email link", () => {
-    const html = renderToStaticMarkup(<SiteFooter />);
-    const mailtoIdx = html.indexOf('href="mailto:hello@avinro.com"');
-    expect(mailtoIdx).toBeGreaterThan(-1);
-    // Isolate a window around the mailto anchor.
-    const mailtoSlice = html.slice(Math.max(0, mailtoIdx - 200), mailtoIdx + 100);
-    expect(mailtoSlice).toContain("focus-ring-invert");
   });
 });

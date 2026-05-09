@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 
 import { SITE_URL, SITE_NAME, OWNER_JOB_TITLE } from "@/lib/seo/site";
 import { PersonJsonLd } from "@/lib/seo/json-ld";
+import { getPublishedCaseStudies } from "@/lib/content/case-studies";
+import { testimonials } from "@/lib/content/testimonials";
 import { HomeHero } from "@/components/site/home-hero";
 import { WorkDivider } from "@/components/site/work-divider";
-import { SelectedWork } from "@/components/site/selected-work";
-import { SocialProof } from "@/components/site/social-proof";
-import { AboutTeaser } from "@/components/site/about-teaser";
+import { FlowingWorkMenu } from "@/components/site/flowing-work-menu";
+import { AboutCursorImages } from "@/components/site/about-cursor-images";
+import { TestimonialsCarousel } from "@/components/site/testimonials-carousel";
 
 /*
  * Home page metadata — Open Graph and Twitter cards are wired to the
@@ -51,27 +53,30 @@ export const metadata: Metadata = {
  * Home page — public portfolio landing.
  *
  * Sections:
- *   1. HomeHero     — headline, sub, secondary CTA + CircularText protagonist
- *   2. WorkDivider  — CurvedLoop chapter break
- *   3. SelectedWork — 3 case study editorial rows
- *   4. AboutTeaser  — short bio + link to /about (centred, below work)
- *   5. SocialProof  — testimonial + decorative logo row
+ *   1. HomeHero            — headline, sub, secondary CTA + CircularText protagonist
+ *   2. WorkDivider (top)   — slim h4-scale marquee, scrolls left
+ *   3. FlowingWorkMenu     — full-bleed rows with GSAP marquee hover overlay
+ *   3b. WorkDivider (bot)  — same marquee, scrolls right (bookends work section)
+ *   4. AboutCursorImages   — bio with cursor-trail images (desktop) / scroll parallax (mobile)
+ *   5. TestimonialsCarousel — Embla carousel with peek slides, no autoplay
  *
- * The closing CTA lives inside SiteFooter so the page has one cohesive
- * full-screen closing section rather than a separate CTA block plus footer.
+ * Footer lives in (site)/layout.tsx as a curtain behind the content wrapper.
  *
- * The <main> id="main-content" is the target for the skip link rendered in
- * SiteHeader, allowing keyboard users to bypass navigation directly.
+ * Case studies are fetched server-side and passed as props to the client
+ * SelectedWorksStack component to keep the content layer server-only.
  */
 export default function Home() {
+  const cases = getPublishedCaseStudies();
+
   return (
     <main id="main-content">
       <PersonJsonLd />
       <HomeHero />
-      <WorkDivider />
-      <SelectedWork />
-      <AboutTeaser />
-      <SocialProof />
+      <WorkDivider direction="left" />
+      <FlowingWorkMenu cases={cases} />
+      <WorkDivider direction="right" />
+      <AboutCursorImages />
+      <TestimonialsCarousel testimonials={testimonials} />
     </main>
   );
 }
