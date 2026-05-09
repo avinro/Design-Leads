@@ -79,14 +79,31 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
     return response;
   }
 
-  // ── /outreach/* and /owner/* gates: system owner only ────────────────────
-  if (isOutreachPath(pathname) || isOwnerPath(pathname)) {
+  // ── /outreach/* gate: system owner only ──────────────────────────────────
+  // Non-owners are sent to /unauthorized (there is no outreach equivalent for
+  // client users, so redirecting to /client would be confusing).
+  if (isOutreachPath(pathname)) {
     if (!user) {
       return redirectToLogin(request, pathname);
     }
     const owner = await isSystemOwner(supabase);
     if (!owner) {
       return NextResponse.redirect(new URL("/unauthorized", request.url));
+    }
+    return response;
+  }
+
+  // ── /owner/* gate: system owner only ─────────────────────────────────────
+  // Non-owners are redirected to /client rather than /unauthorized. A client
+  // user who somehow lands here should seamlessly reach their own portal
+  // instead of seeing an error screen (AC from PRO-48).
+  if (isOwnerPath(pathname)) {
+    if (!user) {
+      return redirectToLogin(request, pathname);
+    }
+    const owner = await isSystemOwner(supabase);
+    if (!owner) {
+      return NextResponse.redirect(new URL("/client", request.url));
     }
     return response;
   }

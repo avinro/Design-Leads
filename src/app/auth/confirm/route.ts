@@ -17,7 +17,7 @@ const VALID_OTP_TYPES = new Set<string>([
 
 // Fallback destinations when the requested `next` is not reachable for the
 // authenticated user. These must always exist and pass middleware gates.
-const OWNER_HOME = "/owner/invite";
+const OWNER_HOME = "/owner/dashboard";
 const CLIENT_HOME = "/client";
 
 /**

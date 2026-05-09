@@ -9,7 +9,8 @@ import { inviteClientMember } from "@/lib/auth/invitations";
 
 const inviteSchema = z.object({
   email: z.email("Please enter a valid email address."),
-  accountId: z.uuid("Please select a valid account."),
+  // accountId is validated server-side against the bound URL param, not trusted from form data.
+  accountId: z.uuid("Invalid account."),
 });
 
 export type InviteState =
@@ -17,12 +18,24 @@ export type InviteState =
   | { status: "success"; message: string }
   | { status: "error"; message: string; fieldErrors?: Record<string, string[]> };
 
+/**
+ * Invite a member to the account identified by `expectedAccountId`.
+ *
+ * Security: `expectedAccountId` is injected via `.bind(null, accountId)` in
+ * the page server component and never comes from user input. The hidden
+ * `accountId` field in the form is for progressive-enhancement compatibility
+ * only. Both values are compared here so a tampered form field cannot target
+ * a different account.
+ *
+ * Defense in depth: even though middleware already gates this route to
+ * system owners, this action re-checks `isSystemOwner()` to ensure it
+ * cannot be called out-of-context (e.g. via direct fetch).
+ */
 export async function sendInvite(
+  expectedAccountId: string,
   _prevState: InviteState,
   formData: FormData,
 ): Promise<InviteState> {
-  // Gate: only the system owner may call this action.
-  // notFound() is intentional — it avoids leaking the route to non-owners.
   const supabase = await createClient();
   const ownerAccess = await isSystemOwner(supabase);
   if (!ownerAccess) notFound();
@@ -31,6 +44,11 @@ export async function sendInvite(
     email: formData.get("email"),
     accountId: formData.get("accountId"),
   };
+
+  // Reject if the submitted accountId does not match the URL-bound value.
+  if (raw.accountId !== expectedAccountId) {
+    return { status: "error", message: "Invalid account. Please reload and try again." };
+  }
 
   const parsed = inviteSchema.safeParse(raw);
   if (!parsed.success) {

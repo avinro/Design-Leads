@@ -30,8 +30,29 @@ describe("isOwnerPath", () => {
   it("matches /owner/invite", () => {
     expect(isOwnerPath("/owner/invite")).toBe(true);
   });
+  it("matches /owner/dashboard", () => {
+    expect(isOwnerPath("/owner/dashboard")).toBe(true);
+  });
+  it("matches /owner/clients", () => {
+    expect(isOwnerPath("/owner/clients")).toBe(true);
+  });
+  it("matches /owner/clients/abc-123", () => {
+    expect(isOwnerPath("/owner/clients/abc-123")).toBe(true);
+  });
+  it("matches /owner/clients/abc-123/members/new", () => {
+    expect(isOwnerPath("/owner/clients/abc-123/members/new")).toBe(true);
+  });
+  it("matches /owner/inbox", () => {
+    expect(isOwnerPath("/owner/inbox")).toBe(true);
+  });
+  it("matches /owner/settings", () => {
+    expect(isOwnerPath("/owner/settings")).toBe(true);
+  });
   it("does not match /outreach", () => {
     expect(isOwnerPath("/outreach")).toBe(false);
+  });
+  it("does not match /client", () => {
+    expect(isOwnerPath("/client")).toBe(false);
   });
 });
 
@@ -59,6 +80,9 @@ describe("isPublicPath", () => {
   });
   it("does not match /owner/invite", () => {
     expect(isPublicPath("/owner/invite")).toBe(false);
+  });
+  it("does not match /owner/dashboard", () => {
+    expect(isPublicPath("/owner/dashboard")).toBe(false);
   });
 });
 

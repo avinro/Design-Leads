@@ -1,13 +1,14 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
+import type { Database } from "@/types/database";
 import { getSupabaseEnv } from "./env";
 
 export async function createClient() {
   const cookieStore = await cookies();
   const { supabaseUrl, supabaseAnonKey } = getSupabaseEnv();
 
-  return createServerClient(supabaseUrl, supabaseAnonKey, {
+  return createServerClient<Database>(supabaseUrl, supabaseAnonKey, {
     auth: {
       // Implicit flow keeps email magic-links and invites verifiable across
       // browsers (no PKCE code_verifier cookie required). The /auth/confirm
