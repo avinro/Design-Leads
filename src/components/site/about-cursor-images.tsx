@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
@@ -12,10 +12,10 @@ import { Container } from "@/components/layout/container";
  * AboutCursorImages — sticky text with scroll-panning images.
  *
  * Behavior:
- *   The section is tall (300dvh desktop / 250dvh mobile) to give the user
- *   scroll runway. Inside, a sticky viewport-height wrapper keeps the bio text
- *   dead-center while 5 images slide across the screen at different vertical
- *   bands and stagger times.
+ *   The section is tall (300dvh) to give the user scroll runway.
+ *   Inside, a sticky viewport-height wrapper keeps the bio text dead-center
+ *   while 5 images slide across the screen at different vertical bands
+ *   and stagger times.
  *
  *   Z-index alternation:
  *     Indices 0, 2, 4 → z-0  (behind text at z-10)
@@ -25,6 +25,10 @@ import { Container } from "@/components/layout/container";
  *   [xStart → xEnd] translation in viewport-width units so images cross
  *   the full screen independently, entering and exiting on opposite sides.
  *
+ *   Image sizing: widths and heights use CSS min(Nvw, Xpx) so images are
+ *   proportionally large on narrow viewports (up to 60vw) and capped to the
+ *   original desktop pixel sizes on wide ones — no JS breakpoint detection.
+ *
  * prefers-reduced-motion: static collage rendered instead.
  *
  * Image source: homeContent.aboutImages (5 placeholders in public/).
@@ -32,101 +36,51 @@ import { Container } from "@/components/layout/container";
  */
 
 // ---------------------------------------------------------------------------
-// Image choreography config
+// Image choreography config — single fluid set, no mobile/desktop split
 // ---------------------------------------------------------------------------
 
 interface ImageConfig {
-  /** scroll progress window [0..1] that this image is active */
+  /** Scroll progress window [0..1] that this image is active */
   range: [number, number];
   /** translateX from → to in vw units (positive = right) */
   xFrom: number;
   xTo: number;
-  /** vertical position relative to the sticky viewport */
+  /** Vertical position relative to the sticky viewport */
   top: string;
-  /** slight rotation for organic feel */
+  /** Slight rotation for organic feel */
   rotate: string;
-  /** w/h via tailwind-compatible inline style */
+  /** Width and height as CSS values (vw units for fluid scaling) */
   width: string;
   height: string;
   /** z-index: 0 = behind text (z-10), 20 = in front */
   zIndex: number;
 }
 
-// Desktop — uniform stagger S=0.10, range W=0.60 → 4S+W=1.0 (perfect fill).
+// Uniform stagger S=0.10, range W=0.60 → 4S+W=1.0 (perfect fill).
 // All 5 images are on screen simultaneously from progress 0.40 to 0.60.
+//
+// Sizes use min(Nvw, Xpx) so images scale with the viewport on narrow screens
+// (mobile: up to 60vw) while being capped to the original desktop pixel sizes
+// on wide viewports — no JS breakpoint detection needed.
 const IMAGE_CONFIGS: ImageConfig[] = [
-  {
-    range: [0.0, 0.6],
-    xFrom: 115,
-    xTo: -115,
-    top: "8%",
-    rotate: "-4deg",
-    width: "28vw",
-    height: "20vw",
-    zIndex: 0,
-  },
-  {
-    range: [0.1, 0.7],
-    xFrom: -115,
-    xTo: 115,
-    top: "55%",
-    rotate: "3deg",
-    width: "22vw",
-    height: "30vw",
-    zIndex: 20,
-  },
-  {
-    range: [0.2, 0.8],
-    xFrom: 120,
-    xTo: -120,
-    top: "30%",
-    rotate: "5deg",
-    width: "25vw",
-    height: "18vw",
-    zIndex: 0,
-  },
-  {
-    range: [0.3, 0.9],
-    xFrom: -120,
-    xTo: 120,
-    top: "65%",
-    rotate: "-3deg",
-    width: "20vw",
-    height: "28vw",
-    zIndex: 20,
-  },
-  {
-    range: [0.4, 1.0],
-    xFrom: 115,
-    xTo: -115,
-    top: "18%",
-    rotate: "6deg",
-    width: "26vw",
-    height: "22vw",
-    zIndex: 0,
-  },
-];
-
-// Mobile — same uniform S=0.10 / W=0.60; wider images for narrow viewport.
-const IMAGE_CONFIGS_MOBILE: ImageConfig[] = [
   {
     range: [0.0, 0.6],
     xFrom: 130,
     xTo: -130,
     top: "8%",
     rotate: "-4deg",
-    width: "60vw",
-    height: "43vw",
+    width: "min(60vw, 400px)",
+    height: "min(43vw, 290px)",
     zIndex: 0,
   },
   {
     range: [0.1, 0.7],
     xFrom: -130,
     xTo: 130,
-    top: "58%",
+    top: "55%",
     rotate: "3deg",
-    width: "53vw",
-    height: "67vw",
+    width: "min(50vw, 315px)",
+    height: "min(64vw, 432px)",
     zIndex: 20,
   },
   {
@@ -135,8 +89,8 @@ const IMAGE_CONFIGS_MOBILE: ImageConfig[] = [
     xTo: -130,
     top: "28%",
     rotate: "5deg",
-    width: "57vw",
-    height: "41vw",
+    width: "min(54vw, 360px)",
+    height: "min(39vw, 260px)",
     zIndex: 0,
   },
   {
@@ -145,8 +99,8 @@ const IMAGE_CONFIGS_MOBILE: ImageConfig[] = [
     xTo: 130,
     top: "62%",
     rotate: "-3deg",
-    width: "50vw",
-    height: "62vw",
+    width: "min(43vw, 288px)",
+    height: "min(60vw, 400px)",
     zIndex: 20,
   },
   {
@@ -155,8 +109,8 @@ const IMAGE_CONFIGS_MOBILE: ImageConfig[] = [
     xTo: -130,
     top: "15%",
     rotate: "6deg",
-    width: "55vw",
-    height: "45vw",
+    width: "min(55vw, 375px)",
+    height: "min(47vw, 317px)",
     zIndex: 0,
   },
 ];
@@ -197,7 +151,7 @@ function ScrollPanImage({ src, config, scrollYProgress }: ScrollPanImageProps) {
         src={src}
         alt=""
         fill
-        sizes="(max-width: 768px) 55vw, 28vw"
+        sizes="(max-width: 768px) 60vw, 400px"
         className="object-cover"
         loading="lazy"
         aria-hidden="true"
@@ -217,12 +171,39 @@ function ScrollPanImage({ src, config, scrollYProgress }: ScrollPanImageProps) {
 // ---------------------------------------------------------------------------
 
 function StaticCollage() {
+  // Percentage widths relative to the 100dvh sticky container scale with
+  // the viewport. min() caps pixel size on desktop while keeping large
+  // proportions on mobile — largest ≈ min(55%, 400px).
   const POSITIONS: React.CSSProperties[] = [
-    { top: "5%", left: "3%", width: "30%", height: "22%", rotate: "-4deg" },
-    { bottom: "8%", left: "5%", width: "26%", height: "34%", rotate: "3deg" },
-    { top: "12%", right: "2%", width: "28%", height: "20%", rotate: "5deg" },
-    { bottom: "12%", right: "4%", width: "24%", height: "30%", rotate: "-3deg" },
-    { top: "42%", left: "38%", width: "24%", height: "18%", rotate: "6deg" },
+    { top: "5%", left: "3%", width: "min(55%, 400px)", height: "min(22%, 290px)", rotate: "-4deg" },
+    {
+      bottom: "8%",
+      left: "5%",
+      width: "min(45%, 315px)",
+      height: "min(34%, 432px)",
+      rotate: "3deg",
+    },
+    {
+      top: "12%",
+      right: "2%",
+      width: "min(50%, 360px)",
+      height: "min(20%, 260px)",
+      rotate: "5deg",
+    },
+    {
+      bottom: "12%",
+      right: "4%",
+      width: "min(42%, 288px)",
+      height: "min(30%, 400px)",
+      rotate: "-3deg",
+    },
+    {
+      top: "42%",
+      left: "38%",
+      width: "min(42%, 375px)",
+      height: "min(18%, 317px)",
+      rotate: "6deg",
+    },
   ];
 
   return (
@@ -238,7 +219,7 @@ function StaticCollage() {
             src={img.src}
             alt=""
             fill
-            sizes="30vw"
+            sizes="(max-width: 768px) 55vw, 400px"
             className="object-cover"
             loading="lazy"
             aria-hidden="true"
@@ -262,22 +243,6 @@ function StaticCollage() {
 export function AboutCursorImages() {
   const { aboutTeaser } = homeContent;
   const sectionRef = useRef<HTMLElement>(null);
-  // Reactive breakpoint detection — updates whenever the viewport crosses 768px.
-  // Lazy initializer seeds the correct value on mount; the effect keeps it in sync.
-  const [isMobile, setIsMobile] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(max-width: 767.5px)").matches,
-  );
-
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767.5px)");
-    const onChange = (e: MediaQueryListEvent) => {
-      setIsMobile(e.matches);
-    };
-    mq.addEventListener("change", onChange);
-    return () => {
-      mq.removeEventListener("change", onChange);
-    };
-  }, []);
   const [reducedMotion] = useState(
     () =>
       typeof window !== "undefined" &&
@@ -289,14 +254,12 @@ export function AboutCursorImages() {
     offset: ["start start", "end end"],
   });
 
-  const configs = isMobile ? IMAGE_CONFIGS_MOBILE : IMAGE_CONFIGS;
-
   return (
     <section
       ref={sectionRef}
       aria-label="About"
       className="bg-background relative"
-      style={{ height: isMobile ? "250dvh" : "300dvh" }}
+      style={{ height: "300dvh" }}
     >
       {/* Sticky viewport — keeps text and images in view during the scroll */}
       <div className="sticky top-0 h-[100dvh] overflow-hidden">
@@ -316,7 +279,7 @@ export function AboutCursorImages() {
                 <ScrollPanImage
                   key={img.src}
                   src={img.src}
-                  config={configs[i]}
+                  config={IMAGE_CONFIGS[i]}
                   scrollYProgress={scrollYProgress}
                 />
               ))}

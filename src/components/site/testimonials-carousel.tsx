@@ -9,26 +9,24 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 
 /*
- * TestimonialsCarousel — infinite scrollLeft marquee.
+ * TestimonialsCarousel — infinite rAF marquee driven by transform.
  *
  * Mechanism:
  *   The track renders two identical copies of the card list. A rAF loop
- *   increments container.scrollLeft each frame. When scrollLeft reaches
- *   the halfway point (= exactly one copy's width, including all gaps), it
- *   subtracts that value — making the jump invisible since both halves are
- *   pixel-identical. The same logic handles wrap when scrollLeft goes
- *   negative (user scrolling backwards).
+ *   decrements an offset ref by PIXELS_PER_SECOND each frame and writes it
+ *   directly to track.style.transform. When the offset reaches -halfWidth
+ *   (= exactly one copy's width, including all gaps), it resets by adding
+ *   halfWidth back — making the jump invisible since both halves are
+ *   pixel-identical.
  *
- * User scroll coexists with autoplay: the browser writes scrollLeft from
- * touch/wheel/trackpad; the rAF loop adds its own delta on top. Both paths
- * feed the same loop-wrap check.
+ *   Using transform instead of scrollLeft keeps the animation GPU-composited
+ *   and avoids conflicts with Lenis and native touch-scroll on mobile.
  *
  * Hover slowdown: speedRef.current is set to 0.1 on mouseenter and restored
- * to 1 on mouseleave — the rAF multiplies PIXELS_PER_SECOND by this value
- * each frame, so there is no discontinuity.
+ *   to 1 on mouseleave — the rAF multiplies PIXELS_PER_SECOND by this value
+ *   each frame, so there is no discontinuity.
  *
- * Reduced motion: rAF is never started; cards are static but manually
- * scrollable.
+ * Reduced motion: rAF is never started; the track is static.
  *
  * Accessibility:
  *   - Semantic track: full ARIA labels (role="group", aria-roledescription="slide").
@@ -66,8 +64,8 @@ function TestimonialCard({ testimonial, index, total, decorative }: TestimonialC
       }
       aria-hidden={decorative ? true : undefined}
       // Fixed width ensures the duplicate copy is pixel-identical so the
-      // scrollLeft loop wraps cleanly at the halfway point.
-      className="w-[85vw] flex-shrink-0 sm:w-[400px] lg:w-[360px]"
+      // transform loop wraps cleanly at the halfway point.
+      className="w-[70vw] flex-shrink-0 sm:w-[400px] lg:w-[360px]"
     >
       <div className="border-border/40 flex h-full flex-col gap-6 rounded-xl border p-6 sm:p-8">
         {/* Quote */}
@@ -111,16 +109,17 @@ interface TestimonialsCarouselProps {
 }
 
 export function TestimonialsCarousel({ testimonials: items }: TestimonialsCarouselProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
   // Mutable speed multiplier: 1 = full speed, 0.1 = hover slowdown (10%).
   const speedRef = useRef(1);
+  // Running pixel offset; negative = scrolled left.
+  const offsetRef = useRef(0);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    const track = trackRef.current;
+    if (!track) return;
 
-    // Skip autoplay for users who prefer reduced motion; track stays static
-    // but remains manually scrollable.
+    // Skip autoplay for users who prefer reduced motion; track stays static.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let rafId: number;
@@ -130,18 +129,16 @@ export function TestimonialsCarousel({ testimonials: items }: TestimonialsCarous
       const dt = (now - lastTime) / 1000; // seconds since last frame
       lastTime = now;
 
-      container.scrollLeft += PIXELS_PER_SECOND * speedRef.current * dt;
+      offsetRef.current -= PIXELS_PER_SECOND * speedRef.current * dt;
 
       // Wrap: the track is two identical copies, so halfWidth marks the
       // seam. Resetting by exactly halfWidth is invisible.
-      const halfWidth = container.scrollWidth / 2;
-      if (container.scrollLeft >= halfWidth) {
-        container.scrollLeft -= halfWidth;
+      const halfWidth = track.scrollWidth / 2;
+      if (offsetRef.current <= -halfWidth) {
+        offsetRef.current += halfWidth;
       }
-      // Handle user scrolling backwards past the start.
-      if (container.scrollLeft < 0) {
-        container.scrollLeft += halfWidth;
-      }
+
+      track.style.transform = `translateX(${String(offsetRef.current)}px)`;
 
       rafId = requestAnimationFrame(tick);
     };
@@ -169,12 +166,13 @@ export function TestimonialsCarousel({ testimonials: items }: TestimonialsCarous
         </p>
 
         {/*
-         * Marquee wrapper — relative so fade overlays can be absolutely
-         * positioned as siblings of the scroll container (they must not
-         * scroll with the track).
+         * Negative margins cancel Container's horizontal padding so the
+         * overflow boundary sits at the Container's outer edge — at the
+         * viewport edge on mobile and at max-w-6xl on desktop. The gradient
+         * fades therefore align with the visible clip boundary on both sizes.
          */}
         <div
-          className="relative mt-8"
+          className="relative -mx-4 mt-8 overflow-hidden sm:-mx-6 lg:-mx-8"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
@@ -190,35 +188,31 @@ export function TestimonialsCarousel({ testimonials: items }: TestimonialsCarous
           />
 
           {/*
-           * Scroll container — overflow-x-auto enables native touch/wheel
-           * scroll; scrollbar-hidden hides the bar without disabling scroll.
-           * scroll-behavior must stay auto so rAF and browser scroll don't fight.
+           * Track — two identical copies rendered inline via flex.
+           * The rAF loop writes translateX directly to this element's style.
            */}
           <div
-            ref={containerRef}
-            className="scrollbar-hidden overflow-x-auto"
-            style={{ scrollBehavior: "auto", scrollbarWidth: "none", msOverflowStyle: "none" }}
+            ref={trackRef}
             role="region"
             aria-label="Client testimonials"
             aria-roledescription="carousel"
+            className="flex w-max gap-4 sm:gap-6"
           >
-            <div className="flex w-max gap-4 sm:gap-6">
-              {/* Semantic copy — visible to assistive technology */}
-              {items.map((t, i) => (
-                <TestimonialCard key={t.id} testimonial={t} index={i} total={items.length} />
-              ))}
+            {/* Semantic copy — visible to assistive technology */}
+            {items.map((t, i) => (
+              <TestimonialCard key={t.id} testimonial={t} index={i} total={items.length} />
+            ))}
 
-              {/* Decorative copy — pixel-identical so the wrap is seamless; hidden from AT */}
-              {items.map((t) => (
-                <TestimonialCard
-                  key={`${t.id}-dupe`}
-                  testimonial={t}
-                  index={0}
-                  total={0}
-                  decorative
-                />
-              ))}
-            </div>
+            {/* Decorative copy — pixel-identical so the wrap is seamless; hidden from AT */}
+            {items.map((t) => (
+              <TestimonialCard
+                key={`${t.id}-dupe`}
+                testimonial={t}
+                index={0}
+                total={0}
+                decorative
+              />
+            ))}
           </div>
         </div>
       </Container>

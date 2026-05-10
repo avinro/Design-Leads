@@ -7,21 +7,22 @@ import type { Testimonial } from "@/lib/content/testimonials";
 /*
  * TestimonialsCarousel tests.
  *
- * The component uses a scrollLeft + rAF marquee — no Embla, no DOM APIs
- * needed for the static shape. SSR render via renderToStaticMarkup covers
- * structure, content, and accessibility.
+ * The component uses a rAF loop that writes translateX directly to the track
+ * element's style — no Embla, no scrollLeft, no DOM APIs needed for the
+ * static shape. SSR render via renderToStaticMarkup covers structure,
+ * content, and accessibility.
  *
- * rAF / scrollLeft behaviour is browser-only and is covered by visual QA.
+ * rAF / transform behaviour is browser-only and is covered by visual QA.
  *
  * Covers:
  *   - Renders without crashing.
  *   - All testimonial quotes are present.
  *   - Author attribution (name + role · company) is rendered.
- *   - ARIA region/roledescription on the scroll container.
+ *   - ARIA region/roledescription on the track.
  *   - Slide role/roledescription on semantic cards only (not the duplicate track).
  *   - No prev/next arrow buttons.
  *   - Duplicate track is present and marked aria-hidden.
- *   - Scroll container carries overflow-x-auto and scrollbar-hidden classes.
+ *   - Marquee wrapper carries overflow-hidden.
  *   - Kicker "Trusted by" is rendered.
  *   - Returns null for empty testimonials array.
  */
@@ -95,10 +96,9 @@ describe("TestimonialsCarousel", () => {
     expect(html).toContain('aria-hidden="true"');
   });
 
-  it("scroll container carries overflow-x-auto and scrollbar-hidden", () => {
+  it("marquee wrapper carries overflow-hidden", () => {
     const html = renderToStaticMarkup(<TestimonialsCarousel testimonials={mockTestimonials} />);
-    expect(html).toContain("overflow-x-auto");
-    expect(html).toContain("scrollbar-hidden");
+    expect(html).toContain("overflow-hidden");
   });
 
   it("renders the section kicker 'Trusted by'", () => {

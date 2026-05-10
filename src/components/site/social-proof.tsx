@@ -62,7 +62,7 @@ export function SocialProof() {
           {/* Decorative logo placeholders — purely visual, no a11y meaning */}
           <ul aria-hidden="true" className="flex flex-wrap gap-3">
             {Array.from({ length: socialProof.logoCount }).map((_, i) => (
-              <li key={i} className="bg-muted/60 h-6 w-20 rounded-sm opacity-60 sm:h-7 sm:w-24" />
+              <li key={i} className="bg-muted/60 h-6 w-18 rounded-sm opacity-60 sm:h-7 sm:w-22" />
             ))}
           </ul>
         </div>
