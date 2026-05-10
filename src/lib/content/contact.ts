@@ -5,6 +5,15 @@
  * component or server-action files. Follows the same pattern as about.ts.
  */
 
+import { SOCIAL_LINKS } from "@/lib/seo/site";
+
+export interface SocialLink {
+  label: string;
+  href: string;
+  /** Renders a non-interactive "Soon" badge instead of a live link. */
+  comingSoon?: boolean;
+}
+
 export interface ContactContent {
   hero: {
     kicker: string;
@@ -12,9 +21,9 @@ export interface ContactContent {
     subheading: string;
   };
   aside: {
-    emailLabel: string;
-    emailHref: string;
-    responseTime: string;
+    sectionLabel: string;
+    // TODO: add CV download entry here when the asset is ready
+    socials: SocialLink[];
   };
   form: {
     fields: {
@@ -44,9 +53,15 @@ export const contactContent: ContactContent = {
       "Have a project in mind, a team that needs direction, or an idea you're not sure how to structure? Send a message and I'll get back to you.",
   },
   aside: {
-    emailLabel: "hello@avinro.com",
-    emailHref: "mailto:hello@avinro.com",
-    responseTime: "Typically respond within 1–2 business days.",
+    sectionLabel: "Find me online",
+    socials: [
+      { label: "LinkedIn", href: SOCIAL_LINKS.linkedin },
+      { label: "Behance", href: SOCIAL_LINKS.behance },
+      { label: "GitHub", href: SOCIAL_LINKS.github },
+      { label: "Instagram", href: SOCIAL_LINKS.instagram },
+      { label: "X", href: SOCIAL_LINKS.x },
+      { label: "Dribbble", href: "#", comingSoon: true },
+    ],
   },
   form: {
     fields: {
@@ -74,10 +89,10 @@ export const contactContent: ContactContent = {
   },
   success: {
     heading: "Message sent.",
-    body: "I'll reply within 1–2 business days. If it's urgent, email me directly at hello@avinro.com.",
+    body: "I'll reply within 1–2 business days. If it's urgent, email me directly at avinroart@gmail.com.",
     reset: "Send another message",
   },
   error: {
-    generic: "Something went wrong — please try again or email hello@avinro.com directly.",
+    generic: "Something went wrong — please try again or email avinroart@gmail.com directly.",
   },
 };

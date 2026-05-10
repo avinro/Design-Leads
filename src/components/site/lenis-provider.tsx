@@ -79,7 +79,20 @@ export function LenisProvider({ children }: LenisProviderProps) {
     // Disable GSAP lag smoothing to prevent ScrollTrigger jitter under Lenis.
     gsap.ticker.lagSmoothing(0);
 
+    // Recompute scroll bounds once fonts and lazy images have settled.
+    // Without this, Lenis may read a shorter scrollHeight on pages with large
+    // deferred sections (e.g. home 300dvh AboutCursorImages + lazy thumbnails),
+    // causing it to stop scrolling before the curtain footer fully reveals.
+    const refreshBounds = () => {
+      lenis.resize();
+      ScrollTrigger.refresh();
+    };
+    const refreshTimerId = window.setTimeout(refreshBounds, 300);
+    window.addEventListener("load", refreshBounds, { once: true });
+
     return () => {
+      window.clearTimeout(refreshTimerId);
+      window.removeEventListener("load", refreshBounds);
       lenis.off("scroll", onScroll);
       gsap.ticker.remove(tickerFn);
       lenis.destroy();

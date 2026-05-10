@@ -167,7 +167,7 @@ export default function AboutPage() {
       <PersonJsonLd />
 
       {/* ── 1. Hero ─────────────────────────────────────────────────────── */}
-      <Section spacing="heroInternal">
+      <Section spacing="heroInternalCompact">
         <Container>
           <div className="flex flex-col gap-10 md:flex-row md:items-start md:gap-16">
             {/* Text column */}

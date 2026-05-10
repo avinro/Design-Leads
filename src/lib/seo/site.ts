@@ -19,9 +19,9 @@ export const OWNER_JOB_TITLE = "Product Design Engineer";
  */
 export const SOCIAL_LINKS = {
   github: "https://github.com/avinro",
-  behance: "https://behance.net/avinro",
-  x: "https://x.com/avinro",
-  linkedin: "https://linkedin.com/in/avinro",
-  instagram: "https://instagram.com/avinro",
+  behance: "https://www.behance.net/aryvincench1",
+  x: "https://x.com/avinroart",
+  linkedin: "https://www.linkedin.com/in/ary-vincench/",
+  instagram: "https://www.instagram.com/a_vinro",
   // dribbble: "https://dribbble.com/avinro",  // TODO(PRO-20): add when ready
 } as const;

@@ -47,7 +47,7 @@ export const privacyContent = {
     },
     {
       heading: "Contact",
-      body: ["If you have questions about this privacy policy, reach out at hello@avinro.com."],
+      body: ["If you have questions about this privacy policy, reach out at avinroart@gmail.com."],
     },
   ],
   lastUpdated: "May 2026",

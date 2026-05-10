@@ -93,7 +93,7 @@ export async function submitContact(
     return {
       status: "error",
       message:
-        "We couldn't save your message. Please try again or email hello@avinro.com directly.",
+        "We couldn't save your message. Please try again or email avinroart@gmail.com directly.",
     };
   }
 

@@ -13,11 +13,14 @@ import { cn } from "@/lib/utils";
  *
  * Spacing variants:
  *   hero          full-bleed top sections (64 → 96 px padding-block)
- *   heroInternal  internal page headers — fixed 120px top (accounts for
+ *   heroInternal  internal page headers — fixed 160px top (accounts for
  *                 the sticky nav height ~56px + intentional breathing room)
  *                 with the same bottom as `hero`. Use on the first section
  *                 of every internal route (about, contact, privacy, work/[slug]).
  *                 Excludes home (custom centering) and /work listing (snap-scroll).
+ *   heroInternalCompact
+ *                 same internal header rhythm, but with 30% less top padding
+ *                 on mobile before returning to heroInternal spacing at md+.
  *   section       default page sections   (48 → 80 px padding-block)
  *   card          compact embedded blocks (24 px padding-block)
  *   none          no vertical padding (consumer controls spacing)
@@ -34,6 +37,7 @@ const sectionVariants = cva("", {
     spacing: {
       hero: "py-(--space-hero)",
       heroInternal: "pt-[10rem] pb-(--space-hero)",
+      heroInternalCompact: "pt-[7rem] pb-(--space-hero) md:pt-[10rem]",
       section: "py-(--space-section)",
       card: "py-(--space-card)",
       none: "",

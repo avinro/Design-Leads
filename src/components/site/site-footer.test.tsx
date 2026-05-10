@@ -53,7 +53,7 @@ describe("SiteFooter", () => {
 
   it("does not render an email mailto link (removed per design spec)", () => {
     const html = renderToStaticMarkup(<SiteFooter />);
-    expect(html).not.toContain('href="mailto:hello@avinro.com"');
+    expect(html).not.toContain('href="mailto:');
   });
 
   it("renders a plain text Avinro home link (no CircularText)", () => {
