@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { gsap } from "gsap";
@@ -160,11 +160,11 @@ function StaticFallback({ cases }: SelectedWorksStackProps) {
 
 export function SelectedWorksStack({ cases }: SelectedWorksStackProps) {
   const sectionRef = useRef<HTMLElement>(null);
-  const reducedMotionRef = useRef(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
   const initScrollTrigger = useCallback(() => {
     const section = sectionRef.current;
-    if (!section || reducedMotionRef.current || cases.length < 2) return;
+    if (!section || cases.length < 2) return;
 
     const cards = section.querySelectorAll<HTMLElement>("[data-stack-card]");
     const ctx = gsap.context(() => {
@@ -211,22 +211,28 @@ export function SelectedWorksStack({ cases }: SelectedWorksStackProps) {
     };
   }, [cases.length]);
 
+  // Sync reducedMotion state with the system preference and listen for live changes.
   useEffect(() => {
-    reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => {
+      setReducedMotion(mq.matches);
+    };
+    update();
+    mq.addEventListener("change", update);
+    return () => {
+      mq.removeEventListener("change", update);
+    };
+  }, []);
 
-    if (reducedMotionRef.current) return;
-
+  // Initialize GSAP ScrollTrigger only when motion is allowed.
+  // Re-runs if reducedMotion or cases change so teardown/re-init is correct.
+  useEffect(() => {
+    if (reducedMotion) return;
     const cleanup = initScrollTrigger();
     return cleanup;
-  }, [initScrollTrigger]);
+  }, [reducedMotion, initScrollTrigger]);
 
-  // Render static fallback for reduced-motion (SSR-safe: starts as animated,
-  // but useEffect detects and re-renders via state if needed; for now the GSAP
-  // init simply skips and shows cards normally stacked — still readable.)
-  if (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  ) {
+  if (reducedMotion) {
     return <StaticFallback cases={cases} />;
   }
 

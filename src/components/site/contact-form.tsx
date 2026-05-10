@@ -4,7 +4,7 @@ import * as React from "react";
 import { useActionState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CheckCircleIcon, LoaderCircleIcon } from "lucide-react";
+import { AlertCircleIcon, CheckCircleIcon, LoaderCircleIcon } from "lucide-react";
 import { toast } from "sonner";
 
 import { submitContact } from "@/app/(site)/contact/actions";
@@ -66,7 +66,7 @@ export function ContactForm() {
       message: "",
       website: "",
     },
-    mode: "onTouched",
+    mode: "onSubmit",
   });
 
   // ── Status summary ref for focus management ─────────────────────────────
@@ -104,8 +104,10 @@ export function ContactForm() {
       toast.error("Message not sent", { description: state.message });
     }
 
-    // Move focus to the status summary so assistive technologies announce it.
-    if (statusRef.current) {
+    // Move focus to the status summary on success only.
+    // On error we rely on role="alert" / aria-live for announcement and
+    // deliberately avoid any focus() call to preserve the page scroll position.
+    if (state.status === "success" && statusRef.current) {
       statusRef.current.focus();
     }
   }, [state, form, successCopy]);
@@ -152,22 +154,18 @@ export function ContactForm() {
   return (
     <div className="flex flex-col gap-6 pb-[var(--space-cta-bar)] md:pb-0">
       {/*
-       * Status summary — aria-live="polite" so screen readers announce
-       * changes without interrupting current speech. role="alert" is added
-       * dynamically on error state for more urgent announcement.
+       * Visually hidden aria-live region — screen readers announce server
+       * errors without interrupting speech. Visual error is rendered below
+       * the submit button so it sits near the action that triggered it.
        */}
       <div
         ref={statusRef}
         tabIndex={-1}
         aria-live="polite"
         role={state.status === "error" ? "alert" : undefined}
-        className="outline-none"
+        className="sr-only outline-none"
       >
-        {state.status === "error" && (
-          <div className="border-destructive/30 bg-destructive/5 rounded-lg border px-4 py-3">
-            <p className="text-destructive text-sm font-medium">{state.message}</p>
-          </div>
-        )}
+        {state.status === "error" && <p>{state.message}</p>}
       </div>
 
       <Form {...form}>
@@ -176,7 +174,7 @@ export function ContactForm() {
           <FormField
             control={form.control}
             name="name"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel>{copy.fields.name.label}</FormLabel>
                 <FormControl>
@@ -187,10 +185,14 @@ export function ContactForm() {
                     autoComplete="name"
                     className="min-h-[44px]"
                     disabled={isPending}
-                    onFocus={handleFieldFocus}
+                    aria-invalid={!!fieldState.error}
+                    onFocus={() => {
+                      handleFieldFocus();
+                      form.clearErrors(field.name);
+                    }}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="sr-only" />
               </FormItem>
             )}
           />
@@ -199,7 +201,7 @@ export function ContactForm() {
           <FormField
             control={form.control}
             name="email"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel>{copy.fields.email.label}</FormLabel>
                 <FormControl>
@@ -210,10 +212,14 @@ export function ContactForm() {
                     autoComplete="email"
                     className="min-h-[44px]"
                     disabled={isPending}
-                    onFocus={handleFieldFocus}
+                    aria-invalid={!!fieldState.error}
+                    onFocus={() => {
+                      handleFieldFocus();
+                      form.clearErrors(field.name);
+                    }}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage className="sr-only" />
               </FormItem>
             )}
           />
@@ -222,7 +228,7 @@ export function ContactForm() {
           <FormField
             control={form.control}
             name="company"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel>{copy.fields.company.label}</FormLabel>
                 <FormControl>
@@ -233,11 +239,15 @@ export function ContactForm() {
                     autoComplete="organization"
                     className="min-h-[44px]"
                     disabled={isPending}
-                    onFocus={handleFieldFocus}
+                    aria-invalid={!!fieldState.error}
+                    onFocus={() => {
+                      handleFieldFocus();
+                      form.clearErrors(field.name);
+                    }}
                   />
                 </FormControl>
                 <FormDescription>{copy.fields.company.description}</FormDescription>
-                <FormMessage />
+                <FormMessage className="sr-only" />
               </FormItem>
             )}
           />
@@ -246,7 +256,7 @@ export function ContactForm() {
           <FormField
             control={form.control}
             name="message"
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <FormItem>
                 <FormLabel>{copy.fields.message.label}</FormLabel>
                 <FormControl>
@@ -256,11 +266,15 @@ export function ContactForm() {
                     rows={5}
                     className="min-h-[132px] resize-y"
                     disabled={isPending}
-                    onFocus={handleFieldFocus}
+                    aria-invalid={!!fieldState.error}
+                    onFocus={() => {
+                      handleFieldFocus();
+                      form.clearErrors(field.name);
+                    }}
                   />
                 </FormControl>
                 <FormDescription>{copy.fields.message.description}</FormDescription>
-                <FormMessage />
+                <FormMessage className="sr-only" />
               </FormItem>
             )}
           />
@@ -307,6 +321,24 @@ export function ContactForm() {
               copy.submit
             )}
           </Button>
+
+          {/* ── Error banner — clears field-by-field as user focuses each ── */}
+          {(() => {
+            const hasRhfErrors =
+              Object.keys(form.formState.errors).filter((k) => k !== "website").length > 0;
+            const hasServerNonFieldError = state.status === "error" && !state.fieldErrors;
+            const showBanner = hasRhfErrors || hasServerNonFieldError;
+            const bannerMessage = hasServerNonFieldError
+              ? state.message
+              : "Please complete the required fields before sending.";
+            if (!showBanner) return null;
+            return (
+              <div className="border-destructive/30 bg-destructive/5 text-destructive flex items-center gap-2 rounded-lg border p-2 text-sm">
+                <AlertCircleIcon className="size-4 shrink-0" aria-hidden="true" />
+                <span>{bannerMessage}</span>
+              </div>
+            );
+          })()}
         </form>
       </Form>
     </div>

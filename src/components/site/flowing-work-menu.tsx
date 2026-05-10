@@ -253,12 +253,24 @@ function FlowingWorkItem({ cs, isFirst, isDesktopMotion }: FlowingWorkItemProps)
 
 export function FlowingWorkMenu({ cases }: FlowingWorkMenuProps) {
   // Lazy initializer reads media queries once on mount (client-only).
-  const [isDesktopMotion] = useState(() => {
-    if (typeof window === "undefined") return false;
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const isDesktop = window.matchMedia("(min-width: 768px)").matches;
-    return isDesktop && !prefersReducedMotion;
-  });
+  const [isDesktopMotion, setIsDesktopMotion] = useState(false);
+
+  useEffect(() => {
+    const desktopMQ = window.matchMedia("(min-width: 768px)");
+    const reducedMQ = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const update = () => {
+      setIsDesktopMotion(desktopMQ.matches && !reducedMQ.matches);
+    };
+
+    update();
+    desktopMQ.addEventListener("change", update);
+    reducedMQ.addEventListener("change", update);
+    return () => {
+      desktopMQ.removeEventListener("change", update);
+      reducedMQ.removeEventListener("change", update);
+    };
+  }, []);
 
   return (
     <section
