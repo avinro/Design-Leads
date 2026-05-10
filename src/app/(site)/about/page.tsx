@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 
 import { aboutContent } from "@/lib/content/about";
 import { PersonJsonLd } from "@/lib/seo/json-ld";
-import type { ExperienceEntry, ToolGroup } from "@/lib/content/about";
-import { Button } from "@/components/ui/button";
+import type { ExperienceEntry, EducationEntry, ToolGroup } from "@/lib/content/about";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
+import { ProcessStack } from "@/components/site/process-stack";
 
 // ---------------------------------------------------------------------------
 // Metadata
@@ -14,29 +14,29 @@ import { Section } from "@/components/layout/section";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Lead Product Designer working at the intersection of strategy, design, and execution. Background, experience, tools, and design philosophy.",
+    "Product Design Engineer working at the intersection of strategy, design, and front-end implementation. Background, experience, tools, and design philosophy.",
   alternates: {
     canonical: "/about",
   },
   openGraph: {
-    title: "Avinro — Lead Product Designer",
+    title: "Avinro — Product Design Engineer",
     description:
-      "Lead Product Designer working at the intersection of strategy, design, and execution.",
+      "Product Design Engineer working at the intersection of strategy, design, and front-end implementation.",
     url: "/about",
     images: [
       {
         url: "/about/opengraph-image",
         width: 1200,
         height: 630,
-        alt: "Avinro — Lead Product Designer",
+        alt: "Avinro — Product Design Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Avinro — Lead Product Designer",
+    title: "Avinro — Product Design Engineer",
     description:
-      "Lead Product Designer working at the intersection of strategy, design, and execution.",
+      "Product Design Engineer working at the intersection of strategy, design, and front-end implementation.",
     images: ["/about/opengraph-image"],
   },
 };
@@ -59,18 +59,17 @@ function SectionKicker({ children }: { children: React.ReactNode }) {
 
 /*
  * ExperienceRow — single timeline entry.
- * Follows the same editorial row vocabulary as WorkCard:
- * year (mono) · role — company · outcome
+ * year (mono) · role — company · outcome paragraph
  */
 function ExperienceRow({ entry }: { entry: ExperienceEntry }) {
   return (
-    <div className="border-border/40 flex flex-col gap-1 border-b py-6 first:border-t sm:flex-row sm:items-start sm:gap-8">
-      {/* Year — anchored, does not move */}
-      <span className="text-muted-foreground w-16 shrink-0 font-mono text-sm tabular-nums">
+    <div className="border-border/40 flex flex-col gap-1 border-b py-6 first:border-t sm:flex-row sm:items-start sm:gap-12">
+      {/* Date range — right-aligned, 48px gap to content on desktop */}
+      <span className="text-muted-foreground w-36 shrink-0 self-end self-start text-right font-mono text-sm whitespace-nowrap tabular-nums sm:ml-auto">
         {entry.year}
       </span>
 
-      <div className="flex flex-1 flex-col gap-0.5">
+      <div className="flex flex-1 flex-col gap-1">
         <span className="font-display text-lg font-semibold tracking-tight">
           {entry.role}
           <span className="text-muted-foreground font-sans text-base font-normal">
@@ -79,6 +78,38 @@ function ExperienceRow({ entry }: { entry: ExperienceEntry }) {
           </span>
         </span>
         <span className="text-muted-foreground text-sm leading-relaxed">{entry.outcome}</span>
+      </div>
+    </div>
+  );
+}
+
+/*
+ * EducationRow — single education entry, same vocabulary as ExperienceRow.
+ */
+function EducationRow({ entry }: { entry: EducationEntry }) {
+  return (
+    <div className="border-border/40 flex flex-col gap-1 border-b py-6 first:border-t sm:flex-row sm:items-start sm:gap-8">
+      {/*
+       * When a description is present, show the graduation year (end of range).
+       * Otherwise show the start year as usual.
+       */}
+      <span className="text-muted-foreground w-16 shrink-0 font-mono text-sm tabular-nums">
+        {entry.description ? entry.years.slice(-4) : entry.years.slice(0, 4)}
+      </span>
+
+      <div className="flex flex-1 flex-col gap-1">
+        <span className="font-display text-lg font-semibold tracking-tight">
+          {entry.degree}
+          <span className="text-muted-foreground font-sans text-base font-normal">
+            {" "}
+            — {entry.institution}
+          </span>
+        </span>
+        {entry.description ? (
+          <span className="text-muted-foreground text-sm leading-relaxed">{entry.description}</span>
+        ) : (
+          <span className="text-muted-foreground font-mono text-sm">{entry.years}</span>
+        )}
       </div>
     </div>
   );
@@ -116,27 +147,27 @@ function ToolGroupBlock({ group }: { group: ToolGroup }) {
 // ---------------------------------------------------------------------------
 
 /*
- * About page — PRO-18 / F1-7.
+ * About page.
  *
  * Sections (in order):
  *   1. Hero         — bio + portrait placeholder
  *   2. Experience   — editorial timeline rows
- *   3. Tools        — three chip groups
- *   4. Philosophy   — single display paragraph
- *   5. PM layer     — strategy-as-complement framing
- *   6. Closing CTA  — mailto + resume download
+ *   3. Education    — single education entry
+ *   4. Tools        — three chip groups
+ *   5. My Process   — scroll-driven stacked cards (ProcessStack)
  *
- * Server component — no client JS required.
+ * Server component — ProcessStack is the only client island.
  * Mobile-first: all base styles target 375px, sm:/md: are additive.
  */
 export default function AboutPage() {
-  const { hero, experience, tools, philosophy, pmLayer, cta } = aboutContent;
+  const { hero, experience, education, tools, process } = aboutContent;
 
   return (
     <main id="main-content">
       <PersonJsonLd />
+
       {/* ── 1. Hero ─────────────────────────────────────────────────────── */}
-      <Section spacing="hero">
+      <Section spacing="heroInternal">
         <Container>
           <div className="flex flex-col gap-10 md:flex-row md:items-start md:gap-16">
             {/* Text column */}
@@ -147,7 +178,7 @@ export default function AboutPage() {
                 className="font-display font-semibold tracking-tight text-balance"
                 style={{ fontSize: "var(--text-display-sm)", lineHeight: 1.1 }}
               >
-                Lead Product Designer.
+                Product Design Engineer.
               </h1>
 
               <div className="flex flex-col gap-4">
@@ -201,9 +232,7 @@ export default function AboutPage() {
         <Container>
           <div className="flex flex-col gap-8">
             <SectionKicker>{experience.sectionTitle}</SectionKicker>
-
             <h2 className="sr-only">{experience.sectionTitle}</h2>
-
             <div>
               {experience.entries.map((entry) => (
                 <ExperienceRow key={`${entry.year}-${entry.role}-${entry.company}`} entry={entry} />
@@ -213,14 +242,27 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* ── 3. Tools & methods ──────────────────────────────────────────── */}
+      {/* ── 3. Education ────────────────────────────────────────────────── */}
+      <Section>
+        <Container>
+          <div className="flex flex-col gap-8">
+            <SectionKicker>{education.sectionTitle}</SectionKicker>
+            <h2 className="sr-only">{education.sectionTitle}</h2>
+            <div>
+              {education.entries.map((entry) => (
+                <EducationRow key={`${entry.years}-${entry.degree}`} entry={entry} />
+              ))}
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* ── 4. Tools & methods ──────────────────────────────────────────── */}
       <Section>
         <Container>
           <div className="flex flex-col gap-8">
             <SectionKicker>{tools.sectionTitle}</SectionKicker>
-
             <h2 className="sr-only">{tools.sectionTitle}</h2>
-
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {tools.groups.map((group) => (
                 <ToolGroupBlock key={group.label} group={group} />
@@ -230,64 +272,18 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      {/* ── 4. Design philosophy ────────────────────────────────────────── */}
-      <Section>
-        <Container width="narrow">
-          <div className="flex flex-col gap-6">
-            <SectionKicker>{philosophy.sectionTitle}</SectionKicker>
-
-            <h2 className="sr-only">{philosophy.sectionTitle}</h2>
-
-            <p
-              className="font-display text-foreground leading-snug font-semibold tracking-tight text-balance"
-              style={{ fontSize: "var(--text-display-sm)" }}
-            >
-              {philosophy.body}
-            </p>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ── 5. PM / strategy layer ──────────────────────────────────────── */}
-      <Section>
-        <Container width="narrow">
-          <div className="flex flex-col gap-6">
-            <SectionKicker>{pmLayer.sectionTitle}</SectionKicker>
-
-            <h2 className="sr-only">{pmLayer.sectionTitle}</h2>
-
-            <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
-              {pmLayer.body}
-            </p>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ── 6. Closing CTA ──────────────────────────────────────────────── */}
+      {/* ── 5. My Process ───────────────────────────────────────────────── */}
       <Section>
         <Container>
-          <div className="flex flex-col gap-8">
-            <SectionKicker>{cta.sectionTitle}</SectionKicker>
-
-            <h2 className="sr-only">{cta.sectionTitle}</h2>
-
-            {/*
-             * Two CTAs stacked on mobile, side-by-side at sm+.
-             * min-h-11 + px-5 ensure >= 44px touch targets.
-             * gap-3 keeps adjacent touch areas separated.
-             */}
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Button asChild size="lg" className="min-h-11 cursor-pointer px-5">
-                <a href={cta.primaryHref}>{cta.primaryLabel}</a>
-              </Button>
-
-              <Button asChild variant="outline" size="lg" className="min-h-11 cursor-pointer px-5">
-                <a href={cta.resumeHref} download>
-                  {cta.resumeLabel}
-                </a>
-              </Button>
-            </div>
-          </div>
+          {/*
+           * Header + cards are co-located inside ProcessStack so the header
+           * can fade out when the last card reaches its pin position.
+           */}
+          <ProcessStack
+            sectionTitle={process.sectionTitle}
+            intro={process.intro}
+            stages={process.stages}
+          />
         </Container>
       </Section>
     </main>

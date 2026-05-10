@@ -32,13 +32,16 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
        */}
       <SiteFooter />
       {/*
-       * Curtain content wrapper — mb-[100dvh] reserves exactly one viewport
-       * height of space so the footer is fully revealed when the user reaches
-       * the bottom of the page. bg-background ensures content occludes the footer
-       * while scrolling. relative + z-10 establishes the stacking context above
-       * the fixed footer.
+       * Curtain content wrapper — reserves the same height as the fixed footer
+       * so it is fully revealed when the user reaches the bottom of the page.
+       * The footer height leaves 8px below the scrolled navbar before the dark
+       * surface begins. bg-background ensures content occludes the footer while
+       * scrolling. relative + z-10 establishes the stacking context above the
+       * fixed footer.
        */}
-      <div className="bg-background relative z-10 mb-[100dvh] flex flex-1 flex-col">{children}</div>
+      <div className="bg-background relative z-10 mb-[calc(100dvh-72px)] flex flex-1 flex-col">
+        {children}
+      </div>
       <MobileCtaBar />
     </LenisProvider>
   );

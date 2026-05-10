@@ -80,7 +80,7 @@ export default function ContactPage() {
 
   return (
     <main id="main-content">
-      <Section spacing="hero">
+      <Section spacing="heroInternal">
         <Container>
           {/*
            * Two-column on md+.

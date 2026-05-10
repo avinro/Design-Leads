@@ -12,7 +12,7 @@ import { ImageResponse } from "next/og";
  * System fonts only, matching the global OG handler.
  */
 export const runtime = "nodejs";
-export const alt = "Avinro — Lead Product Designer";
+export const alt = "Avinro — Product Design Engineer";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -56,7 +56,7 @@ export default function AboutOGImage() {
           marginBottom: 24,
         }}
       >
-        Lead Product Designer
+        Product Design Engineer
       </span>
 
       {/* Supporting line */}

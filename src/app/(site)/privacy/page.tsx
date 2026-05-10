@@ -19,7 +19,7 @@ export default function PrivacyPage() {
   return (
     <main id="main-content">
       {/* Hero */}
-      <Section spacing="hero">
+      <Section spacing="heroInternal">
         <Container>
           <p className="text-muted-foreground mb-4 font-mono text-xs tracking-[0.15em] uppercase">
             {hero.kicker}

@@ -224,7 +224,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       {/* JSON-LD structured data — only for published case studies (drafts are noindex) */}
       {!frontmatter.draft && <CreativeWorkJsonLd cs={cs} slug={slug} />}
       {/* Hero section — cover + metadata strip */}
-      <Section spacing="hero">
+      <Section spacing="heroInternal">
         <Container>
           {/* Page h1 — lives here, not in MDX body (heading-hierarchy rule) */}
           <h1 className="font-display mb-8 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">

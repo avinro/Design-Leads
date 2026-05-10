@@ -9,7 +9,7 @@
 export const SITE_URL = "https://avinro.com";
 export const SITE_NAME = "Avinro";
 export const OWNER_NAME = "Ary (Avinro)";
-export const OWNER_JOB_TITLE = "Lead Product Designer";
+export const OWNER_JOB_TITLE = "Product Design Engineer";
 
 /**
  * Social profile URLs.

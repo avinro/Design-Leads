@@ -12,10 +12,15 @@ import { cn } from "@/lib/utils";
  * the viewport without media queries.
  *
  * Spacing variants:
- *   hero     full-bleed top sections (64 → 96 px padding-block)
- *   section  default page sections   (48 → 80 px padding-block)
- *   card     compact embedded blocks (24 px padding-block)
- *   none     no vertical padding (consumer controls spacing)
+ *   hero          full-bleed top sections (64 → 96 px padding-block)
+ *   heroInternal  internal page headers — fixed 120px top (accounts for
+ *                 the sticky nav height ~56px + intentional breathing room)
+ *                 with the same bottom as `hero`. Use on the first section
+ *                 of every internal route (about, contact, privacy, work/[slug]).
+ *                 Excludes home (custom centering) and /work listing (snap-scroll).
+ *   section       default page sections   (48 → 80 px padding-block)
+ *   card          compact embedded blocks (24 px padding-block)
+ *   none          no vertical padding (consumer controls spacing)
  *
  * Use the `as` prop to render semantic landmarks ("section", "header",
  * "main", "article"). Defaults to "section" so the element is a real
@@ -28,6 +33,7 @@ const sectionVariants = cva("", {
   variants: {
     spacing: {
       hero: "py-(--space-hero)",
+      heroInternal: "pt-[10rem] pb-(--space-hero)",
       section: "py-(--space-section)",
       card: "py-(--space-card)",
       none: "",

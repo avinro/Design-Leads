@@ -4,15 +4,18 @@ import Image from "next/image";
 import { homeContent } from "@/lib/content/home";
 
 /*
- * SiteFooter — full-screen curtain footer.
+ * SiteFooter — curtain footer.
  *
  * Positioning strategy:
  *   The footer uses position: fixed; bottom: 0; z-0 so it is always "behind"
  *   the page content. The curtain wrapper in (site)/layout.tsx sits at z-10
- *   with mb-[100dvh], which means:
+ *   with the same reveal height, which means:
  *     - While the user scrolls through page content, the wrapper covers the footer.
- *     - At the very bottom of the page, the wrapper slides fully above the viewport,
- *       revealing the footer underneath — the "lifting curtain" effect.
+ *     - At the very bottom of the page, the wrapper slides above the footer,
+ *       revealing it underneath — the "lifting curtain" effect.
+ *
+ *   The reveal height is 100dvh - 72px: a scrolled header sits 8px from the
+ *   top and is 56px tall, then the footer starts 8px below its bottom edge.
  *
  *   pointer-events-none on the root prevents the hidden footer from intercepting
  *   clicks while it is behind the content wrapper. pointer-events-auto is restored
@@ -44,7 +47,7 @@ export function SiteFooter() {
   return (
     <footer
       data-curtain-footer
-      className="border-background/10 bg-foreground text-background pointer-events-none fixed inset-x-0 bottom-0 z-0 flex h-[100dvh] flex-col border-t"
+      className="border-background/10 bg-foreground text-background pointer-events-none fixed inset-x-0 bottom-0 z-0 flex h-[calc(100dvh-72px)] flex-col border-t"
     >
       {/* Interactive inner container — restores pointer events */}
       <div className="pointer-events-auto mx-auto flex h-full w-full max-w-7xl flex-col justify-between gap-12 px-4 py-12 pb-6 sm:px-6 lg:px-8">

@@ -118,7 +118,7 @@ export const homeContent: HomeContent = {
   },
   aboutTeaser: {
     sectionTitle: "About",
-    bio: "I'm Ary. Lead Product Designer working at the intersection of product, design and execution. I help teams go from unclear ideas to structured products — and ship them.",
+    bio: "I'm Ary. Product Design Engineer working at the intersection of product, design and execution. I help teams go from unclear ideas to structured products — and ship them.",
     linkLabel: "More about me",
     linkHref: "/about",
   },

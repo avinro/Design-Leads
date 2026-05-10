@@ -116,7 +116,7 @@ The zod schema in [`src/lib/content/case-studies.ts`](../src/lib/content/case-st
 | `title`      | string     | Display name, e.g. `"UMA"`                                                      |
 | `slug`       | string     | URL path segment, e.g. `"uma"`. Must be unique and kebab-case.                  |
 | `client`     | string     | Client or company name                                                          |
-| `role`       | string     | Your role, e.g. `"Lead Product Designer"`                                       |
+| `role`       | string     | Your role, e.g. `"Product Design Engineer"`                                     |
 | `year`       | number     | Integer, 2000–2100                                                              |
 | `coverage`   | string[]   | Tags like `research`, `interaction`, `visual`, `strategy`                       |
 | `outcome`    | string     | One-line result shown in `<meta description>` and OG tags                       |
@@ -144,7 +144,7 @@ The zod schema in [`src/lib/content/case-studies.ts`](../src/lib/content/case-st
 title: TODO — Project Name
 slug: my-project
 client: TODO — Client Name
-role: Lead Product Designer
+role: Product Design Engineer
 year: 2025
 coverage:
   - research
