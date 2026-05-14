@@ -398,3 +398,89 @@ html.lenis-smooth {
     }
   }
 }
+
+/* ─── Button shine effect ─────────────────────────────────────────────────────
+ * Written outside @layer so it carries full cascade priority.
+ * .btn-shine is an absolutely-positioned span inside .btn-shine-host (button).
+ * It starts off-screen left and sweeps right on hover; returns on mouse-leave.
+ */
+.btn-shine {
+  pointer-events: none;
+  position: absolute;
+  top: -50%;
+  left: 0;
+  z-index: 0;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: translateX(-150%) rotate(45deg);
+  transition: transform 0.6s ease-in-out;
+}
+
+.dark .btn-shine {
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.15), transparent);
+}
+
+.btn-shine-host:hover .btn-shine {
+  transform: translateX(300%) rotate(45deg);
+}
+
+.btn-shine-host {
+  isolation: isolate;
+  --btn-shiny-text-base: rgb(255 255 255 / 0.68);
+  --btn-shiny-text-highlight: rgb(255 255 255);
+}
+
+.dark .btn-shine-host {
+  --btn-shiny-text-base: rgb(0 0 0 / 0.58);
+  --btn-shiny-text-highlight: rgb(0 0 0);
+}
+
+.btn-shiny-text {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  color: var(--btn-shiny-text-highlight);
+  background-image: linear-gradient(
+    120deg,
+    var(--btn-shiny-text-base) 0%,
+    var(--btn-shiny-text-base) 55%,
+    var(--btn-shiny-text-highlight) 65%,
+    var(--btn-shiny-text-base) 75%,
+    var(--btn-shiny-text-base) 100%
+  );
+  background-size: 200% auto;
+  background-position: 150% center;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: btn-shiny-text 1.5s ease-in-out infinite;
+}
+
+@keyframes btn-shiny-text {
+  from {
+    background-position: 150% center;
+  }
+  to {
+    background-position: -50% center;
+  }
+}
+
+/* On hover: stop animation, drop gradient, show solid text at 100% opacity. */
+.btn-shine-host:hover .btn-shiny-text {
+  animation: none;
+  background-image: none;
+  -webkit-text-fill-color: var(--btn-shiny-text-highlight);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-shine {
+    transition: none;
+  }
+
+  /* Idle reduced-motion: no animation, text already solid at center position. */
+  .btn-shiny-text {
+    animation: none;
+    background-position: center;
+  }
+}

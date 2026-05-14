@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2100 900" width="2100" height="900">
+  <rect width="2100" height="900" fill="#0e1118"/>
+  <rect x="60" y="80" width="930" height="740" rx="24" fill="#1a1f2e" stroke="#3d4558" stroke-width="2"/>
+  <rect x="1110" y="80" width="930" height="740" rx="24" fill="#121826" stroke="#14f195" stroke-width="2" opacity="0.85"/>
+  <text x="525" y="460" text-anchor="middle" fill="#9aa3b8" font-family="system-ui,sans-serif" font-size="36" font-weight="600">Problem</text>
+  <text x="1575" y="460" text-anchor="middle" fill="#c8d0e0" font-family="system-ui,sans-serif" font-size="36" font-weight="600">Proposal</text>
+  <text x="1050" y="860" text-anchor="middle" fill="#5c6578" font-family="system-ui,sans-serif" font-size="24">Placeholder · replace with two-column problem/proposal art</text>
+</svg>

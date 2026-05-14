@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <rect width="1600" height="900" fill="#0c1018"/>
+  <rect x="80" y="100" width="660" height="700" rx="32" fill="#1e2436" stroke="#5c6578" stroke-width="2"/>
+  <rect x="860" y="100" width="660" height="700" rx="32" fill="#1a2030" stroke="#14f195" stroke-width="2"/>
+  <text x="410" y="460" text-anchor="middle" fill="#8b95b2" font-family="system-ui,sans-serif" font-size="28">From here</text>
+  <text x="1190" y="460" text-anchor="middle" fill="#e8ecf8" font-family="system-ui,sans-serif" font-size="28">To here</text>
+  <text x="800" y="56" text-anchor="middle" fill="#c8d0e0" font-family="system-ui,sans-serif" font-size="26" font-weight="600">Home · annotated before/after (placeholder)</text>
+</svg>

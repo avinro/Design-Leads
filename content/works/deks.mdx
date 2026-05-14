@@ -1,0 +1,253 @@
+---
+title: Deks — UX Redesign Proposal
+slug: deks
+year: 2025
+category: Mobile UI
+client: Deks
+summary: "Unsolicited UX redesign for Deks, a Solana gift-card app: clearer hierarchy, simpler navigation, and conversion-focused Home, Send Gift, and Rewards flows."
+coverImage: /works/deks/cover.svg
+hoverImage: /works/deks/hover.svg
+coverAspect: landscape
+tools:
+  - Figma
+  - Prototyping
+tags:
+  - Web3
+  - Fintech
+  - iOS
+  - Proposal
+order: 5
+featured: false
+gallery: []
+---
+
+> Redesign proposal for a Solana-based crypto gift card app. The goal was to identify the main UX failures and demonstrate what a cleaner, conversion-focused experience could look like.
+
+## Overview
+
+Deks had a strong product concept: sending crypto gift cards without requiring the recipient to have a wallet.
+
+The issue was not the idea. The issue was the experience.
+
+The interface was not communicating the value clearly, the navigation created unnecessary noise, and the main actions competed for attention instead of guiding users toward conversion.
+
+<div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+  <div className="border-border/40 bg-muted/20 flex flex-col gap-2 rounded-lg border p-4">
+    <div className="flex items-center gap-2">
+      <svg
+        className="text-muted-foreground h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M21 13.255A23.931 23.931 0 0112 15a23.931 23.931 0 01-9-1.745M12 13a3 3 0 100-6 3 3 0 000 6z"
+        />
+      </svg>
+      <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+        Type
+      </span>
+    </div>
+    <h4 className="font-display text-sm font-semibold">Unsolicited redesign proposal</h4>
+  </div>
+  <div className="border-border/40 bg-muted/20 flex flex-col gap-2 rounded-lg border p-4">
+    <div className="flex items-center gap-2">
+      <svg
+        className="text-muted-foreground h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20H7m6-4h.01M9 9h.01"
+        />
+      </svg>
+      <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+        Industry
+      </span>
+    </div>
+    <h4 className="font-display text-sm font-semibold">Web3 / Fintech</h4>
+  </div>
+  <div className="border-border/40 bg-muted/20 flex flex-col gap-2 rounded-lg border p-4">
+    <div className="flex items-center gap-2">
+      <svg
+        className="text-muted-foreground h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+        />
+      </svg>
+      <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+        Year
+      </span>
+    </div>
+    <h4 className="font-display text-sm font-semibold">2025</h4>
+  </div>
+  <div className="border-border/40 bg-muted/20 flex flex-col gap-2 rounded-lg border p-4">
+    <div className="flex items-center gap-2">
+      <svg
+        className="text-muted-foreground h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
+        />
+      </svg>
+      <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+        Platform
+      </span>
+    </div>
+    <h4 className="font-display text-sm font-semibold">Mobile app, iOS</h4>
+  </div>
+  <div className="border-border/40 bg-muted/20 flex flex-col gap-2 rounded-lg border p-4">
+    <div className="flex items-center gap-2">
+      <svg
+        className="text-muted-foreground h-4 w-4"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+        />
+      </svg>
+      <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+        Status
+      </span>
+    </div>
+    <h4 className="font-display text-sm font-semibold">Proposal, not implemented</h4>
+  </div>
+</div>
+
+## The Problem
+
+Deks had a genuinely strong concept: send crypto gift cards with no wallet required.
+
+But the interface was working against it.
+
+The value was not clear from the first moment. Navigation was cluttered. Actions competed for attention. There were no clear prompts to drive conversion or build repeat-use habits.
+
+The current experience and UI were not aiding conversion or retention.
+
+The proposal focused on three areas where friction was highest:
+
+- **Home**
+- **Send Gift**
+- **Rewards**
+
+<Figure
+  src="/works/deks/image-01-problem-proposal.svg"
+  alt="Two-column problem versus proposal statement framing the redesign intent"
+  aspect="wide"
+  priority
+/>
+
+## Home
+
+The original Home screen stacked too many competing sections with no clear hierarchy.
+
+Five navigation tabs diluted the focus, and the primary action, **Send Gift**, had the same visual weight as Trade, Send, and Receive.
+
+The redesign established a single dominant CTA directly below the balance, reduced navigation to three tabs, and added a **Send Again** contact row to encourage repeat use.
+
+### What changed
+
+- Reduced the tab bar from five items to three
+- Made **Send Gift** the primary CTA
+- Moved secondary actions into supporting pill buttons
+- Added recent contacts to encourage repeat gifting
+- Improved the hierarchy between balance, actions, tokens, and assets
+
+<Figure
+  src="/works/deks/image-03-home-annotated.svg"
+  alt="Annotated before and after Home screen comparison with From here and To here callouts"
+  aspect="landscape"
+/>
+
+<Figure
+  src="/works/deks/image-04-home-comparison.svg"
+  alt="Side-by-side Home screen comparison with Real Impact bullet annotations"
+  aspect="landscape"
+/>
+
+## Send Gift
+
+The original token selection experience was a bottom sheet modal with a raw list of tokens and no effective way to filter.
+
+Prices were shown too early in the flow, adding unnecessary cognitive load before the user had even decided what to send.
+
+The redesign converted token selection into a full-screen flow with search, category filters, and a cleaner list structure. Prices were moved to the detail step, where they are more useful.
+
+### What changed
+
+- Replaced the bottom sheet with a full-screen selection flow
+- Added search
+- Added category filters: Popular, Utility, Meme, Gaming
+- Simplified the token list
+- Removed price data from the selection step
+- Reduced decision friction before sending a gift
+
+<Figure
+  src="/works/deks/image-05-send-gift.svg"
+  alt="Before and after token selection: bottom sheet versus full-screen list with filters"
+  aspect="landscape"
+  caption="From a bottom sheet modal to a focused full-screen selection flow."
+/>
+
+## Rewards
+
+The original Rewards screen was static and passive.
+
+It showed two counters, an empty table, and no strong visual reason to act. The feature existed, but it did not encourage engagement.
+
+The redesign rebuilt Rewards around the referral metric, an active history list with status indicators, a direct **Invite** action in the top bar, and illustrated earning prompts at the bottom.
+
+### What changed
+
+- Turned Rewards from a passive screen into an active engagement surface
+- Added clearer referral metrics
+- Added referral history with status indicators
+- Added a direct Invite action
+- Replaced the empty feeling with visual earning prompts
+- Made Rewards feel like part of the growth loop, not a forgotten tab
+
+<Figure
+  src="/works/deks/image-06-rewards.svg"
+  alt="Before and after Rewards screen: passive counters versus referral history and invite affordances"
+  aspect="landscape"
+  caption="From a passive data display to an active engagement surface."
+/>
+
+## Outcome
+
+The proposal was reviewed by the Deks founders and received positively.
+
+The product later pivoted due to business constraints before implementation.
+
+## What this project shows
+
+- Ability to audit an existing product and identify high-impact UX problems quickly
+- Capacity to deliver high-fidelity proposals independently, without a formal brief
+- Understanding of conversion patterns in early-stage fintech and Web3 products
+- Ability to improve an existing visual direction without replacing the brand identity
+- Product judgment: focusing on hierarchy, navigation, and action clarity instead of redesigning everything for the sake of redesigning

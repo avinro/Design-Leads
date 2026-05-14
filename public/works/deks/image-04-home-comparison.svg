@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <rect width="1600" height="900" fill="#0e121c"/>
+  <rect x="100" y="140" width="660" height="620" rx="28" fill="#222836"/>
+  <rect x="840" y="140" width="660" height="620" rx="28" fill="#1c2234" stroke="#9945ff" stroke-width="2" opacity="0.9"/>
+  <text x="430" y="200" text-anchor="middle" fill="#9aa3b8" font-family="system-ui,sans-serif" font-size="22">Before</text>
+  <text x="1170" y="200" text-anchor="middle" fill="#e8ecf8" font-family="system-ui,sans-serif" font-size="22">After</text>
+  <text x="800" y="820" text-anchor="middle" fill="#6b7388" font-family="system-ui,sans-serif" font-size="20">Real Impact · side-by-side (placeholder)</text>
+</svg>

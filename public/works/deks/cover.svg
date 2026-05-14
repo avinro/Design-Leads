@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="dk" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c1220"/>
+      <stop offset="100%" stop-color="#141a2e"/>
+    </linearGradient>
+    <linearGradient id="ac" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#14f195"/>
+      <stop offset="100%" stop-color="#9945ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#dk)"/>
+  <rect x="520" y="280" width="560" height="340" rx="48" fill="#1a2238" stroke="url(#ac)" stroke-width="3"/>
+  <rect x="580" y="360" width="440" height="56" rx="12" fill="#252e48"/>
+  <rect x="580" y="440" width="280" height="48" rx="24" fill="url(#ac)" opacity="0.9"/>
+  <text x="800" y="160" text-anchor="middle" fill="#e8ecf8" font-family="system-ui,sans-serif" font-size="52" font-weight="600">Deks</text>
+  <text x="800" y="220" text-anchor="middle" fill="#8b95b2" font-family="system-ui,sans-serif" font-size="22">UX redesign proposal · cover</text>
+</svg>

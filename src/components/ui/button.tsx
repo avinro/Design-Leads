@@ -9,7 +9,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        default:
+          "btn-shine-host relative overflow-hidden bg-primary text-primary-foreground [a]:hover:bg-primary/80",
         outline:
           "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
@@ -41,26 +42,72 @@ const buttonVariants = cva(
   },
 );
 
+const ShineSpan = () => <span aria-hidden="true" className="btn-shine" />;
+
+const ShinyText = ({ children }: { children: React.ReactNode }) => (
+  <span className="btn-shiny-text">{children}</span>
+);
+
+function wrapShinyText(children: React.ReactNode): React.ReactNode {
+  return React.Children.map(children, (child) => {
+    if (typeof child === "string" || typeof child === "number") {
+      return <ShinyText>{child}</ShinyText>;
+    }
+
+    if (!React.isValidElement<{ children?: React.ReactNode }>(child)) {
+      return child;
+    }
+
+    if (child.type === React.Fragment) {
+      return React.cloneElement(child, undefined, wrapShinyText(child.props.children));
+    }
+
+    return child;
+  });
+}
+
 function Button({
   className,
   variant = "default",
   size = "default",
   asChild = false,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
   }) {
-  const Comp = asChild ? Slot.Root : "button";
+  const showShine = variant === "default";
+  const sharedProps = {
+    "data-slot": "button" as const,
+    "data-variant": variant,
+    "data-size": size,
+    className: cn(buttonVariants({ variant, size, className })),
+    ...props,
+  };
+
+  if (asChild) {
+    // Inject shine span into the wrapped child so it renders inside the <a> / Link
+    const child = React.Children.only(
+      children as React.ReactElement<{ children?: React.ReactNode }>,
+    );
+    const wrappedChildren = showShine
+      ? React.cloneElement(
+          child,
+          undefined,
+          <ShineSpan key="shine" />,
+          wrapShinyText(child.props.children),
+        )
+      : child;
+
+    return <Slot.Root {...sharedProps}>{wrappedChildren}</Slot.Root>;
+  }
 
   return (
-    <Comp
-      data-slot="button"
-      data-variant={variant}
-      data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
+    <button {...sharedProps}>
+      {showShine && <ShineSpan />}
+      {showShine ? wrapShinyText(children) : children}
+    </button>
   );
 }
 

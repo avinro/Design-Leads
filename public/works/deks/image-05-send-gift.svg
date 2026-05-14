@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <rect width="1600" height="900" fill="#0a0e16"/>
+  <rect x="120" y="160" width="620" height="580" rx="24" fill="#1a2234"/>
+  <rect x="860" y="120" width="620" height="660" rx="20" fill="#141c2c" stroke="#14f195" stroke-width="2"/>
+  <text x="430" y="480" text-anchor="middle" fill="#8b95b2" font-family="system-ui,sans-serif" font-size="26">Bottom sheet</text>
+  <text x="1170" y="480" text-anchor="middle" fill="#e8ecf8" font-family="system-ui,sans-serif" font-size="26">Full-screen flow</text>
+  <text x="800" y="60" text-anchor="middle" fill="#c8d0e0" font-family="system-ui,sans-serif" font-size="24" font-weight="600">Send Gift · token selection (placeholder)</text>
+</svg>

@@ -1,0 +1,5 @@
+{
+  // Tailwind v4 directives (@theme, @utility, @custom-variant, @apply) are valid at build time
+  // but not part of standard CSS, so the built-in validator reports them as unknown.
+  "css.lint.unknownAtRules": "ignore"
+}
