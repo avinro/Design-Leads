@@ -15,7 +15,23 @@ import dynamic from "next/dynamic";
  */
 const AboutPortraitCard = dynamic(
   () => import("@/components/site/about-portrait-card").then((m) => m.AboutPortraitCard),
-  { ssr: false },
+  {
+    ssr: false,
+    loading: () => (
+      <figure
+        aria-hidden="true"
+        className="relative flex w-full items-center justify-center"
+        data-testid="portrait-card-fallback"
+      >
+        <div className="border-border/40 bg-muted relative aspect-[3/4] w-full overflow-hidden rounded-xl border">
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+            <div className="bg-muted-foreground/20 h-16 w-16 rounded-full" />
+            <div className="bg-muted-foreground/10 h-20 w-24 rounded-t-full" />
+          </div>
+        </div>
+      </figure>
+    ),
+  },
 );
 
 export function AboutPortraitCardLoader() {
