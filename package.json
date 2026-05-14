@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "postinstall": "node -e \"if (process.platform === 'darwin') { require('node:child_process').execSync('xattr -dr com.apple.quarantine node_modules 2>/dev/null; exit 0', { stdio: 'inherit', shell: true }); }\"",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "typecheck": "tsc --noEmit",
