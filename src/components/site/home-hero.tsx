@@ -32,14 +32,10 @@ const CircularText = dynamic(
  * HomeHero — rotation rebrand protagonist section.
  *
  * Layout:
- *   The hero is a single-column full-viewport section. The CircularText
- *   is absolutely positioned but aligned to the *editorial grid* — a ghost
- *   strip mirrors Container's `max-w-7xl` + horizontal gutters so `right-0`
- *   pins the circle to the inner right edge of the wide column (not the
- *   viewport). Hidden below md so small screens stay uncluttered.
- *
- *   Section stays `relative`; the ghost strip uses `absolute inset-0` so
- *   vertical placement (top-24 / lg:top-28) is stable under the sticky header.
+ *   The hero is a single-column full-viewport section. The desktop CircularText
+ *   is positioned relative to the real wide Container so it tracks the same
+ *   max-width and gutters as the headline block. Hidden below md so small
+ *   screens stay uncluttered.
  *
  * CTA rule: outline variant only here. Primary CTA lives in SiteHeader (md+)
  * and MobileCtaBar (<md) — never duplicated in-page.
@@ -59,49 +55,6 @@ export function HomeHero() {
       spacing="hero"
       className="relative flex min-h-screen flex-col justify-center overflow-hidden pt-32"
     >
-      {/*
-       * Ghost grid strip — same max-width + gutters as Container width="wide"
-       * so CircularText aligns to the inner right edge of the editorial column.
-       */}
-      <div className="pointer-events-none absolute inset-0 flex items-start justify-center">
-        <div className="relative h-full w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Desktop — aligned to inner right edge of editorial column */}
-          <div className="animate-in fade-in fill-mode-both pointer-events-auto absolute top-24 right-0 z-10 hidden delay-700 duration-1000 md:block lg:top-28">
-            <Link href="/contact" aria-label="Let's talk — go to contact page">
-              {/* Wrapper sized to match the circle so the PFP overlay can be absolutely centered */}
-              <div
-                className="relative"
-                style={{ width: 180, height: 180 }}
-                onMouseEnter={() => {
-                  setIsCircleHovered(true);
-                }}
-                onMouseLeave={() => {
-                  setIsCircleHovered(false);
-                }}
-              >
-                <CircularText
-                  text={isCircleHovered ? hero.circularTextHover : hero.circularText}
-                  spinDuration={20}
-                  onHover="slowDown"
-                  size={180}
-                  fontSize="1rem"
-                  aria-label="Let's talk — go to contact page"
-                  className="text-foreground/60"
-                />
-                {/* PFP placeholder — 60% of 180px = 108px, static layer that doesn't rotate */}
-                <div
-                  aria-hidden="true"
-                  className="bg-muted text-muted-foreground pointer-events-none absolute top-1/2 left-1/2 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full"
-                  style={{ width: "60%" }}
-                >
-                  <User className="h-1/3 w-1/3" strokeWidth={1.5} />
-                </div>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </div>
-
       {/* Mobile — 24px from right edge, lower in the viewport */}
       <div className="animate-in fade-in fill-mode-both pointer-events-auto absolute top-[10vh] right-6 z-10 delay-700 duration-1000 md:hidden">
         <Link href="/contact" aria-label="Let's talk — go to contact page">
@@ -128,7 +81,42 @@ export function HomeHero() {
         </Link>
       </div>
 
-      <Container width="wide">
+      <Container width="wide" className="relative">
+        {/* Desktop — anchored to the top-right corner of the hero Container */}
+        <div className="animate-in fade-in fill-mode-both pointer-events-auto absolute top-0 right-0 z-10 hidden delay-700 duration-1000 md:block">
+          <Link href="/contact" aria-label="Let's talk — go to contact page">
+            {/* Wrapper sized to match the circle so the PFP overlay can be absolutely centered */}
+            <div
+              className="relative"
+              style={{ width: 180, height: 180 }}
+              onMouseEnter={() => {
+                setIsCircleHovered(true);
+              }}
+              onMouseLeave={() => {
+                setIsCircleHovered(false);
+              }}
+            >
+              <CircularText
+                text={isCircleHovered ? hero.circularTextHover : hero.circularText}
+                spinDuration={20}
+                onHover="slowDown"
+                size={180}
+                fontSize="1rem"
+                aria-label="Let's talk — go to contact page"
+                className="text-foreground/60"
+              />
+              {/* PFP placeholder — 60% of 180px = 108px, static layer that doesn't rotate */}
+              <div
+                aria-hidden="true"
+                className="bg-muted text-muted-foreground pointer-events-none absolute top-1/2 left-1/2 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full"
+                style={{ width: "60%" }}
+              >
+                <User className="h-1/3 w-1/3" strokeWidth={1.5} />
+              </div>
+            </div>
+          </Link>
+        </div>
+
         <div className="flex flex-col gap-3 sm:gap-4">
           {/* Open to Work badge */}
           <div className="animate-in fade-in slide-in-from-bottom-4 fill-mode-both duration-700">
