@@ -8,8 +8,11 @@
  *   - No MermaidDiagram
  *   - No BeforeAfter / Bar
  *
- * What is allowed: prose typography, links, inline code, and simple images.
- * The gallery itself is rendered from frontmatter, not MDX.
+ * What is allowed: prose typography including structured headings (h2–h4),
+ * blockquotes, dividers, links, inline code, simple images, and the
+ * <Figure> component for contextual screen placement within the narrative.
+ * The frontmatter gallery is still available for works that prefer a
+ * visual-only format with no inline images.
  */
 
 import Image from "next/image";
@@ -17,6 +20,58 @@ import Link from "next/link";
 import type { ComponentPropsWithoutRef } from "react";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "@/lib/utils";
+
+function H2({ className, ...props }: ComponentPropsWithoutRef<"h2">) {
+  return (
+    <h2
+      className={cn(
+        "font-display text-foreground mt-12 mb-4 text-2xl font-semibold tracking-tight sm:text-3xl",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function H3({ className, ...props }: ComponentPropsWithoutRef<"h3">) {
+  return (
+    <h3
+      className={cn(
+        "font-display text-foreground mt-8 mb-3 text-xl font-semibold tracking-tight",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function H4({ className, ...props }: ComponentPropsWithoutRef<"h4">) {
+  return (
+    <h4
+      className={cn(
+        "text-foreground mt-6 mb-2 text-base font-semibold tracking-tight sm:text-lg",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function Blockquote({ className, ...props }: ComponentPropsWithoutRef<"blockquote">) {
+  return (
+    <blockquote
+      className={cn(
+        "border-accent/60 text-foreground/70 my-6 border-l-2 pl-5 text-base leading-relaxed italic sm:text-lg",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+function Hr({ className, ...props }: ComponentPropsWithoutRef<"hr">) {
+  return <hr className={cn("border-border/40 my-10", className)} {...props} />;
+}
 
 function P({ className, ...props }: ComponentPropsWithoutRef<"p">) {
   return (
@@ -109,6 +164,56 @@ function Em({ className, ...props }: ComponentPropsWithoutRef<"em">) {
   return <em className={cn("italic", className)} {...props} />;
 }
 
+interface InlineFigureProps {
+  src: string;
+  alt: string;
+  caption?: string;
+  /** Aspect ratio of the image container. Defaults to landscape (16/9). */
+  aspect?: "portrait" | "square" | "landscape" | "wide";
+  className?: string;
+  priority?: boolean;
+}
+
+const FIGURE_ASPECT_RATIOS = {
+  portrait: "4/5",
+  square: "1/1",
+  landscape: "16/9",
+  wide: "21/9",
+} as const;
+
+function InlineFigure({
+  src,
+  alt,
+  caption,
+  aspect = "landscape",
+  className,
+  priority = false,
+}: InlineFigureProps) {
+  return (
+    <figure className={cn("my-8 w-full", className)}>
+      <div
+        className="bg-muted relative w-full overflow-hidden rounded-xl"
+        style={{ aspectRatio: FIGURE_ASPECT_RATIOS[aspect] }}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 80vw, 800px"
+          className="object-cover"
+        />
+      </div>
+      {caption && (
+        <figcaption className="text-muted-foreground mt-3 text-sm leading-relaxed">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
+  );
+}
+
 function Img({ src, alt = "", width, height }: ComponentPropsWithoutRef<"img">) {
   if (typeof src !== "string" || !src) return null;
   return (
@@ -127,6 +232,11 @@ function Img({ src, alt = "", width, height }: ComponentPropsWithoutRef<"img">) 
 }
 
 export const workMdxComponents: MDXComponents = {
+  h2: H2,
+  h3: H3,
+  h4: H4,
+  blockquote: Blockquote,
+  hr: Hr,
   p: P,
   a: A,
   ul: Ul,
@@ -136,4 +246,6 @@ export const workMdxComponents: MDXComponents = {
   strong: Strong,
   em: Em,
   img: Img,
+  // JSX component — use as <Figure src="..." alt="..." aspect="landscape" /> in MDX
+  Figure: InlineFigure,
 };

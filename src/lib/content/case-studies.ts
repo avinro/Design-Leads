@@ -46,6 +46,7 @@ const CaseStudyFrontmatterSchema = z.object({
   coverage: z.array(z.string()).min(1),
   outcome: z.string().min(1),
   coverImage: z.string().min(1),
+  hoverImage: z.string().min(1).optional(),
   order: z.number().int().min(1),
   // Listing layer extensions
   summary: z.string().min(1),

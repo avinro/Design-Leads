@@ -30,24 +30,29 @@ export default function CaseStudiesPage() {
   return (
     <main id="main-content">
       {/* Page header — centered, with a creative hook line below the h1 */}
-      <Section as="header" spacing="heroInternalCompact" className="border-border border-b">
+      <Section
+        as="header"
+        spacing="heroInternalCompact"
+        className="border-border border-b"
+        style={{ paddingBottom: "calc(var(--space-hero) / 2)" }}
+      >
         <Container>
           <div className="flex flex-col items-center gap-4 text-center">
             <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
-              Case studies
+              Into my process
             </p>
             <h1 className="font-display text-foreground text-4xl font-semibold tracking-tight sm:text-5xl">
               Problems solved,
               <br className="hidden sm:block" /> products shipped.
             </h1>
-            <p className="text-muted-foreground max-w-md text-base leading-relaxed sm:text-lg">
+            <p className="text-muted-foreground max-w-md text-base leading-relaxed sm:text-lg md:max-w-none">
               Real constraints, real teams, real outcomes.
             </p>
           </div>
         </Container>
       </Section>
 
-      {/* Case study grid — featured cards span 2 cols, others span 1 */}
+      {/* Case study grid — all cards share equal column width */}
       <Section>
         <CaseStudyGrid cases={cases} />
       </Section>

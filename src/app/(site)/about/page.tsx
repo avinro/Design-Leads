@@ -6,6 +6,7 @@ import type { ExperienceEntry, EducationEntry, ToolGroup } from "@/lib/content/a
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { ProcessStack } from "@/components/site/process-stack";
+import { AboutPortraitCardLoader } from "@/components/site/about-portrait-card-loader";
 
 // ---------------------------------------------------------------------------
 // Metadata
@@ -64,8 +65,7 @@ function SectionKicker({ children }: { children: React.ReactNode }) {
 function ExperienceRow({ entry }: { entry: ExperienceEntry }) {
   return (
     <div className="border-border/40 flex flex-col gap-1 border-b py-6 first:border-t sm:flex-row sm:items-start sm:gap-12">
-      {/* Date range — right-aligned, 48px gap to content on desktop */}
-      <span className="text-muted-foreground w-36 shrink-0 self-end self-start text-right font-mono text-sm whitespace-nowrap tabular-nums sm:ml-auto">
+      <span className="text-muted-foreground w-36 shrink-0 font-mono text-sm whitespace-nowrap tabular-nums">
         {entry.year}
       </span>
 
@@ -191,37 +191,14 @@ export default function AboutPage() {
             </div>
 
             {/*
-             * Portrait placeholder — intentional card, not a bare decorative div.
-             * TODO(portrait): replace this block with:
-             *   <Image
-             *     src="/about/portrait.jpg"
-             *     alt="Portrait of Ary"
-             *     fill
-             *     className="object-cover"
-             *     sizes="(max-width: 768px) 100vw, 320px"
-             *   />
-             * when the photo asset is available at public/about/portrait.jpg.
+             * Portrait card — 3D tilt effect on desktop, static on mobile.
+             * Loaded client-side only (ssr: false) so Motion hooks don't run
+             * during server-side rendering or static markup tests.
+             * TODO(portrait): pass imageSrc="/about/portrait.jpg" to
+             * AboutPortraitCard when the photo asset is available.
              */}
             <div className="w-full md:w-72 lg:w-80">
-              <div className="border-border/40 bg-muted relative aspect-[3/4] w-full overflow-hidden rounded-xl border">
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-                  {/* Minimal silhouette placeholder */}
-                  <div className="bg-muted-foreground/20 h-16 w-16 rounded-full" />
-                  <div className="bg-muted-foreground/10 h-20 w-24 rounded-t-full" />
-                  {/*
-                   * Portrait placeholder label — developer-facing only; not
-                   * meaningful to users. aria-hidden removes the low-contrast
-                   * text from the a11y tree. data-testid preserved for tests.
-                   */}
-                  <span
-                    aria-hidden="true"
-                    className="text-muted-foreground/50 absolute bottom-4 font-mono text-xs tracking-widest uppercase"
-                    data-testid="portrait-placeholder"
-                  >
-                    Portrait placeholder
-                  </span>
-                </div>
-              </div>
+              <AboutPortraitCardLoader />
             </div>
           </div>
         </Container>

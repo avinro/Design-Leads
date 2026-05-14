@@ -24,11 +24,6 @@ const nextConfig: NextConfig = {
         destination: "/case-studies/uma",
         permanent: true,
       },
-      {
-        source: "/work/project-3",
-        destination: "/case-studies/project-3",
-        permanent: true,
-      },
     ];
   },
 };

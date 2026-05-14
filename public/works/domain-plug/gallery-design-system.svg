@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg-ds" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0A1A"/>
+      <stop offset="100%" stop-color="#110D24"/>
+    </linearGradient>
+    <linearGradient id="grad-ds" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6334D0"/>
+      <stop offset="100%" stop-color="#DA62F7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg-ds)"/>
+
+  <!-- Title -->
+  <text x="800" y="68" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#6B4FA0" text-anchor="middle" letter-spacing="3">DESIGN SYSTEM</text>
+  <text x="800" y="106" font-family="system-ui, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF" text-anchor="middle">Colors · Typography · Components</text>
+
+  <!-- SECTION: Colors -->
+  <text x="80" y="158" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#6B4FA0" letter-spacing="2">PALETTE</text>
+
+  <!-- Primary purple -->
+  <rect x="80" y="170" width="120" height="80" rx="10" fill="#6334D0"/>
+  <text x="140" y="270" font-family="system-ui, monospace" font-size="11" fill="#FFFFFF" text-anchor="middle">#6334D0</text>
+  <text x="140" y="288" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Primary</text>
+
+  <!-- Accent magenta -->
+  <rect x="220" y="170" width="120" height="80" rx="10" fill="#DA62F7"/>
+  <text x="280" y="270" font-family="system-ui, monospace" font-size="11" fill="#FFFFFF" text-anchor="middle">#DA62F7</text>
+  <text x="280" y="288" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Accent</text>
+
+  <!-- Purple scale -->
+  <rect x="360" y="170" width="60" height="80" rx="10" fill="#3A1C80"/>
+  <rect x="430" y="170" width="60" height="80" rx="10" fill="#4B28A8"/>
+  <rect x="500" y="170" width="60" height="80" rx="10" fill="#6334D0"/>
+  <rect x="570" y="170" width="60" height="80" rx="10" fill="#7D55D8"/>
+  <rect x="640" y="170" width="60" height="80" rx="10" fill="#9E7FE4"/>
+  <rect x="710" y="170" width="60" height="80" rx="10" fill="#BDA8EE"/>
+  <rect x="780" y="170" width="60" height="80" rx="10" fill="#DAD0F6"/>
+  <text x="570" y="270" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Purple scale</text>
+
+  <!-- Neutral + surface -->
+  <rect x="880" y="170" width="80" height="80" rx="10" fill="#FAFAFA" stroke="#1E1433" stroke-width="1"/>
+  <text x="920" y="270" font-family="system-ui, monospace" font-size="11" fill="#6B4FA0" text-anchor="middle">#FAFAFA</text>
+  <text x="920" y="288" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Surface</text>
+
+  <rect x="980" y="170" width="80" height="80" rx="10" fill="#1A1230"/>
+  <text x="1020" y="270" font-family="system-ui, monospace" font-size="11" fill="#6B4FA0" text-anchor="middle">#1A1230</text>
+  <text x="1020" y="288" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Dark</text>
+
+  <!-- SECTION: Typography -->
+  <text x="80" y="340" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#6B4FA0" letter-spacing="2">TYPOGRAPHY  MANROPE</text>
+
+  <text x="80" y="390" font-family="system-ui, sans-serif" font-size="48" font-weight="800" fill="#FFFFFF">Register your</text>
+  <text x="80" y="450" font-family="system-ui, sans-serif" font-size="48" font-weight="800" fill="url(#grad-ds)">.eth domains.</text>
+  <text x="80" y="494" font-family="system-ui, sans-serif" font-size="18" font-weight="400" fill="#A78BCA">Display / 48px / ExtraBold  Headline</text>
+
+  <text x="900" y="380" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF">Marketplace</text>
+  <text x="900" y="408" font-family="system-ui, sans-serif" font-size="20" font-weight="500" fill="#A78BCA">Section heading</text>
+  <text x="900" y="450" font-family="system-ui, sans-serif" font-size="16" font-weight="400" fill="#8B79B0">Browse available .eth domains, apply filters and purchase in seconds.</text>
+  <text x="900" y="474" font-family="system-ui, sans-serif" font-size="13" fill="#6B4FA0">Body / 16px / Regular</text>
+  <text x="900" y="508" font-family="system-ui, monospace" font-size="13" fill="#DA62F7">vitalik.eth · 0.004 ETH</text>
+  <text x="900" y="528" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">Mono label / 13px</text>
+
+  <!-- SECTION: Components -->
+  <text x="80" y="572" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#6B4FA0" letter-spacing="2">COMPONENTS  TAIGA UI CUSTOMIZED</text>
+
+  <!-- Button: Primary -->
+  <rect x="80" y="592" width="160" height="44" rx="22" fill="url(#grad-ds)"/>
+  <text x="160" y="619" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">Register domains</text>
+  <text x="160" y="652" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Button Primary</text>
+
+  <!-- Button: Secondary -->
+  <rect x="260" y="592" width="140" height="44" rx="22" fill="transparent" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="330" y="619" font-family="system-ui, sans-serif" font-size="13" font-weight="500" fill="#DA62F7" text-anchor="middle">Browse all</text>
+  <text x="330" y="652" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Button Secondary</text>
+
+  <!-- Input -->
+  <rect x="420" y="592" width="280" height="44" rx="10" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="440" y="619" font-family="system-ui, sans-serif" font-size="12" fill="#4A3872">Search .eth domains...</text>
+  <text x="560" y="652" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Input  focused state</text>
+
+  <!-- Domain card -->
+  <rect x="720" y="580" width="180" height="92" rx="10" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="810" y="610" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">vitalik.eth</text>
+  <text x="810" y="632" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">Available · 5 chars</text>
+  <text x="810" y="654" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.004 ETH</text>
+  <text x="810" y="688" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Domain card</text>
+
+  <!-- Badge: Available -->
+  <rect x="930" y="596" width="90" height="28" rx="14" fill="#6334D0" fill-opacity="0.2" stroke="#6334D0" stroke-width="1"/>
+  <text x="975" y="615" font-family="system-ui, sans-serif" font-size="11" fill="#DA62F7" text-anchor="middle">Available</text>
+
+  <!-- Badge: Taken -->
+  <rect x="1040" y="596" width="70" height="28" rx="14" fill="#FF6B6B" fill-opacity="0.1" stroke="#FF6B6B" stroke-width="1"/>
+  <text x="1075" y="615" font-family="system-ui, sans-serif" font-size="11" fill="#FF6B6B" text-anchor="middle">Taken</text>
+
+  <!-- Checkbox checked -->
+  <rect x="1140" y="596" width="28" height="28" rx="6" fill="url(#grad-ds)"/>
+  <text x="1154" y="615" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle"></text>
+
+  <!-- Checkbox unchecked -->
+  <rect x="1190" y="596" width="28" height="28" rx="6" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+
+  <text x="1165" y="650" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">Checkbox</text>
+
+  <!-- Bottom label -->
+  <rect x="80" y="820" width="4" height="40" rx="2" fill="url(#grad-ds)"/>
+  <text x="96" y="838" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">Design system</text>
+  <text x="96" y="856" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">Purple #6334D0 · Magenta #DA62F7 · Manrope · Taiga UI</text>
+</svg>

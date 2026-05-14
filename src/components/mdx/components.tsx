@@ -78,9 +78,8 @@ function P({ className, ...props }: ComponentPropsWithoutRef<"p">) {
   return (
     <p
       className={cn(
-        // lg: tighter max-width on prose keeps ~75ch even inside max-w-6xl container,
-        // maintaining readability without a separate narrow Container variant.
-        "text-foreground/90 mb-5 text-base leading-relaxed sm:text-lg lg:max-w-3xl lg:leading-loose",
+        // Paragraphs fill the full content column width and wrap naturally.
+        "text-foreground/90 mb-5 text-base leading-relaxed sm:text-lg lg:leading-loose",
         className,
       )}
       {...props}

@@ -81,21 +81,21 @@ export const aboutContent: AboutContent = {
     sectionTitle: "Experience",
     entries: [
       {
-        year: "2025 – present",
+        year: "Nov 2025 – present",
         role: "Product Design Engineer Lead",
         company: "helloDojo",
         outcome:
           "Lead the end-to-end UX across a multi-surface ecosystem — customer, driver, vendor, and fleet portals. Built the design system from zero and pair design with AI-assisted front-end using Cursor and Claude to close the gap between Figma and production code.",
       },
       {
-        year: "Mar 2023 – 2025",
+        year: "Mar 2023 – Nov 2025",
         role: "Senior Product Designer",
         company: "110 Theory",
         outcome:
           "Led mobile UX for the Baptist Health iOS and Android app and designed Smart TV interfaces deployed across hospital environments. Defined features alongside product and engineering, connecting UX decisions to operational KPIs and measurable outcomes.",
       },
       {
-        year: "Nov 2022 – May 2023",
+        year: "Nov 2022 – Mar 2023",
         role: "Product Designer",
         company: "Alyssum Digital",
         outcome:
@@ -122,7 +122,7 @@ export const aboutContent: AboutContent = {
     sectionTitle: "Education",
     entries: [
       {
-        years: "2012–2018",
+        years: "Sept 2012 – Jul 2018",
         degree: "BA Visual Communication Design",
         institution: "University of Havana, Cuba",
         description:

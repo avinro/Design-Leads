@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg-l" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0A1A"/>
+      <stop offset="100%" stop-color="#110D24"/>
+    </linearGradient>
+    <linearGradient id="grad-l" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6334D0"/>
+      <stop offset="100%" stop-color="#DA62F7"/>
+    </linearGradient>
+    <radialGradient id="orb-l" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#6334D0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#6334D0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg-l)"/>
+  <ellipse cx="800" cy="300" rx="600" ry="300" fill="url(#orb-l)"/>
+
+  <!-- Browser frame -->
+  <rect x="60" y="40" width="1480" height="820" rx="12" fill="#1A1230" stroke="#2D1F55" stroke-width="1.5"/>
+  <rect x="60" y="40" width="1480" height="36" rx="12" fill="#211840"/>
+  <rect x="60" y="64" width="1480" height="12" fill="#211840"/>
+  <circle cx="96" cy="58" r="5" fill="#FF5F57" opacity="0.7"/>
+  <circle cx="116" cy="58" r="5" fill="#FFBD2E" opacity="0.7"/>
+  <circle cx="136" cy="58" r="5" fill="#28CA41" opacity="0.7"/>
+  <rect x="500" y="48" width="600" height="20" rx="10" fill="#2D1F55"/>
+  <text x="800" y="62" font-family="system-ui, sans-serif" font-size="10" fill="#6334D0" text-anchor="middle">domainplug.io</text>
+
+  <!-- Navbar -->
+  <rect x="60" y="76" width="1480" height="52" fill="#1A1230" stroke="#2D1F55" stroke-width="0" stroke-dasharray="0"/>
+  <line x1="60" y1="128" x2="1540" y2="128" stroke="#2D1F55" stroke-width="1"/>
+  <text x="100" y="107" font-family="system-ui, sans-serif" font-size="16" font-weight="800" fill="#FFFFFF">DomainPlug</text>
+  <text x="500" y="107" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA">Marketplace</text>
+  <text x="640" y="107" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA">Bulk Register</text>
+  <text x="790" y="107" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA">Trending</text>
+  <rect x="1360" y="90" width="140" height="32" rx="16" fill="url(#grad-l)"/>
+  <text x="1430" y="111" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">Connect Wallet</text>
+
+  <!-- Hero section annotation bracket -->
+  <line x1="62" y1="130" x2="62" y2="370" stroke="#6334D0" stroke-width="2"/>
+  <text x="72" y="145" font-family="system-ui, sans-serif" font-size="9" fill="#6334D0" letter-spacing="1">HERO</text>
+
+  <!-- Hero content -->
+  <text x="800" y="200" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#6B4FA0" text-anchor="middle" letter-spacing="2">THE BULK ENS MARKETPLACE</text>
+  <text x="800" y="248" font-family="system-ui, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" text-anchor="middle">Register .eth domains</text>
+  <text x="800" y="300" font-family="system-ui, sans-serif" font-size="44" font-weight="800" fill="url(#grad-l)" text-anchor="middle">at scale.</text>
+  <text x="800" y="340" font-family="system-ui, sans-serif" font-size="15" fill="#A78BCA" text-anchor="middle">Search, compare, and register up to 20 ENS domains in a single transaction.</text>
+
+  <!-- Search bar annotation -->
+  <line x1="62" y1="370" x2="62" y2="440" stroke="#DA62F7" stroke-width="2"/>
+  <text x="72" y="385" font-family="system-ui, sans-serif" font-size="9" fill="#DA62F7" letter-spacing="1">SEARCH</text>
+
+  <!-- Search bar -->
+  <rect x="280" y="372" width="820" height="52" rx="26" fill="#211840" stroke="#6334D0" stroke-width="2"/>
+  <text x="500" y="403" font-family="system-ui, sans-serif" font-size="14" fill="#4A3872">Search for .eth domains... e.g. "vitalik"</text>
+  <rect x="1020" y="378" width="72" height="40" rx="20" fill="url(#grad-l)"/>
+  <text x="1056" y="403" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF" text-anchor="middle">Search</text>
+
+  <!-- Stats row -->
+  <text x="490" y="448" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">2.4M+</text>
+  <text x="490" y="464" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">domains listed</text>
+  <text x="660" y="448" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">20</text>
+  <text x="660" y="464" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">max bulk registration</text>
+  <text x="830" y="448" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">1 tx</text>
+  <text x="830" y="464" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="middle">per bulk purchase</text>
+
+  <!-- Featured domains annotation -->
+  <line x1="62" y1="480" x2="62" y2="740" stroke="#6334D0" stroke-width="2"/>
+  <text x="72" y="495" font-family="system-ui, sans-serif" font-size="9" fill="#6334D0" letter-spacing="1">FEATURED DOMAINS</text>
+
+  <line x1="100" y1="476" x2="1540" y2="476" stroke="#2D1F55" stroke-width="1"/>
+  <text x="800" y="510" font-family="system-ui, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">Featured Domains</text>
+
+  <!-- Domain cards grid -->
+  <rect x="100" y="528" width="280" height="120" rx="12" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="240" y="565" font-family="system-ui, monospace" font-size="16" font-weight="700" fill="#DA62F7" text-anchor="middle">vitalik.eth</text>
+  <text x="240" y="588" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Available · 6 characters</text>
+  <text x="240" y="612" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.004 ETH</text>
+  <rect x="140" y="626" width="200" height="12" rx="6" fill="#6334D0"/>
+
+  <rect x="420" y="528" width="280" height="120" rx="12" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="560" y="565" font-family="system-ui, monospace" font-size="16" font-weight="700" fill="#DA62F7" text-anchor="middle">defi.eth</text>
+  <text x="560" y="588" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Available · 4 characters</text>
+  <text x="560" y="612" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.012 ETH</text>
+  <rect x="460" y="626" width="200" height="12" rx="6" fill="#6334D0"/>
+
+  <rect x="740" y="528" width="280" height="120" rx="12" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="880" y="565" font-family="system-ui, monospace" font-size="16" font-weight="700" fill="#DA62F7" text-anchor="middle">nfts.eth</text>
+  <text x="880" y="588" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Available · 4 characters</text>
+  <text x="880" y="612" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.008 ETH</text>
+  <rect x="780" y="626" width="200" height="12" rx="6" fill="#6334D0"/>
+
+  <rect x="1060" y="528" width="280" height="120" rx="12" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="1200" y="565" font-family="system-ui, monospace" font-size="16" font-weight="700" fill="#DA62F7" text-anchor="middle">web3.eth</text>
+  <text x="1200" y="588" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Available · 4 characters</text>
+  <text x="1200" y="612" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.005 ETH</text>
+  <rect x="1100" y="626" width="200" height="12" rx="6" fill="#6334D0"/>
+
+  <!-- CTA annotation -->
+  <line x1="62" y1="740" x2="62" y2="820" stroke="#DA62F7" stroke-width="2"/>
+  <text x="72" y="755" font-family="system-ui, sans-serif" font-size="9" fill="#DA62F7" letter-spacing="1">CTA</text>
+
+  <!-- Marketplace CTA strip -->
+  <line x1="100" y1="736" x2="1540" y2="736" stroke="#2D1F55" stroke-width="1"/>
+  <text x="800" y="780" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle">Ready to register in bulk?</text>
+  <rect x="660" y="792" width="280" height="40" rx="20" fill="url(#grad-l)"/>
+  <text x="800" y="817" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">Open Bulk Generator ’</text>
+</svg>

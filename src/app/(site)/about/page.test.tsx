@@ -43,8 +43,14 @@ describe("AboutPage", () => {
     expect(html).toContain("My Process");
   });
 
-  it("renders the portrait placeholder label", () => {
-    expect(html).toContain("Portrait placeholder");
+  /*
+   * The portrait card is loaded with dynamic({ ssr: false }), so
+   * renderToStaticMarkup never executes the client bundle. The old
+   * "Portrait placeholder" text is gone; the test now verifies that
+   * the markup does NOT regress to that developer-facing label.
+   */
+  it("does not render the old portrait placeholder label", () => {
+    expect(html).not.toContain("Portrait placeholder");
   });
 
   it("renders all 5 process stage numbers", () => {

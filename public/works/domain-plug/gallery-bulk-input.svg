@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <linearGradient id="bg-bi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0A1A"/>
+      <stop offset="100%" stop-color="#110D24"/>
+    </linearGradient>
+    <linearGradient id="grad-bi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6334D0"/>
+      <stop offset="100%" stop-color="#DA62F7"/>
+    </linearGradient>
+    <radialGradient id="orb-bi" cx="50%" cy="30%">
+      <stop offset="0%" stop-color="#6334D0" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#6334D0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bg-bi)"/>
+  <ellipse cx="400" cy="200" rx="400" ry="250" fill="url(#orb-bi)"/>
+
+  <!-- Phone frame -->
+  <rect x="170" y="60" width="460" height="880" rx="44" fill="#1A1230" stroke="#2D1F55" stroke-width="2"/>
+  <rect x="184" y="80" width="432" height="840" rx="34" fill="#0D0A1A"/>
+  <!-- Notch -->
+  <rect x="310" y="90" width="180" height="22" rx="11" fill="#1A1230"/>
+
+  <!-- Status bar -->
+  <text x="210" y="108" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0">9:41</text>
+  <text x="576" y="108" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="end">ÏÏÏ</text>
+
+  <!-- Nav header -->
+  <text x="400" y="150" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Bulk Generator</text>
+  <text x="400" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0" text-anchor="middle">Step 1 of 3  Enter domains</text>
+
+  <!-- Step indicator -->
+  <rect x="200" y="184" width="120" height="4" rx="2" fill="url(#grad-bi)"/>
+  <rect x="332" y="184" width="68" height="4" rx="2" fill="#2D1F55"/>
+  <rect x="408" y="184" width="68" height="4" rx="2" fill="#2D1F55"/>
+  <rect x="484" y="184" width="68" height="4" rx="2" fill="#2D1F55"/>
+
+  <!-- Input label -->
+  <text x="210" y="222" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#A78BCA">Enter .eth names (one per line)</text>
+
+  <!-- Text area input -->
+  <rect x="200" y="234" width="400" height="200" rx="12" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="220" y="262" font-family="system-ui, monospace" font-size="13" fill="#DA62F7">vitalik</text>
+  <text x="220" y="284" font-family="system-ui, monospace" font-size="13" fill="#DA62F7">defi</text>
+  <text x="220" y="306" font-family="system-ui, monospace" font-size="13" fill="#DA62F7">nfts</text>
+  <text x="220" y="328" font-family="system-ui, monospace" font-size="13" fill="#DA62F7">web3</text>
+  <text x="220" y="350" font-family="system-ui, monospace" font-size="13" fill="#DA62F7">dao</text>
+  <text x="220" y="372" font-family="system-ui, monospace" font-size="13" fill="#DA62F7">meta</text>
+  <!-- Cursor blink -->
+  <rect x="269" y="380" width="2" height="14" rx="1" fill="#6334D0"/>
+
+  <!-- Helper text -->
+  <text x="210" y="454" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">6 names entered · max 20</text>
+  <text x="590" y="454" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0" text-anchor="end">14 remaining</text>
+
+  <!-- Progress bar -->
+  <rect x="200" y="462" width="400" height="4" rx="2" fill="#211840"/>
+  <rect x="200" y="462" width="120" height="4" rx="2" fill="url(#grad-bi)"/>
+
+  <!-- Paste hint -->
+  <rect x="200" y="482" width="400" height="44" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="400" y="509" font-family="system-ui, sans-serif" font-size="12" fill="#6B4FA0" text-anchor="middle">Paste from clipboard or import CSV</text>
+
+  <!-- Separator -->
+  <line x1="200" y1="546" x2="600" y2="546" stroke="#2D1F55" stroke-width="1"/>
+
+  <!-- Include taken toggle -->
+  <text x="210" y="576" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Show taken domains</text>
+  <!-- Toggle off -->
+  <rect x="552" y="562" width="44" height="24" rx="12" fill="#2D1F55"/>
+  <circle cx="564" cy="574" r="10" fill="#4A3872"/>
+
+  <!-- Include expired toggle -->
+  <text x="210" y="618" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Include expiring soon</text>
+  <!-- Toggle on -->
+  <rect x="552" y="604" width="44" height="24" rx="12" fill="#6334D0"/>
+  <circle cx="584" cy="616" r="10" fill="#FFFFFF"/>
+
+  <!-- CTA button -->
+  <rect x="200" y="650" width="400" height="52" rx="26" fill="url(#grad-bi)"/>
+  <text x="400" y="681" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Check Availability ’</text>
+
+  <!-- Bottom safe area -->
+  <rect x="330" y="886" width="140" height="4" rx="2" fill="#2D1F55"/>
+
+  <!-- Label -->
+  <rect x="80" y="948" width="4" height="32" rx="2" fill="url(#grad-bi)"/>
+  <text x="94" y="963" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Bulk Generator  Step 1</text>
+  <text x="94" y="977" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0">Multi-domain input and availability check</text>
+</svg>

@@ -7,12 +7,9 @@ import { getWorkBySlug, getWorkSlugs, getPublishedWorks } from "@/lib/content/wo
 import { SITE_URL, SITE_NAME } from "@/lib/seo/site";
 import { mdxOptions } from "@/lib/mdx/options";
 import { workMdxComponents } from "@/components/work/work-mdx-components";
-import { WorkDetail } from "@/components/work/work-detail";
 import { WorkGalleryFigure } from "@/components/work/work-gallery-figure";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
-import { Badge } from "@/components/ui/badge";
-
 // ---------------------------------------------------------------------------
 // Static generation
 // ---------------------------------------------------------------------------
@@ -87,8 +84,8 @@ interface WorkMetaStripProps {
 function WorkMetaStrip({ year, category, client, tools, externalLink, tags }: WorkMetaStripProps) {
   return (
     <div className="flex flex-col gap-6">
-      {/* Grid: year / category / client */}
-      <div className="border-border/40 grid grid-cols-2 gap-4 border-t pt-6 sm:grid-cols-3">
+      {/* Grid: year / category / client — 4-col on sm+ matching case study pattern */}
+      <div className="border-border/40 grid grid-cols-2 gap-4 border-t pt-6 sm:grid-cols-4">
         <div className="flex flex-col gap-1">
           <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
             Year
@@ -101,52 +98,51 @@ function WorkMetaStrip({ year, category, client, tools, externalLink, tags }: Wo
           </span>
           <span className="text-sm font-medium">{category}</span>
         </div>
-        {client && (
+        {client ? (
           <div className="flex flex-col gap-1">
             <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
               Client
             </span>
             <span className="text-sm font-medium">{client}</span>
           </div>
+        ) : (
+          <div className="flex flex-col gap-1">
+            <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+              Type
+            </span>
+            <span className="text-sm font-medium">Personal concept</span>
+          </div>
+        )}
+        {externalLink && (
+          <div className="flex flex-col gap-1">
+            <span className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+              Live
+            </span>
+            <a
+              href={externalLink}
+              target="_blank"
+              rel="noreferrer noopener"
+              className="text-accent hover:text-accent/80 inline-flex items-center gap-1 text-sm font-medium transition-colors"
+            >
+              View live
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
         )}
       </div>
 
-      {/* Tools */}
-      {tools.length > 0 && (
-        <div className="flex flex-wrap gap-1.5">
-          {tools.map((tool) => (
-            <Badge key={tool} variant="outline">
-              {tool}
-            </Badge>
-          ))}
-        </div>
-      )}
-
-      {/* Tags */}
-      {tags.length > 0 && (
+      {/* Tags + tools — unified pill row: tags first, tools appended */}
+      {(tags.length > 0 || tools.length > 0) && (
         <div className="flex flex-wrap gap-2">
-          {tags.map((tag) => (
+          {[...tags, ...tools].map((label) => (
             <span
-              key={tag}
+              key={label}
               className="bg-muted text-muted-foreground rounded-full px-3 py-1 font-mono text-xs tracking-wide uppercase"
             >
-              {tag}
+              {label}
             </span>
           ))}
         </div>
-      )}
-
-      {/* External link */}
-      {externalLink && (
-        <a
-          href={externalLink}
-          target="_blank"
-          rel="noreferrer noopener"
-          className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 font-mono text-xs tracking-widest uppercase transition-colors"
-        >
-          View live
-          <span aria-hidden="true">↗</span>
-        </a>
       )}
     </div>
   );
@@ -239,25 +235,34 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
 
   return (
     <main id="main-content">
-      {/* Hero: title + summary + meta strip */}
+      {/* Hero — title, cover image, and meta strip in one block (mirrors case study pattern) */}
       <Section spacing="heroInternal">
         <Container>
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-4 sm:gap-6 lg:gap-8">
             {/* Category kicker */}
             <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
               {frontmatter.category}
             </p>
 
-            {/* h1 */}
-            <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-              {frontmatter.title}
-            </h1>
+            {/* h1 + Summary: stack on mobile, side-by-side on desktop */}
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:items-start lg:gap-8">
+              <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+                {frontmatter.title}
+              </h1>
 
-            {/* Summary — mandatory one-liner */}
-            <p className="text-muted-foreground max-w-2xl text-base leading-relaxed sm:text-lg">
-              {frontmatter.summary}
-            </p>
+              <p className="text-muted-foreground text-base leading-relaxed sm:text-lg">
+                {frontmatter.summary}
+              </p>
+            </div>
 
+            {/* Cover image — inline with hero, above metadata strip */}
+            <WorkCover
+              src={frontmatter.coverImage}
+              alt={`${frontmatter.title} cover`}
+              aspect={frontmatter.coverAspect}
+            />
+
+            {/* Metadata strip — below cover, same as case study pattern */}
             <WorkMetaStrip
               year={frontmatter.year}
               category={frontmatter.category}
@@ -270,24 +275,11 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         </Container>
       </Section>
 
-      {/* Full-bleed cover image */}
-      <Section spacing="card">
-        <Container width="wide">
-          <WorkCover
-            src={frontmatter.coverImage}
-            alt={`${frontmatter.title} cover`}
-            aspect={frontmatter.coverAspect}
-          />
-        </Container>
-      </Section>
-
-      {/* Optional MDX intro — short prose, no primitives */}
+      {/* Optional MDX body — compact project narrative */}
       {hasIntro && (
         <Section spacing="card">
-          <Container>
-            <WorkDetail>
-              <MDXRemote source={content} components={workMdxComponents} options={mdxOptions} />
-            </WorkDetail>
+          <Container width="wide">
+            <MDXRemote source={content} components={workMdxComponents} options={mdxOptions} />
           </Container>
         </Section>
       )}
@@ -296,6 +288,12 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
       {frontmatter.gallery.length > 0 && (
         <Section>
           <Container width="wide">
+            {/* Selected screens label — editorial bridge between narrative and visuals */}
+            <div className="border-border/40 mb-8 flex items-center gap-4 border-t pt-6">
+              <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
+                Selected screens
+              </p>
+            </div>
             <div className="flex flex-col gap-8">
               {frontmatter.gallery.map((item, idx) => (
                 <WorkGalleryFigure key={item.src} item={item} priority={idx === 0} />

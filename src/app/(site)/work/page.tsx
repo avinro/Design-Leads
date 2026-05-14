@@ -31,17 +31,22 @@ export default function WorkPage() {
   return (
     <main id="main-content">
       {/* Page header */}
-      <Section as="header" spacing="heroInternalCompact" className="border-border border-b">
+      <Section
+        as="header"
+        spacing="heroInternalCompact"
+        className="border-border border-b"
+        style={{ paddingBottom: "calc(var(--space-hero) / 2)" }}
+      >
         <Container>
           <div className="flex flex-col items-center gap-4 text-center">
             <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
-              Visual work
+              Explore my work
             </p>
             <h1 className="font-display text-foreground text-4xl font-semibold tracking-tight sm:text-5xl">
               Explorations,
               <br className="hidden sm:block" /> concepts & UI.
             </h1>
-            <p className="text-muted-foreground max-w-md text-base leading-relaxed sm:text-lg">
+            <p className="text-muted-foreground max-w-md text-base leading-relaxed sm:text-lg md:max-w-none">
               Visual explorations, UI systems, and product concepts.
             </p>
 

@@ -56,10 +56,10 @@ const mockItems: SelectedWorkItem[] = [
   },
   {
     kind: "work",
-    slug: "aurora-mobile-banking",
-    title: "Aurora Mobile Banking",
-    coverImage: "/works/aurora-mobile-banking/cover.svg",
-    order: 10,
+    slug: "domain-plug",
+    title: "DomainPlug",
+    coverImage: "/works/domain-plug/cover.svg",
+    order: 4,
   },
 ];
 
@@ -85,13 +85,13 @@ describe("FlowingWorkMenu", () => {
 
   it("work items link to /work/[slug]", () => {
     const html = renderToStaticMarkup(<FlowingWorkMenu items={mockItems} />);
-    expect(html).toContain('href="/work/aurora-mobile-banking"');
+    expect(html).toContain('href="/work/domain-plug"');
   });
 
   it("renders each item title in the markup", () => {
     const html = renderToStaticMarkup(<FlowingWorkMenu items={mockItems} />);
     expect(html).toContain("Hello Dojo");
-    expect(html).toContain("Aurora Mobile Banking");
+    expect(html).toContain("DomainPlug");
   });
 
   it("renders kind badges to distinguish content types", () => {

@@ -17,6 +17,8 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { CaseStudyScrollTracker } from "@/components/analytics/case-study-scroll-tracker";
 import { CaseStudyBody } from "@/components/case-study/case-study-body";
+import { RelatedRail } from "@/components/case-study/related-rail";
+import { getRelatedItems } from "@/lib/content/related";
 
 // ---------------------------------------------------------------------------
 // Static generation
@@ -214,6 +216,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
   const { frontmatter, content, readingTime } = cs;
   const tocHeadings = extractTocHeadings(content);
 
+  // Related items for the right rail (other case studies first, then works).
+  const relatedItems = getRelatedItems(slug);
+
   // Determine the next published case study (wraps around).
   const published = getPublishedCaseStudies();
   const currentIdx = published.findIndex((p) => p.frontmatter.slug === slug);
@@ -261,7 +266,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       {/* MDX body — widened to max-w-7xl to accommodate the two-column layout */}
       <Section>
         <Container width="wide">
-          <CaseStudyBody headings={tocHeadings}>
+          <CaseStudyBody
+            headings={tocHeadings}
+            rail={relatedItems.length > 0 ? <RelatedRail items={relatedItems} /> : undefined}
+          >
             <MDXRemote source={content} components={mdxComponents} options={mdxOptions} />
 
             {/*

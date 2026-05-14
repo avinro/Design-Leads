@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg-f" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0A1A"/>
+      <stop offset="100%" stop-color="#110D24"/>
+    </linearGradient>
+    <linearGradient id="grad-f" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6334D0"/>
+      <stop offset="100%" stop-color="#DA62F7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg-f)"/>
+
+  <!-- Title -->
+  <text x="800" y="68" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#6B4FA0" text-anchor="middle" letter-spacing="3">USER FLOWS</text>
+  <text x="800" y="106" font-family="system-ui, sans-serif" font-size="26" font-weight="700" fill="#FFFFFF" text-anchor="middle">Three paths from landing to purchase</text>
+
+  <!-- ENTRY NODE: Landing Page -->
+  <rect x="640" y="140" width="320" height="52" rx="26" fill="url(#grad-f)"/>
+  <text x="800" y="171" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">Landing Page</text>
+
+  <!-- Three branches -->
+  <line x1="800" y1="192" x2="800" y2="216" stroke="#6334D0" stroke-width="1.5"/>
+  <line x1="800" y1="216" x2="280" y2="216" stroke="#6334D0" stroke-width="1.5"/>
+  <line x1="800" y1="216" x2="800" y2="216" stroke="#6334D0" stroke-width="1.5"/>
+  <line x1="800" y1="216" x2="1320" y2="216" stroke="#6334D0" stroke-width="1.5"/>
+  <line x1="280" y1="216" x2="280" y2="240" stroke="#6334D0" stroke-width="1.5"/>
+  <line x1="800" y1="216" x2="800" y2="240" stroke="#6334D0" stroke-width="1.5"/>
+  <line x1="1320" y1="216" x2="1320" y2="240" stroke="#6334D0" stroke-width="1.5"/>
+
+  <!-- PATH 1: Marketplace Browse -->
+  <text x="280" y="234" font-family="system-ui, sans-serif" font-size="11" fill="#DA62F7" text-anchor="middle" letter-spacing="1">PATH 1</text>
+  <rect x="120" y="248" width="320" height="48" rx="8" fill="#1A1230" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="280" y="277" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">Marketplace Browse</text>
+
+  <line x1="280" y1="296" x2="280" y2="320" stroke="#2D1F55" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="120" y="320" width="320" height="40" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="280" y="345" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Browse featured domains</text>
+
+  <line x1="280" y1="360" x2="280" y2="384" stroke="#2D1F55" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="120" y="384" width="320" height="40" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="280" y="409" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Apply category filters</text>
+
+  <line x1="280" y1="424" x2="280" y2="448" stroke="#2D1F55" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="120" y="448" width="320" height="40" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="280" y="473" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Compare prices</text>
+
+  <line x1="280" y1="488" x2="280" y2="512" stroke="#2D1F55" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="120" y="512" width="320" height="40" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="280" y="537" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Purchase single domain</text>
+
+  <line x1="280" y1="552" x2="280" y2="576" stroke="#6334D0" stroke-width="1.5"/>
+
+  <!-- PATH 2: Search & Buy -->
+  <text x="800" y="234" font-family="system-ui, sans-serif" font-size="11" fill="#DA62F7" text-anchor="middle" letter-spacing="1">PATH 2</text>
+  <rect x="640" y="248" width="320" height="48" rx="8" fill="#1A1230" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="800" y="277" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">Search &amp; Buy</text>
+
+  <line x1="800" y1="296" x2="800" y2="320" stroke="#2D1F55" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="640" y="320" width="320" height="40" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="800" y="345" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Search specific .eth name</text>
+
+  <line x1="800" y1="360" x2="800" y2="384" stroke="#2D1F55" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="640" y="384" width="320" height="40" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="800" y="409" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Check availability</text>
+
+  <line x1="800" y1="424" x2="800" y2="448" stroke="#2D1F55" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="640" y="448" width="320" height="40" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="800" y="473" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">View pricing and duration</text>
+
+  <line x1="800" y1="488" x2="800" y2="512" stroke="#2D1F55" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <rect x="640" y="512" width="320" height="40" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="800" y="537" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA" text-anchor="middle">Complete purchase</text>
+
+  <line x1="800" y1="552" x2="800" y2="576" stroke="#6334D0" stroke-width="1.5"/>
+
+  <!-- PATH 3: Bulk Registration -->
+  <text x="1320" y="234" font-family="system-ui, sans-serif" font-size="11" fill="#DA62F7" text-anchor="middle" letter-spacing="1">PATH 3</text>
+  <rect x="1160" y="248" width="320" height="48" rx="8" fill="#211840" stroke="url(#grad-f)" stroke-width="2"/>
+  <text x="1320" y="277" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#DA62F7" text-anchor="middle">Bulk Registration &</text>
+
+  <line x1="1320" y1="296" x2="1320" y2="320" stroke="#6334D0" stroke-width="1.5"/>
+  <rect x="1160" y="320" width="320" height="40" rx="6" fill="#1A1230" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="1320" y="345" font-family="system-ui, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Input multiple domain names</text>
+
+  <line x1="1320" y1="360" x2="1320" y2="384" stroke="#6334D0" stroke-width="1.5"/>
+  <rect x="1160" y="384" width="320" height="40" rx="6" fill="#1A1230" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="1320" y="409" font-family="system-ui, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Filter available results</text>
+
+  <line x1="1320" y1="424" x2="1320" y2="448" stroke="#6334D0" stroke-width="1.5"/>
+  <rect x="1160" y="448" width="320" height="40" rx="6" fill="#1A1230" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="1320" y="473" font-family="system-ui, sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle">Review prices and select (d20)</text>
+
+  <line x1="1320" y1="488" x2="1320" y2="512" stroke="#6334D0" stroke-width="1.5"/>
+  <rect x="1160" y="512" width="320" height="40" rx="6" fill="#211840" stroke="url(#grad-f)" stroke-width="2"/>
+  <text x="1320" y="537" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#DA62F7" text-anchor="middle">Confirm bulk purchase</text>
+
+  <line x1="1320" y1="552" x2="1320" y2="576" stroke="#6334D0" stroke-width="1.5"/>
+
+  <!-- Converge lines to Confirmation -->
+  <line x1="280" y1="576" x2="800" y2="576" stroke="#6334D0" stroke-width="1.5"/>
+  <line x1="1320" y1="576" x2="800" y2="576" stroke="#6334D0" stroke-width="1.5"/>
+  <line x1="800" y1="576" x2="800" y2="600" stroke="#6334D0" stroke-width="1.5"/>
+
+  <!-- SHARED EXIT NODE: Confirmation -->
+  <rect x="560" y="600" width="480" height="52" rx="26" fill="url(#grad-f)"/>
+  <text x="800" y="631" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">Purchase Confirmation</text>
+
+  <!-- Bottom label -->
+  <rect x="80" y="820" width="4" height="40" rx="2" fill="url(#grad-f)"/>
+  <text x="96" y="838" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">User flow diagram</text>
+  <text x="96" y="856" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">Three entry paths converging at shared checkout</text>
+</svg>

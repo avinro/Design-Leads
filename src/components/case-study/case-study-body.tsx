@@ -1,16 +1,17 @@
 /**
- * CaseStudyBody — two-column layout wrapper for case study pages.
+ * CaseStudyBody — layout wrapper for case study pages.
  *
- * Renders a sticky TOC sidebar on the left and the article content on the
- * right. Falls back to a single-column layout when the TOC has fewer than
- * 2 headings (drafts, stubs, or very short case studies).
+ * Column layout (mobile-first):
+ *   base  — single column (flex-col)
+ *   lg    — two columns: TOC sidebar (14rem) + article content (1fr)
+ *   xl    — three columns when `rail` is provided:
+ *             TOC (12rem) + article (1fr) + related rail (16rem)
+ *           two columns when TOC is absent:
+ *             article (1fr) + related rail (16rem)
  *
- * Column proportions (lg+):
- *   Left  — 14 rem  (TOC sidebar)
- *   Right — 1fr     (article content, all remaining space)
- *
- * Mobile-first: base styles are flex-col (single column), lg overrides to
- * the two-column grid.
+ * The rail column is intentionally hidden below xl to avoid cramping the
+ * article column on tablets and small laptops where the two-column layout
+ * already works well.
  */
 
 import type { ReactNode } from "react";
@@ -21,15 +22,28 @@ import { cn } from "@/lib/utils";
 interface CaseStudyBodyProps {
   headings: TocHeading[];
   children: ReactNode;
+  /** Optional right rail (e.g. RelatedRail). Rendered as a third column at xl+. */
+  rail?: ReactNode;
   className?: string;
 }
 
-export function CaseStudyBody({ headings, children, className }: CaseStudyBodyProps) {
+export function CaseStudyBody({ headings, children, rail, className }: CaseStudyBodyProps) {
   const hasToc = headings.length >= 2;
 
   if (!hasToc) {
-    // Single-column fallback for drafts or short case studies.
-    return <div className={cn("w-full", className)}>{children}</div>;
+    // No TOC — single column up to lg, then content + optional rail at xl.
+    return (
+      <div
+        className={cn(
+          "flex flex-col",
+          rail && "xl:grid xl:grid-cols-[minmax(0,1fr)_16rem] xl:gap-8",
+          className,
+        )}
+      >
+        <div className="min-w-0">{children}</div>
+        {rail}
+      </div>
+    );
   }
 
   return (
@@ -37,8 +51,12 @@ export function CaseStudyBody({ headings, children, className }: CaseStudyBodyPr
       className={cn(
         // Mobile: single column, TOC above content (rendered in TocSidebar).
         "flex flex-col",
-        // Desktop: two-column grid — sidebar left, content right.
-        "lg:grid lg:grid-cols-[14rem_minmax(0,1fr)] lg:gap-12",
+        // lg: two-column grid — TOC sidebar left, content right.
+        "lg:grid lg:gap-12",
+        rail
+          ? // xl adds the right rail as a third column.
+            "lg:grid-cols-[14rem_minmax(0,1fr)] xl:grid-cols-[12rem_minmax(0,1fr)_16rem] xl:gap-8"
+          : "lg:grid-cols-[14rem_minmax(0,1fr)]",
         className,
       )}
     >
@@ -52,6 +70,9 @@ export function CaseStudyBody({ headings, children, className }: CaseStudyBodyPr
 
       {/* Article content */}
       <div className="min-w-0">{children}</div>
+
+      {/* Right rail — visible only at xl+, controlled internally by RelatedRail */}
+      {rail}
     </div>
   );
 }

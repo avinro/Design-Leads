@@ -5,7 +5,7 @@
  * and performs pure data transformations.
  *
  * Covers:
- *   - All three dummy MDX files are readable and pass zod validation.
+ *   - domain-plug.mdx is readable and passes zod validation.
  *   - getAllWorks returns results sorted by `order`.
  *   - getPublishedWorks excludes drafts.
  *   - getWorkBySlug resolves known slugs and returns undefined for unknown.
@@ -23,9 +23,9 @@ import { describe, it, expect } from "vitest";
 import { getAllWorks, getPublishedWorks, getWorkBySlug, getWorkSlugs } from "./works";
 
 describe("works content layer", () => {
-  it("loads all three work files without throwing", () => {
+  it("loads all work files without throwing", () => {
     const all = getAllWorks();
-    expect(all).toHaveLength(3);
+    expect(all).toHaveLength(1);
   });
 
   it("returns works sorted by order ascending", () => {
@@ -42,16 +42,10 @@ describe("works content layer", () => {
     expect(published.every((w) => !w.frontmatter.draft)).toBe(true);
   });
 
-  it("getWorkBySlug resolves 'aurora-mobile-banking'", () => {
-    const work = getWorkBySlug("aurora-mobile-banking");
+  it("getWorkBySlug resolves 'domain-plug'", () => {
+    const work = getWorkBySlug("domain-plug");
     expect(work).toBeDefined();
-    expect(work?.frontmatter.title).toBe("Aurora Mobile Banking");
-  });
-
-  it("getWorkBySlug resolves 'glyph-design-system'", () => {
-    const work = getWorkBySlug("glyph-design-system");
-    expect(work).toBeDefined();
-    expect(work?.frontmatter.title).toBe("Glyph Design System");
+    expect(work?.frontmatter.title).toBe("DomainPlug");
   });
 
   it("getWorkBySlug returns undefined for unknown slug", () => {
@@ -60,9 +54,7 @@ describe("works content layer", () => {
 
   it("getWorkSlugs includes all slugs", () => {
     const slugs = getWorkSlugs();
-    expect(slugs).toContain("aurora-mobile-banking");
-    expect(slugs).toContain("glyph-design-system");
-    expect(slugs).toContain("pulse-microinteractions");
+    expect(slugs).toContain("domain-plug");
   });
 
   it("every work has a non-empty readingTime text", () => {
@@ -111,18 +103,8 @@ describe("works content layer", () => {
     });
   });
 
-  it("aurora-mobile-banking is featured", () => {
-    const work = getWorkBySlug("aurora-mobile-banking");
-    expect(work?.frontmatter.featured).toBe(true);
-  });
-
-  it("glyph-design-system is featured", () => {
-    const work = getWorkBySlug("glyph-design-system");
-    expect(work?.frontmatter.featured).toBe(true);
-  });
-
-  it("pulse-microinteractions is not featured", () => {
-    const work = getWorkBySlug("pulse-microinteractions");
+  it("domain-plug is not featured (correct for home exclusion)", () => {
+    const work = getWorkBySlug("domain-plug");
     expect(work?.frontmatter.featured).toBe(false);
   });
 

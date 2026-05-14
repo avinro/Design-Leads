@@ -47,6 +47,7 @@ const WorkFrontmatterSchema = z.object({
   /** One-liner shown under the thumbnail — mandatory for visual discovery. */
   summary: z.string().min(1).max(180),
   coverImage: z.string().min(1),
+  hoverImage: z.string().min(1).optional(),
   /** Cover aspect ratio — 4:5 portrait by default. */
   coverAspect: z.enum(["portrait", "square", "landscape"]).default("portrait"),
   /** Gallery images rendered from frontmatter, not MDX, to enforce visual-first. */

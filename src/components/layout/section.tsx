@@ -36,7 +36,7 @@ const sectionVariants = cva("", {
   variants: {
     spacing: {
       hero: "py-(--space-hero)",
-      heroInternal: "pt-[10rem] pb-(--space-hero)",
+      heroInternal: "pt-[7rem] pb-(--space-hero)",
       heroInternalCompact: "pt-[7rem] pb-(--space-hero) md:pt-[10rem]",
       section: "py-(--space-section)",
       card: "py-(--space-card)",

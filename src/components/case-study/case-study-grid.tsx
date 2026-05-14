@@ -7,16 +7,14 @@ import type { CaseStudy } from "@/lib/content/case-studies";
  *
  * Layout rules (mobile-first):
  *   - 1 column on mobile (all cards are full-width).
- *   - 2 columns from md upward.
- *   - featured === true  → col-span-2 (full row, i.e. a "weighted" card).
- *   - featured === false → col-span-1 (half-row card).
- *   - A lone non-featured card at the end of a row leaves the adjacent cell
- *     intentionally empty — consistent with future cards being added.
+ *   - 2 columns from md upward, all cards at equal weight (col-span-1).
+ *   - `featured` is intentionally ignored here; it is only used by home to
+ *     populate FlowingWorkMenu.
  *
  * Spacing:
  *   - gap-y-10  (40px) mobile — compact for small screens.
  *   - gap-y-20  (80px) md+   — breathing room on the designed breakpoint.
- *   - gap-x-6 / md:gap-x-8   — horizontal gutter between half-row cards.
+ *   - gap-x-6 / md:gap-x-8   — horizontal gutter between cards.
  *
  * The Container (max-w-6xl + adaptive gutters) is applied here so the page
  * can simply render <CaseStudyGrid cases={cases} /> inside a <Section>.
@@ -34,10 +32,7 @@ export function CaseStudyGrid({ cases }: CaseStudyGridProps) {
         aria-label="Case studies"
       >
         {cases.map((cs) => (
-          <li
-            key={cs.frontmatter.slug}
-            className={cs.frontmatter.featured ? "md:col-span-2" : "md:col-span-1"}
-          >
+          <li key={cs.frontmatter.slug}>
             <CaseStudyGridCard cs={cs} />
           </li>
         ))}

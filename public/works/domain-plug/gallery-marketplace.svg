@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg-m" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0A1A"/>
+      <stop offset="100%" stop-color="#110D24"/>
+    </linearGradient>
+    <linearGradient id="grad-m" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6334D0"/>
+      <stop offset="100%" stop-color="#DA62F7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg-m)"/>
+
+  <!-- Title -->
+  <text x="800" y="56" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#6B4FA0" text-anchor="middle" letter-spacing="3">MARKETPLACE</text>
+
+  <!-- Label: Mobile -->
+  <text x="240" y="92" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#DA62F7" text-anchor="middle" letter-spacing="2">MOBILE  375px</text>
+
+  <!-- Mobile frame -->
+  <rect x="100" y="108" width="280" height="760" rx="28" fill="#1A1230" stroke="#2D1F55" stroke-width="2"/>
+  <rect x="110" y="126" width="260" height="724" rx="20" fill="#0D0A1A"/>
+  <rect x="166" y="134" width="108" height="16" rx="8" fill="#1A1230"/>
+
+  <!-- Mobile nav -->
+  <text x="240" y="174" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle">Marketplace</text>
+  <!-- Mobile filter row -->
+  <rect x="122" y="186" width="68" height="24" rx="12" fill="url(#grad-m)"/>
+  <text x="156" y="203" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">All</text>
+  <rect x="200" y="186" width="68" height="24" rx="12" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="234" y="203" font-family="system-ui, sans-serif" font-size="10" fill="#A78BCA" text-anchor="middle">3-char</text>
+  <rect x="278" y="186" width="68" height="24" rx="12" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="312" y="203" font-family="system-ui, sans-serif" font-size="10" fill="#A78BCA" text-anchor="middle">4-char</text>
+
+  <!-- Mobile: domain cards (single column) -->
+  <rect x="122" y="224" width="236" height="80" rx="10" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="240" y="254" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">vitalik.eth</text>
+  <text x="240" y="274" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">6 chars · Available</text>
+  <text x="240" y="294" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.004 ETH</text>
+
+  <rect x="122" y="316" width="236" height="80" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="240" y="346" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">defi.eth</text>
+  <text x="240" y="366" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">4 chars · Available</text>
+  <text x="240" y="386" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.012 ETH</text>
+
+  <rect x="122" y="408" width="236" height="80" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="240" y="438" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">nfts.eth</text>
+  <text x="240" y="458" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">4 chars · Available</text>
+  <text x="240" y="478" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.008 ETH</text>
+
+  <rect x="122" y="500" width="236" height="80" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="240" y="530" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#4A3872" text-anchor="middle">web3.eth</text>
+  <text x="240" y="550" font-family="system-ui, sans-serif" font-size="11" fill="#4A3872" text-anchor="middle">4 chars · Taken</text>
+  <text x="240" y="570" font-family="system-ui, sans-serif" font-size="13" fill="#4A3872" text-anchor="middle"></text>
+
+  <rect x="122" y="592" width="236" height="80" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="240" y="622" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">dao.eth</text>
+  <text x="240" y="642" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">3 chars · Available</text>
+  <text x="240" y="662" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.320 ETH</text>
+
+  <rect x="122" y="684" width="236" height="80" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="240" y="714" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">meta.eth</text>
+  <text x="240" y="734" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">4 chars · Available</text>
+  <text x="240" y="754" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.018 ETH</text>
+
+  <!-- Label: Desktop -->
+  <text x="1020" y="92" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#DA62F7" text-anchor="middle" letter-spacing="2">DESKTOP  1280px</text>
+
+  <!-- Desktop frame -->
+  <rect x="440" y="108" width="1120" height="760" rx="12" fill="#1A1230" stroke="#2D1F55" stroke-width="1.5"/>
+
+  <!-- Desktop top bar -->
+  <rect x="440" y="108" width="1120" height="36" rx="12" fill="#211840"/>
+  <rect x="440" y="132" width="1120" height="12" fill="#211840"/>
+  <circle cx="474" cy="126" r="5" fill="#FF5F57" opacity="0.7"/>
+  <circle cx="494" cy="126" r="5" fill="#FFBD2E" opacity="0.7"/>
+  <circle cx="514" cy="126" r="5" fill="#28CA41" opacity="0.7"/>
+
+  <!-- Desktop nav strip -->
+  <rect x="440" y="144" width="1120" height="44" fill="#1A1230"/>
+  <line x1="440" y1="188" x2="1560" y2="188" stroke="#2D1F55" stroke-width="1"/>
+  <text x="480" y="170" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#FFFFFF">DomainPlug</text>
+  <text x="700" y="170" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA">Marketplace</text>
+  <text x="820" y="170" font-family="system-ui, sans-serif" font-size="12" fill="#DA62F7">Bulk Register</text>
+  <rect x="1420" y="154" width="120" height="28" rx="14" fill="url(#grad-m)"/>
+  <text x="1480" y="173" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle">Connect Wallet</text>
+
+  <!-- Desktop sidebar + grid layout -->
+  <!-- Sidebar -->
+  <rect x="440" y="188" width="200" height="680" fill="#161028" stroke="#2D1F55" stroke-width="0"/>
+  <line x1="640" y1="188" x2="640" y2="868" stroke="#2D1F55" stroke-width="1"/>
+  <text x="460" y="220" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#6B4FA0" letter-spacing="1">FILTERS</text>
+
+  <!-- Filter: Length -->
+  <text x="460" y="250" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Length</text>
+  <rect x="460" y="262" width="64" height="24" rx="12" fill="url(#grad-m)"/>
+  <text x="492" y="279" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">All</text>
+  <rect x="534" y="262" width="40" height="24" rx="12" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="554" y="279" font-family="system-ui, sans-serif" font-size="10" fill="#A78BCA" text-anchor="middle">3</text>
+  <rect x="584" y="262" width="40" height="24" rx="12" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="604" y="279" font-family="system-ui, sans-serif" font-size="10" fill="#A78BCA" text-anchor="middle">4</text>
+
+  <!-- Filter: Status -->
+  <text x="460" y="314" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Status</text>
+  <rect x="460" y="326" width="100" height="24" rx="12" fill="url(#grad-m)"/>
+  <text x="510" y="343" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#FFFFFF" text-anchor="middle">Available</text>
+  <rect x="460" y="360" width="80" height="24" rx="12" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="500" y="377" font-family="system-ui, sans-serif" font-size="10" fill="#A78BCA" text-anchor="middle">All</text>
+
+  <!-- Filter: Price -->
+  <text x="460" y="408" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Price (ETH)</text>
+  <rect x="460" y="420" width="160" height="4" rx="2" fill="#211840"/>
+  <rect x="460" y="420" width="90" height="4" rx="2" fill="url(#grad-m)"/>
+  <circle cx="550" cy="422" r="8" fill="#6334D0" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="460" y="442" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0">0.001</text>
+  <text x="620" y="442" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="end">2.000</text>
+
+  <!-- Desktop domain grid (4 columns) -->
+  <!-- Row 1 -->
+  <rect x="660" y="200" width="200" height="104" rx="10" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="760" y="233" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">vitalik.eth</text>
+  <text x="760" y="253" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">6 chars</text>
+  <text x="760" y="275" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.004 ETH</text>
+  <rect x="700" y="286" width="120" height="10" rx="5" fill="url(#grad-m)"/>
+
+  <rect x="876" y="200" width="200" height="104" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="976" y="233" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">defi.eth</text>
+  <text x="976" y="253" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">4 chars</text>
+  <text x="976" y="275" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.012 ETH</text>
+  <rect x="916" y="286" width="120" height="10" rx="5" fill="#211840" stroke="#6334D0" stroke-width="1"/>
+
+  <rect x="1092" y="200" width="200" height="104" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="1192" y="233" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">nfts.eth</text>
+  <text x="1192" y="253" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">4 chars</text>
+  <text x="1192" y="275" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.008 ETH</text>
+  <rect x="1132" y="286" width="120" height="10" rx="5" fill="#211840" stroke="#6334D0" stroke-width="1"/>
+
+  <rect x="1308" y="200" width="200" height="104" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="1408" y="233" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#4A3872" text-anchor="middle">web3.eth</text>
+  <text x="1408" y="253" font-family="system-ui, sans-serif" font-size="11" fill="#4A3872" text-anchor="middle">4 chars · Taken</text>
+  <text x="1408" y="275" font-family="system-ui, sans-serif" font-size="13" fill="#4A3872" text-anchor="middle"></text>
+
+  <!-- Row 2 -->
+  <rect x="660" y="320" width="200" height="104" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="760" y="353" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">dao.eth</text>
+  <text x="760" y="373" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">3 chars</text>
+  <text x="760" y="395" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.320 ETH</text>
+
+  <rect x="876" y="320" width="200" height="104" rx="10" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="976" y="353" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">meta.eth</text>
+  <text x="976" y="373" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">4 chars</text>
+  <text x="976" y="395" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.018 ETH</text>
+
+  <rect x="1092" y="320" width="200" height="104" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="1192" y="353" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">layer.eth</text>
+  <text x="1192" y="373" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">5 chars</text>
+  <text x="1192" y="395" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.006 ETH</text>
+
+  <rect x="1308" y="320" width="200" height="104" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <text x="1408" y="353" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7" text-anchor="middle">alpha.eth</text>
+  <text x="1408" y="373" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA" text-anchor="middle">5 chars</text>
+  <text x="1408" y="395" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="middle">0.006 ETH</text>
+
+  <!-- Skeleton rows for depth -->
+  <rect x="660" y="440" width="848" height="80" rx="10" fill="#161028" stroke="#2D1F55" stroke-width="1" opacity="0.6"/>
+  <rect x="680" y="460" width="120" height="12" rx="4" fill="#1E1433"/>
+  <rect x="680" y="482" width="80" height="10" rx="4" fill="#1E1433"/>
+  <rect x="1480" y="440" width="28" height="80" rx="4" fill="#1E1433" opacity="0.5"/>
+
+  <rect x="660" y="540" width="848" height="80" rx="10" fill="#161028" stroke="#2D1F55" stroke-width="1" opacity="0.4"/>
+
+  <!-- Bottom label -->
+  <rect x="80" y="840" width="4" height="40" rx="2" fill="url(#grad-m)"/>
+  <text x="96" y="858" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">Marketplace  responsive grid</text>
+  <text x="96" y="876" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">Single column on mobile · 4-column grid on desktop</text>
+</svg>

@@ -5,7 +5,7 @@
  * and performs pure data transformations.
  *
  * Covers:
- *   - All three MDX files are readable and pass zod validation
+ *   - All two MDX files are readable and pass zod validation
  *   - getAllCaseStudies returns results sorted by `order`
  *   - getPublishedCaseStudies excludes drafts
  *   - getCaseStudyBySlug resolves known slugs and returns undefined for unknown
@@ -28,9 +28,9 @@ import {
 } from "./case-studies";
 
 describe("case-studies content layer", () => {
-  it("loads all three case study files without throwing", () => {
+  it("loads all case study files without throwing", () => {
     const all = getAllCaseStudies();
-    expect(all).toHaveLength(3);
+    expect(all).toHaveLength(2);
   });
 
   it("returns case studies sorted by order ascending", () => {
@@ -50,7 +50,7 @@ describe("case-studies content layer", () => {
   it("getCaseStudyBySlug resolves 'uma'", () => {
     const cs = getCaseStudyBySlug("uma");
     expect(cs).toBeDefined();
-    expect(cs?.frontmatter.title).toBe("UMA");
+    expect(cs?.frontmatter.title).toBe("UMA Agent");
   });
 
   it("getCaseStudyBySlug resolves 'hello-dojo'", () => {
@@ -67,12 +67,6 @@ describe("case-studies content layer", () => {
     const slugs = getCaseStudySlugs();
     expect(slugs).toContain("uma");
     expect(slugs).toContain("hello-dojo");
-    expect(slugs).toContain("project-3");
-  });
-
-  it("getCaseStudySlugs includes draft slugs for static params", () => {
-    const slugs = getCaseStudySlugs();
-    expect(slugs).toContain("project-3");
   });
 
   it("every case study has a non-empty readingTime text", () => {
@@ -100,11 +94,6 @@ describe("case-studies content layer", () => {
       expect(fm.tags.length).toBeGreaterThan(0);
       expect(fm.gradient).toBeTruthy();
     });
-  });
-
-  it("project-3 is marked as draft", () => {
-    const cs = getCaseStudyBySlug("project-3");
-    expect(cs?.frontmatter.draft).toBe(true);
   });
 
   // ---------------------------------------------------------------------------

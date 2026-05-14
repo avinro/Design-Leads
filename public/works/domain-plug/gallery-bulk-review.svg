@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+  <defs>
+    <linearGradient id="bg-br" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0A1A"/>
+      <stop offset="100%" stop-color="#110D24"/>
+    </linearGradient>
+    <linearGradient id="grad-br" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6334D0"/>
+      <stop offset="100%" stop-color="#DA62F7"/>
+    </linearGradient>
+    <radialGradient id="orb-br" cx="50%" cy="80%">
+      <stop offset="0%" stop-color="#DA62F7" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#DA62F7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="1000" fill="url(#bg-br)"/>
+  <ellipse cx="400" cy="800" rx="400" ry="250" fill="url(#orb-br)"/>
+
+  <!-- Phone frame -->
+  <rect x="170" y="60" width="460" height="880" rx="44" fill="#1A1230" stroke="#2D1F55" stroke-width="2"/>
+  <rect x="184" y="80" width="432" height="840" rx="34" fill="#0D0A1A"/>
+  <rect x="310" y="90" width="180" height="22" rx="11" fill="#1A1230"/>
+
+  <!-- Status bar -->
+  <text x="210" y="108" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0">9:41</text>
+  <text x="576" y="108" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0" text-anchor="end">œœœ</text>
+
+  <!-- Nav header -->
+  <text x="400" y="150" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Bulk Generator</text>
+  <text x="400" y="170" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0" text-anchor="middle">Step 3 of 3  Review &amp; select</text>
+
+  <!-- Step indicator  step 3 active -->
+  <rect x="200" y="184" width="120" height="4" rx="2" fill="#6334D0"/>
+  <rect x="332" y="184" width="68" height="4" rx="2" fill="#6334D0"/>
+  <rect x="408" y="184" width="68" height="4" rx="2" fill="url(#grad-br)"/>
+  <rect x="484" y="184" width="68" height="4" rx="2" fill="#2D1F55"/>
+
+  <!-- Sort/filter row -->
+  <text x="210" y="218" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#A78BCA">5 available ∑ sorted by price</text>
+  <text x="590" y="218" font-family="system-ui, sans-serif" font-size="12" fill="#DA62F7" text-anchor="end">ï Sort</text>
+
+  <!-- Domain rows -->
+  <!-- Selected: vitalik.eth -->
+  <rect x="200" y="228" width="400" height="64" rx="10" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <rect x="216" y="244" width="24" height="24" rx="6" fill="url(#grad-br)"/>
+  <text x="228" y="261" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle"></text>
+  <text x="260" y="254" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7">vitalik.eth</text>
+  <text x="260" y="274" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA">6 chars ∑ Available</text>
+  <text x="580" y="262" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="end">0.004 ETH</text>
+
+  <!-- Selected: nfts.eth -->
+  <rect x="200" y="304" width="400" height="64" rx="10" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <rect x="216" y="320" width="24" height="24" rx="6" fill="url(#grad-br)"/>
+  <text x="228" y="337" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" text-anchor="middle"></text>
+  <text x="260" y="330" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#DA62F7">nfts.eth</text>
+  <text x="260" y="350" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA">4 chars ∑ Available</text>
+  <text x="580" y="338" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="end">0.008 ETH</text>
+
+  <!-- Not selected: defi.eth -->
+  <rect x="200" y="380" width="400" height="64" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <rect x="216" y="396" width="24" height="24" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1.5"/>
+  <text x="260" y="406" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#FFFFFF">defi.eth</text>
+  <text x="260" y="426" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA">4 chars ∑ Available</text>
+  <text x="580" y="414" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA" text-anchor="end">0.012 ETH</text>
+
+  <!-- Not selected: meta.eth -->
+  <rect x="200" y="456" width="400" height="64" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <rect x="216" y="472" width="24" height="24" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1.5"/>
+  <text x="260" y="482" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#FFFFFF">meta.eth</text>
+  <text x="260" y="502" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA">4 chars ∑ Available</text>
+  <text x="580" y="490" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA" text-anchor="end">0.018 ETH</text>
+
+  <!-- Not selected: dao.eth -->
+  <rect x="200" y="532" width="400" height="64" rx="10" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <rect x="216" y="548" width="24" height="24" rx="6" fill="#211840" stroke="#2D1F55" stroke-width="1.5"/>
+  <text x="260" y="558" font-family="system-ui, monospace" font-size="14" font-weight="700" fill="#FFFFFF">dao.eth</text>
+  <text x="260" y="578" font-family="system-ui, sans-serif" font-size="11" fill="#A78BCA">3 chars ∑ Available</text>
+  <text x="580" y="566" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA" text-anchor="end">0.320 ETH</text>
+
+  <!-- Taken: web3.eth -->
+  <rect x="200" y="608" width="400" height="56" rx="10" fill="#161028" stroke="#2D1F55" stroke-width="1" opacity="0.7"/>
+  <text x="260" y="630" font-family="system-ui, monospace" font-size="14" fill="#4A3872">web3.eth</text>
+  <text x="260" y="650" font-family="system-ui, sans-serif" font-size="11" fill="#4A3872">Taken  not available</text>
+  <rect x="530" y="620" width="60" height="22" rx="11" fill="#FF6B6B" fill-opacity="0.1" stroke="#FF6B6B" stroke-width="1"/>
+  <text x="560" y="635" font-family="system-ui, sans-serif" font-size="10" fill="#FF6B6B" text-anchor="middle">Taken</text>
+
+  <!-- Separator -->
+  <line x1="200" y1="684" x2="600" y2="684" stroke="#2D1F55" stroke-width="1"/>
+
+  <!-- Order summary -->
+  <text x="210" y="710" font-family="system-ui, sans-serif" font-size="12" fill="#A78BCA">2 domains selected</text>
+  <text x="210" y="732" font-family="system-ui, sans-serif" font-size="12" fill="#6B4FA0">vitalik.eth + nfts.eth</text>
+  <text x="590" y="720" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="end">0.012 ETH</text>
+  <text x="590" y="738" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0" text-anchor="end">+ gas fee</text>
+
+  <!-- CTA -->
+  <rect x="200" y="756" width="400" height="52" rx="26" fill="url(#grad-br)"/>
+  <text x="400" y="787" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Register 2 domains í</text>
+
+  <!-- Back link -->
+  <text x="400" y="828" font-family="system-ui, sans-serif" font-size="12" fill="#6B4FA0" text-anchor="middle">ê Back to edit list</text>
+
+  <!-- Bottom safe area -->
+  <rect x="330" y="886" width="140" height="4" rx="2" fill="#2D1F55"/>
+
+  <!-- Label -->
+  <rect x="80" y="948" width="4" height="32" rx="2" fill="url(#grad-br)"/>
+  <text x="94" y="963" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Bulk Generator  Step 3</text>
+  <text x="94" y="977" font-family="system-ui, sans-serif" font-size="10" fill="#6B4FA0">Filter, compare, select, and confirm up to 20 domains</text>
+</svg>

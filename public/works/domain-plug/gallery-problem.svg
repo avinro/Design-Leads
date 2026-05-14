@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg-p" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0A1A"/>
+      <stop offset="100%" stop-color="#110D24"/>
+    </linearGradient>
+    <linearGradient id="grad-p" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6334D0"/>
+      <stop offset="100%" stop-color="#DA62F7"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg-p)"/>
+  <line x1="800" y1="0" x2="800" y2="900" stroke="#1E1433" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="800" y="80" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#6B4FA0" text-anchor="middle" letter-spacing="3">DESIGN CHALLENGE</text>
+  <text x="800" y="118" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#FFFFFF" text-anchor="middle">One domain at a time vs. bulk registration</text>
+
+  <!-- LEFT: Old flow label -->
+  <text x="330" y="175" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#FF6B6B" text-anchor="middle" letter-spacing="2">BEFORE</text>
+  <text x="330" y="198" font-family="system-ui, sans-serif" font-size="12" fill="#4A3872" text-anchor="middle">Existing ENS experience</text>
+
+  <!-- Old flow steps -->
+  <rect x="150" y="220" width="360" height="52" rx="8" fill="#1A1230" stroke="#2D1F55" stroke-width="1"/>
+  <circle cx="186" cy="246" r="14" fill="#211840" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="186" y="251" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#FF6B6B" text-anchor="middle">1</text>
+  <text x="220" y="244" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Search one domain</text>
+  <text x="220" y="260" font-family="system-ui, sans-serif" font-size="11" fill="#4A3872">Enter name manually</text>
+
+  <line x1="330" y1="272" x2="330" y2="296" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <rect x="150" y="296" width="360" height="52" rx="8" fill="#1A1230" stroke="#2D1F55" stroke-width="1"/>
+  <circle cx="186" cy="322" r="14" fill="#211840" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="186" y="327" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#FF6B6B" text-anchor="middle">2</text>
+  <text x="220" y="320" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Check availability</text>
+  <text x="220" y="336" font-family="system-ui, sans-serif" font-size="11" fill="#4A3872">One result at a time</text>
+
+  <line x1="330" y1="348" x2="330" y2="372" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <rect x="150" y="372" width="360" height="52" rx="8" fill="#1A1230" stroke="#2D1F55" stroke-width="1"/>
+  <circle cx="186" cy="398" r="14" fill="#211840" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="186" y="403" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#FF6B6B" text-anchor="middle">3</text>
+  <text x="220" y="396" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Register domain</text>
+  <text x="220" y="412" font-family="system-ui, sans-serif" font-size="11" fill="#4A3872">Approve transaction</text>
+
+  <line x1="330" y1="424" x2="330" y2="448" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <rect x="150" y="448" width="360" height="52" rx="8" fill="#1A1230" stroke="#2D1F55" stroke-width="1"/>
+  <circle cx="186" cy="474" r="14" fill="#211840" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="186" y="479" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#FF6B6B" text-anchor="middle">4</text>
+  <text x="220" y="472" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Pay gas fee</text>
+  <text x="220" y="488" font-family="system-ui, sans-serif" font-size="11" fill="#4A3872">Per domain</text>
+
+  <line x1="330" y1="500" x2="330" y2="524" stroke="#FF6B6B" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <rect x="150" y="524" width="360" height="52" rx="8" fill="#1A1230" stroke="#2D1F55" stroke-width="1"/>
+  <circle cx="186" cy="550" r="14" fill="#211840" stroke="#FF6B6B" stroke-width="1.5"/>
+  <text x="186" y="555" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#FF6B6B" text-anchor="middle">5</text>
+  <text x="220" y="548" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Repeat for next domain</text>
+  <text x="220" y="564" font-family="system-ui, sans-serif" font-size="11" fill="#FF6B6B">© Start over from step 1</text>
+
+  <!-- Pain indicator -->
+  <rect x="150" y="610" width="360" height="40" rx="8" fill="#FF6B6B" fill-opacity="0.1" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="330" y="635" font-family="system-ui, sans-serif" font-size="12" fill="#FF6B6B" text-anchor="middle">5 steps × N domains = friction</text>
+
+  <!-- CENTER divider -->
+  <text x="800" y="420" font-family="system-ui, sans-serif" font-size="28" fill="#2D1F55" text-anchor="middle">’</text>
+
+  <!-- RIGHT: New flow label -->
+  <text x="1270" y="175" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="url(#grad-p)" text-anchor="middle" letter-spacing="2">AFTER</text>
+  <text x="1270" y="198" font-family="system-ui, sans-serif" font-size="12" fill="#4A3872" text-anchor="middle">DomainPlug experience</text>
+
+  <!-- New flow steps -->
+  <rect x="1090" y="220" width="360" height="52" rx="8" fill="#1A1230" stroke="#6334D0" stroke-width="1.5"/>
+  <circle cx="1126" cy="246" r="14" fill="#211840" stroke="url(#grad-p)" stroke-width="1.5"/>
+  <text x="1126" y="251" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#DA62F7" text-anchor="middle">1</text>
+  <text x="1160" y="244" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Input all domain names</text>
+  <text x="1160" y="260" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">Bulk text entry</text>
+
+  <line x1="1270" y1="272" x2="1270" y2="296" stroke="#6334D0" stroke-width="1.5"/>
+
+  <rect x="1090" y="296" width="360" height="52" rx="8" fill="#1A1230" stroke="#6334D0" stroke-width="1.5"/>
+  <circle cx="1126" cy="322" r="14" fill="#211840" stroke="url(#grad-p)" stroke-width="1.5"/>
+  <text x="1126" y="327" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#DA62F7" text-anchor="middle">2</text>
+  <text x="1160" y="320" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Check all availability</text>
+  <text x="1160" y="336" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">Filter taken names instantly</text>
+
+  <line x1="1270" y1="348" x2="1270" y2="372" stroke="#6334D0" stroke-width="1.5"/>
+
+  <rect x="1090" y="372" width="360" height="52" rx="8" fill="#1A1230" stroke="#6334D0" stroke-width="1.5"/>
+  <circle cx="1126" cy="398" r="14" fill="#211840" stroke="url(#grad-p)" stroke-width="1.5"/>
+  <text x="1126" y="403" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#DA62F7" text-anchor="middle">3</text>
+  <text x="1160" y="396" font-family="system-ui, sans-serif" font-size="13" fill="#FFFFFF">Review prices and select</text>
+  <text x="1160" y="412" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">Compare all at once</text>
+
+  <line x1="1270" y1="424" x2="1270" y2="448" stroke="#6334D0" stroke-width="1.5"/>
+
+  <rect x="1090" y="448" width="360" height="52" rx="8" fill="#211840" stroke="url(#grad-p)" stroke-width="2"/>
+  <circle cx="1126" cy="474" r="14" fill="url(#grad-p)"/>
+  <text x="1126" y="479" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+  <text x="1160" y="472" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">Register up to 20 domains</text>
+  <text x="1160" y="488" font-family="system-ui, sans-serif" font-size="11" fill="#DA62F7">One transaction · One gas fee</text>
+
+  <!-- Win indicator -->
+  <rect x="1090" y="610" width="360" height="40" rx="8" fill="#6334D0" fill-opacity="0.15" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="1270" y="635" font-family="system-ui, sans-serif" font-size="12" fill="#DA62F7" text-anchor="middle">4 steps · any number of domains</text>
+
+  <!-- Bottom label -->
+  <rect x="80" y="820" width="4" height="40" rx="2" fill="url(#grad-p)"/>
+  <text x="96" y="838" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">Problem analysis</text>
+  <text x="96" y="856" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">One-by-one registration vs. bulk transaction</text>
+</svg>

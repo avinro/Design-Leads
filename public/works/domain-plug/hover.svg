@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bg-h" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0A1A"/>
+      <stop offset="100%" stop-color="#110D24"/>
+    </linearGradient>
+    <linearGradient id="grad-h" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6334D0"/>
+      <stop offset="100%" stop-color="#DA62F7"/>
+    </linearGradient>
+    <radialGradient id="glow-h" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#6334D0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#6334D0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg-h)"/>
+  <ellipse cx="800" cy="450" rx="700" ry="500" fill="url(#glow-h)"/>
+
+  <!-- Grid lines -->
+  <line x1="0" y1="300" x2="1600" y2="300" stroke="#1E1433" stroke-width="1"/>
+  <line x1="0" y1="600" x2="1600" y2="600" stroke="#1E1433" stroke-width="1"/>
+  <line x1="533" y1="0" x2="533" y2="900" stroke="#1E1433" stroke-width="1"/>
+  <line x1="1067" y1="0" x2="1067" y2="900" stroke="#1E1433" stroke-width="1"/>
+
+  <!-- Bulk generator UI  bulk cart focus -->
+  <rect x="200" y="160" width="1200" height="580" rx="16" fill="#1A1230" stroke="#2D1F55" stroke-width="1.5"/>
+
+  <!-- Header -->
+  <text x="800" y="220" font-family="system-ui, sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">Bulk Generator</text>
+  <text x="800" y="246" font-family="system-ui, sans-serif" font-size="13" fill="#6B4FA0" text-anchor="middle">Select and register up to 20 .eth domains in one transaction</text>
+
+  <!-- Domain list rows -->
+  <rect x="240" y="270" width="1120" height="52" rx="8" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <rect x="260" y="284" width="20" height="20" rx="4" fill="#6334D0"/>
+  <text x="302" y="300" font-family="system-ui, monospace" font-size="14" font-weight="600" fill="#DA62F7">vitalik.eth</text>
+  <text x="800" y="300" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA" text-anchor="middle">Available</text>
+  <text x="1290" y="300" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="end">0.004 ETH</text>
+
+  <rect x="240" y="334" width="1120" height="52" rx="8" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <rect x="260" y="348" width="20" height="20" rx="4" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="302" y="364" font-family="system-ui, monospace" font-size="14" font-weight="600" fill="#FFFFFF">defi.eth</text>
+  <text x="800" y="364" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA" text-anchor="middle">Available</text>
+  <text x="1290" y="364" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="end">0.012 ETH</text>
+
+  <rect x="240" y="398" width="1120" height="52" rx="8" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <rect x="260" y="412" width="20" height="20" rx="4" fill="#6334D0"/>
+  <text x="302" y="428" font-family="system-ui, monospace" font-size="14" font-weight="600" fill="#DA62F7">nfts.eth</text>
+  <text x="800" y="428" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA" text-anchor="middle">Available</text>
+  <text x="1290" y="428" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF" text-anchor="end">0.008 ETH</text>
+
+  <rect x="240" y="462" width="1120" height="52" rx="8" fill="#211840" stroke="#2D1F55" stroke-width="1"/>
+  <rect x="260" y="476" width="20" height="20" rx="4" fill="#211840" stroke="#6334D0" stroke-width="1.5"/>
+  <text x="302" y="492" font-family="system-ui, monospace" font-size="14" font-weight="600" fill="#FFFFFF">web3.eth</text>
+  <text x="800" y="492" font-family="system-ui, sans-serif" font-size="13" fill="#4A3872" text-anchor="middle">Taken</text>
+  <text x="1290" y="492" font-family="system-ui, sans-serif" font-size="13" fill="#4A3872" text-anchor="end"></text>
+
+  <!-- Footer row -->
+  <rect x="240" y="540" width="1120" height="1" fill="#2D1F55"/>
+  <text x="302" y="582" font-family="system-ui, sans-serif" font-size="13" fill="#A78BCA">2 domains selected</text>
+  <text x="900" y="582" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle">Total: 0.012 ETH</text>
+  <rect x="1060" y="558" width="300" height="44" rx="22" fill="url(#grad-h)"/>
+  <text x="1210" y="585" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#FFFFFF" text-anchor="middle">Register 2 domains ’</text>
+
+  <!-- Label -->
+  <rect x="200" y="820" width="4" height="40" rx="2" fill="url(#grad-h)"/>
+  <text x="216" y="838" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#FFFFFF">DomainPlug · Bulk Generator</text>
+  <text x="216" y="856" font-family="system-ui, sans-serif" font-size="11" fill="#6B4FA0">Select and register up to 20 .eth domains in one transaction</text>
+</svg>
