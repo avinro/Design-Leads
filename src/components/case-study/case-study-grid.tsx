@@ -12,9 +12,7 @@ import type { CaseStudy } from "@/lib/content/case-studies";
  *     populate FlowingWorkMenu.
  *
  * Spacing:
- *   - gap-y-10  (40px) mobile — compact for small screens.
- *   - gap-y-20  (80px) md+   — breathing room on the designed breakpoint.
- *   - gap-x-6 / md:gap-x-8   — horizontal gutter between cards.
+ *   - gap-2 (8px) — uniform horizontal and vertical at all breakpoints.
  *
  * The Container (max-w-6xl + adaptive gutters) is applied here so the page
  * can simply render <CaseStudyGrid cases={cases} /> inside a <Section>.
@@ -27,10 +25,7 @@ interface CaseStudyGridProps {
 export function CaseStudyGrid({ cases }: CaseStudyGridProps) {
   return (
     <Container>
-      <ul
-        className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 md:gap-x-8 md:gap-y-20"
-        aria-label="Case studies"
-      >
+      <ul className="grid grid-cols-1 gap-2 md:grid-cols-2" aria-label="Case studies">
         {cases.map((cs) => (
           <li key={cs.frontmatter.slug}>
             <CaseStudyGridCard cs={cs} />

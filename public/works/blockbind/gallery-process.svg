@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="pr-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07070D"/>
+      <stop offset="100%" stop-color="#0C0C1A"/>
+    </linearGradient>
+    <linearGradient id="pr-brand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#pr-bg)"/>
+  <line x1="0" y1="300" x2="1600" y2="300" stroke="#111124" stroke-width="1"/>
+  <line x1="0" y1="600" x2="1600" y2="600" stroke="#111124" stroke-width="1"/>
+  <line x1="533" y1="0" x2="533" y2="900" stroke="#111124" stroke-width="1"/>
+  <line x1="1067" y1="0" x2="1067" y2="900" stroke="#111124" stroke-width="1"/>
+
+  <!-- Header -->
+  <text x="80" y="80" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#F8F8FF">Design Process</text>
+  <text x="80" y="102" font-family="system-ui, sans-serif" font-size="12" fill="#6B7280">Solo product designer · Full process from research to component library · 2024</text>
+
+  <!-- Timeline spine -->
+  <line x1="120" y1="180" x2="120" y2="720" stroke="#1E1E2E" stroke-width="2"/>
+
+  <!-- Process steps -->
+  <!-- 1. Research -->
+  <circle cx="120" cy="210" r="16" fill="#6366F1"/>
+  <text x="120" y="216" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#F8F8FF" text-anchor="middle">1</text>
+  <text x="156" y="206" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#F8F8FF">Market &amp; Competitive Research</text>
+  <text x="156" y="224" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Analysis of existing wallets · Crypto.com user expectation data</text>
+  <text x="156" y="240" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Pain points mapping · Feature prioritization and scope definition</text>
+  <!-- Tags -->
+  <rect x="156" y="252" width="80" height="20" rx="10" fill="#1A1A2E"/>
+  <text x="196" y="266" font-family="system-ui, sans-serif" font-size="9" fill="#818CF8" text-anchor="middle">Research</text>
+  <rect x="248" y="252" width="92" height="20" rx="10" fill="#1A1A2E"/>
+  <text x="294" y="266" font-family="system-ui, sans-serif" font-size="9" fill="#818CF8" text-anchor="middle">Competitive</text>
+
+  <!-- Connector -->
+  <line x1="120" y1="226" x2="120" y2="320" stroke="#1E1E2E" stroke-width="2" stroke-dasharray="4 3"/>
+
+  <!-- 2. Information Architecture -->
+  <circle cx="120" cy="340" r="16" fill="#6366F1"/>
+  <text x="120" y="346" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#F8F8FF" text-anchor="middle">2</text>
+  <text x="156" y="336" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#F8F8FF">Information Architecture &amp; User Flows</text>
+  <text x="156" y="354" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Navigation structure · 7 main sections · 30+ screens planned</text>
+  <text x="156" y="370" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Transaction flow diagrams · Sitemap and screen inventory</text>
+  <rect x="156" y="382" width="68" height="20" rx="10" fill="#1A1A2E"/>
+  <text x="190" y="396" font-family="system-ui, sans-serif" font-size="9" fill="#818CF8" text-anchor="middle">IA</text>
+  <rect x="236" y="382" width="60" height="20" rx="10" fill="#1A1A2E"/>
+  <text x="266" y="396" font-family="system-ui, sans-serif" font-size="9" fill="#818CF8" text-anchor="middle">Flows</text>
+
+  <!-- Connector -->
+  <line x1="120" y1="356" x2="120" y2="450" stroke="#1E1E2E" stroke-width="2" stroke-dasharray="4 3"/>
+
+  <!-- 3. Visual System -->
+  <circle cx="120" cy="468" r="16" fill="#6366F1"/>
+  <text x="120" y="474" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#F8F8FF" text-anchor="middle">3</text>
+  <text x="156" y="464" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#F8F8FF">Visual System Definition</text>
+  <text x="156" y="482" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Dark neutral palette · Functional color accents · 4px spacing grid</text>
+  <text x="156" y="498" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Kanit + Roboto pairing · Token color system (BTC, ETH, SOL)</text>
+  <rect x="156" y="510" width="80" height="20" rx="10" fill="#1A1A2E"/>
+  <text x="196" y="524" font-family="system-ui, sans-serif" font-size="9" fill="#818CF8" text-anchor="middle">Tokens</text>
+  <rect x="248" y="510" width="72" height="20" rx="10" fill="#1A1A2E"/>
+  <text x="284" y="524" font-family="system-ui, sans-serif" font-size="9" fill="#818CF8" text-anchor="middle">Visual</text>
+
+  <!-- Connector -->
+  <line x1="120" y1="484" x2="120" y2="578" stroke="#1E1E2E" stroke-width="2" stroke-dasharray="4 3"/>
+
+  <!-- 4. Component Library -->
+  <circle cx="120" cy="596" r="16" fill="#6366F1"/>
+  <text x="120" y="602" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#F8F8FF" text-anchor="middle">4</text>
+  <text x="156" y="592" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#F8F8FF">Component Library</text>
+  <text x="156" y="610" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Buttons · Cards · Inputs · Bottom sheets · Modals · Toasts</text>
+  <text x="156" y="626" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Swipe-to-confirm · NFT cards · Settings rows · Interactive states</text>
+  <rect x="156" y="638" width="90" height="20" rx="10" fill="#1A1A2E"/>
+  <text x="201" y="652" font-family="system-ui, sans-serif" font-size="9" fill="#818CF8" text-anchor="middle">Components</text>
+  <rect x="258" y="638" width="56" height="20" rx="10" fill="#1A1A2E"/>
+  <text x="286" y="652" font-family="system-ui, sans-serif" font-size="9" fill="#818CF8" text-anchor="middle">States</text>
+
+  <!-- Connector -->
+  <line x1="120" y1="612" x2="120" y2="700" stroke="#1E1E2E" stroke-width="2" stroke-dasharray="4 3"/>
+
+  <!-- 5. UI Design -->
+  <circle cx="120" cy="718" r="16" fill="#10B981"/>
+  <text x="120" y="724" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#F8F8FF" text-anchor="middle">5</text>
+  <text x="156" y="714" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#F8F8FF">High-Fidelity UI Design</text>
+  <text x="156" y="732" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">30+ screens across all sections · Full prototype in Figma</text>
+  <text x="156" y="748" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Complete design exploration · Ready for handoff</text>
+  <rect x="156" y="760" width="48" height="20" rx="10" fill="#0A1F12" stroke="#10B981" stroke-width="1"/>
+  <text x="180" y="774" font-family="system-ui, sans-serif" font-size="9" fill="#10B981" text-anchor="middle">Done</text>
+  <rect x="216" y="760" width="68" height="20" rx="10" fill="#0A1F12" stroke="#10B981" stroke-width="1"/>
+  <text x="250" y="774" font-family="system-ui, sans-serif" font-size="9" fill="#10B981" text-anchor="middle">30+ screens</text>
+
+  <!-- Right panel: key deliverables -->
+  <text x="860" y="130" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#818CF8">Key deliverables</text>
+  <line x1="860" y1="142" x2="1500" y2="142" stroke="#1E1E2E" stroke-width="1"/>
+
+  <!-- Deliverables list -->
+  <text x="876" y="178" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="178" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Market &amp; competitive analysis report</text>
+  <text x="876" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="210" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Feature prioritization and scope document</text>
+  <text x="876" y="242" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="242" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Full UX sitemap and navigation structure</text>
+  <text x="876" y="274" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="274" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Transaction flow diagrams (swap, send, buy)</text>
+  <text x="876" y="306" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="306" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Visual design system (color, type, spacing)</text>
+  <text x="876" y="338" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="338" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Full component library with all states</text>
+  <text x="876" y="370" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="370" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">30+ high-fidelity screens in Figma</text>
+  <text x="876" y="402" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="402" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Interactive prototype for key flows</text>
+  <text x="876" y="434" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="434" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Swipe-to-confirm custom interaction pattern</text>
+  <text x="876" y="466" font-family="system-ui, sans-serif" font-size="12" fill="#10B981"></text>
+  <text x="900" y="466" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Onboarding sequence (5 screens)</text>
+
+  <!-- Duration badge -->
+  <rect x="860" y="530" width="280" height="80" rx="14" fill="#131320" stroke="#6366F1" stroke-width="1.5"/>
+  <text x="874" y="558" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#818CF8">Solo project</text>
+  <text x="874" y="580" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Full process · Research</text>
+  <text x="874" y="598" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">through final UI · 2024</text>
+
+  <!-- Label -->
+  <rect x="80" y="820" width="5" height="44" rx="2.5" fill="url(#pr-brand)"/>
+  <text x="98" y="844" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF">BlockBind · Design Process</text>
+  <text x="98" y="862" font-family="system-ui, sans-serif" font-size="11" fill="#4B5563">Research ’ Information Architecture ’ Visual System ’ Component Library ’ High-Fidelity UI</text>
+</svg>

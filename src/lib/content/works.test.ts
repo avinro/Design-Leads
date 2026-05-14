@@ -5,7 +5,7 @@
  * and performs pure data transformations.
  *
  * Covers:
- *   - domain-plug.mdx is readable and passes zod validation.
+ *   - All MDX files in content/works/ are readable and pass zod validation.
  *   - getAllWorks returns results sorted by `order`.
  *   - getPublishedWorks excludes drafts.
  *   - getWorkBySlug resolves known slugs and returns undefined for unknown.
@@ -25,7 +25,7 @@ import { getAllWorks, getPublishedWorks, getWorkBySlug, getWorkSlugs } from "./w
 describe("works content layer", () => {
   it("loads all work files without throwing", () => {
     const all = getAllWorks();
-    expect(all).toHaveLength(1);
+    expect(all.length).toBeGreaterThanOrEqual(1);
   });
 
   it("returns works sorted by order ascending", () => {

@@ -1,0 +1,183 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="bb-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07070D"/>
+      <stop offset="100%" stop-color="#0C0C1A"/>
+    </linearGradient>
+    <linearGradient id="bb-brand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <linearGradient id="bb-green" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="bb-orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <radialGradient id="bb-glow1" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bb-glow2" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" fill="url(#bb-bg)"/>
+  <ellipse cx="500" cy="400" rx="600" ry="450" fill="url(#bb-glow1)"/>
+  <ellipse cx="1300" cy="500" rx="400" ry="320" fill="url(#bb-glow2)"/>
+
+  <!-- Subtle grid -->
+  <line x1="0" y1="300" x2="1600" y2="300" stroke="#111124" stroke-width="1"/>
+  <line x1="0" y1="600" x2="1600" y2="600" stroke="#111124" stroke-width="1"/>
+  <line x1="533" y1="0" x2="533" y2="900" stroke="#111124" stroke-width="1"/>
+  <line x1="1067" y1="0" x2="1067" y2="900" stroke="#111124" stroke-width="1"/>
+
+  <!-- Left: Logotype area -->
+  <rect x="80" y="820" width="5" height="44" rx="2.5" fill="url(#bb-brand)"/>
+  <text x="98" y="844" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#F8F8FF" letter-spacing="0.5">BLOCKBIND</text>
+  <text x="98" y="862" font-family="system-ui, sans-serif" font-size="11" fill="#4B5563" letter-spacing="1.5">CRYPTO WALLET · 2024</text>
+
+  <!-- Left: Hero copy -->
+  <text x="80" y="130" font-family="system-ui, sans-serif" font-size="68" font-weight="700" fill="#F8F8FF" letter-spacing="-2">BlockBind</text>
+  <text x="80" y="185" font-family="system-ui, sans-serif" font-size="22" font-weight="400" fill="#6366F1" letter-spacing="0.5">Where Every Chain is Bind to You</text>
+  <text x="80" y="225" font-family="system-ui, sans-serif" font-size="15" fill="#6B7280">Mobile crypto wallet · iOS &amp; Android · 30+ screens</text>
+
+  <!-- Tag pills -->
+  <rect x="80" y="252" width="84" height="26" rx="13" fill="#1A1A2E" stroke="#2A2A44" stroke-width="1"/>
+  <text x="122" y="270" font-family="system-ui, sans-serif" font-size="11" fill="#818CF8" text-anchor="middle">Fintech</text>
+  <rect x="176" y="252" width="64" height="26" rx="13" fill="#1A1A2E" stroke="#2A2A44" stroke-width="1"/>
+  <text x="208" y="270" font-family="system-ui, sans-serif" font-size="11" fill="#818CF8" text-anchor="middle">Crypto</text>
+  <rect x="252" y="252" width="96" height="26" rx="13" fill="#1A1A2E" stroke="#2A2A44" stroke-width="1"/>
+  <text x="300" y="270" font-family="system-ui, sans-serif" font-size="11" fill="#818CF8" text-anchor="middle">Mobile UI</text>
+
+  <!-- Phone frame  main (home screen) -->
+  <rect x="620" y="60" width="280" height="560" rx="36" fill="#0F0F1A" stroke="#1E1E2E" stroke-width="2"/>
+  <rect x="630" y="76" width="260" height="528" rx="26" fill="#0A0A12"/>
+  <!-- Notch -->
+  <rect x="718" y="84" width="84" height="20" rx="10" fill="#0F0F1A"/>
+  <!-- Status bar -->
+  <text x="648" y="100" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">9:41</text>
+  <text x="870" y="100" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280" text-anchor="end">100%</text>
+
+  <!-- Home screen content -->
+  <!-- Header -->
+  <text x="760" y="135" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF" text-anchor="middle">My Wallet</text>
+
+  <!-- Balance card -->
+  <rect x="646" y="150" width="228" height="110" rx="16" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="760" y="178" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">Total Balance</text>
+  <text x="760" y="208" font-family="system-ui, sans-serif" font-size="26" font-weight="700" fill="#F8F8FF" text-anchor="middle">$24,891.40</text>
+  <text x="760" y="228" font-family="system-ui, sans-serif" font-size="11" fill="#10B981" text-anchor="middle">² +$1,204.30  +5.08%</text>
+  <text x="760" y="244" font-family="system-ui, sans-serif" font-size="10" fill="#4B5563" text-anchor="middle">Today</text>
+
+  <!-- Action bar -->
+  <rect x="646" y="272" width="228" height="60" rx="12" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <!-- Send -->
+  <circle cx="693" cy="302" r="16" fill="#1E1E2E"/>
+  <text x="693" y="307" font-family="system-ui, sans-serif" font-size="14" fill="#6366F1" text-anchor="middle">‘</text>
+  <text x="693" y="322" font-family="system-ui, sans-serif" font-size="8" fill="#6B7280" text-anchor="middle">Send</text>
+  <!-- Receive -->
+  <circle cx="740" cy="302" r="16" fill="#1E1E2E"/>
+  <text x="740" y="307" font-family="system-ui, sans-serif" font-size="14" fill="#10B981" text-anchor="middle">“</text>
+  <text x="740" y="322" font-family="system-ui, sans-serif" font-size="8" fill="#6B7280" text-anchor="middle">Receive</text>
+  <!-- Buy -->
+  <circle cx="787" cy="302" r="16" fill="#1E1E2E"/>
+  <text x="787" y="307" font-family="system-ui, sans-serif" font-size="13" fill="#F59E0B" text-anchor="middle">$</text>
+  <text x="787" y="322" font-family="system-ui, sans-serif" font-size="8" fill="#6B7280" text-anchor="middle">Buy</text>
+  <!-- Swap -->
+  <circle cx="834" cy="302" r="16" fill="#1E1E2E"/>
+  <text x="834" y="307" font-family="system-ui, sans-serif" font-size="11" fill="#818CF8" text-anchor="middle">Ä</text>
+  <text x="834" y="322" font-family="system-ui, sans-serif" font-size="8" fill="#6B7280" text-anchor="middle">Swap</text>
+
+  <!-- Token cards -->
+  <!-- BTC -->
+  <rect x="646" y="345" width="228" height="52" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <circle cx="669" cy="371" r="14" fill="#2A1A00"/>
+  <text x="669" y="376" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#F7931A" text-anchor="middle">¿</text>
+  <text x="690" y="366" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF">Bitcoin</text>
+  <text x="690" y="382" font-family="system-ui, sans-serif" font-size="10" fill="#4B5563">0.3412 BTC</text>
+  <text x="866" y="366" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="end">$18,210.00</text>
+  <text x="866" y="382" font-family="system-ui, sans-serif" font-size="10" fill="#10B981" text-anchor="end">+4.2%</text>
+
+  <!-- ETH -->
+  <rect x="646" y="407" width="228" height="52" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <circle cx="669" cy="433" r="14" fill="#0D1426"/>
+  <text x="669" y="438" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#627EEA" text-anchor="middle">ž</text>
+  <text x="690" y="428" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF">Ethereum</text>
+  <text x="690" y="444" font-family="system-ui, sans-serif" font-size="10" fill="#4B5563">2.841 ETH</text>
+  <text x="866" y="428" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="end">$5,418.00</text>
+  <text x="866" y="444" font-family="system-ui, sans-serif" font-size="10" fill="#EF4444" text-anchor="end">-1.8%</text>
+
+  <!-- SOL -->
+  <rect x="646" y="469" width="228" height="52" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <circle cx="669" cy="495" r="14" fill="#1A0D26"/>
+  <text x="669" y="500" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#9945FF" text-anchor="middle">Î</text>
+  <text x="690" y="490" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF">Solana</text>
+  <text x="690" y="506" font-family="system-ui, sans-serif" font-size="10" fill="#4B5563">8.920 SOL</text>
+  <text x="866" y="490" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="end">$1,263.40</text>
+  <text x="866" y="506" font-family="system-ui, sans-serif" font-size="10" fill="#10B981" text-anchor="end">+12.1%</text>
+
+  <!-- Bottom nav -->
+  <rect x="630" y="540" width="260" height="56" rx="0" fill="#0D0D18"/>
+  <rect x="630" y="540" width="260" height="1" fill="#1E1E2E"/>
+  <text x="680" y="572" font-family="system-ui, sans-serif" font-size="20" fill="#6366F1" text-anchor="middle"></text>
+  <text x="740" y="572" font-family="system-ui, sans-serif" font-size="16" fill="#374151" text-anchor="middle">ë</text>
+  <text x="800" y="572" font-family="system-ui, sans-serif" font-size="16" fill="#374151" text-anchor="middle">•</text>
+  <text x="860" y="572" font-family="system-ui, sans-serif" font-size="16" fill="#374151" text-anchor="middle">™</text>
+
+  <!-- Phone frame  secondary (swap screen) -->
+  <rect x="980" y="140" width="240" height="480" rx="30" fill="#0F0F1A" stroke="#1E1E2E" stroke-width="1.5"/>
+  <rect x="990" y="154" width="220" height="452" rx="22" fill="#0A0A12"/>
+  <!-- Notch -->
+  <rect x="1073" y="162" width="74" height="18" rx="9" fill="#0F0F1A"/>
+  <!-- Status bar -->
+  <text x="1004" y="178" font-family="system-ui, sans-serif" font-size="8" fill="#6B7280">9:41</text>
+  <text x="1202" y="178" font-family="system-ui, sans-serif" font-size="8" fill="#6B7280" text-anchor="end">100%</text>
+  <!-- Swap screen header -->
+  <text x="1100" y="208" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="middle">Swap</text>
+  <!-- From token -->
+  <rect x="1002" y="222" width="196" height="70" rx="12" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="1016" y="244" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">From</text>
+  <circle cx="1030" cy="268" r="12" fill="#2A1A00"/>
+  <text x="1030" y="273" font-family="system-ui, sans-serif" font-size="9" font-weight="700" fill="#F7931A" text-anchor="middle">¿</text>
+  <text x="1048" y="264" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#F8F8FF">BTC</text>
+  <text x="1048" y="279" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563">0.3412 available</text>
+  <text x="1190" y="270" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#F8F8FF" text-anchor="end">0.1</text>
+
+  <!-- Swap arrow -->
+  <circle cx="1100" cy="308" r="16" fill="#1E1E2E"/>
+  <text x="1100" y="314" font-family="system-ui, sans-serif" font-size="14" fill="#6366F1" text-anchor="middle">Å</text>
+
+  <!-- To token -->
+  <rect x="1002" y="330" width="196" height="70" rx="12" fill="#131320" stroke="#6366F1" stroke-width="1.5"/>
+  <text x="1016" y="352" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">To</text>
+  <circle cx="1030" cy="376" r="12" fill="#0D1426"/>
+  <text x="1030" y="381" font-family="system-ui, sans-serif" font-size="9" font-weight="700" fill="#627EEA" text-anchor="middle">ž</text>
+  <text x="1048" y="372" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#F8F8FF">ETH</text>
+  <text x="1048" y="387" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563">H 1 BTC = 17.42 ETH</text>
+  <text x="1190" y="378" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#6366F1" text-anchor="end">1.742</text>
+
+  <!-- Fees row -->
+  <text x="1004" y="422" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Network fee</text>
+  <text x="1196" y="422" font-family="system-ui, sans-serif" font-size="10" fill="#F8F8FF" text-anchor="end">H $3.20</text>
+  <text x="1004" y="440" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Provider</text>
+  <text x="1196" y="440" font-family="system-ui, sans-serif" font-size="10" fill="#818CF8" text-anchor="end">1inch</text>
+
+  <!-- Swipe button -->
+  <rect x="1004" y="460" width="192" height="48" rx="24" fill="#1E1E2E" stroke="#2A2A44" stroke-width="1.5"/>
+  <circle cx="1036" cy="484" r="18" fill="url(#bb-brand)"/>
+  <text x="1036" y="490" font-family="system-ui, sans-serif" font-size="13" fill="#F8F8FF" text-anchor="middle">’</text>
+  <text x="1120" y="489" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">Swipe to confirm</text>
+
+  <!-- Phone frame  tertiary (onboarding screen)  back and smaller -->
+  <rect x="1280" y="200" width="200" height="400" rx="26" fill="#0F0F1A" stroke="#1E1E2E" stroke-width="1" opacity="0.6"/>
+  <rect x="1289" y="213" width="182" height="374" rx="18" fill="#0A0A12" opacity="0.6"/>
+  <text x="1380" y="310" font-family="system-ui, sans-serif" font-size="28" fill="#6366F1" text-anchor="middle" opacity="0.8">!</text>
+  <text x="1380" y="350" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#F8F8FF" text-anchor="middle" opacity="0.7">Multi-chain</text>
+  <text x="1380" y="370" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle" opacity="0.7">All chains, one wallet</text>
+</svg>

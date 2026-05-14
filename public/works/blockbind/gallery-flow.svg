@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="fl-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07070D"/>
+      <stop offset="100%" stop-color="#0C0C1A"/>
+    </linearGradient>
+    <linearGradient id="fl-brand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#fl-bg)"/>
+  <line x1="0" y1="300" x2="1600" y2="300" stroke="#111124" stroke-width="1"/>
+  <line x1="0" y1="600" x2="1600" y2="600" stroke="#111124" stroke-width="1"/>
+  <line x1="533" y1="0" x2="533" y2="900" stroke="#111124" stroke-width="1"/>
+  <line x1="1067" y1="0" x2="1067" y2="900" stroke="#111124" stroke-width="1"/>
+
+  <!-- Title -->
+  <text x="80" y="80" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF">UX Structure</text>
+  <text x="80" y="100" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Navigation architecture and main wallet sections</text>
+
+  <!-- Entry point: Onboarding -->
+  <rect x="660" y="130" width="280" height="56" rx="10" fill="#131320" stroke="#6366F1" stroke-width="2"/>
+  <text x="800" y="160" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#6366F1" text-anchor="middle">Onboarding</text>
+  <text x="800" y="178" font-family="system-ui, sans-serif" font-size="10" fill="#4B5563" text-anchor="middle">Create or import wallet</text>
+
+  <!-- Arrow down to Home -->
+  <line x1="800" y1="186" x2="800" y2="224" stroke="#2A2A44" stroke-width="1.5"/>
+  <polygon points="794,218 806,218 800,228" fill="#2A2A44"/>
+
+  <!-- Home screen (center hub) -->
+  <rect x="620" y="228" width="360" height="72" rx="12" fill="#1A1A2E" stroke="#6366F1" stroke-width="2.5"/>
+  <circle cx="648" cy="264" r="20" fill="#6366F1"/>
+  <text x="648" y="270" font-family="system-ui, sans-serif" font-size="14" fill="#F8F8FF" text-anchor="middle"></text>
+  <text x="800" y="256" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#F8F8FF" text-anchor="middle">Home / Wallet Dashboard</text>
+  <text x="800" y="278" font-family="system-ui, sans-serif" font-size="11" fill="#818CF8" text-anchor="middle">Balance · Performance · Holdings · Quick Actions</text>
+
+  <!-- From Home: 6 branches -->
+  <!-- Branch 1: Asset Detail (left) -->
+  <line x1="640" y1="300" x2="290" y2="380" stroke="#2A2A44" stroke-width="1.5"/>
+  <rect x="80" y="380" width="220" height="64" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="190" y="406" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="middle">Asset Detail</text>
+  <text x="190" y="422" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Chart · History · Actions</text>
+  <text x="190" y="436" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563" text-anchor="middle">Tap token ’</text>
+
+  <!-- Branch 2: Swap -->
+  <line x1="700" y1="300" x2="490" y2="380" stroke="#2A2A44" stroke-width="1.5"/>
+  <rect x="360" y="380" width="200" height="64" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="460" y="406" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="middle">Swap Tokens</text>
+  <text x="460" y="422" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Select · Review · Swipe</text>
+  <text x="460" y="436" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563" text-anchor="middle">3 steps</text>
+
+  <!-- Branch 3: Send -->
+  <line x1="780" y1="300" x2="710" y2="380" stroke="#2A2A44" stroke-width="1.5"/>
+  <rect x="580" y="380" width="200" height="64" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="680" y="406" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="middle">Send Crypto</text>
+  <text x="680" y="422" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Address · Amount · Confirm</text>
+  <text x="680" y="436" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563" text-anchor="middle">3 steps</text>
+
+  <!-- Branch 4: NFTs -->
+  <line x1="870" y1="300" x2="920" y2="380" stroke="#2A2A44" stroke-width="1.5"/>
+  <rect x="800" y="380" width="200" height="64" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="900" y="406" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="middle">Collectibles / NFTs</text>
+  <text x="900" y="422" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Browse · Manage · Detail</text>
+  <text x="900" y="436" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563" text-anchor="middle">Grid view</text>
+
+  <!-- Branch 5: Activity -->
+  <line x1="940" y1="300" x2="1120" y2="380" stroke="#2A2A44" stroke-width="1.5"/>
+  <rect x="1020" y="380" width="200" height="64" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="1120" y="406" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="middle">Activity</text>
+  <text x="1120" y="422" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">History · Filter · Search</text>
+  <text x="1120" y="436" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563" text-anchor="middle">Timeline</text>
+
+  <!-- Branch 6: Settings -->
+  <line x1="970" y1="300" x2="1330" y2="380" stroke="#2A2A44" stroke-width="1.5"/>
+  <rect x="1240" y="380" width="200" height="64" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="1340" y="406" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="middle">Settings</text>
+  <text x="1340" y="422" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Wallets · Security · Apps</text>
+  <text x="1340" y="436" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563" text-anchor="middle">Multi-wallet</text>
+
+  <!-- Sub-flow: Asset Detail ’ Send / Trade -->
+  <line x1="190" y1="444" x2="250" y2="530" stroke="#1E1E2E" stroke-width="1" stroke-dasharray="4 3"/>
+  <rect x="170" y="530" width="160" height="44" rx="8" fill="#0F0F1A" stroke="#1A1A2E" stroke-width="1"/>
+  <text x="250" y="550" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Trade / Send</text>
+  <text x="250" y="566" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563" text-anchor="middle">from asset screen</text>
+
+  <!-- Sub-flow: Swap ’ Confirmation -->
+  <line x1="460" y1="444" x2="460" y2="530" stroke="#1E1E2E" stroke-width="1" stroke-dasharray="4 3"/>
+  <rect x="370" y="530" width="180" height="44" rx="8" fill="#0F0F1A" stroke="#1A1A2E" stroke-width="1"/>
+  <text x="460" y="550" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Swipe Confirm</text>
+  <text x="460" y="566" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563" text-anchor="middle">’ Success state</text>
+
+  <!-- Sub-flow: Send ’ Confirmation -->
+  <line x1="680" y1="444" x2="680" y2="530" stroke="#1E1E2E" stroke-width="1" stroke-dasharray="4 3"/>
+  <rect x="590" y="530" width="180" height="44" rx="8" fill="#0F0F1A" stroke="#1A1A2E" stroke-width="1"/>
+  <text x="680" y="550" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="middle">Swipe Confirm</text>
+  <text x="680" y="566" font-family="system-ui, sans-serif" font-size="9" fill="#4B5563" text-anchor="middle">’ Success state</text>
+
+  <!-- Primary journey annotation -->
+  <rect x="80" y="660" width="800" height="60" rx="10" fill="#131320" stroke="#6366F1" stroke-width="1.5"/>
+  <text x="104" y="684" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#818CF8">Primary journey</text>
+  <text x="104" y="704" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280">Open app  ’  View balance  ’  Tap token  ’  Send crypto  ’  Swipe to confirm  ’  Success</text>
+
+  <!-- Label -->
+  <rect x="80" y="820" width="5" height="44" rx="2.5" fill="url(#fl-brand)"/>
+  <text x="98" y="844" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF">BlockBind · UX Structure</text>
+  <text x="98" y="862" font-family="system-ui, sans-serif" font-size="11" fill="#4B5563">Navigation architecture · 7 main sections · 30+ screens</text>
+</svg>

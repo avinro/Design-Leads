@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="sn-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07070D"/>
+      <stop offset="100%" stop-color="#0C0C1A"/>
+    </linearGradient>
+    <linearGradient id="sn-brand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#sn-bg)"/>
+  <line x1="0" y1="300" x2="1600" y2="300" stroke="#111124" stroke-width="1"/>
+  <line x1="0" y1="600" x2="1600" y2="600" stroke="#111124" stroke-width="1"/>
+
+  <!-- Step labels -->
+  <rect x="140" y="60" width="100" height="28" rx="14" fill="#1A1A2E"/>
+  <text x="190" y="79" font-family="system-ui, sans-serif" font-size="11" fill="#818CF8" text-anchor="middle">Step 1</text>
+  <rect x="660" y="60" width="100" height="28" rx="14" fill="#1A1A2E"/>
+  <text x="710" y="79" font-family="system-ui, sans-serif" font-size="11" fill="#818CF8" text-anchor="middle">Step 2</text>
+  <rect x="1180" y="60" width="100" height="28" rx="14" fill="#10B981"/>
+  <text x="1230" y="79" font-family="system-ui, sans-serif" font-size="11" fill="#F8F8FF" text-anchor="middle">Step 3</text>
+
+  <!-- PHONE 1: Enter address and amount -->
+  <rect x="60" y="100" width="280" height="560" rx="36" fill="#0F0F1A" stroke="#1E1E2E" stroke-width="2"/>
+  <rect x="70" y="116" width="260" height="528" rx="26" fill="#0A0A12"/>
+  <rect x="148" y="124" width="84" height="20" rx="10" fill="#0F0F1A"/>
+  <text x="200" y="162" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF" text-anchor="middle">Send Crypto</text>
+
+  <!-- Recipient address -->
+  <text x="86" y="190" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">To</text>
+  <rect x="82" y="200" width="236" height="50" rx="10" fill="#131320" stroke="#6366F1" stroke-width="1.5"/>
+  <text x="200" y="230" font-family="system-ui, monospace" font-size="11" fill="#818CF8" text-anchor="middle">0x71C7656EC7ab88b098dEf...</text>
+  <circle cx="305" cy="225" r="12" fill="#1A1A2E"/>
+  <text x="305" y="230" font-family="system-ui, sans-serif" font-size="10" fill="#6366F1" text-anchor="middle">•</text>
+
+  <!-- Amount input -->
+  <text x="86" y="270" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Amount</text>
+  <rect x="82" y="280" width="236" height="72" rx="14" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="200" y="322" font-family="system-ui, sans-serif" font-size="28" font-weight="700" fill="#F8F8FF" text-anchor="middle">0.25 ETH</text>
+  <text x="200" y="342" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">H $476.25 USD</text>
+
+  <!-- Network -->
+  <text x="86" y="376" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Network</text>
+  <rect x="82" y="386" width="236" height="44" rx="10" fill="#131320" stroke="#2A2A44" stroke-width="1"/>
+  <circle cx="104" cy="408" r="12" fill="#0D1426"/>
+  <text x="104" y="413" font-family="system-ui, sans-serif" font-size="9" font-weight="700" fill="#627EEA" text-anchor="middle">ž</text>
+  <text x="122" y="412" font-family="system-ui, sans-serif" font-size="12" fill="#F8F8FF">Ethereum Mainnet</text>
+  <text x="310" y="412" font-family="system-ui, sans-serif" font-size="14" fill="#6B7280" text-anchor="end">:</text>
+
+  <!-- Fee estimate -->
+  <rect x="82" y="444" width="236" height="40" rx="10" fill="#0F0F1A" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="96" y="469" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Estimated fee</text>
+  <text x="310" y="469" font-family="system-ui, sans-serif" font-size="10" fill="#F8F8FF" text-anchor="end">H $3.20</text>
+
+  <rect x="82" y="500" width="236" height="44" rx="22" fill="url(#sn-brand)"/>
+  <text x="200" y="528" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF" text-anchor="middle">Review Transaction</text>
+
+  <!-- ARROW 1’2 -->
+  <text x="390" y="400" font-family="system-ui, sans-serif" font-size="32" fill="#2A2A44" text-anchor="middle">’</text>
+
+  <!-- PHONE 2: Confirm details -->
+  <rect x="580" y="100" width="280" height="560" rx="36" fill="#0F0F1A" stroke="#6366F1" stroke-width="2"/>
+  <rect x="590" y="116" width="260" height="528" rx="26" fill="#0A0A12"/>
+  <rect x="668" y="124" width="84" height="20" rx="10" fill="#0F0F1A"/>
+  <text x="720" y="162" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF" text-anchor="middle">Confirm Details</text>
+
+  <!-- Confirmation card -->
+  <rect x="602" y="180" width="236" height="240" rx="16" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="618" y="206" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Sending</text>
+  <text x="830" y="206" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#F8F8FF" text-anchor="end">0.25 ETH</text>
+  <text x="830" y="222" font-family="system-ui, sans-serif" font-size="11" fill="#4B5563" text-anchor="middle">$476.25</text>
+  <line x1="618" y1="236" x2="830" y2="236" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="618" y="258" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">To address</text>
+  <text x="830" y="258" font-family="system-ui, monospace" font-size="9" fill="#818CF8" text-anchor="end">0x71C7...A26</text>
+  <line x1="618" y1="272" x2="830" y2="272" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="618" y="294" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Network</text>
+  <text x="830" y="294" font-family="system-ui, sans-serif" font-size="10" fill="#627EEA" text-anchor="end">Ethereum</text>
+  <line x1="618" y1="308" x2="830" y2="308" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="618" y="330" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Network fee</text>
+  <text x="830" y="330" font-family="system-ui, sans-serif" font-size="10" fill="#F8F8FF" text-anchor="end">$3.20</text>
+  <line x1="618" y1="344" x2="830" y2="344" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="618" y="366" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Total (max)</text>
+  <text x="830" y="366" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#F8F8FF" text-anchor="end">$479.45</text>
+  <line x1="618" y1="380" x2="830" y2="380" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="618" y="402" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Est. arrival</text>
+  <text x="830" y="402" font-family="system-ui, sans-serif" font-size="10" fill="#10B981" text-anchor="end">~15 seconds</text>
+
+  <!-- Warning note -->
+  <rect x="602" y="436" width="236" height="40" rx="8" fill="#1A1200" stroke="#F59E0B" stroke-width="1"/>
+  <text x="618" y="452" font-family="system-ui, sans-serif" font-size="9" fill="#F59E0B">  Double-check recipient address.</text>
+  <text x="618" y="467" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">Crypto transactions cannot be reversed.</text>
+
+  <!-- Swipe button -->
+  <rect x="602" y="492" width="236" height="56" rx="28" fill="#1E1E2E" stroke="#2A2A44" stroke-width="1.5"/>
+  <circle cx="636" cy="520" r="22" fill="url(#sn-brand)"/>
+  <text x="636" y="526" font-family="system-ui, sans-serif" font-size="14" fill="#F8F8FF" text-anchor="middle">’</text>
+  <text x="740" y="525" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">Swipe to send</text>
+
+  <!-- ARROW 2’3 -->
+  <text x="910" y="400" font-family="system-ui, sans-serif" font-size="32" fill="#2A2A44" text-anchor="middle">’</text>
+
+  <!-- PHONE 3: Success -->
+  <rect x="1100" y="100" width="280" height="560" rx="36" fill="#0F0F1A" stroke="#10B981" stroke-width="2"/>
+  <rect x="1110" y="116" width="260" height="528" rx="26" fill="#0A0A12"/>
+  <rect x="1188" y="124" width="84" height="20" rx="10" fill="#0F0F1A"/>
+
+  <circle cx="1240" cy="268" r="60" fill="#0A1F12" stroke="#10B981" stroke-width="2.5"/>
+  <text x="1240" y="282" font-family="system-ui, sans-serif" font-size="42" fill="#10B981" text-anchor="middle"></text>
+
+  <text x="1240" y="352" font-family="system-ui, sans-serif" font-size="18" font-weight="700" fill="#F8F8FF" text-anchor="middle">Sent!</text>
+  <text x="1240" y="374" font-family="system-ui, sans-serif" font-size="14" fill="#10B981" text-anchor="middle">0.25 ETH · $476.25</text>
+  <text x="1240" y="396" font-family="system-ui, sans-serif" font-size="11" fill="#6B7280" text-anchor="middle">Transaction submitted</text>
+
+  <rect x="1120" y="416" width="240" height="64" rx="12" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="1134" y="440" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">To</text>
+  <text x="1352" y="440" font-family="system-ui, monospace" font-size="10" fill="#818CF8" text-anchor="end">0x71C7...A26</text>
+  <text x="1134" y="462" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">Tx hash</text>
+  <text x="1352" y="462" font-family="system-ui, monospace" font-size="10" fill="#4B5563" text-anchor="end">0x8ac2...f104</text>
+
+  <text x="1240" y="510" font-family="system-ui, sans-serif" font-size="11" fill="#6366F1" text-anchor="middle">View on Etherscan ’</text>
+
+  <rect x="1120" y="526" width="240" height="44" rx="22" fill="url(#sn-brand)"/>
+  <text x="1240" y="554" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF" text-anchor="middle">Back to Home</text>
+
+  <!-- Label -->
+  <rect x="80" y="820" width="5" height="44" rx="2.5" fill="url(#sn-brand)"/>
+  <text x="98" y="844" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF">BlockBind · Send Crypto Flow</text>
+  <text x="98" y="862" font-family="system-ui, sans-serif" font-size="11" fill="#4B5563">Address + amount · Full detail review with irreversibility warning · Swipe-to-confirm ’ success state</text>
+</svg>

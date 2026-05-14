@@ -1,0 +1,156 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="hm-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#07070D"/>
+      <stop offset="100%" stop-color="#0C0C1A"/>
+    </linearGradient>
+    <linearGradient id="hm-brand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+    <radialGradient id="hm-glow" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#6366F1" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#hm-bg)"/>
+  <ellipse cx="800" cy="450" rx="700" ry="500" fill="url(#hm-glow)"/>
+  <line x1="0" y1="300" x2="1600" y2="300" stroke="#111124" stroke-width="1"/>
+  <line x1="0" y1="600" x2="1600" y2="600" stroke="#111124" stroke-width="1"/>
+
+  <!-- MAIN PHONE  large center -->
+  <rect x="560" y="40" width="320" height="640" rx="40" fill="#0F0F1A" stroke="#1E1E2E" stroke-width="2.5"/>
+  <rect x="572" y="58" width="296" height="608" rx="30" fill="#0A0A12"/>
+  <!-- Notch -->
+  <rect x="672" y="66" width="96" height="22" rx="11" fill="#0F0F1A"/>
+  <!-- Status bar -->
+  <text x="590" y="82" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280">9:41</text>
+  <text x="850" y="82" font-family="system-ui, sans-serif" font-size="10" fill="#6B7280" text-anchor="end">100%</text>
+
+  <!-- Header row -->
+  <circle cx="605" cy="118" r="18" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="605" y="123" font-family="system-ui, sans-serif" font-size="11" fill="#818CF8" text-anchor="middle">A</text>
+  <text x="720" y="122" font-family="system-ui, sans-serif" font-size="14" font-weight="600" fill="#F8F8FF" text-anchor="middle">My Wallet</text>
+  <circle cx="835" cy="118" r="18" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="835" y="123" font-family="system-ui, sans-serif" font-size="14" fill="#6B7280" text-anchor="middle">•</text>
+
+  <!-- Balance card -->
+  <rect x="584" y="146" width="272" height="130" rx="18" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <text x="720" y="174" font-family="system-ui, sans-serif" font-size="12" fill="#6B7280" text-anchor="middle">Total Balance</text>
+  <text x="720" y="208" font-family="system-ui, sans-serif" font-size="34" font-weight="700" fill="#F8F8FF" text-anchor="middle" letter-spacing="-1">$24,891</text>
+  <text x="720" y="230" font-family="system-ui, sans-serif" font-size="12" fill="#4B5563" text-anchor="middle">.40</text>
+  <!-- Performance pill -->
+  <rect x="667" y="244" width="106" height="24" rx="12" fill="#0A1F12"/>
+  <text x="720" y="261" font-family="system-ui, sans-serif" font-size="11" fill="#10B981" text-anchor="middle">² +5.08%  Today</text>
+
+  <!-- Annotation lines for home screen -->
+  <!-- Balance hierarchy annotation -->
+  <line x1="468" y1="208" x2="582" y2="208" stroke="#6366F1" stroke-width="1" stroke-dasharray="4 3"/>
+  <circle cx="466" cy="208" r="4" fill="#6366F1"/>
+  <text x="80" y="198" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#818CF8">Balance hierarchy</text>
+  <text x="80" y="213" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">Primary amount dominates</text>
+  <text x="80" y="226" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">Secondary info recedes</text>
+
+  <!-- Action bar annotation -->
+  <line x1="470" y1="340" x2="582" y2="340" stroke="#10B981" stroke-width="1" stroke-dasharray="4 3"/>
+  <circle cx="468" cy="340" r="4" fill="#10B981"/>
+  <text x="80" y="330" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#10B981">Quick-action bar</text>
+  <text x="80" y="345" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">Send · Receive · Buy · Swap</text>
+  <text x="80" y="358" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">4 most-used actions</text>
+
+  <!-- Token card annotation -->
+  <line x1="468" y1="460" x2="582" y2="460" stroke="#F59E0B" stroke-width="1" stroke-dasharray="4 3"/>
+  <circle cx="466" cy="460" r="4" fill="#F59E0B"/>
+  <text x="80" y="450" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#F59E0B">Token card</text>
+  <text x="80" y="465" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">Icon · Name · Balance</text>
+  <text x="80" y="478" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">Value · % change</text>
+
+  <!-- Nav annotation -->
+  <line x1="468" y1="620" x2="572" y2="620" stroke="#818CF8" stroke-width="1" stroke-dasharray="4 3"/>
+  <circle cx="466" cy="620" r="4" fill="#818CF8"/>
+  <text x="80" y="610" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#818CF8">Bottom navigation</text>
+  <text x="80" y="625" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">Home · Work · Activity · Settings</text>
+  <text x="80" y="638" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">44px min touch target</text>
+
+  <!-- Performance annotation (right) -->
+  <line x1="858" y1="258" x2="950" y2="258" stroke="#10B981" stroke-width="1" stroke-dasharray="4 3"/>
+  <circle cx="952" cy="258" r="4" fill="#10B981"/>
+  <text x="964" y="248" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#10B981">Color-coded performance</text>
+  <text x="964" y="263" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">Green = gain · Red = loss</text>
+
+  <!-- Action bar (phone) -->
+  <rect x="584" y="288" width="272" height="72" rx="14" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <!-- Send -->
+  <circle cx="635" cy="316" r="18" fill="#1A1A2E"/>
+  <text x="635" y="321" font-family="system-ui, sans-serif" font-size="15" fill="#6366F1" text-anchor="middle">‘</text>
+  <text x="635" y="342" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280" text-anchor="middle">Send</text>
+  <!-- Receive -->
+  <circle cx="688" cy="316" r="18" fill="#1A1A2E"/>
+  <text x="688" y="321" font-family="system-ui, sans-serif" font-size="15" fill="#10B981" text-anchor="middle">“</text>
+  <text x="688" y="342" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280" text-anchor="middle">Receive</text>
+  <!-- Buy -->
+  <circle cx="750" cy="316" r="18" fill="#1A1A2E"/>
+  <text x="750" y="322" font-family="system-ui, sans-serif" font-size="14" fill="#F59E0B" text-anchor="middle">$</text>
+  <text x="750" y="342" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280" text-anchor="middle">Buy</text>
+  <!-- Swap -->
+  <circle cx="805" cy="316" r="18" fill="#1A1A2E"/>
+  <text x="805" y="321" font-family="system-ui, sans-serif" font-size="13" fill="#818CF8" text-anchor="middle">Ä</text>
+  <text x="805" y="342" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280" text-anchor="middle">Swap</text>
+
+  <!-- Holdings section label -->
+  <text x="592" y="382" font-family="system-ui, sans-serif" font-size="11" font-weight="600" fill="#F8F8FF">Holdings</text>
+  <text x="848" y="382" font-family="system-ui, sans-serif" font-size="11" fill="#6366F1" text-anchor="end">See all</text>
+
+  <!-- Token rows -->
+  <!-- BTC -->
+  <rect x="584" y="392" width="272" height="56" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <circle cx="610" cy="420" r="16" fill="#2A1A00"/>
+  <text x="610" y="425" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#F7931A" text-anchor="middle">¿</text>
+  <text x="634" y="415" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF">Bitcoin</text>
+  <text x="634" y="431" font-family="system-ui, sans-serif" font-size="10" fill="#4B5563">0.3412 BTC</text>
+  <text x="848" y="415" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="end">$18,210</text>
+  <text x="848" y="431" font-family="system-ui, sans-serif" font-size="10" fill="#10B981" text-anchor="end">+4.2%</text>
+
+  <!-- ETH -->
+  <rect x="584" y="456" width="272" height="56" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <circle cx="610" cy="484" r="16" fill="#0D1426"/>
+  <text x="610" y="489" font-family="system-ui, sans-serif" font-size="12" font-weight="700" fill="#627EEA" text-anchor="middle">ž</text>
+  <text x="634" y="479" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF">Ethereum</text>
+  <text x="634" y="495" font-family="system-ui, sans-serif" font-size="10" fill="#4B5563">2.841 ETH</text>
+  <text x="848" y="479" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="end">$5,418</text>
+  <text x="848" y="495" font-family="system-ui, sans-serif" font-size="10" fill="#EF4444" text-anchor="end">-1.8%</text>
+
+  <!-- SOL -->
+  <rect x="584" y="520" width="272" height="56" rx="10" fill="#131320" stroke="#1E1E2E" stroke-width="1"/>
+  <circle cx="610" cy="548" r="16" fill="#1A0D26"/>
+  <text x="610" y="553" font-family="system-ui, sans-serif" font-size="11" font-weight="700" fill="#9945FF" text-anchor="middle">Î</text>
+  <text x="634" y="543" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF">Solana</text>
+  <text x="634" y="559" font-family="system-ui, sans-serif" font-size="10" fill="#4B5563">8.920 SOL</text>
+  <text x="848" y="543" font-family="system-ui, sans-serif" font-size="12" font-weight="600" fill="#F8F8FF" text-anchor="end">$1,263</text>
+  <text x="848" y="559" font-family="system-ui, sans-serif" font-size="10" fill="#10B981" text-anchor="end">+12.1%</text>
+
+  <!-- Bottom nav -->
+  <rect x="572" y="600" width="296" height="60" rx="0" fill="#0D0D18"/>
+  <rect x="572" y="600" width="296" height="1" fill="#1E1E2E"/>
+  <text x="628" y="634" font-family="system-ui, sans-serif" font-size="20" fill="#6366F1" text-anchor="middle"></text>
+  <text x="700" y="634" font-family="system-ui, sans-serif" font-size="16" fill="#374151" text-anchor="middle">ë</text>
+  <text x="775" y="634" font-family="system-ui, sans-serif" font-size="16" fill="#374151" text-anchor="middle">•</text>
+  <text x="845" y="634" font-family="system-ui, sans-serif" font-size="16" fill="#374151" text-anchor="middle">™</text>
+
+  <!-- Right side: key design notes -->
+  <text x="964" y="330" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#818CF8">Action bar pattern</text>
+  <text x="964" y="345" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">4 primary actions always</text>
+  <text x="964" y="358" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">visible from home</text>
+
+  <text x="964" y="538" font-family="system-ui, sans-serif" font-size="10" font-weight="600" fill="#9945FF">Right: Solana annotation</text>
+  <text x="964" y="553" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">Brand token colors used</text>
+  <text x="964" y="566" font-family="system-ui, sans-serif" font-size="9" fill="#6B7280">for each chain's identity</text>
+  <line x1="858" y1="548" x2="960" y2="548" stroke="#9945FF" stroke-width="1" stroke-dasharray="4 3"/>
+  <circle cx="960" cy="548" r="4" fill="#9945FF"/>
+
+  <!-- Label -->
+  <rect x="80" y="820" width="5" height="44" rx="2.5" fill="url(#hm-brand)"/>
+  <text x="98" y="844" font-family="system-ui, sans-serif" font-size="13" font-weight="600" fill="#F8F8FF">BlockBind · Home / Wallet Dashboard</text>
+  <text x="98" y="862" font-family="system-ui, sans-serif" font-size="11" fill="#4B5563">Balance hierarchy · Color-coded performance · Quick-action bar · Token holdings · Bottom navigation</text>
+</svg>

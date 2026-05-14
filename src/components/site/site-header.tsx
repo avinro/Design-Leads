@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 
 import { homeContent } from "@/lib/content/home";
 import { Button } from "@/components/ui/button";
+
 import { cn } from "@/lib/utils";
 
 /*
@@ -156,7 +157,8 @@ export function SiteHeader() {
       >
         {/* ── Top row — always visible ─────────────────────────────────── */}
         <div className="flex h-14 shrink-0 items-center justify-between">
-          {/* Wordmark */}
+          {/* Wordmark — Link falls through on same-route (/) and when
+              handleLogoClick calls e.preventDefault() to scroll-to-top */}
           <Link
             href="/"
             onClick={handleLogoClick}

@@ -19,8 +19,8 @@ import { cn } from "@/lib/utils";
  *                 of every internal route (about, contact, privacy, work/[slug]).
  *                 Excludes home (custom centering) and /work listing (snap-scroll).
  *   heroInternalCompact
- *                 same internal header rhythm, but with 30% less top padding
- *                 on mobile before returning to heroInternal spacing at md+.
+ *                 identical to heroInternal — kept as a separate variant so
+ *                 consumers can differentiate intent in markup without visual change.
  *   section       default page sections   (48 → 80 px padding-block)
  *   card          compact embedded blocks (24 px padding-block)
  *   none          no vertical padding (consumer controls spacing)
@@ -37,7 +37,7 @@ const sectionVariants = cva("", {
     spacing: {
       hero: "py-(--space-hero)",
       heroInternal: "pt-[7rem] pb-(--space-hero)",
-      heroInternalCompact: "pt-[7rem] pb-(--space-hero) md:pt-[10rem]",
+      heroInternalCompact: "pt-[7rem] pb-(--space-hero)",
       section: "py-(--space-section)",
       card: "py-(--space-card)",
       none: "",

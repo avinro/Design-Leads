@@ -33,6 +33,14 @@ export interface AboutImage {
 }
 
 export interface HomeContent {
+  intro: {
+    /**
+     * Phrases typed in sequence by IntroOpener (TextType). GAP narrative.
+     * Total reading time tuned to ~3.5s including the final hold before exit.
+     * Edit here — component reads from this array directly.
+     */
+    phrases: string[];
+  };
   hero: {
     badgeText: string;
     headline: string;
@@ -95,6 +103,9 @@ export interface HomeContent {
 }
 
 export const homeContent: HomeContent = {
+  intro: {
+    phrases: ["Most ideas die\nbetween vision and execution.", "I close that gap."],
+  },
   hero: {
     badgeText: "Open to Work",
     headline: "Product Design Engineer shipping vision into reality",

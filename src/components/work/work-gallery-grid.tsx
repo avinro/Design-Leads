@@ -25,10 +25,7 @@ interface WorkGalleryGridProps {
 export function WorkGalleryGrid({ works }: WorkGalleryGridProps) {
   return (
     <Container>
-      <ul
-        className="grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2 md:gap-x-8 md:gap-y-16"
-        aria-label="Visual work"
-      >
+      <ul className="grid grid-cols-1 gap-2 md:grid-cols-2" aria-label="Visual work">
         {works.map((work) => (
           <li key={work.frontmatter.slug}>
             <WorkGalleryCard work={work} />

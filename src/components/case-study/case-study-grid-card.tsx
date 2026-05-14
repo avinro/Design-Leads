@@ -103,13 +103,13 @@ export function CaseStudyGridCard({ cs, className }: CaseStudyGridCardProps) {
           alt={`${frontmatter.title} cover`}
           sizes={CARD_SIZES}
           priority={frontmatter.order === 1}
-          className="bg-muted w-full"
+          className="bg-muted w-full rounded-xl"
           style={cardStyle}
         >
           <CardOverlay title={frontmatter.title} badges={badges} />
         </PixelTransition>
       ) : (
-        <div className="bg-muted relative w-full overflow-hidden" style={cardStyle}>
+        <div className="bg-muted relative w-full overflow-hidden rounded-xl" style={cardStyle}>
           <Image
             src={frontmatter.coverImage}
             alt={`${frontmatter.title} cover`}
