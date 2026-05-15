@@ -18,14 +18,18 @@ import type { Testimonial } from "@/lib/content/testimonials";
  *   - Renders without crashing.
  *   - All testimonial quotes are present.
  *   - Author attribution (name + role · company) is rendered.
+ *   - LinkedIn href when linkedInUrl is set; no LinkedIn href when omitted.
+ *   - quoteLang renders on the quote paragraph when provided.
  *   - ARIA region/roledescription on the track.
  *   - Slide role/roledescription on semantic cards only (not the duplicate track).
  *   - No prev/next arrow buttons.
  *   - Duplicate track is present and marked aria-hidden.
  *   - Marquee wrapper carries overflow-hidden.
- *   - Kicker "Trusted by" is rendered.
+ *   - Kicker "Testimonials" is rendered.
  *   - Returns null for empty testimonials array.
  */
+
+const MOCK_LINKEDIN = "https://www.linkedin.com/in/test-person-mock/";
 
 const mockTestimonials: Testimonial[] = [
   {
@@ -35,6 +39,7 @@ const mockTestimonials: Testimonial[] = [
     company: "HelloDojo",
     role: "CEO",
     quote: "Working with Ary didn't just improve our product — it helped us define it.",
+    linkedInUrl: MOCK_LINKEDIN,
   },
   {
     id: "t2",
@@ -72,6 +77,44 @@ describe("TestimonialsCarousel", () => {
     expect(html).toContain("Head of Product · UMA");
   });
 
+  it("renders LinkedIn profile URL on the name link when linkedInUrl is set", () => {
+    const html = renderToStaticMarkup(<TestimonialsCarousel testimonials={mockTestimonials} />);
+    expect(html).toContain(`href="${MOCK_LINKEDIN}"`);
+  });
+
+  it("does not wrap the name in a LinkedIn href when linkedInUrl is omitted", () => {
+    const solo: Testimonial[] = [
+      {
+        id: "solo",
+        firstName: "Gonzo",
+        lastName: "Torres",
+        company: "UMA",
+        role: "CEO",
+        quote: "Standalone quote for the no-link regression case.",
+      },
+    ];
+    const html = renderToStaticMarkup(<TestimonialsCarousel testimonials={solo} />);
+    expect(html).toContain("Gonzo Torres");
+    expect(html).not.toContain('href="https://www.linkedin.com');
+  });
+
+  it("sets lang on the quote when quoteLang is provided", () => {
+    const withLang: Testimonial[] = [
+      {
+        id: "es",
+        firstName: "Ed",
+        lastName: "Test",
+        company: "Co",
+        role: "Role",
+        quote: "Cita en español.",
+        quoteLang: "es",
+        linkedInUrl: MOCK_LINKEDIN,
+      },
+    ];
+    const html = renderToStaticMarkup(<TestimonialsCarousel testimonials={withLang} />);
+    expect(html).toContain('lang="es"');
+  });
+
   it("renders carousel ARIA region and roledescription", () => {
     const html = renderToStaticMarkup(<TestimonialsCarousel testimonials={mockTestimonials} />);
     expect(html).toContain('aria-roledescription="carousel"');
@@ -101,8 +144,8 @@ describe("TestimonialsCarousel", () => {
     expect(html).toContain("overflow-hidden");
   });
 
-  it("renders the section kicker 'Trusted by'", () => {
+  it("renders the section kicker 'Testimonials'", () => {
     const html = renderToStaticMarkup(<TestimonialsCarousel testimonials={mockTestimonials} />);
-    expect(html).toContain("Trusted by");
+    expect(html).toContain("Testimonials");
   });
 });

@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getWorkBySlug, getWorkSlugs, getPublishedWorks } from "@/lib/content/works";
+import { getWorkBySlug, getWorkSlugs, getPublishedWorkNeighbors } from "@/lib/content/works";
 import { SITE_URL, SITE_NAME } from "@/lib/seo/site";
 import { mdxOptions } from "@/lib/mdx/options";
 import { workMdxComponents } from "@/components/work/work-mdx-components";
@@ -149,36 +149,99 @@ function WorkMetaStrip({ year, category, client, tools, externalLink, tags }: Wo
 }
 
 // ---------------------------------------------------------------------------
-// Next work CTA
+// Adjacent published work navigation (same order as /work listing)
 // ---------------------------------------------------------------------------
 
-interface NextWorkCTAProps {
-  nextTitle: string;
-  nextSlug: string;
+interface WorkProjectNavLinkProps {
+  variant: "previous" | "next";
+  title: string;
+  slug: string;
 }
 
-function NextWorkCTA({ nextTitle, nextSlug }: NextWorkCTAProps) {
+function WorkProjectNavLink({ variant, title, slug }: WorkProjectNavLinkProps) {
+  const isNext = variant === "next";
+  const kicker = isNext ? "Next project" : "Previous project";
+  const ariaPrefix = isNext ? "Next project" : "Previous project";
+  const href = `/work/${slug}`;
+  const position = isNext ? "next_work" : "prev_work";
+
+  const linkClassName =
+    "group focus-visible:ring-ring flex min-h-[44px] items-center gap-3 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none";
+
+  const titleClassName = isNext
+    ? "font-display text-2xl font-semibold tracking-tight transition-transform group-hover:translate-x-1 sm:text-3xl"
+    : "font-display text-2xl font-semibold tracking-tight transition-transform group-hover:-translate-x-1 sm:text-3xl";
+
+  const arrowClassName = isNext
+    ? "text-muted-foreground shrink-0 transition-transform group-hover:translate-x-2"
+    : "text-muted-foreground shrink-0 transition-transform group-hover:-translate-x-2";
+
   return (
-    <div className="border-border/40 mt-16 border-t pt-12">
-      <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">Next work</p>
+    <div>
+      <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">{kicker}</p>
       <Link
-        href={`/work/${nextSlug}`}
-        aria-label={`Next work: ${nextTitle}`}
-        data-cta-label={nextTitle}
-        data-cta-href={`/work/${nextSlug}`}
-        data-cta-position="next_work"
-        className="group focus-visible:ring-ring mt-4 flex min-h-[44px] items-center gap-3 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+        href={href}
+        aria-label={`${ariaPrefix}: ${title}`}
+        data-cta-label={title}
+        data-cta-href={href}
+        data-cta-position={position}
+        className={linkClassName}
       >
-        <span className="font-display text-2xl font-semibold tracking-tight transition-transform group-hover:translate-x-1 sm:text-3xl">
-          {nextTitle}
-        </span>
-        <span
-          aria-hidden="true"
-          className="text-muted-foreground shrink-0 transition-transform group-hover:translate-x-2"
-        >
-          →
-        </span>
+        {!isNext && (
+          <span aria-hidden="true" className={arrowClassName}>
+            ←
+          </span>
+        )}
+        <span className={titleClassName}>{title}</span>
+        {isNext && (
+          <span aria-hidden="true" className={arrowClassName}>
+            →
+          </span>
+        )}
       </Link>
+    </div>
+  );
+}
+
+interface WorkProjectAdjacentNavProps {
+  prevTitle: string | null;
+  prevSlug: string | null;
+  nextTitle: string | null;
+  nextSlug: string | null;
+}
+
+function WorkProjectAdjacentNav({
+  prevTitle,
+  prevSlug,
+  nextTitle,
+  nextSlug,
+}: WorkProjectAdjacentNavProps) {
+  if (!prevSlug && !nextSlug) return null;
+
+  const hasPrev = Boolean(prevSlug && prevTitle);
+  const hasNext = Boolean(nextSlug && nextTitle);
+  const both = hasPrev && hasNext;
+
+  const layoutClassName = both
+    ? "grid grid-cols-1 gap-8 sm:grid-cols-2"
+    : `flex flex-col gap-8 sm:flex-row ${hasNext ? "sm:justify-end" : "sm:justify-start"}`;
+
+  return (
+    <div className="border-border/40 border-t pt-6">
+      <div className={layoutClassName}>
+        {hasPrev && prevSlug && prevTitle ? (
+          <div className="min-w-0">
+            <WorkProjectNavLink variant="previous" title={prevTitle} slug={prevSlug} />
+          </div>
+        ) : null}
+        {hasNext && nextSlug && nextTitle ? (
+          <div className={`min-w-0 ${both ? "sm:text-right" : ""}`}>
+            <div className={both ? "flex sm:justify-end" : undefined}>
+              <WorkProjectNavLink variant="next" title={nextTitle} slug={nextSlug} />
+            </div>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -223,13 +286,7 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
 
   const { frontmatter, content } = work;
 
-  // Next published work (wraps around).
-  const published = getPublishedWorks();
-  const currentIdx = published.findIndex((w) => w.frontmatter.slug === slug);
-  const nextWork =
-    currentIdx !== -1 && published.length > 1
-      ? published[(currentIdx + 1) % published.length]
-      : null;
+  const { prev: prevWork, next: nextWork } = getPublishedWorkNeighbors(slug);
 
   const hasIntro = content.trim().length > 0;
 
@@ -303,13 +360,15 @@ export default async function WorkPage({ params }: { params: Promise<{ slug: str
         </Section>
       )}
 
-      {/* Next work CTA */}
-      {nextWork && (
-        <Section spacing="card">
+      {/* Previous / next project navigation */}
+      {(prevWork != null || nextWork != null) && (
+        <Section spacing="card" className="mb-16">
           <Container>
-            <NextWorkCTA
-              nextTitle={nextWork.frontmatter.title}
-              nextSlug={nextWork.frontmatter.slug}
+            <WorkProjectAdjacentNav
+              prevTitle={prevWork?.frontmatter.title ?? null}
+              prevSlug={prevWork?.frontmatter.slug ?? null}
+              nextTitle={nextWork?.frontmatter.title ?? null}
+              nextSlug={nextWork?.frontmatter.slug ?? null}
             />
           </Container>
         </Section>

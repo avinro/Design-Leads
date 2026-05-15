@@ -35,11 +35,12 @@ export interface AboutImage {
 export interface HomeContent {
   intro: {
     /**
-     * Phrases typed in sequence by IntroOpener (TextType). GAP narrative.
-     * Total reading time tuned to ~3.5s including the final hold before exit.
-     * Edit here — component reads from this array directly.
+     * Opening line for IntroOpener: mobile-first copy with explicit newline breaks (`\n`).
+     * IntroOpener picks mobile vs desktop at mount (Tailwind md breakpoint).
      */
-    phrases: string[];
+    phrase1: { mobile: string; desktop: string };
+    /** Second line typed after the first (delete-then-type sequence). */
+    phrase2: string;
   };
   hero: {
     badgeText: string;
@@ -97,14 +98,18 @@ export interface HomeContent {
   /**
    * Lifestyle / personal images shown as floating cursor-trail on desktop
    * and as a static parallax collage on mobile in the About section.
-   * Use placeholder paths until real assets are provided.
+   * Order matches scroll choreography slots in about-cursor-images.tsx.
    */
   aboutImages: AboutImage[];
 }
 
 export const homeContent: HomeContent = {
   intro: {
-    phrases: ["Most ideas die\nbetween vision and execution.", "I close that gap."],
+    phrase1: {
+      mobile: "Most ideas die\nbetween\nvision and execution.",
+      desktop: "Most ideas die\nbetween vision and execution.",
+    },
+    phrase2: "I close that gap.",
   },
   hero: {
     badgeText: "Open to Work",
@@ -126,7 +131,7 @@ export const homeContent: HomeContent = {
     body: "A selection of 0→1 products and multi-app systems. Each one started as an unclear idea — and ended up shipped.",
   },
   socialProof: {
-    sectionTitle: "Trusted by",
+    sectionTitle: "Testimonials",
     testimonial: {
       quote:
         "Working with Ary didn't just improve our product — it helped us define it. The result is something we could actually ship and scale.",
@@ -150,13 +155,14 @@ export const homeContent: HomeContent = {
     label: "Let's talk",
     href: "/contact",
   },
-  // Lifestyle images for the About cursor-trail section.
-  // Replace these placeholder paths once real assets are available in public/.
+  // About section floating images (see IMAGE_CONFIGS in about-cursor-images.tsx).
+  // Order maps to slot index 0–4: 0/2/4 = landscape frames (~1.38 / ~1.18), 1/3 = portrait (~0.73).
+  // Asset mix is 2× 4:3 landscape + 3× 3:4 portrait; slot 4 uses a portrait in a landscape frame (object-cover crops sides).
   aboutImages: [
-    { src: "/about/lifestyle/01.jpg", alt: "" },
-    { src: "/about/lifestyle/02.jpg", alt: "" },
-    { src: "/about/lifestyle/03.jpg", alt: "" },
-    { src: "/about/lifestyle/04.jpg", alt: "" },
-    { src: "/about/lifestyle/05.jpg", alt: "" },
+    { src: "/about/lifestyle/01.webp", alt: "" },
+    { src: "/about/lifestyle/02.webp", alt: "" },
+    { src: "/about/lifestyle/03.webp", alt: "" },
+    { src: "/about/lifestyle/04.webp", alt: "" },
+    { src: "/about/lifestyle/05.webp", alt: "" },
   ],
 };

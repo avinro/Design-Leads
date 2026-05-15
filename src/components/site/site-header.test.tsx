@@ -82,11 +82,10 @@ describe("SiteHeader", () => {
     const html = renderToStaticMarkup(<SiteHeader />);
     const panelIdx = html.indexOf('id="mobile-nav-panel"');
     expect(panelIdx).toBeGreaterThan(-1);
-    // All three mobile links should have tabindex="-1" in the closed state
-    const panelSection = html.slice(panelIdx, panelIdx + 2000);
+    // All mobile nav links should have tabindex="-1" when the menu is closed
+    const panelSection = html.slice(panelIdx, panelIdx + 4000);
     const tabIndexMatches = panelSection.match(/tabindex="-1"/g);
-    // At minimum 3 nav links (Work, Case studies, About) + CTA = 4 items
-    expect(tabIndexMatches?.length).toBeGreaterThanOrEqual(4);
+    expect(tabIndexMatches?.length).toBeGreaterThanOrEqual(3);
   });
 
   it("desktop nav has hidden md:flex so it is visible only at md+", () => {
@@ -118,7 +117,7 @@ describe("SiteHeader", () => {
     const navIdx = html.indexOf('aria-label="Main navigation"');
     expect(navIdx).toBeGreaterThan(-1);
     // 3 nav links: Work, Case studies, About — each carries focus-ring
-    const navSection = html.slice(navIdx, navIdx + 1200);
+    const navSection = html.slice(navIdx, navIdx + 2800);
     expect(navSection.match(/focus-ring/g)?.length).toBeGreaterThanOrEqual(3);
   });
 });

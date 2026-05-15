@@ -9,6 +9,7 @@
  *   - getAllWorks returns results sorted by `order`.
  *   - getPublishedWorks excludes drafts.
  *   - getWorkBySlug resolves known slugs and returns undefined for unknown.
+ *   - getPublishedWorkNeighbors returns linear prev/next aligned with listing order.
  *   - getWorkSlugs includes all slugs (including drafts).
  *   - readingTime is computed.
  *   - Frontmatter shape matches expected fields.
@@ -20,7 +21,13 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { getAllWorks, getPublishedWorks, getWorkBySlug, getWorkSlugs } from "./works";
+import {
+  getAllWorks,
+  getPublishedWorkNeighbors,
+  getPublishedWorks,
+  getWorkBySlug,
+  getWorkSlugs,
+} from "./works";
 
 describe("works content layer", () => {
   it("loads all work files without throwing", () => {
@@ -50,6 +57,42 @@ describe("works content layer", () => {
 
   it("getWorkBySlug returns undefined for unknown slug", () => {
     expect(getWorkBySlug("not-a-real-slug")).toBeUndefined();
+  });
+
+  it("getPublishedWorkNeighbors returns nulls for unknown slug", () => {
+    expect(getPublishedWorkNeighbors("not-a-real-slug")).toEqual({ prev: null, next: null });
+  });
+
+  it("getPublishedWorkNeighbors matches listing order without wrap", () => {
+    const published = getPublishedWorks();
+    expect(published.length).toBeGreaterThanOrEqual(1);
+
+    const firstSlug = published[0].frontmatter.slug;
+    const firstNeighbors = getPublishedWorkNeighbors(firstSlug);
+    expect(firstNeighbors.prev).toBeNull();
+    if (published.length === 1) {
+      expect(firstNeighbors.next).toBeNull();
+    } else {
+      expect(firstNeighbors.next?.frontmatter.slug).toBe(published[1].frontmatter.slug);
+    }
+
+    const lastSlug = published[published.length - 1].frontmatter.slug;
+    const lastNeighbors = getPublishedWorkNeighbors(lastSlug);
+    expect(lastNeighbors.next).toBeNull();
+    if (published.length === 1) {
+      expect(lastNeighbors.prev).toBeNull();
+    } else {
+      expect(lastNeighbors.prev?.frontmatter.slug).toBe(
+        published[published.length - 2].frontmatter.slug,
+      );
+    }
+
+    if (published.length >= 3) {
+      const mid = published[1];
+      const midNeighbors = getPublishedWorkNeighbors(mid.frontmatter.slug);
+      expect(midNeighbors.prev?.frontmatter.slug).toBe(published[0].frontmatter.slug);
+      expect(midNeighbors.next?.frontmatter.slug).toBe(published[2].frontmatter.slug);
+    }
   });
 
   it("getWorkSlugs includes all slugs", () => {

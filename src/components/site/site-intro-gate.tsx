@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import type { ReactNode } from "react";
 
 import { IntroOpener } from "@/components/site/intro-opener";
@@ -11,7 +11,9 @@ import { IntroOpener } from "@/components/site/intro-opener";
 // Hard render gate for the first-session intro experience.
 //
 // State machine:
-//   When mounting: reads sessionStorage synchronously in initializer.
+//   Initial render is always "ready" (matches SSR) to avoid hydration mismatch.
+//   useLayoutEffect reads sessionStorage and switches to "intro" before paint
+//   when the intro has not been seen this session.
 //   - "intro"     — first visit: renders IntroOpener only
 //   - "ready"     — returning visit OR after intro completes: mounts children
 //
@@ -33,11 +35,16 @@ interface SiteIntroGateProps {
 }
 
 export function SiteIntroGate({ children }: SiteIntroGateProps) {
-  const [state, setState] = useState<GateState>(() => {
-    if (typeof window === "undefined") return "ready";
+  const [state, setState] = useState<GateState>("ready");
+
+  useLayoutEffect(() => {
     const seen = sessionStorage.getItem(SESSION_KEY);
-    return seen ? "ready" : "intro";
-  });
+    if (!seen) {
+      // Sync before paint to avoid SSR markup mismatch while still honoring session.
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional gate flip
+      setState("intro");
+    }
+  }, []);
 
   const handleIntroComplete = () => {
     sessionStorage.setItem(SESSION_KEY, "1");

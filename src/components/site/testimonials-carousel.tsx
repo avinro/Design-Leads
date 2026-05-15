@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type React from "react";
 import Image from "next/image";
 
 import type { Testimonial } from "@/lib/content/testimonials";
@@ -70,7 +69,10 @@ function TestimonialCard({ testimonial, index, total, decorative }: TestimonialC
       <div className="border-border/40 flex h-full flex-col gap-6 rounded-xl border p-6 sm:p-8">
         {/* Quote */}
         <blockquote>
-          <p className="text-foreground text-base leading-relaxed text-balance sm:text-lg">
+          <p
+            className="text-foreground text-base leading-relaxed text-balance sm:text-lg"
+            lang={testimonial.quoteLang}
+          >
             &ldquo;{testimonial.quote}&rdquo;
           </p>
         </blockquote>
@@ -88,8 +90,20 @@ function TestimonialCard({ testimonial, index, total, decorative }: TestimonialC
               />
             </div>
           )}
-          <div className="flex flex-col gap-0.5">
-            <span className="text-foreground text-sm font-medium">{fullName}</span>
+          <div className="flex flex-col gap-[4px]">
+            {testimonial.linkedInUrl ? (
+              <a
+                href={testimonial.linkedInUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="focus-ring text-foreground w-fit max-w-full rounded-sm text-sm font-medium underline-offset-2 hover:underline"
+              >
+                {fullName}
+                <span className="sr-only"> (opens in new tab)</span>
+              </a>
+            ) : (
+              <span className="text-foreground text-sm font-medium">{fullName}</span>
+            )}
             <span className="text-muted-foreground font-mono text-xs tracking-wider uppercase">
               {testimonial.role} · {testimonial.company}
             </span>
@@ -161,8 +175,8 @@ export function TestimonialsCarousel({ testimonials: items }: TestimonialsCarous
   return (
     <Section>
       <Container>
-        <p className="text-muted-foreground font-mono text-xs tracking-[0.15em] uppercase">
-          Trusted by
+        <p className="text-muted-foreground w-full text-center font-mono text-xs tracking-[0.15em] uppercase">
+          Testimonials
         </p>
 
         {/*

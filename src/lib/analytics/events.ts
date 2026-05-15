@@ -18,7 +18,14 @@ import { getPosthog } from "./posthog";
 // Enum types
 // ---------------------------------------------------------------------------
 
-export type CtaPosition = "header" | "mobile_bar" | "hero_secondary" | "footer_link" | "next_case";
+export type CtaPosition =
+  | "header"
+  | "mobile_bar"
+  | "hero_secondary"
+  | "footer_link"
+  | "next_case"
+  | "next_work"
+  | "prev_work";
 
 export type WorkCardSource = "home_selected_work" | "work_listing";
 
@@ -41,8 +48,7 @@ export type AppEvent =
       name: "case_study_scroll";
       props: { slug: string; threshold: ScrollThreshold };
     }
-  | { name: "contact_form_start"; props: Record<string, never> }
-  | { name: "contact_form_submit"; props: Record<string, never> };
+  | { name: "calendly_modal_open"; props: { position: string } };
 
 // ---------------------------------------------------------------------------
 // Core track helper
@@ -89,12 +95,8 @@ export function trackCaseStudyScroll(props: { slug: string; threshold: ScrollThr
   track({ name: "case_study_scroll", props });
 }
 
-export function trackContactFormStart(): void {
-  track({ name: "contact_form_start", props: {} });
-}
-
-export function trackContactFormSubmit(): void {
-  track({ name: "contact_form_submit", props: {} });
+export function trackCalendlyModalOpen(position: string): void {
+  track({ name: "calendly_modal_open", props: { position } });
 }
 
 // ---------------------------------------------------------------------------

@@ -1,6 +1,5 @@
-import Link from "next/link";
-
 import { homeContent } from "@/lib/content/home";
+import { SiteTextLink } from "@/components/site/site-text-link";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 
@@ -31,15 +30,12 @@ export function AboutTeaser() {
           </p>
 
           {/* Mono link — meta/navigation register */}
-          <Link
-            href={aboutTeaser.linkHref}
-            className="focus-ring text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm font-mono text-sm underline-offset-4 transition-colors hover:underline"
-          >
+          <SiteTextLink href={aboutTeaser.linkHref} variant="inlineMono">
             {aboutTeaser.linkLabel}
             <span aria-hidden="true" className="transition-transform duration-150">
               →
             </span>
-          </Link>
+          </SiteTextLink>
         </div>
       </Container>
     </Section>

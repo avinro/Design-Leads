@@ -41,13 +41,16 @@ const WorkFrontmatterSchema = z.object({
     "Concept",
     "Visual system",
     "Mobile UI",
+    "Flow Improvement",
+    "UX Redesign",
     "Branding",
     "Microinteraction",
   ]),
   /** One-liner shown under the thumbnail — mandatory for visual discovery. */
   summary: z.string().min(1).max(180),
   coverImage: z.string().min(1),
-  hoverImage: z.string().min(1).optional(),
+  /** Payoff / result shot — revealed under the pixel grid on /work listing cards. */
+  resultImage: z.string().min(1).optional(),
   /** Cover aspect ratio — 4:5 portrait by default. */
   coverAspect: z.enum(["portrait", "square", "landscape"]).default("portrait"),
   /** Gallery images rendered from frontmatter, not MDX, to enforce visual-first. */
@@ -149,6 +152,26 @@ export function getPublishedWorks(): Work[] {
 /** Slug-keyed lookup. Returns `undefined` for unknown slugs. */
 export function getWorkBySlug(slug: string): Work | undefined {
   return getAll().find((w) => w.frontmatter.slug === slug);
+}
+
+export interface PublishedWorkNeighbors {
+  prev: Work | null;
+  next: Work | null;
+}
+
+/**
+ * Linear prev/next among published works only, in the same `order` as
+ * {@link getPublishedWorks} (matches `/work` listing). No wrap at ends.
+ * Unknown slug or draft-only slug (not in published list) → both null.
+ */
+export function getPublishedWorkNeighbors(slug: string): PublishedWorkNeighbors {
+  const published = getPublishedWorks();
+  const idx = published.findIndex((w) => w.frontmatter.slug === slug);
+  if (idx === -1) return { prev: null, next: null };
+  return {
+    prev: idx > 0 ? published[idx - 1] : null,
+    next: idx < published.length - 1 ? published[idx + 1] : null,
+  };
 }
 
 /**

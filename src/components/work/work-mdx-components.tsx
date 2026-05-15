@@ -9,17 +9,19 @@
  *   - No BeforeAfter / Bar
  *
  * What is allowed: prose typography including structured headings (h2–h4),
- * blockquotes, dividers, links, inline code, simple images, and the
- * <Figure> component for contextual screen placement within the narrative.
+ * blockquotes, dividers, links, inline code, simple images, the
+ * <Figure> component for contextual screen placement, and
+ * <WorkMetadataGrid> / <WorkMetadataCard> for overview metadata rows.
  * The frontmatter gallery is still available for works that prefer a
  * visual-only format with no inline images.
  */
 
 import Image from "next/image";
-import Link from "next/link";
+import { MdxInternalBodyLink } from "@/components/mdx/mdx-internal-body-link";
 import type { ComponentPropsWithoutRef } from "react";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "@/lib/utils";
+import { WorkMetadataCard, WorkMetadataGrid } from "@/components/work/work-metadata";
 
 function H2({ className, ...props }: ComponentPropsWithoutRef<"h2">) {
   return (
@@ -103,16 +105,9 @@ function A({ href = "", className, children, ...props }: ComponentPropsWithoutRe
   }
 
   return (
-    <Link
-      href={href}
-      className={cn(
-        "text-accent decoration-accent/40 hover:decoration-accent focus-visible:ring-ring rounded-sm underline underline-offset-4 transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
-        className,
-      )}
-      {...props}
-    >
+    <MdxInternalBodyLink href={href} className={className} {...props}>
       {children}
-    </Link>
+    </MdxInternalBodyLink>
   );
 }
 
@@ -248,4 +243,7 @@ export const workMdxComponents: MDXComponents = {
   img: Img,
   // JSX component — use as <Figure src="..." alt="..." aspect="landscape" /> in MDX
   Figure: InlineFigure,
+  // Project metadata grid — <WorkMetadataGrid><WorkMetadataCard kind="type">…</WorkMetadataCard></WorkMetadataGrid>
+  WorkMetadataGrid,
+  WorkMetadataCard,
 };

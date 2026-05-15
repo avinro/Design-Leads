@@ -1,7 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { homeContent } from "@/lib/content/home";
+import { SOCIAL_LINKS } from "@/lib/seo/site";
+import { CalendlyModal } from "@/components/site/calendly-modal";
+import { BehanceIcon } from "@/components/site/icons/behance-icon";
+import { GithubIcon } from "@/components/site/icons/github-icon";
+import { LinkedinIcon } from "@/components/site/icons/linkedin-icon";
+import { siteUnderlineBarClassName } from "@/components/site/site-link-underline";
+import { SiteTextLink } from "@/components/site/site-text-link";
+import { isNavSectionActive } from "@/lib/navigation/nav-active";
 
 /*
  * SiteFooter — curtain footer.
@@ -20,28 +31,22 @@ import { homeContent } from "@/lib/content/home";
  *   pointer-events-none on the root prevents the hidden footer from intercepting
  *   clicks while it is behind the content wrapper. pointer-events-auto is restored
  *   inside the interactive container.
- *
- * Typography:
- *   The closing CTA heading uses letter-spacing: 0.8em (confirmed by design spec).
- *   text-wrap: balance + max-w-3xl prevent extreme wrapping on small viewports.
- *   font-weight is reduced to medium to counteract the visual weight added by
- *   ultra-wide tracking at display sizes.
- *
- * CircularText removed per design spec (replaced by plain Avinro text link).
- *
- * pb-[var(--space-cta-bar)] md:pb-0 reserves space on mobile so the last
- * content item is not hidden behind the fixed MobileCtaBar.
  */
 
 const footerLinks = [
   { label: "Work", href: "/work" },
   { label: "Case studies", href: "/case-studies" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
   { label: "Privacy", href: "/privacy" },
 ] as const;
 
+const socialLinks = [
+  { label: "GitHub", href: SOCIAL_LINKS.github, Icon: GithubIcon },
+  { label: "LinkedIn", href: SOCIAL_LINKS.linkedin, Icon: LinkedinIcon },
+] as const;
+
 export function SiteFooter() {
+  const pathname = usePathname();
   const year = new Date().getFullYear();
   const { finalCta } = homeContent;
 
@@ -68,16 +73,24 @@ export function SiteFooter() {
             {finalCta.heading}
           </h3>
 
-          <Link
-            href={finalCta.linkHref}
-            data-cta-label={finalCta.linkLabel}
-            data-cta-href={finalCta.linkHref}
-            data-cta-position="footer_link"
-            className="focus-visible:ring-background focus-visible:ring-offset-foreground font-display inline-flex w-fit items-center gap-2 border-b-2 border-current pb-0.5 text-2xl font-semibold tracking-tight transition-opacity duration-150 hover:opacity-70 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:text-3xl"
-          >
-            {finalCta.linkLabel}
-            <span aria-hidden="true">→</span>
-          </Link>
+          <CalendlyModal ctaPosition="footer_link">
+            <button
+              type="button"
+              data-cta-label={finalCta.linkLabel}
+              data-cta-href={finalCta.linkHref}
+              data-cta-position="footer_link"
+              className="focus-ring-invert group focus-visible:ring-background focus-visible:ring-offset-foreground font-display hover:text-background/90 inline-flex w-fit cursor-pointer text-2xl font-semibold tracking-tight transition-colors duration-200 ease-out focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none motion-reduce:transition-none sm:text-3xl"
+            >
+              <span className="relative inline-flex items-center gap-2 pb-0.5">
+                {finalCta.linkLabel}
+                <span aria-hidden="true">→</span>
+                <span
+                  aria-hidden
+                  className={siteUnderlineBarClassName({ active: false, mode: "reveal" })}
+                />
+              </span>
+            </button>
+          </CalendlyModal>
         </section>
 
         <div className="flex flex-col gap-8">
@@ -90,19 +103,50 @@ export function SiteFooter() {
             <Image src="/logo.png" alt="" width={62} height={12} className="h-3 w-auto invert" />
           </Link>
 
-          {/* Nav + copyright row */}
+          {/* Nav + social + copyright row */}
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <nav aria-label="Footer navigation" className="flex gap-5">
-              {footerLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="focus-ring-invert text-background/70 hover:text-background rounded-sm font-mono text-xs tracking-wider uppercase transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {footerLinks.map((link) => {
+                const active = isNavSectionActive(pathname, link.href);
+                return (
+                  <SiteTextLink
+                    key={link.href}
+                    href={link.href}
+                    variant="footerNav"
+                    active={active}
+                  >
+                    {link.label}
+                  </SiteTextLink>
+                );
+              })}
             </nav>
+
+            {/* Social icons */}
+            <div className="flex items-center gap-4" aria-label="Social links">
+              {socialLinks.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  data-cta-position="footer_social"
+                  className="focus-ring-invert text-background/70 hover:text-background rounded-sm transition-colors"
+                >
+                  <Icon className="h-4 w-4" />
+                </a>
+              ))}
+              <a
+                href={SOCIAL_LINKS.behance}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Behance"
+                data-cta-position="footer_social"
+                className="focus-ring-invert text-background/70 hover:text-background rounded-sm transition-colors"
+              >
+                <BehanceIcon className="h-4 w-4" />
+              </a>
+            </div>
 
             <p className="text-background/70 font-mono text-xs">&copy; {year} Avinro</p>
           </div>

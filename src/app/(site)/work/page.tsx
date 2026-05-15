@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
+import { SiteTextLink } from "@/components/site/site-text-link";
 import { getPublishedWorks } from "@/lib/content/works";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
@@ -53,12 +53,9 @@ export default function WorkPage() {
             {/* Cross-link to /case-studies */}
             <p className="text-muted-foreground text-sm">
               Looking for detailed product case studies?{" "}
-              <Link
-                href="/case-studies"
-                className="text-foreground underline underline-offset-4 transition-opacity hover:opacity-70"
-              >
+              <SiteTextLink href="/case-studies" variant="inlineMono" className="text-foreground">
                 View case studies
-              </Link>
+              </SiteTextLink>
             </p>
           </div>
         </Container>

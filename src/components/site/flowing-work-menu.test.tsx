@@ -58,7 +58,7 @@ const mockItems: SelectedWorkItem[] = [
     kind: "work",
     slug: "domain-plug",
     title: "DomainPlug",
-    coverImage: "/works/domain-plug/cover.svg",
+    coverImage: "/works/domain-plug/cover.jpg",
     order: 4,
   },
 ];

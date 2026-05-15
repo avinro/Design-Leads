@@ -6,6 +6,9 @@
  *
  * For now, testimonials are seeded manually here. Remote/database loading
  * would require backend changes and is explicitly out of scope for this phase.
+ *
+ * linkedInUrl: optional external profile link; keep host linkedin.com if URLs
+ * ever move to a CMS (allowlist at integration time).
  */
 
 export interface Testimonial {
@@ -17,57 +20,81 @@ export interface Testimonial {
   quote: string;
   /** Optional path to an avatar image in public/ */
   avatar?: string;
+  /** Public LinkedIn profile URL — name is linked when set */
+  linkedInUrl?: string;
+  /** BCP 47 tag for quote language (e.g. es) for Language of Parts a11y */
+  quoteLang?: string;
 }
 
 export const testimonials: Testimonial[] = [
   {
     id: "t1",
-    firstName: "Sofia",
-    lastName: "Martínez",
-    company: "HelloDojo",
+    firstName: "Tony",
+    lastName: "MacFadden",
+    company: "helloDojo",
     role: "CEO",
+    linkedInUrl: "https://www.linkedin.com/in/tony-mcfadden-04475018/",
     quote:
-      "Working with Ary didn't just improve our product — it helped us define it. The result is something we could actually ship and scale.",
-    avatar: undefined,
+      "We had a big vision, but it needed structure. Ary helped us decide what to build first and kept four apps feeling like one product.",
   },
   {
     id: "t2",
-    firstName: "Marco",
+    firstName: "Gonzo",
     lastName: "Torres",
     company: "UMA",
-    role: "Head of Product",
+    role: "CEO",
     quote:
-      "Ary brings a rare combination of strategic thinking and hands-on execution. He turned our vague requirements into a product the whole team is proud of.",
-    avatar: undefined,
+      "The challenge was making receipt capture feel effortless. Ary simplified the flow, cut the scope, and made UMA's core product feel obvious.",
   },
   {
     id: "t3",
-    firstName: "Priya",
-    lastName: "Nair",
-    company: "Fintech Studio",
-    role: "Co-founder",
+    firstName: "Laura",
+    lastName: "Acosta",
+    company: "Alyssum Digital",
+    role: "Founder",
+    linkedInUrl: "https://www.linkedin.com/in/laura-acosta-sherman-ab0561207/",
     quote:
-      "We went from a cluttered roadmap to a focused MVP in three weeks. The clarity Ary brought to our design process was exactly what we needed.",
-    avatar: undefined,
+      "Across multiple client projects, consistency was the hard part. Ary kept UX and UI sharp, moved fast, and delivered work our teams could use.",
   },
   {
     id: "t4",
-    firstName: "James",
-    lastName: "Okafor",
-    company: "Stacklane",
-    role: "CTO",
+    firstName: "Eduardo",
+    lastName: "Salvatierra",
+    company: "110 Theory",
+    role: "Product Design Lead",
+    linkedInUrl: "https://www.linkedin.com/in/eduardo-salvatierra-visual-designer/",
+    quoteLang: "es",
     quote:
-      "Most designers hand off specs and disappear. Ary stayed in the build loop with us — catching edge cases we never would have caught on our own.",
-    avatar: undefined,
+      "En un equipo, el detalle y la colaboración importan mucho. Ary fue comprometido, proactivo, empático y aportó muy buen criterio en UI, UX y diseño visual.",
   },
   {
     id: "t5",
-    firstName: "Laura",
-    lastName: "Schreiber",
-    company: "Forma Health",
-    role: "Director of Design",
+    firstName: "Adam",
+    lastName: "Noonan",
+    company: "helloDojo",
+    role: "CTO",
+    linkedInUrl: "https://www.linkedin.com/in/adam-noonan/",
     quote:
-      "The systems Ary put in place didn't just solve our immediate problem — they gave our team a language to keep building on. That's the rarest kind of output.",
-    avatar: undefined,
+      "Build churn was the risk. Ary clarified flows, states, and edge cases, then stayed close to implementation so the experience held together.",
+  },
+  {
+    id: "t6",
+    firstName: "Scott",
+    lastName: "Witters",
+    company: "Samachi",
+    role: "CEO",
+    linkedInUrl: "https://www.linkedin.com/in/scottwitters/",
+    quote:
+      "The idea was messy and needed focus. Ary brought it back to the user problem, reduced the scope, and helped us shape something we could actually test.",
+  },
+  {
+    id: "t7",
+    firstName: "Justin",
+    lastName: "DeTolla",
+    company: "110 Theory",
+    role: "Founder",
+    linkedInUrl: "https://www.linkedin.com/in/justin-detolla-2595434/",
+    quote:
+      "Complex product work needs real ownership. Ary worked closely with product and engineering, and kept UX decisions tied to practical outcomes.",
   },
 ];

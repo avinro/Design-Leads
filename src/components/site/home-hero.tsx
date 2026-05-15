@@ -8,6 +8,7 @@ import { ArrowDown, Download, User } from "lucide-react";
 import { homeContent } from "@/lib/content/home";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { CalendlyModal } from "@/components/site/calendly-modal";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import VariableProximity from "@/components/motion/variable-proximity";
@@ -57,55 +58,24 @@ export function HomeHero() {
     >
       {/* Mobile — 24px from right edge, lower in the viewport */}
       <div className="animate-in fade-in fill-mode-both pointer-events-auto absolute top-[10vh] right-6 z-10 delay-700 duration-1000 md:hidden">
-        <Link href="/contact" aria-label="Let's talk — go to contact page">
-          {/* Wrapper sized to match the circle so the PFP overlay can be absolutely centered */}
-          <div className="relative" style={{ width: 120, height: 120 }}>
-            <CircularText
-              text={isCircleHovered ? hero.circularTextHover : hero.circularText}
-              spinDuration={20}
-              onHover="slowDown"
-              size={120}
-              fontSize="0.65rem"
-              aria-hidden="true"
-              className="text-foreground/60"
-            />
-            {/* PFP placeholder — 60% of 120px = 72px, static layer that doesn't rotate */}
-            <div
-              aria-hidden="true"
-              className="bg-muted text-muted-foreground pointer-events-none absolute top-1/2 left-1/2 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full"
-              style={{ width: "60%" }}
-            >
-              <User className="h-1/3 w-1/3" strokeWidth={1.5} />
-            </div>
-          </div>
-        </Link>
-      </div>
-
-      <Container width="wide" className="relative">
-        {/* Desktop — anchored to the top-right corner of the hero Container */}
-        <div className="animate-in fade-in fill-mode-both pointer-events-auto absolute top-0 right-0 z-10 hidden delay-700 duration-1000 md:block">
-          <Link href="/contact" aria-label="Let's talk — go to contact page">
+        <CalendlyModal ctaPosition="hero_circle_mobile">
+          <button
+            type="button"
+            aria-label="Let's talk — open contact modal"
+            className="cursor-pointer rounded-full"
+          >
             {/* Wrapper sized to match the circle so the PFP overlay can be absolutely centered */}
-            <div
-              className="relative"
-              style={{ width: 180, height: 180 }}
-              onMouseEnter={() => {
-                setIsCircleHovered(true);
-              }}
-              onMouseLeave={() => {
-                setIsCircleHovered(false);
-              }}
-            >
+            <div className="relative" style={{ width: 120, height: 120 }}>
               <CircularText
                 text={isCircleHovered ? hero.circularTextHover : hero.circularText}
                 spinDuration={20}
                 onHover="slowDown"
-                size={180}
-                fontSize="1rem"
-                aria-label="Let's talk — go to contact page"
+                size={120}
+                fontSize="0.65rem"
+                aria-hidden="true"
                 className="text-foreground/60"
               />
-              {/* PFP placeholder — 60% of 180px = 108px, static layer that doesn't rotate */}
+              {/* PFP placeholder — 60% of 120px = 72px, static layer that doesn't rotate */}
               <div
                 aria-hidden="true"
                 className="bg-muted text-muted-foreground pointer-events-none absolute top-1/2 left-1/2 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full"
@@ -114,7 +84,47 @@ export function HomeHero() {
                 <User className="h-1/3 w-1/3" strokeWidth={1.5} />
               </div>
             </div>
-          </Link>
+          </button>
+        </CalendlyModal>
+      </div>
+
+      <Container width="wide" className="relative">
+        {/* Desktop — anchored to the top-right corner of the hero Container */}
+        <div className="animate-in fade-in fill-mode-both pointer-events-auto absolute top-0 right-0 z-10 hidden delay-700 duration-1000 md:block">
+          <CalendlyModal ctaPosition="hero_circle_desktop">
+            <button
+              type="button"
+              aria-label="Let's talk — open contact modal"
+              className="cursor-pointer rounded-full"
+              onMouseEnter={() => {
+                setIsCircleHovered(true);
+              }}
+              onMouseLeave={() => {
+                setIsCircleHovered(false);
+              }}
+            >
+              {/* Wrapper sized to match the circle so the PFP overlay can be absolutely centered */}
+              <div className="relative" style={{ width: 180, height: 180 }}>
+                <CircularText
+                  text={isCircleHovered ? hero.circularTextHover : hero.circularText}
+                  spinDuration={20}
+                  onHover="slowDown"
+                  size={180}
+                  fontSize="1rem"
+                  aria-hidden="true"
+                  className="text-foreground/60"
+                />
+                {/* PFP placeholder — 60% of 180px = 108px, static layer that doesn't rotate */}
+                <div
+                  aria-hidden="true"
+                  className="bg-muted text-muted-foreground pointer-events-none absolute top-1/2 left-1/2 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full"
+                  style={{ width: "60%" }}
+                >
+                  <User className="h-1/3 w-1/3" strokeWidth={1.5} />
+                </div>
+              </div>
+            </button>
+          </CalendlyModal>
         </div>
 
         <div className="flex flex-col gap-3 sm:gap-4">

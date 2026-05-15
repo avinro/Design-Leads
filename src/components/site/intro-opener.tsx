@@ -1,11 +1,18 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 import { homeContent } from "@/lib/content/home";
 import { TextType } from "@/components/motion/text-type";
 import { useLenis } from "@/components/site/lenis-provider";
+
+/** Tailwind `md` — must match phrase1 desktop vs mobile split. */
+const INTRO_MD_MIN_WIDTH_PX = 768;
+
+/** Target duration (ms) for typing each intro phrase (spread across characters). */
+const INTRO_TYPING_MS_PHRASE_1 = 2500;
+const INTRO_TYPING_MS_PHRASE_2 = 1500;
 
 // ---------------------------------------------------------------------------
 // IntroOpener
@@ -32,6 +39,22 @@ export function IntroOpener({ onComplete }: IntroOpenerProps) {
   const holdTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const exitingRef = useRef(false);
   const lenis = useLenis();
+
+  const [introPhrases] = useState(() => {
+    const desktop =
+      typeof window !== "undefined" &&
+      window.matchMedia(`(min-width: ${String(INTRO_MD_MIN_WIDTH_PX)}px)`).matches;
+    const first = desktop ? homeContent.intro.phrase1.desktop : homeContent.intro.phrase1.mobile;
+    return [first, homeContent.intro.phrase2];
+  });
+
+  const typingSpeedByPhrase = useMemo(
+    () => [
+      INTRO_TYPING_MS_PHRASE_1 / Math.max(introPhrases[0]?.length ?? 1, 1),
+      INTRO_TYPING_MS_PHRASE_2 / Math.max(introPhrases[1]?.length ?? 1, 1),
+    ],
+    [introPhrases],
+  );
 
   // Lock scroll while the intro is visible.
   useEffect(() => {
@@ -94,7 +117,7 @@ export function IntroOpener({ onComplete }: IntroOpenerProps) {
 
   // Called by TextType when each phrase finishes typing.
   const handleSentenceComplete = (_sentence: string, index: number) => {
-    const lastIndex = homeContent.intro.phrases.length - 1;
+    const lastIndex = introPhrases.length - 1;
     if (index === lastIndex) {
       holdTimerRef.current = setTimeout(() => {
         triggerExit(false);
@@ -112,10 +135,10 @@ export function IntroOpener({ onComplete }: IntroOpenerProps) {
       className="bg-foreground text-background fixed inset-0 z-[70] flex items-center justify-center px-6 text-center focus:outline-none"
     >
       <TextType
-        text={homeContent.intro.phrases}
+        text={introPhrases}
         as="h4"
         loop={false}
-        typingSpeed={40}
+        typingSpeed={typingSpeedByPhrase}
         pauseDuration={500}
         deletingSpeed={18}
         showCursor

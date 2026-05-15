@@ -8,15 +8,15 @@ import type { Work } from "@/lib/content/works";
 /*
  * WorkGalleryCard — full-bleed image card for the /work listing grid.
  *
- * Anatomy (3 layers when hoverImage is present):
+ * Anatomy (3 layers when resultImage is present):
  *   ┌──────────────────────────────┐
- *   │  [Hover image — z-0]         │  always rendered below
+ *   │  [Result image — z-0]        │  always rendered below (hover / payoff layer)
  *   │  [Pixel grid — z-10]         │  default image sliced into N×N cells
- *   │  [Gradient — z-20]           │  mobile: always visible; desktop: hover/focus
+ *   │  [Gradient — z-20]           │  bottom scrim ~70%→0; mobile always; desktop hover/focus
  *   │  [Category + title — z-30]   │  mobile: always visible; desktop: hover/focus
  *   └──────────────────────────────┘
  *
- * When hoverImage is absent: static full-bleed card with the same overlay rules.
+ * When resultImage is absent: static full-bleed card with the same overlay rules.
  *
  * Overlay visibility:
  *   Mobile (<md):   gradient + text always visible.
@@ -55,7 +55,7 @@ function CardOverlay({
         )}
         style={{
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to top, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0) 70%, rgba(0,0,0,0) 100%)",
         }}
       />
 
@@ -72,13 +72,15 @@ function CardOverlay({
           "md:group-focus-visible:translate-y-0 md:group-focus-visible:opacity-100",
         )}
       >
-        <span className="font-mono text-xs tracking-widest text-white/70 uppercase">
-          {category}
-        </span>
+        <div className="flex flex-col gap-0">
+          <span className="font-mono text-xs leading-none tracking-widest text-white/70 uppercase">
+            {category}
+          </span>
 
-        <h3 className="font-display text-lg font-semibold tracking-tight text-white sm:text-xl">
-          {title}
-        </h3>
+          <h3 className="font-display mt-0.5 text-lg leading-tight font-semibold tracking-tight text-white sm:text-xl">
+            {title}
+          </h3>
+        </div>
 
         {tags.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
@@ -109,10 +111,10 @@ export function WorkGalleryCard({ work, className }: WorkGalleryCardProps) {
       className={cn("group focus-ring relative block cursor-pointer", className)}
       aria-label={`${frontmatter.title} — ${frontmatter.category}`}
     >
-      {frontmatter.hoverImage ? (
+      {frontmatter.resultImage ? (
         <PixelTransition
           defaultImageSrc={frontmatter.coverImage}
-          hoverImageSrc={frontmatter.hoverImage}
+          hoverImageSrc={frontmatter.resultImage}
           alt={`${frontmatter.title} cover`}
           sizes={CARD_SIZES}
           priority={frontmatter.order === 1}

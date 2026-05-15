@@ -7,6 +7,9 @@ import { usePathname } from "next/navigation";
 
 import { homeContent } from "@/lib/content/home";
 import { Button } from "@/components/ui/button";
+import { CalendlyModal } from "@/components/site/calendly-modal";
+import { SiteTextLink } from "@/components/site/site-text-link";
+import { isNavSectionActive } from "@/lib/navigation/nav-active";
 
 import { cn } from "@/lib/utils";
 
@@ -170,25 +173,25 @@ export function SiteHeader() {
 
           {/* Desktop nav + CTA — hidden below md */}
           <nav aria-label="Main navigation" className="hidden items-center gap-6 md:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="focus-ring text-muted-foreground hover:text-foreground rounded-sm font-mono text-xs tracking-wider uppercase transition-all duration-150 hover:-translate-y-px"
-              >
-                {link.label}
-              </Link>
-            ))}
-            <Button asChild size="default" className="font-mono text-xs tracking-wider uppercase">
-              <Link
-                href={primaryCta.href}
+            {navLinks.map((link) => {
+              const active = isNavSectionActive(pathname, link.href);
+              return (
+                <SiteTextLink key={link.href} href={link.href} variant="navDesktop" active={active}>
+                  {link.label}
+                </SiteTextLink>
+              );
+            })}
+            <CalendlyModal ctaPosition="header">
+              <Button
+                size="default"
+                className="font-mono text-xs tracking-wider uppercase"
                 data-cta-label={primaryCta.label}
                 data-cta-href={primaryCta.href}
                 data-cta-position="header"
               >
                 {primaryCta.label}
-              </Link>
-            </Button>
+              </Button>
+            </CalendlyModal>
           </nav>
 
           {/* Hamburger / close button — mobile only */}
@@ -243,26 +246,30 @@ export function SiteHeader() {
             aria-label="Mobile navigation"
             className="flex flex-1 flex-col items-center justify-center gap-8 text-center"
           >
-            {navLinks.map((link, i) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                tabIndex={isMenuOpen ? undefined : -1}
-                onClick={() => {
-                  setIsMenuOpen(false);
-                }}
-                className={cn(
-                  "focus-ring font-display text-foreground rounded-md text-3xl font-semibold tracking-tight hover:opacity-60",
-                  // Animate in after container expands; opacity-0 while hidden
-                  isMenuOpen
-                    ? "animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-both duration-300"
-                    : "opacity-0",
-                )}
-                style={isMenuOpen ? { animationDelay: `${String(280 + i * 60)}ms` } : undefined}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link, i) => {
+              const active = isNavSectionActive(pathname, link.href);
+              return (
+                <SiteTextLink
+                  key={link.href}
+                  href={link.href}
+                  variant="navMobile"
+                  active={active}
+                  tabIndex={isMenuOpen ? undefined : -1}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                  }}
+                  className={cn(
+                    // Animate in after container expands; opacity-0 while hidden
+                    isMenuOpen
+                      ? "animate-in fade-in-0 slide-in-from-bottom-2 fill-mode-both duration-300"
+                      : "pointer-events-none opacity-0",
+                  )}
+                  style={isMenuOpen ? { animationDelay: `${String(280 + i * 60)}ms` } : undefined}
+                >
+                  {link.label}
+                </SiteTextLink>
+              );
+            })}
           </nav>
 
           {/* Primary CTA — follows links with staggered entrance */}
@@ -275,9 +282,10 @@ export function SiteHeader() {
             )}
             style={isMenuOpen ? { animationDelay: `${String(280 + 3 * 60)}ms` } : undefined}
           >
-            <Button asChild size="lg" className="min-h-[44px] w-full">
-              <Link
-                href={primaryCta.href}
+            <CalendlyModal ctaPosition="mobile_overlay">
+              <Button
+                size="lg"
+                className="min-h-[44px] w-full"
                 tabIndex={isMenuOpen ? undefined : -1}
                 onClick={() => {
                   setIsMenuOpen(false);
@@ -287,8 +295,8 @@ export function SiteHeader() {
                 data-cta-position="mobile_overlay"
               >
                 {primaryCta.label}
-              </Link>
-            </Button>
+              </Button>
+            </CalendlyModal>
           </div>
         </div>
       </div>

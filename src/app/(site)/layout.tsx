@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site/site-footer";
 import { MobileCtaBar } from "@/components/site/mobile-cta-bar";
 import { LenisProvider } from "@/components/site/lenis-provider";
 import { SiteIntroGate } from "@/components/site/site-intro-gate";
+import { CalendlyPrefetch } from "@/components/site/calendly-prefetch";
 
 /**
  * Marketing site layout — applies to all public portfolio pages.
@@ -57,6 +58,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
          */}
         <div aria-hidden="true" className="h-[calc(100dvh-72px)] shrink-0" />
         <MobileCtaBar />
+        <CalendlyPrefetch />
       </SiteIntroGate>
     </LenisProvider>
   );

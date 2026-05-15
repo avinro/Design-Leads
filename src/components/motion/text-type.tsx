@@ -29,7 +29,8 @@ import { gsap } from "gsap";
 export interface TextTypeProps {
   text: string | string[];
   as?: ElementType;
-  typingSpeed?: number;
+  /** Milliseconds between typed characters; pass an array for per-phrase speeds. */
+  typingSpeed?: number | number[];
   initialDelay?: number;
   pauseDuration?: number;
   deletingSpeed?: number;
@@ -52,7 +53,7 @@ export const TextType = forwardRef<HTMLElement, TextTypeProps>(
     {
       text,
       as: Component = "div",
-      typingSpeed = 50,
+      typingSpeed: typingSpeedProp = 50,
       initialDelay = 0,
       pauseDuration = 2000,
       deletingSpeed = 30,
@@ -97,11 +98,24 @@ export const TextType = forwardRef<HTMLElement, TextTypeProps>(
       }
     }, [ref]);
 
-    const getRandomSpeed = useCallback(() => {
-      if (!variableSpeed) return typingSpeed;
-      const { min, max } = variableSpeed;
-      return Math.random() * (max - min) + min;
-    }, [variableSpeed, typingSpeed]);
+    const resolveTypingSpeed = useCallback(
+      (phraseIndex: number) => {
+        if (Array.isArray(typingSpeedProp)) {
+          return typingSpeedProp.at(phraseIndex) ?? typingSpeedProp.at(-1) ?? 50;
+        }
+        return typingSpeedProp;
+      },
+      [typingSpeedProp],
+    );
+
+    const getRandomSpeed = useCallback(
+      (phraseIndex: number) => {
+        if (!variableSpeed) return resolveTypingSpeed(phraseIndex);
+        const { min, max } = variableSpeed;
+        return Math.random() * (max - min) + min;
+      },
+      [variableSpeed, resolveTypingSpeed],
+    );
 
     const getCurrentTextColor = () => {
       if (textColors.length === 0) return "inherit";
@@ -189,7 +203,9 @@ export const TextType = forwardRef<HTMLElement, TextTypeProps>(
                 setDisplayedText((prev) => prev + (processedText[currentCharIndex] ?? ""));
                 setCurrentCharIndex((prev) => prev + 1);
               },
-              variableSpeed ? getRandomSpeed() : typingSpeed,
+              variableSpeed
+                ? getRandomSpeed(currentTextIndex)
+                : resolveTypingSpeed(currentTextIndex),
             );
           } else if (textArray.length >= 1) {
             if (!loop && currentTextIndex === textArray.length - 1) {
@@ -214,12 +230,11 @@ export const TextType = forwardRef<HTMLElement, TextTypeProps>(
       return () => {
         clearTimeout(timeout);
       };
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [
       currentCharIndex,
       displayedText,
       isDeleting,
-      typingSpeed,
+      typingSpeedProp,
       deletingSpeed,
       pauseDuration,
       textArray,
@@ -229,6 +244,8 @@ export const TextType = forwardRef<HTMLElement, TextTypeProps>(
       isVisible,
       reverseMode,
       variableSpeed,
+      resolveTypingSpeed,
+      getRandomSpeed,
       onSentenceComplete,
     ]);
 

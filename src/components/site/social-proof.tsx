@@ -14,7 +14,7 @@ import { Section } from "@/components/layout/section";
  *   clearly decorative (aria-hidden) — the accessible social proof is the
  *   text of the quote and its attribution, not logo shapes.
  *
- *   "Trusted by" becomes a mono kicker above the quote, not a bold heading.
+ *   Section kicker (e.g. "Testimonials") is mono above the quote, not a bold heading.
  */
 export function SocialProof() {
   const { socialProof } = homeContent;
@@ -24,7 +24,7 @@ export function SocialProof() {
       <Container>
         <div className="flex flex-col gap-8">
           {/* Section kicker */}
-          <p className="text-muted-foreground font-mono text-xs tracking-[0.15em] uppercase">
+          <p className="text-muted-foreground w-full text-center font-mono text-xs tracking-[0.15em] uppercase">
             {socialProof.sectionTitle}
           </p>
 

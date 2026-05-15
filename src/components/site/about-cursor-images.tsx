@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import Link from "next/link";
+import { SiteTextLink } from "@/components/site/site-text-link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 
@@ -31,7 +31,7 @@ import { Container } from "@/components/layout/container";
  *
  * prefers-reduced-motion: static collage rendered instead.
  *
- * Image source: homeContent.aboutImages (5 placeholders in public/).
+ * Image source: homeContent.aboutImages (paths under public/about/lifestyle/).
  * Images that fail to load show a neutral bg placeholder via onError.
  */
 
@@ -313,15 +313,14 @@ function TextContent({ aboutTeaser }: { aboutTeaser: AboutTeaser }) {
         <p className="font-display text-foreground text-2xl leading-snug font-semibold tracking-tight text-balance sm:text-3xl">
           {aboutTeaser.bio}
         </p>
-        <Link
-          href={aboutTeaser.linkHref}
-          className="focus-ring text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 rounded-sm font-mono text-sm underline-offset-4 transition-colors hover:underline"
-        >
-          {aboutTeaser.linkLabel}
-          <span aria-hidden="true" className="transition-transform duration-150">
-            →
-          </span>
-        </Link>
+        <span className="relative z-20 inline-flex justify-center">
+          <SiteTextLink href={aboutTeaser.linkHref} variant="inlineMono">
+            {aboutTeaser.linkLabel}
+            <span aria-hidden="true" className="transition-transform duration-150">
+              →
+            </span>
+          </SiteTextLink>
+        </span>
       </div>
     </Container>
   );

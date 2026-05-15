@@ -5,20 +5,20 @@ import { MobileCtaBar } from "./mobile-cta-bar";
 
 /*
  * Smoke tests: verify that data-cta-* analytics attributes are present on
- * the MobileCtaBar CTA link.
+ * the MobileCtaBar CTA trigger button.
  */
 describe("MobileCtaBar analytics attributes", () => {
-  it("CTA link has data-cta-position=mobile_bar", () => {
+  it("CTA trigger has data-cta-position=mobile_bar", () => {
     const html = renderToStaticMarkup(<MobileCtaBar />);
     expect(html).toContain('data-cta-position="mobile_bar"');
   });
 
-  it("CTA link has data-cta-href", () => {
+  it("CTA trigger has data-cta-href", () => {
     const html = renderToStaticMarkup(<MobileCtaBar />);
     expect(html).toContain("data-cta-href=");
   });
 
-  it("CTA link has data-cta-label", () => {
+  it("CTA trigger has data-cta-label", () => {
     const html = renderToStaticMarkup(<MobileCtaBar />);
     expect(html).toContain("data-cta-label=");
   });

@@ -7,7 +7,7 @@ import { getPublishedWorksForSitemap } from "@/lib/content/works";
  * Native App Router sitemap — no external dependency needed.
  *
  * Includes:
- *   - Static public pages: /, /work, /case-studies, /about, /contact
+ *   - Static public pages: /, /work, /case-studies, /about
  *   - One entry per published (non-draft) case study with real fs mtime.
  *   - One entry per published (non-draft) work with real fs mtime.
  *
@@ -41,12 +41,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: buildDate,
       changeFrequency: "yearly",
       priority: 0.8,
-    },
-    {
-      url: `${SITE_URL}/contact`,
-      lastModified: buildDate,
-      changeFrequency: "yearly",
-      priority: 0.7,
     },
   ];
 

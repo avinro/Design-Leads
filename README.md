@@ -1,6 +1,6 @@
 # Design Leads
 
-Strategic design leadership — brand identity, UX systems, and client portals.
+Strategic design leadership — brand identity, UX systems, and design case studies.
 
 ---
 
@@ -19,9 +19,7 @@ Strategic design leadership — brand identity, UX systems, and client portals.
 ```
 src/
 ├── app/                    # Next.js App Router
-│   ├── (site)/             # Phase 1 — portfolio / public site
-│   ├── (outreach)/         # Phase 2 — LimaLeads outreach system
-│   ├── (client)/           # Phase 3 — client portal
+│   ├── (site)/             # Portfolio / public site
 │   ├── api/                # Route handlers
 │   ├── globals.css         # Tailwind v4 + design tokens
 │   └── layout.tsx          # Root layout
@@ -55,19 +53,13 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Environment variables
 
-Copy `.env.local.example` to `.env.local` and fill in the values (configured in PRO-6):
+Copy `.env.local.example` to `.env.local` and fill in the values:
 
 ```bash
 cp .env.local.example .env.local
 ```
 
-Required variables (see PRO-6 for setup):
-
-```
-NEXT_PUBLIC_SUPABASE_URL=
-NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
-```
+See `.env.local.example` for the complete list of configuration options.
 
 ## Design tokens
 
@@ -101,4 +93,3 @@ PRO-7 (F0-3) will define the full token system (colour palette, typography scale
 | 0     | Foundations (this scaffold) |
 | 1     | Portfolio / public site     |
 | 2     | LimaLeads outreach system   |
-| 3     | Client portal               |

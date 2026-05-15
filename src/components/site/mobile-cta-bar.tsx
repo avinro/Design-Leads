@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
 import { homeContent } from "@/lib/content/home";
 import { Button } from "@/components/ui/button";
+import { CalendlyModal } from "@/components/site/calendly-modal";
 import { cn } from "@/lib/utils";
 
 /*
@@ -54,16 +54,16 @@ export function MobileCtaBar() {
         footerVisible && "pointer-events-none translate-y-full opacity-0",
       )}
     >
-      <Button asChild className="min-h-[44px] w-full">
-        <Link
-          href={primaryCta.href}
+      <CalendlyModal ctaPosition="mobile_bar">
+        <Button
+          className="min-h-[44px] w-full"
           data-cta-label={primaryCta.label}
           data-cta-href={primaryCta.href}
           data-cta-position="mobile_bar"
         >
           {primaryCta.label}
-        </Link>
-      </Button>
+        </Button>
+      </CalendlyModal>
       {/* Bottom padding below button so the bar doesn't clip content */}
       <div className="h-3" aria-hidden="true" />
     </div>

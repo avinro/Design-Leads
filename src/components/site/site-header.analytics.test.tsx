@@ -5,22 +5,21 @@ import { SiteHeader } from "./site-header";
 
 /*
  * Smoke tests: verify that data-cta-* analytics attributes are present on
- * the SiteHeader primary CTA. These attributes are read by AnalyticsClickDelegator
- * to emit cta_click events without converting the server component to a client
- * component.
+ * the SiteHeader primary CTA trigger. These attributes are read by
+ * AnalyticsClickDelegator to emit cta_click events.
  */
 describe("SiteHeader analytics attributes", () => {
-  it("primary CTA link has data-cta-position=header", () => {
+  it("primary CTA trigger has data-cta-position=header", () => {
     const html = renderToStaticMarkup(<SiteHeader />);
     expect(html).toContain('data-cta-position="header"');
   });
 
-  it("primary CTA link has data-cta-href", () => {
+  it("primary CTA trigger has data-cta-href", () => {
     const html = renderToStaticMarkup(<SiteHeader />);
     expect(html).toContain("data-cta-href=");
   });
 
-  it("primary CTA link has data-cta-label", () => {
+  it("primary CTA trigger has data-cta-label", () => {
     const html = renderToStaticMarkup(<SiteHeader />);
     expect(html).toContain("data-cta-label=");
   });
