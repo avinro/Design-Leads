@@ -44,6 +44,8 @@ export interface AboutContent {
   hero: {
     /** 3–5 sentence bio. Product Design Engineer is the primary identity. */
     bio: string[];
+    /** Hero portrait card image (path under public/). */
+    portraitSrc: string;
   };
   experience: {
     sectionTitle: string;
@@ -70,6 +72,7 @@ export interface AboutContent {
 
 export const aboutContent: AboutContent = {
   hero: {
+    portraitSrc: "/images/about.jpg",
     bio: [
       "I'm Ary — Product Design Engineer working at the intersection of strategy, design, and execution.",
       "I help teams turn unclear ideas into structured products they can actually ship. My work spans 0→1 products, multi-app ecosystems, and design systems built to last beyond the first release.",

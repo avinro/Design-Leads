@@ -414,7 +414,7 @@ html.lenis-smooth {
   height: 200%;
   background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
   transform: translateX(-150%) rotate(45deg);
-  transition: transform 0.6s ease-in-out;
+  transition: transform 500ms ease 0ms;
 }
 
 .dark .btn-shine {
@@ -436,9 +436,45 @@ html.lenis-smooth {
   --btn-shiny-text-highlight: rgb(0 0 0);
 }
 
-.btn-shiny-text {
+/* Overrides Tailwind `transition-all` so primary bg eases in 300ms while the shine sweep stays at 500ms on .btn-shine. */
+[data-slot="button"].btn-shine-host {
+  transition:
+    background-color 300ms ease 0ms,
+    border-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    box-shadow 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    transform 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    opacity 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    filter 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
+    backdrop-filter 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+}
+
+.btn-shiny-text-wrap {
   position: relative;
   z-index: 1;
+  display: inline-grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-areas: "stack";
+}
+
+.btn-shiny-text-wrap > .btn-shiny-text,
+.btn-shiny-text-wrap > .btn-shiny-text-solid {
+  grid-area: stack;
+}
+
+.btn-shiny-text-solid {
+  pointer-events: none;
+  color: var(--btn-shiny-text-highlight);
+  opacity: 0;
+  transition: opacity 300ms ease 0ms;
+}
+
+.btn-shine-host:hover .btn-shiny-text-solid {
+  opacity: 1;
+}
+
+.btn-shiny-text {
   display: inline-block;
   color: var(--btn-shiny-text-highlight);
   background-image: linear-gradient(
@@ -455,6 +491,8 @@ html.lenis-smooth {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   animation: btn-shiny-text 1.5s ease-in-out infinite;
+  opacity: 1;
+  transition: opacity 300ms ease 0ms;
 }
 
 @keyframes btn-shiny-text {
@@ -466,11 +504,10 @@ html.lenis-smooth {
   }
 }
 
-/* On hover: stop animation, drop gradient, show solid text at 100% opacity. */
+/* On hover: stop shimmer; label crossfade (300ms) runs faster than the shine sweep (500ms). */
 .btn-shine-host:hover .btn-shiny-text {
   animation: none;
-  background-image: none;
-  -webkit-text-fill-color: var(--btn-shiny-text-highlight);
+  opacity: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -478,9 +515,22 @@ html.lenis-smooth {
     transition: none;
   }
 
+  .btn-shiny-text-solid {
+    display: none;
+  }
+
   /* Idle reduced-motion: no animation, text already solid at center position. */
   .btn-shiny-text {
+    transition: none;
     animation: none;
     background-position: center;
+    opacity: 1;
+  }
+
+  .btn-shine-host:hover .btn-shiny-text {
+    animation: none;
+    background-image: none;
+    -webkit-text-fill-color: var(--btn-shiny-text-highlight);
+    opacity: 1;
   }
 }

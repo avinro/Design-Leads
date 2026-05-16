@@ -194,11 +194,9 @@ export default function AboutPage() {
              * Portrait card — 3D tilt effect on desktop, static on mobile.
              * Loaded client-side only (ssr: false) so Motion hooks don't run
              * during server-side rendering or static markup tests.
-             * TODO(portrait): pass imageSrc="/about/portrait.jpg" to
-             * AboutPortraitCard when the photo asset is available.
              */}
             <div className="w-full md:w-72 lg:w-80">
-              <AboutPortraitCardLoader />
+              <AboutPortraitCardLoader imageSrc={hero.portraitSrc} />
             </div>
           </div>
         </Container>

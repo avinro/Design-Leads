@@ -34,6 +34,10 @@ const AboutPortraitCard = dynamic(
   },
 );
 
-export function AboutPortraitCardLoader() {
-  return <AboutPortraitCard />;
+export interface AboutPortraitCardLoaderProps {
+  imageSrc: string;
+}
+
+export function AboutPortraitCardLoader({ imageSrc }: AboutPortraitCardLoaderProps) {
+  return <AboutPortraitCard imageSrc={imageSrc} />;
 }

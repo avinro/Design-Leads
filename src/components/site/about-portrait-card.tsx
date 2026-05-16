@@ -1,11 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useMotionValue, useSpring } from "motion/react";
 
 /*
  * AboutPortraitCard — TiltedCard-style 3D tilt effect wrapping the portrait
- * placeholder. Adapted from React Bits TiltedCard to TypeScript + Tailwind,
+ * image. Adapted from React Bits TiltedCard to TypeScript + Tailwind,
  * with no external CSS file.
  *
  * Behavior by device:
@@ -23,8 +24,7 @@ import { motion, useMotionValue, useSpring } from "motion/react";
  * Badges live inside the preserve-3d container and use translateZ(40px) so
  * they participate in the tilt and visually float in front of the card surface.
  *
- * TODO(portrait): when public/about/portrait.jpg is ready, replace the
- * placeholder children with a Next.js <Image> and remove the silhouette divs.
+ * Portrait image is passed via `imageSrc` (path under public/).
  */
 
 const SPRING = { damping: 30, stiffness: 100, mass: 2 } as const;
@@ -33,7 +33,12 @@ const CAPTION_SPRING = { stiffness: 350, damping: 30, mass: 1 } as const;
 
 const BADGES = ["anime lover", "bad bunny fan", "video games", "crypto enthusiast"] as const;
 
-export function AboutPortraitCard() {
+export interface AboutPortraitCardProps {
+  /** Public URL path to the portrait image (e.g. /images/about.jpg). */
+  imageSrc: string;
+}
+
+export function AboutPortraitCard({ imageSrc }: AboutPortraitCardProps) {
   const figureRef = useRef<HTMLElement>(null);
   const [lastY, setLastY] = useState(0);
 
@@ -91,7 +96,7 @@ export function AboutPortraitCard() {
     <figure
       ref={figureRef}
       data-testid="portrait-card"
-      aria-label="Portrait of Ary — placeholder"
+      aria-label="Portrait of Ary"
       className="relative flex w-full items-center justify-center"
       style={{ perspective: "800px" }}
       onMouseMove={handleMouseMove}
@@ -112,12 +117,16 @@ export function AboutPortraitCard() {
           willChange: "transform",
         }}
       >
-        {/* Card surface — placeholder until portrait.jpg is available */}
+        {/* Card surface — portrait */}
         <div className="border-border/40 bg-muted relative aspect-[3/4] w-full overflow-hidden rounded-xl border">
-          <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-            <div className="bg-muted-foreground/20 h-16 w-16 rounded-full" />
-            <div className="bg-muted-foreground/10 h-20 w-24 rounded-t-full" />
-          </div>
+          <Image
+            src={imageSrc}
+            alt="Ary — portrait"
+            fill
+            sizes="(max-width: 768px) 100vw, 320px"
+            className="object-cover"
+            priority
+          />
         </div>
 
         {/*
@@ -127,7 +136,7 @@ export function AboutPortraitCard() {
          */}
         <motion.div
           aria-label="Interests"
-          className="absolute bottom-4 left-0 flex w-full flex-wrap justify-start gap-2 px-4"
+          className="absolute bottom-4 left-0 z-10 flex w-full flex-wrap justify-start gap-2 px-4"
           style={{ transform: "translateZ(40px)", opacity }}
         >
           {BADGES.map((badge) => (

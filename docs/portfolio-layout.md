@@ -128,17 +128,17 @@ RootLayout
 Global chrome in `RootLayout`:
 
 - `<SiteHeader>` — sticky top, skip link, primary CTA ("Let's talk") at `md+`
-- `<SiteFooter>` — full-screen dark closing section: final CTA + small CircularText wordmark echo + nav + copyright
+- `<SiteFooter>` — full-screen dark closing section: final CTA + nav + copyright (plain text home link; no `CircularText` echo)
 - `<MobileCtaBar>` — fixed bottom, `md:hidden`, `pb-[env(safe-area-inset-bottom)]`
 
 ### Motion components
 
 Two wrapper components live in `src/components/motion/`. Both are `"use client"`, lazy-loaded via `next/dynamic({ ssr: false })` in their consuming sections.
 
-| Component      | Source          | Role in page                                              |
-| -------------- | --------------- | --------------------------------------------------------- |
-| `CircularText` | React Bits port | Hero (220px, 1rem, grid-right) + footer echo (88px, slow) |
-| `CurvedLoop`   | React Bits port | WorkDivider chapter break                                 |
+| Component      | Source          | Role in page                                                                                                     |
+| -------------- | --------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `CircularText` | React Bits port | Hero circle only (sizes 120 / 180); optional `textChangeTransition="shuffle"` (GSAP stagger) when phrase changes |
+| `CurvedLoop`   | React Bits port | WorkDivider chapter break                                                                                        |
 
 **Reduced-motion contract**: Both wrappers call `useReducedMotion()` from `motion/react`. When `prefers-reduced-motion: reduce` is set:
 
@@ -149,10 +149,10 @@ Layout and content remain identical in both motion states.
 
 ### Motion cadence tokens
 
-| Token                  | Value | Used by                       |
-| ---------------------- | ----- | ----------------------------- |
-| `--motion-spin-slow`   | `30`  | Footer CircularText echo      |
-| `--motion-spin-medium` | `20`  | Hero CircularText protagonist |
+| Token                  | Value | Used by                                                  |
+| ---------------------- | ----- | -------------------------------------------------------- |
+| `--motion-spin-slow`   | `30`  | Reserved / legacy (footer no longer uses `CircularText`) |
+| `--motion-spin-medium` | `20`  | Hero CircularText protagonist                            |
 
 Values are unitless numbers (seconds) passed to `CircularText`'s `spinDuration` prop.
 

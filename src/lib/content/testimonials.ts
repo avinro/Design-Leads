@@ -28,16 +28,6 @@ export interface Testimonial {
 
 export const testimonials: Testimonial[] = [
   {
-    id: "t1",
-    firstName: "Tony",
-    lastName: "MacFadden",
-    company: "helloDojo",
-    role: "CEO",
-    linkedInUrl: "https://www.linkedin.com/in/tony-mcfadden-04475018/",
-    quote:
-      "We had a big vision, but it needed structure. Ary helped us decide what to build first and kept four apps feeling like one product.",
-  },
-  {
     id: "t2",
     firstName: "Gonzo",
     lastName: "Torres",

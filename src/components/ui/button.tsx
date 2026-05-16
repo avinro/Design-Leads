@@ -45,7 +45,12 @@ const buttonVariants = cva(
 const ShineSpan = () => <span aria-hidden="true" className="btn-shine" />;
 
 const ShinyText = ({ children }: { children: React.ReactNode }) => (
-  <span className="btn-shiny-text">{children}</span>
+  <span className="btn-shiny-text-wrap">
+    <span aria-hidden="true" className="btn-shiny-text-solid">
+      {children}
+    </span>
+    <span className="btn-shiny-text">{children}</span>
+  </span>
 );
 
 function wrapShinyText(children: React.ReactNode): React.ReactNode {

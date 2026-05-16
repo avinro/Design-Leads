@@ -3,12 +3,12 @@
 import { useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ArrowDown, Download, User } from "lucide-react";
+import Image from "next/image";
+import { ArrowDown, Download } from "lucide-react";
 
 import { homeContent } from "@/lib/content/home";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { CalendlyModal } from "@/components/site/calendly-modal";
 import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import VariableProximity from "@/components/motion/variable-proximity";
@@ -46,7 +46,7 @@ const CircularText = dynamic(
  * handlers are disabled — layout and content are unchanged.
  */
 export function HomeHero() {
-  const { hero } = homeContent;
+  const { hero, aboutTeaser } = homeContent;
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const [isCircleHovered, setIsCircleHovered] = useState(false);
 
@@ -58,73 +58,97 @@ export function HomeHero() {
     >
       {/* Mobile — 24px from right edge, lower in the viewport */}
       <div className="animate-in fade-in fill-mode-both pointer-events-auto absolute top-[10vh] right-6 z-10 delay-700 duration-1000 md:hidden">
-        <CalendlyModal ctaPosition="hero_circle_mobile">
-          <button
-            type="button"
-            aria-label="Let's talk — open contact modal"
-            className="cursor-pointer rounded-full"
-          >
-            {/* Wrapper sized to match the circle so the PFP overlay can be absolutely centered */}
-            <div className="relative" style={{ width: 120, height: 120 }}>
-              <CircularText
-                text={isCircleHovered ? hero.circularTextHover : hero.circularText}
-                spinDuration={20}
-                onHover="slowDown"
-                size={120}
-                fontSize="0.65rem"
-                aria-hidden="true"
-                className="text-foreground/60"
+        <Link
+          href={aboutTeaser.linkHref}
+          aria-label="About — get to know my background"
+          className="group cursor-pointer rounded-full"
+          data-cta-href={aboutTeaser.linkHref}
+          data-cta-label="Hero circular — About"
+          data-cta-position="hero_circle_mobile"
+          onPointerEnter={() => {
+            setIsCircleHovered(true);
+          }}
+          onPointerLeave={() => {
+            setIsCircleHovered(false);
+          }}
+        >
+          {/* Wrapper sized to match the circle so the PFP overlay can be absolutely centered */}
+          <div className="relative" style={{ width: 120, height: 120 }}>
+            <CircularText
+              text={isCircleHovered ? hero.circularTextHover : hero.circularText}
+              textChangeTransition="shuffle"
+              spinDuration={20}
+              onHover="slowDown"
+              size={120}
+              fontSize="0.65rem"
+              aria-hidden="true"
+              className="text-foreground/60"
+            />
+            {/* PFP — 60% + 4px vs circle; outer ring stays 120px; image zooms slightly on hover */}
+            <div
+              aria-hidden="true"
+              className="bg-muted pointer-events-none absolute top-1/2 left-1/2 aspect-square -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full"
+              style={{ width: "calc(60% + 4px)" }}
+            >
+              <Image
+                src={hero.profileImageSrc}
+                alt=""
+                fill
+                sizes="80px"
+                className="object-cover transition-transform duration-[800ms] ease-in-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                priority
               />
-              {/* PFP placeholder — 60% of 120px = 72px, static layer that doesn't rotate */}
-              <div
-                aria-hidden="true"
-                className="bg-muted text-muted-foreground pointer-events-none absolute top-1/2 left-1/2 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full"
-                style={{ width: "60%" }}
-              >
-                <User className="h-1/3 w-1/3" strokeWidth={1.5} />
-              </div>
             </div>
-          </button>
-        </CalendlyModal>
+          </div>
+        </Link>
       </div>
 
       <Container width="wide" className="relative">
         {/* Desktop — anchored to the top-right corner of the hero Container */}
         <div className="animate-in fade-in fill-mode-both pointer-events-auto absolute top-0 right-0 z-10 hidden delay-700 duration-1000 md:block">
-          <CalendlyModal ctaPosition="hero_circle_desktop">
-            <button
-              type="button"
-              aria-label="Let's talk — open contact modal"
-              className="cursor-pointer rounded-full"
-              onMouseEnter={() => {
-                setIsCircleHovered(true);
-              }}
-              onMouseLeave={() => {
-                setIsCircleHovered(false);
-              }}
-            >
-              {/* Wrapper sized to match the circle so the PFP overlay can be absolutely centered */}
-              <div className="relative" style={{ width: 180, height: 180 }}>
-                <CircularText
-                  text={isCircleHovered ? hero.circularTextHover : hero.circularText}
-                  spinDuration={20}
-                  onHover="slowDown"
-                  size={180}
-                  fontSize="1rem"
-                  aria-hidden="true"
-                  className="text-foreground/60"
+          <Link
+            href={aboutTeaser.linkHref}
+            aria-label="About — get to know my background"
+            className="group cursor-pointer rounded-full"
+            data-cta-href={aboutTeaser.linkHref}
+            data-cta-label="Hero circular — About"
+            data-cta-position="hero_circle_desktop"
+            onPointerEnter={() => {
+              setIsCircleHovered(true);
+            }}
+            onPointerLeave={() => {
+              setIsCircleHovered(false);
+            }}
+          >
+            {/* Wrapper sized to match the circle so the PFP overlay can be absolutely centered */}
+            <div className="relative" style={{ width: 180, height: 180 }}>
+              <CircularText
+                text={isCircleHovered ? hero.circularTextHover : hero.circularText}
+                textChangeTransition="shuffle"
+                spinDuration={20}
+                onHover="slowDown"
+                size={180}
+                fontSize="1rem"
+                aria-hidden="true"
+                className="text-foreground/60"
+              />
+              {/* PFP — 60% + 4px vs circle; outer ring stays 180px; image zooms slightly on hover */}
+              <div
+                aria-hidden="true"
+                className="bg-muted pointer-events-none absolute top-1/2 left-1/2 aspect-square -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full"
+                style={{ width: "calc(70%" }}
+              >
+                <Image
+                  src={hero.profileImageSrc}
+                  alt=""
+                  fill
+                  sizes="120px"
+                  className="object-cover transition-transform duration-[800ms] ease-in-out group-hover:scale-[1.06] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                  priority
                 />
-                {/* PFP placeholder — 60% of 180px = 108px, static layer that doesn't rotate */}
-                <div
-                  aria-hidden="true"
-                  className="bg-muted text-muted-foreground pointer-events-none absolute top-1/2 left-1/2 flex aspect-square -translate-x-1/2 -translate-y-1/2 items-center justify-center overflow-hidden rounded-full"
-                  style={{ width: "60%" }}
-                >
-                  <User className="h-1/3 w-1/3" strokeWidth={1.5} />
-                </div>
               </div>
-            </button>
-          </CalendlyModal>
+            </div>
+          </Link>
         </div>
 
         <div className="flex flex-col gap-3 sm:gap-4">

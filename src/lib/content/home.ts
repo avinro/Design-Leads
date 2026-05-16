@@ -52,12 +52,14 @@ export interface HomeContent {
      * circle looks full. Keep under ~24 chars per phrase to fit the circle.
      */
     circularText: string;
-    /** Text shown inside CircularText on hover — signals the element is a link to /contact. */
+    /** Text shown inside CircularText on hover — signals navigation to About. */
     circularTextHover: string;
     primaryCta: string;
     primaryCtaHref: string;
     downloadCta: string;
     downloadCtaHref: string;
+    /** Profile photo inside the hero CircularText ring (path under public/). */
+    profileImageSrc: string;
   };
   /**
    * Copy for the CurvedLoop chapter break between hero and selected work.
@@ -117,11 +119,12 @@ export const homeContent: HomeContent = {
     subheadline:
       "I've shipped SaaS products for B2B and B2C teams — from 0→1 discovery to launch. Most projects fail between idea and execution; I help close that gap.",
     circularText: "Strategy & execution · Product design · ",
-    circularTextHover: "Let's talk · Send me a message · ",
+    circularTextHover: "Get to know me · My Background · ",
     primaryCta: "Explore my work",
     primaryCtaHref: "/work",
     downloadCta: "Download CV",
     downloadCtaHref: "/AryVincench_CV_2026.pdf",
+    profileImageSrc: "/images/pfp.jpg",
   },
   workDivider: {
     text: "SELECTED WORK \u2022 ",
