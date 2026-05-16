@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { cn } from "@/lib/utils";
 import { track } from "@/lib/analytics/events";
 import { loadCalendlyScript } from "@/lib/calendly/load";
 
@@ -33,7 +34,29 @@ function calendlyInlineEmbedUrl(): string {
   });
   return `${CALENDLY_PAGE_URL}?${q}`;
 }
+
 const LOADING_HINT_DELAY_MS = 8_000;
+/**
+ * Max time to wait for Calendly to signal ready after initInlineWidget().
+ * If no signal arrives in this window, we transition to "failed".
+ */
+const IFRAME_READY_TIMEOUT_MS = 15_000;
+
+// Omit removes MessageEvent.data (typed as `any`) so our override wins.
+type CalendlyMessageEvent = Omit<MessageEvent, "data"> & { data: { event: string } };
+
+/**
+ * Type predicate — narrows MessageEvent to one that carries a Calendly event string.
+ * Reads e.data through `unknown` to satisfy strict no-unsafe-member-access rules.
+ */
+function isCalendlyEvent(e: MessageEvent): e is CalendlyMessageEvent {
+  if (e.origin !== "https://calendly.com") return false;
+  const data: unknown = e.data;
+  if (typeof data !== "object" || data === null || !("event" in data)) return false;
+  // Use Record<string, unknown> — broader than TS's automatic narrowing — to access .event.
+  const record = data as Record<string, unknown>;
+  return typeof record.event === "string" && record.event.startsWith("calendly.");
+}
 
 type Status = "idle" | "loading" | "loaded" | "failed";
 
@@ -61,38 +84,95 @@ export function CalendlyModal({ children, ctaPosition = "unknown" }: CalendlyMod
   };
 
   // Kick off Calendly init whenever the sheet opens.
-  // The cleanup function cancels any pending state updates if the sheet closes
-  // before the script finishes loading.
+  // Detection strategy (in order of priority):
+  //   1. postMessage "calendly.event_type_viewed" — fired when the widget finishes rendering
+  //   2. MutationObserver + iframe "load" event — fallback if postMessage is blocked
+  //   3. IFRAME_READY_TIMEOUT_MS hard cutoff — prevents infinite loading state
   useEffect(() => {
     if (!open) return;
 
+    // Capture at effect time so the cleanup closure uses the same node reference.
+    const container = containerRef.current;
+
     let cancelled = false;
+    let ready = false;
+    let iframeReadyTimer: ReturnType<typeof setTimeout> | null = null;
+    let observer: MutationObserver | null = null;
 
     const hintTimer = setTimeout(() => {
       if (!cancelled) setShowHint(true);
     }, LOADING_HINT_DELAY_MS);
+
+    function cleanup() {
+      if (iframeReadyTimer) clearTimeout(iframeReadyTimer);
+      window.removeEventListener("message", onMessage);
+      observer?.disconnect();
+    }
+
+    function markReady() {
+      if (ready || cancelled) return;
+      ready = true;
+      cleanup();
+      setStatus("loaded");
+    }
+
+    function onMessage(e: MessageEvent) {
+      if (!isCalendlyEvent(e)) return;
+      // event_type_viewed fires when the booking calendar is fully rendered.
+      // profile_page_viewed is the equivalent on profile-level embeds.
+      const { event } = e.data;
+      if (event === "calendly.event_type_viewed" || event === "calendly.profile_page_viewed") {
+        markReady();
+      }
+    }
 
     loadCalendlyScript()
       .then(() => {
         if (cancelled) return;
         clearTimeout(hintTimer);
 
-        // Wait 350ms for the sheet's open animation (duration-300) to finish
-        // and for the container to receive its final computed layout before
-        // Calendly measures it. Re-read containerRef after the delay (safer than
-        // capturing at effect start).
+        // Wait for the sheet's open animation (duration-300) so Calendly measures
+        // the container at its final layout dimensions.
         setTimeout(() => {
           if (cancelled) return;
           const el = containerRef.current;
-          if (el && window.Calendly) {
-            window.Calendly.initInlineWidget({
-              url: calendlyInlineEmbedUrl(),
-              parentElement: el,
-            });
-            setStatus("loaded");
-          } else if (el) {
+          if (!el || !window.Calendly) {
             setStatus("failed");
+            return;
           }
+
+          window.Calendly.initInlineWidget({
+            url: calendlyInlineEmbedUrl(),
+            parentElement: el,
+          });
+
+          // Hard cutoff: if no ready signal arrives within IFRAME_READY_TIMEOUT_MS,
+          // transition to failed so the user is never stuck on an infinite loader.
+          iframeReadyTimer = setTimeout(() => {
+            if (!cancelled && !ready) {
+              cleanup();
+              setStatus("failed");
+            }
+          }, IFRAME_READY_TIMEOUT_MS);
+
+          // Primary detection: Calendly fires postMessage when booking UI renders.
+          window.addEventListener("message", onMessage);
+
+          // Secondary detection: observe the container for the iframe Calendly injects,
+          // then wait for that iframe's own load event + 800 ms for React to paint.
+          observer = new MutationObserver(() => {
+            const iframe = el.querySelector<HTMLIFrameElement>("iframe");
+            if (!iframe || iframe.dataset.monitored) return;
+            iframe.dataset.monitored = "1";
+            iframe.addEventListener(
+              "load",
+              () => {
+                setTimeout(markReady, 800);
+              },
+              { once: true },
+            );
+          });
+          observer.observe(el, { childList: true, subtree: true });
         }, 350);
       })
       .catch(() => {
@@ -105,13 +185,14 @@ export function CalendlyModal({ children, ctaPosition = "unknown" }: CalendlyMod
     return () => {
       cancelled = true;
       clearTimeout(hintTimer);
-      // Clear the Calendly iframe so the next open starts with a clean container.
-      // Radix unmounts SheetContent after close animation, but clearing here is
-      // defensive in case forceMount is ever added.
-      const host = containerRef.current;
-      if (host) host.innerHTML = "";
+      cleanup();
+      if (container) container.innerHTML = "";
     };
   }, [open]);
+
+  const isVisible = status === "loaded";
+  const isFailed = status === "failed";
+  const isLoading = status === "idle" || status === "loading";
 
   return (
     <Sheet open={open} onOpenChange={handleOpenChange}>
@@ -124,6 +205,18 @@ export function CalendlyModal({ children, ctaPosition = "unknown" }: CalendlyMod
       </SheetTrigger>
 
       <SheetContent>
+        <span
+          id="calendly-status"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+          className="sr-only"
+        >
+          {isLoading && "Loading scheduling widget"}
+          {isVisible && "Scheduling widget ready"}
+          {isFailed && "Couldn't load the scheduler — use the alternatives below"}
+        </span>
+
         {/* ── Header ─────────────────────────────────────────────────── */}
         <div
           className="shrink-0 px-6 pb-6"
@@ -141,26 +234,75 @@ export function CalendlyModal({ children, ctaPosition = "unknown" }: CalendlyMod
         </div>
 
         {/* ── Calendly region ────────────────────────────────────────── */}
-        <div className="border-border bg-card relative mx-4 min-h-0 flex-1 overflow-hidden rounded-xl border">
-          {/* Container that Calendly injects its iframe into.
-              Calendly requires explicit height and min-width per their embed spec. */}
+        <div
+          className="border-border bg-card relative mx-4 flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border"
+          aria-busy={isLoading}
+          aria-describedby="calendly-status"
+        >
+          {/* Calendly widget container — always in DOM so the iframe persists.
+              Fades in only after the widget signals it has fully rendered. */}
           <div
             ref={containerRef}
-            className="bg-card w-full"
-            style={{ minWidth: 320, height: 700 }}
+            className={cn(
+              "bg-card min-h-[360px] w-full flex-1 transition-opacity duration-500 motion-reduce:transition-none",
+              isVisible ? "opacity-100" : "opacity-0",
+            )}
+            style={{ minWidth: 320 }}
             aria-label="Calendly scheduler"
-            aria-hidden={status !== "loaded"}
+            aria-hidden={!isVisible}
           />
 
-          {/* Loading state */}
-          {(status === "idle" || status === "loading") && (
-            <div className="bg-background absolute inset-0 flex flex-col items-center justify-center gap-4 px-6">
-              <Skeleton className="h-48 w-full rounded-lg" />
-              <Skeleton className="h-6 w-3/4 rounded" />
-              <Skeleton className="h-6 w-1/2 rounded" />
-              <p className="text-muted-foreground mt-2 text-sm">Loading your scheduler…</p>
-              {showHint && (
-                <p className="text-muted-foreground text-center text-xs">
+          {/* Loading skeleton — calendar-shaped so users know what's coming.
+              Fades out when Calendly signals ready or when an error is shown. */}
+          <div
+            aria-hidden="true"
+            className={cn(
+              "bg-background absolute inset-0 flex flex-col overflow-hidden rounded-xl transition-opacity duration-500 motion-reduce:transition-none",
+              isLoading ? "opacity-100" : "pointer-events-none opacity-0",
+            )}
+          >
+            <div className="flex flex-1 flex-col gap-3 p-5">
+              {/* Month navigation */}
+              <div className="flex items-center justify-between">
+                <Skeleton className="h-5 w-28 rounded" />
+                <div className="flex gap-2">
+                  <Skeleton className="size-7 rounded-full" />
+                  <Skeleton className="size-7 rounded-full" />
+                </div>
+              </div>
+
+              {/* Day-of-week labels */}
+              <div className="grid grid-cols-7 gap-1">
+                {Array.from({ length: 7 }).map((_, i) => (
+                  <Skeleton key={i} className="h-4 w-full rounded-sm" />
+                ))}
+              </div>
+
+              {/* Date grid — rounded-full mimics Calendly's circular day buttons.
+                  Weekend columns (0, 6 mod 7) are dimmed to suggest disabled dates. */}
+              <div className="grid grid-cols-7 gap-1.5">
+                {Array.from({ length: 35 }).map((_, i) => (
+                  <Skeleton
+                    key={i}
+                    className={cn(
+                      "h-8 w-full rounded-full",
+                      i % 7 === 0 || i % 7 === 6 ? "opacity-25" : "",
+                    )}
+                  />
+                ))}
+              </div>
+
+              {/* Timezone hint row */}
+              <div className="flex items-center justify-center gap-2">
+                <Skeleton className="size-3 rounded-full" />
+                <Skeleton className="h-3 w-32 rounded" />
+              </div>
+            </div>
+
+            {/* Status text — lives below the calendar area */}
+            <div className="pb-5 text-center">
+              {showHint ? (
+                <p className="text-muted-foreground text-xs">
                   Still loading.{" "}
                   <a
                     href={CALENDLY_PAGE_URL}
@@ -171,35 +313,40 @@ export function CalendlyModal({ children, ctaPosition = "unknown" }: CalendlyMod
                     Open Calendly in a new tab
                   </a>
                 </p>
+              ) : (
+                <p className="text-muted-foreground text-sm">Loading your scheduler…</p>
               )}
             </div>
-          )}
+          </div>
 
-          {/* Failed state */}
-          {status === "failed" && (
-            <div className="bg-background absolute inset-0 flex flex-col items-center justify-center gap-4 px-6 text-center">
-              <p className="text-foreground text-base font-semibold">
-                Couldn&apos;t load the scheduler
-              </p>
-              <p className="text-muted-foreground max-w-[260px] text-sm">
-                This happens sometimes. You can open it directly or send an email instead.
-              </p>
-              <div className="flex w-full max-w-[260px] flex-col gap-2">
-                <Button asChild size="sm">
-                  <a href={CALENDLY_PAGE_URL} target="_blank" rel="noopener noreferrer">
-                    <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                    Open Calendly
-                  </a>
-                </Button>
-                <Button variant="outline" size="sm" asChild>
-                  <a href="mailto:avinroart@gmail.com?subject=Project%20inquiry">
-                    <Mail className="h-4 w-4" aria-hidden="true" />
-                    Email instead
-                  </a>
-                </Button>
-              </div>
+          {/* Failed state — fades in when load detection times out or errors. */}
+          <div
+            className={cn(
+              "bg-background absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-xl px-6 text-center transition-opacity duration-300 motion-reduce:transition-none",
+              isFailed ? "opacity-100" : "pointer-events-none opacity-0",
+            )}
+          >
+            <p className="text-foreground text-base font-semibold">
+              Couldn&apos;t load the scheduler
+            </p>
+            <p className="text-muted-foreground max-w-[260px] text-sm">
+              This happens sometimes. You can open it directly or send an email instead.
+            </p>
+            <div className="flex w-full max-w-[260px] flex-col gap-2">
+              <Button asChild size="sm">
+                <a href={CALENDLY_PAGE_URL} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                  Open Calendly
+                </a>
+              </Button>
+              <Button variant="outline" size="sm" asChild>
+                <a href="mailto:avinroart@gmail.com?subject=Project%20inquiry">
+                  <Mail className="h-4 w-4" aria-hidden="true" />
+                  Email instead
+                </a>
+              </Button>
             </div>
-          )}
+          </div>
         </div>
 
         {/* ── Footer ─────────────────────────────────────────────────── */}
