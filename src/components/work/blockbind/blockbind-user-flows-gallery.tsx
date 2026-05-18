@@ -204,13 +204,7 @@ export function BlockbindUserFlowsGallery() {
 
   return (
     <figure className="my-8 w-full min-w-0" data-slot="blockbind-user-flows">
-      <div
-        ref={wrapRef}
-        className={cn(
-          styles.root,
-          "border-border/50 bg-muted/20 w-full min-w-0 rounded-xl border p-2 sm:p-3",
-        )}
-      >
+      <div ref={wrapRef} className={cn(styles.root, "w-full min-w-0")}>
         <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <p className="text-muted-foreground font-mono text-xs tracking-widest uppercase">
             Flow {String(index + 1).padStart(2, "0")} / {String(flowCount).padStart(2, "0")}
@@ -280,7 +274,7 @@ export function BlockbindUserFlowsGallery() {
 
                   <button
                     type="button"
-                    className="group border-border/50 bg-muted/30 hover:border-border hover:bg-muted/50 focus-visible:ring-ring relative mb-[12px] h-auto min-h-0 w-full max-w-full cursor-zoom-in rounded-lg border text-left transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+                    className="group focus-visible:ring-ring relative mb-[12px] h-auto min-h-0 w-full max-w-full cursor-zoom-in text-left focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
                     onClick={() => {
                       openDialog(i);
                     }}
