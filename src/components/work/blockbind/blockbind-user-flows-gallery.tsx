@@ -12,7 +12,7 @@ import styles from "./blockbind-user-flows.module.css";
 
 const FLOWS = [
   { num: "01", title: "Onboarding & Auth", id: "f1", wide: true },
-  { num: "02", title: "Home / Wallet Dashboard", id: "f2", wide: true },
+  { num: "02", title: "Home / Wallet Dashboard", id: "f2", wide: false },
   { num: "03", title: "Main Navigation", id: "f3", wide: false },
   { num: "04", title: "Receive Flow", id: "f4", wide: true },
   { num: "05", title: "Buy Flow", id: "f5", wide: true },
