@@ -3,12 +3,12 @@
  *
  * Sources:
  *   - favicon_32.jpg / favicon_256.jpg (external design folder)
- *   - public/images/pfp.jpg (portrait for social preview)
+ *   - Social web.jpg (canonical social preview artwork)
  *
  * Outputs:
  *   - public/favicon.ico (static; avoids App Router image pipeline)
  *   - src/app/icon.png, apple-icon.png
- *   - public/images/og.jpg (1200×630)
+ *   - public/images/og.jpg (1200×630, resized from Social web.jpg)
  *
  * Run: node scripts/generate-brand-assets.mjs
  */
@@ -25,13 +25,14 @@ const FAVICON_32 =
 const FAVICON_256 =
   process.env.FAVICON_256_SRC ??
   join(process.env.HOME ?? "", "Documents/Work/00 - New portfolio/favicon_256.jpg");
-const PFP = join(ROOT, "public/images/pfp.jpg");
+const SOCIAL_OG_SRC =
+  process.env.SOCIAL_OG_SRC ??
+  join(process.env.HOME ?? "", "Documents/Work/00 - New portfolio/Social web.jpg");
 const APP_DIR = join(ROOT, "src/app");
 const OG_OUT = join(ROOT, "public/images/og.jpg");
 
 const OG_WIDTH = 1200;
 const OG_HEIGHT = 630;
-const OG_BG = { r: 9, g: 9, b: 11 }; // zinc-950
 
 /** Pack one or more PNG buffers into a Windows .ico (PNG-embedded entries). */
 function packPngIco(entries) {
@@ -91,33 +92,14 @@ async function writeFavicons() {
 }
 
 async function writeOgImage() {
-  const portraitSize = 520;
-  const portrait = await sharp(PFP)
-    .resize(portraitSize, portraitSize, { fit: "cover", position: "centre" })
-    .png()
-    .toBuffer();
-
-  await sharp({
-    create: {
-      width: OG_WIDTH,
-      height: OG_HEIGHT,
-      channels: 3,
-      background: OG_BG,
-    },
-  })
-    .composite([
-      {
-        input: portrait,
-        left: Math.round((OG_WIDTH - portraitSize) / 2),
-        top: Math.round((OG_HEIGHT - portraitSize) / 2),
-      },
-    ])
+  await sharp(SOCIAL_OG_SRC)
+    .resize(OG_WIDTH, OG_HEIGHT, { fit: "cover", position: "centre" })
     .jpeg({ quality: 90, mozjpeg: true })
     .toFile(OG_OUT);
 }
 
 async function main() {
-  for (const path of [FAVICON_32, FAVICON_256, PFP]) {
+  for (const path of [FAVICON_32, FAVICON_256, SOCIAL_OG_SRC]) {
     try {
       await sharp(path).metadata();
     } catch {
