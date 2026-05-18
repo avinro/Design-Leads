@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { PostHogProvider } from "@/components/analytics/posthog-provider";
 import { AnalyticsClickDelegator } from "@/components/analytics/click-delegator";
+import { INTRO_BLOCK_FIRST_PAINT_SCRIPT } from "@/lib/intro/block-first-paint";
 import { SITE_URL, SITE_NAME, OWNER_JOB_TITLE } from "@/lib/seo/site";
 
 /* Display/headings font */
@@ -63,6 +64,13 @@ export default function RootLayout({
       lang="en"
       className={`${googleSansFlex.variable} ${manrope.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        {/*
+         * Synchronous first-paint guard for the session intro (see SiteIntroGate).
+         * Must run before body paint; pairs with .avinro-intro-pending in globals.css.
+         */}
+        <script dangerouslySetInnerHTML={{ __html: INTRO_BLOCK_FIRST_PAINT_SCRIPT }} />
+      </head>
       <body className="flex min-h-dvh flex-col">
         {/*
          * PostHogProvider captures App Router pageviews via usePathname +

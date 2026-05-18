@@ -325,6 +325,23 @@
   }
 }
 
+/* ─── Intro first-paint cover ─────────────────────────────────────────────
+ * Root layout runs INTRO_BLOCK_FIRST_PAINT_SCRIPT before body paint when the
+ * intro has not been seen this session. Matches IntroOpener (bg-foreground).
+ */
+html.avinro-intro-pending body {
+  overflow: hidden;
+}
+
+html.avinro-intro-pending body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background-color: var(--foreground);
+  pointer-events: none;
+}
+
 /* ─── Lenis smooth scroll compatibility ───────────────────────────────────
  * Official Lenis recommendations to prevent conflicts with CSS
  * scroll-behavior: smooth and to allow Lenis to control the scroll root.
