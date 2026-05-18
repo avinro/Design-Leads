@@ -14,6 +14,7 @@ import type { GalleryItem } from "@/lib/content/works";
  *   square    → 1/1
  *   landscape → 16/9
  *   wide      → 21/9  (panoramic — hero shots, spatial UI)
+ *   natural   → no fixed frame; uses intrinsicWidth/intrinsicHeight for stable layout
  */
 
 const ASPECT_RATIOS = {
@@ -30,13 +31,45 @@ interface WorkGalleryFigureProps {
 }
 
 export function WorkGalleryFigure({ item, priority = false, className }: WorkGalleryFigureProps) {
-  const aspect = ASPECT_RATIOS[item.aspect ?? "portrait"];
+  if (item.aspect === "natural" && item.intrinsicWidth != null && item.intrinsicHeight != null) {
+    return (
+      <figure className={cn("w-full", className)}>
+        <div className="bg-muted w-full min-w-0 overflow-hidden rounded-xl">
+          <Image
+            src={item.src}
+            alt={item.alt}
+            width={item.intrinsicWidth}
+            height={item.intrinsicHeight}
+            priority={priority}
+            loading={priority ? undefined : "lazy"}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 90vw, 1200px"
+            className="h-auto w-full max-w-full"
+            style={{ width: "100%", height: "auto" }}
+          />
+        </div>
+        {item.caption && (
+          <figcaption className="text-muted-foreground mt-3 text-sm leading-relaxed">
+            {item.caption}
+          </figcaption>
+        )}
+      </figure>
+    );
+  }
+
+  const aspectKey: keyof typeof ASPECT_RATIOS =
+    item.aspect === "portrait" ||
+    item.aspect === "square" ||
+    item.aspect === "landscape" ||
+    item.aspect === "wide"
+      ? item.aspect
+      : "portrait";
+  const aspectRatio = ASPECT_RATIOS[aspectKey];
 
   return (
     <figure className={cn("w-full", className)}>
       <div
         className="bg-muted relative w-full overflow-hidden rounded-xl"
-        style={{ aspectRatio: aspect }}
+        style={{ aspectRatio: aspectRatio }}
       >
         <Image
           src={item.src}

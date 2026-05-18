@@ -19,27 +19,7 @@ tags:
   - Mobile UI
   - Design system
   - Shipped
-gallery:
-  - src: /works/pineapp/gallery-problem.svg
-    alt: Old paper-based pre-registration process versus new digital Pre-Visit flow inside PineApp
-    caption: Before — paper forms at the hospital front desk. After — a digital checklist completable from the app before arrival.
-    aspect: landscape
-  - src: /works/pineapp/gallery-flow.svg
-    alt: Four-step UX sequence from appointment card entry point to success confirmation screen
-    caption: Appointment card → multi-appointment confirmation → pre-registration checklist → success. Minimal decisions at each step.
-    aspect: landscape
-  - src: /works/pineapp/gallery-checklist.svg
-    alt: Pre-Registration checklist screen with appointment accordion, document status badges, and sticky Continue CTA
-    caption: The core screen. Appointment context at the top, document items by status, Continue CTA anchored to the bottom.
-    aspect: landscape
-  - src: /works/pineapp/gallery-system.svg
-    alt: Component board showing document card in three states, multi-appointment accordion, confirmation modal, and success state
-    caption: Not Started, Needs Review, Completed — three states, one component system covering the full feature scope.
-    aspect: landscape
-  - src: /works/pineapp/gallery-home-card.svg
-    alt: Three-state appointment card comparison — original, Pre-Visit integration, and post-completion confirmed state
-    caption: Home card redesign. Original → Pre-Register with Manage dropdown → Confirmed with Review button.
-    aspect: landscape
+gallery: []
 ---
 
 <WorkMetadataGrid>
@@ -53,39 +33,49 @@ gallery:
 
 ---
 
-## Design Challenge
+## Design Approach
 
-Before this feature existed, Baptist Health patients had to complete pre-registration forms manually at the front desk — on paper, under stress, and close to their appointment time.
+Before this feature existed, Baptist Health patients had to complete pre-registration forms manually at the front desk — on paper, under stress, and close to their appointment time. The challenge was to bring this offline process into the app in a way that felt simple, clear, and trustworthy for older adults with limited smartphone confidence, while handling real operational complexity: multiple appointments on the same day, several document types with different statuses, and irreversible final confirmation.
 
-The app already showed appointment information, but patients had no way to complete pre-visit steps digitally before arriving. The challenge was to bring this offline process into the app in a way that felt simple, clear, and trustworthy for users who were often older adults with limited smartphone confidence.
+User research pointed consistently toward older adults — many of them retired, using a smartphone mainly for calls and texts. This shaped four core design principles:
 
-At the same time, the flow had to handle real operational complexity: multiple appointments on the same day, several document types with different statuses, and a final confirmation step that had to feel irreversible by design.
+<div className="my-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+  <div className="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
+    <h3 className="mb-3 text-lg font-semibold">Progressive Disclosure</h3>
+    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+      Instead of recreating a paper form inside the app, the experience reveals information step by
+      step. Users first see what needs attention, then drill into each item only when needed.
+    </p>
+  </div>
+
+<div className="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
+  <h3 className="mb-3 text-lg font-semibold">Status Visibility</h3>
+  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+    Every checklist item carries a clear state: Not Started, Needs Review, or Completed. Progress is
+    visible at a glance without relying on instructions.
+  </p>
+</div>
+
+<div className="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
+  <h3 className="mb-3 text-lg font-semibold">Irreversible by Design</h3>
+  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+    Once submitted, the data could not be changed by the patient inside the flow. The UI makes this
+    explicit before the final step — reducing confusion and accidental submissions.
+  </p>
+</div>
+
+  <div className="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
+    <h3 className="mb-3 text-lg font-semibold">Multi-Appointment Clarity</h3>
+    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+      When users had multiple appointments on the same day, the accordion pattern showed exactly
+      which visits the forms applied to, removing ambiguity from a stressful scenario.
+    </p>
+  </div>
+</div>
 
 <Figure
-  src="/works/pineapp/gallery-problem.svg"
-  alt="Old paper-based pre-registration process versus new digital Pre-Visit flow inside PineApp"
-  caption="Before — arrive at hospital, wait at front desk, fill paper forms. After — open app, tap Pre-Register, complete checklist before arrival."
-  aspect="landscape"
-/>
-
----
-
-## Design Direction
-
-The user research pointed consistently toward older adults — many of them retired, using a smartphone mainly for calls and texts. That shaped every design decision.
-
-**Progressive disclosure over long forms.** Instead of recreating a paper form inside the app, the experience reveals information step by step. Users first see what needs attention, then drill into each item only when needed.
-
-**Status visibility as the core pattern.** Every checklist item carries a clear state: Not Started, Needs Review, or Completed. Progress is visible at a glance without relying on instructions.
-
-**Irreversible confirmation by design.** Once submitted, the data could not be changed by the patient inside the flow. Rather than hiding this, the UI makes it explicit before the final step — reducing confusion and accidental submissions.
-
-**Multi-appointment without confusion.** When users had multiple appointments on the same day, the accordion pattern showed exactly which visits the forms applied to, removing ambiguity from a stressful scenario.
-
-<Figure
-  src="/works/pineapp/gallery-checklist.svg"
-  alt="Pre-Registration checklist screen with appointment accordion, document status badges, and sticky Continue CTA"
-  caption="Appointment accordion at the top. Status badges per item. Continue CTA visible regardless of scroll position."
+  src="/works/pineapp/design-direction.jpg"
+  alt="Design approach for Pre-Visit — progressive disclosure, status visibility, and high-contrast mobile patterns"
   aspect="landscape"
 />
 
@@ -93,57 +83,51 @@ The user research pointed consistently toward older adults — many of them reti
 
 ## UX Structure
 
-The flow was built around one goal: arrive at the hospital with everything already completed.
+The flow was built around one goal: arrive at the hospital with everything already completed. The design system ensured consistency across four key steps — from entry point through completion — using functional color (Baptist Health green for actions, amber for attention states), high-contrast typography optimized for older adults, and thumb-friendly mobile layout throughout.
 
-### Entry Point — Appointment Card
+<div className="my-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+  <div className="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
+    <div className="text-primary mb-4 text-5xl font-bold">1</div>
+    <h3 className="mb-2 text-lg font-semibold">Entry Point</h3>
+    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+      CTA on appointment card with contextual hint to guide users
+    </p>
+  </div>
 
-The **Pre-Register** CTA lives directly on the appointment card on the Home screen. A contextual hint below explains the action in plain language, reducing hesitation for less experienced users.
+<div className="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
+  <div className="text-primary mb-4 text-5xl font-bold">2</div>
+  <h3 className="mb-2 text-lg font-semibold">Multi-Appointment</h3>
+  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+    Dedicated screen for multiple appointments on the same day
+  </p>
+</div>
 
-### Multi-Appointment Confirmation
+<div className="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
+  <div className="text-primary mb-4 text-5xl font-bold">3</div>
+  <h3 className="mb-2 text-lg font-semibold">Pre-Registration</h3>
+  <p className="text-sm text-neutral-600 dark:text-neutral-400">
+    Core checklist where users submit required documents in any order with sticky CTA
+  </p>
+</div>
 
-If the user has multiple appointments on the same day, a dedicated screen lists them before the flow begins, explaining that the information applies to all listed visits.
-
-### Pre-Registration Checklist
-
-The checklist is the core screen. Each required document is listed with its current status and users can address items in any order. The appointment accordion collapses once the user has understood the context. The Continue CTA remains anchored to the bottom regardless of scroll position.
-
-### Success State
-
-Once all items are submitted, a clear success screen with arrival instructions closes the loop. For virtual visits, the flow communicates when the visit becomes accessible. Push notifications confirm each completed step outside the app.
+  <div className="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
+    <div className="text-primary mb-4 text-5xl font-bold">4</div>
+    <h3 className="mb-2 text-lg font-semibold">Success State</h3>
+    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+      Success screen with arrival instructions and push notifications
+    </p>
+  </div>
+</div>
 
 <Figure
-  src="/works/pineapp/gallery-flow.svg"
-  alt="Four-step UX sequence from appointment card entry point to success confirmation screen"
-  caption="Appointment card to completion in four steps. Each screen has one primary action — no branching decisions for the user."
+  src="/works/pineapp/ux-structure-2.jpg"
+  alt="UX structure — component system across document states, accordion, confirmation, and success"
   aspect="landscape"
 />
 
----
-
-## UI System
-
-The Pre-Visit flow was designed within the existing Baptist Health / PineApp visual system and extended with new components specific to this feature.
-
-**Color was used functionally.** Baptist Health green drove primary actions. Amber handled attention and review states. Neutral grays provided structure and supporting text.
-
-**Typography for older users.** Large, high-contrast body text. Label/value hierarchy on document cards. Each screen focused on a single topic to reduce cognitive load.
-
-**Layout for thumb reach.** Single-column mobile layout throughout. Generous tap targets. Bottom-anchored CTAs. Compact but readable document cards. Collapsible accordion to preserve vertical space.
-
-### Components created or extended
-
-- Status badge: three states (Not Started, Needs Review, Completed)
-- Expandable document review card
-- Multi-appointment accordion
-- Confirmation modal
-- Success state screen
-- Step-by-step push notification pattern
-- Document type icons: insurance card, consent form, license / ID, MSPQ
-
 <Figure
-  src="/works/pineapp/gallery-system.svg"
-  alt="Component board showing document card in three states, multi-appointment accordion, confirmation modal, and success state"
-  caption="System thinking across the feature. Three status states per document type. Accordion collapsed and expanded. Confirmation and success patterns."
+  src="/works/pineapp/ux-structure-1.jpg"
+  alt="UX structure — four-step flow from appointment card entry through pre-registration to success"
   aspect="landscape"
 />
 
@@ -158,10 +142,10 @@ A **Manage** dropdown consolidated secondary actions — appointment info, resch
 Once pre-registration was complete, the card updated to show a Confirmed badge, registration status, tappable address and phone links, and a **Review** button replacing the Pre-Register CTA.
 
 <Figure
-  src="/works/pineapp/gallery-home-card.svg"
+  src="/works/pineapp/home-card-redesign.jpg"
   alt="Three-state appointment card comparison — original, Pre-Visit ready, and post-completion confirmed state"
-  caption="Original card → Pre-Visit integration with Manage dropdown and Pre-Register CTA → Confirmed state with Review button."
-  aspect="landscape"
+  width={2880}
+  height={1712}
 />
 
 ---
@@ -181,7 +165,6 @@ The Pre-Visit flow shipped to production and replaced a manual, in-person proces
 <Figure
   src="/works/pineapp/result.jpg"
   alt="Final product gallery showing the complete Pre-Visit flow in sequence — shipped to production"
-  caption="Shipped to production. Pre-Visit moved hospital pre-registration from paper forms to a mobile-first digital experience."
   aspect="landscape"
 />
 

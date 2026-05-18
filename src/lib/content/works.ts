@@ -22,13 +22,39 @@ import { z } from "zod";
 // Frontmatter schema
 // ---------------------------------------------------------------------------
 
-const GalleryItemSchema = z.object({
-  src: z.string().min(1),
-  alt: z.string().min(1),
-  caption: z.string().optional(),
-  /** Explicit aspect override per image — defaults to portrait (4:5). */
-  aspect: z.enum(["portrait", "square", "landscape", "wide"]).optional(),
-});
+const GalleryItemSchema = z
+  .object({
+    src: z.string().min(1),
+    alt: z.string().min(1),
+    caption: z.string().optional(),
+    /**
+     * Explicit aspect override per image — defaults to portrait (4:5).
+     * `natural` follows the image proportions (no fixed aspect-ratio frame); requires intrinsicWidth/intrinsicHeight.
+     */
+    aspect: z.enum(["portrait", "square", "landscape", "wide", "natural"]).optional(),
+    /** Pixel width — required with intrinsicHeight when aspect is natural. */
+    intrinsicWidth: z.number().int().positive().optional(),
+    /** Pixel height — required with intrinsicWidth when aspect is natural. */
+    intrinsicHeight: z.number().int().positive().optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.aspect === "natural") {
+      if (data.intrinsicWidth == null) {
+        ctx.addIssue({
+          code: "custom",
+          message: "intrinsicWidth is required when aspect is natural",
+          path: ["intrinsicWidth"],
+        });
+      }
+      if (data.intrinsicHeight == null) {
+        ctx.addIssue({
+          code: "custom",
+          message: "intrinsicHeight is required when aspect is natural",
+          path: ["intrinsicHeight"],
+        });
+      }
+    }
+  });
 
 export type GalleryItem = z.infer<typeof GalleryItemSchema>;
 
