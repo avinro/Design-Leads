@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site/site-header";
 import { SiteFooter } from "@/components/site/site-footer";
 import { MobileCtaBar } from "@/components/site/mobile-cta-bar";
 import { LenisProvider } from "@/components/site/lenis-provider";
+import { RouteScrollRestore } from "@/components/site/route-scroll-restore";
 import { SiteIntroGate } from "@/components/site/site-intro-gate";
 import { CalendlyPrefetch } from "@/components/site/calendly-prefetch";
 
@@ -12,6 +13,7 @@ import { CalendlyPrefetch } from "@/components/site/calendly-prefetch";
  *
  * Structure:
  *   LenisProvider   — smooth scroll + GSAP ScrollTrigger sync (>=md only)
+ *   RouteScrollRestore — scroll to top on pathname change (Lenis + native)
  *   SiteIntroGate   — hard render gate for the first-session intro.
  *                     On first visit: renders only the intro overlay; the site
  *                     tree is not mounted until the intro completes.
@@ -30,6 +32,7 @@ import { CalendlyPrefetch } from "@/components/site/calendly-prefetch";
 export default function SiteLayout({ children }: { children: ReactNode }) {
   return (
     <LenisProvider>
+      <RouteScrollRestore />
       <SiteIntroGate>
         <SiteHeader />
         {/*

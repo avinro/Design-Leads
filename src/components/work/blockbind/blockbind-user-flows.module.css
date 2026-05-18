@@ -44,6 +44,27 @@
   padding: 8px 120px;
 }
 
+/* Home / Wallet Dashboard: 7-column hub (reference HTML section 02). */
+.root :global(#f2.flow) {
+  width: 1120px;
+  max-width: none;
+}
+
+.root :global(#f2 .flow-grid) {
+  grid-template-columns: repeat(7, 160px);
+  --node-w: 148px;
+}
+
+/* Main Navigation: four columns (reference HTML section 03). */
+.root :global(#f3.flow) {
+  width: calc(var(--col-w) * 4);
+  max-width: none;
+}
+
+.root :global(#f3 .flow-grid) {
+  grid-template-columns: repeat(4, var(--col-w));
+}
+
 @media (max-width: 639px) {
   .root :global(.flow.wide) {
     padding: 8px 20px;

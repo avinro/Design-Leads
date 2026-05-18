@@ -77,39 +77,57 @@ export const blockbindUserFlowDiagrams: ReactNode[] = [
     </div>
   </div>,
 
-  <div key="f2" id="f2" className="flow wide">
+  <div key="f2" id="f2" className="flow">
     <svg className="connectors" aria-hidden />
     <div className="flow-grid">
       <div
         id="n2-home"
-        className="node node--terminal c2 r1"
-        data-to="n2-balance,n2-wallet-sel,n2-qr,n2-recv,n2-buy,n2-send,n2-settings,n2-nav"
+        className="node node--terminal r1"
+        style={{
+          gridColumn: "1 / -1",
+          justifySelf: "center",
+          width: 360,
+          padding: "12px 20px",
+          flexDirection: "column",
+          gap: 4,
+          lineHeight: 1.25,
+        }}
+        data-to="n2-wallet-sel,n2-recv,n2-buy,n2-send,n2-settings,n2-nav,n2-qr"
       >
-        Home
+        <span>Home / Wallet Dashboard</span>
+        <span
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: 10,
+            letterSpacing: "0.08em",
+            opacity: 0.7,
+            textTransform: "uppercase",
+          }}
+        >
+          Balance · Portfolio · Tokens
+        </span>
       </div>
-      <div id="n2-balance" className="node c2 r3">
-        Total balance · Tokens
-      </div>
-      <div id="n2-wallet-sel" className="node c1 r5">
+
+      <div id="n2-wallet-sel" className="node r3" style={{ gridColumn: 1 }}>
         Wallet selector
       </div>
-      <div id="n2-qr" className="node c2 r5">
-        QR · Quick pay
-      </div>
-      <div id="n2-settings" className="node c3 r5">
-        Settings
-      </div>
-      <div id="n2-recv" className="node c1 r7">
+      <div id="n2-recv" className="node r3" style={{ gridColumn: 2 }}>
         Receive
       </div>
-      <div id="n2-buy" className="node c2 r7">
+      <div id="n2-buy" className="node r3" style={{ gridColumn: 3 }}>
         Buy
       </div>
-      <div id="n2-send" className="node c3 r7">
+      <div id="n2-send" className="node r3" style={{ gridColumn: 4 }}>
         Send
       </div>
-      <div id="n2-nav" className="node node--system c2 r9">
+      <div id="n2-settings" className="node r3" style={{ gridColumn: 5 }}>
+        Settings
+      </div>
+      <div id="n2-nav" className="node node--system r3" style={{ gridColumn: 6 }}>
         Bottom navigation
+      </div>
+      <div id="n2-qr" className="node r3" style={{ gridColumn: 7 }}>
+        QR · Quick pay
       </div>
     </div>
   </div>,
@@ -119,21 +137,22 @@ export const blockbindUserFlowDiagrams: ReactNode[] = [
     <div className="flow-grid">
       <div
         id="n3-nav"
-        className="node node--system c2 r1"
-        data-to="n3-wallet,n3-nfts,n3-swap,n3-activity"
+        className="node node--system r1"
+        style={{ gridColumn: "2 / span 2" }}
+        data-to="n3-home,n3-nfts,n3-swap,n3-activity"
       >
         Bottom Navigation
       </div>
-      <div id="n3-wallet" className="node c1 r3">
-        Wallet · Home
+      <div id="n3-home" className="node r3" style={{ gridColumn: 1 }}>
+        Home
       </div>
-      <div id="n3-nfts" className="node c2 r3">
+      <div id="n3-nfts" className="node r3" style={{ gridColumn: 2 }}>
         NFTs · Tokens
       </div>
-      <div id="n3-swap" className="node c3 r3">
+      <div id="n3-swap" className="node r3" style={{ gridColumn: 3 }}>
         Swap
       </div>
-      <div id="n3-activity" className="node c2 r5">
+      <div id="n3-activity" className="node r3" style={{ gridColumn: 4 }}>
         Activity
       </div>
     </div>
