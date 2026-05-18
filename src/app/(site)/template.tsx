@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { gsap } from "gsap";
 
+import { INTRO_JUST_COMPLETED_SESSION_KEY } from "@/lib/intro/constants";
+
 // ---------------------------------------------------------------------------
 // SiteTemplate — per-page enter animation.
 //
@@ -24,8 +26,6 @@ import { gsap } from "gsap";
 //   - No exit animation — navigation must feel immediate.
 // ---------------------------------------------------------------------------
 
-const JUST_COMPLETED_KEY = "avinro:intro-just-completed";
-
 export default function SiteTemplate({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -36,9 +36,9 @@ export default function SiteTemplate({ children }: { children: ReactNode }) {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     // Consume the one-shot flag set by SiteIntroGate.
-    const introJustCompleted = sessionStorage.getItem(JUST_COMPLETED_KEY);
+    const introJustCompleted = sessionStorage.getItem(INTRO_JUST_COMPLETED_SESSION_KEY);
     if (introJustCompleted) {
-      sessionStorage.removeItem(JUST_COMPLETED_KEY);
+      sessionStorage.removeItem(INTRO_JUST_COMPLETED_SESSION_KEY);
       return;
     }
 
