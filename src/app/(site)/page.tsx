@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { SITE_URL, SITE_NAME, OWNER_JOB_TITLE } from "@/lib/seo/site";
+import { SITE_OG_IMAGE, SITE_TWITTER_CARD } from "@/lib/seo/social";
 import { PersonJsonLd } from "@/lib/seo/json-ld";
 import { getPublishedCaseStudies } from "@/lib/content/case-studies";
 import { getPublishedWorks } from "@/lib/content/works";
@@ -12,11 +13,6 @@ import type { SelectedWorkItem } from "@/components/site/flowing-work-menu";
 import { AboutCursorImages } from "@/components/site/about-cursor-images";
 import { TestimonialsCarousel } from "@/components/site/testimonials-carousel";
 
-/*
- * Home page metadata — Open Graph and Twitter cards are wired to the
- * dynamic opengraph-image.tsx handler in this directory so they update
- * automatically whenever the handler changes.
- */
 const HOME_TITLE = `${SITE_NAME} — ${OWNER_JOB_TITLE}`;
 const HOME_DESCRIPTION =
   "Product designer crafting thoughtful UX systems, brand identities, and digital products.";
@@ -31,23 +27,13 @@ export const metadata: Metadata = {
     title: HOME_TITLE,
     description: HOME_DESCRIPTION,
     url: SITE_URL,
-    siteName: SITE_NAME,
-    locale: "en_US",
-    type: "website",
-    images: [
-      {
-        url: "/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: HOME_TITLE,
-      },
-    ],
+    images: [SITE_OG_IMAGE],
   },
   twitter: {
-    card: "summary_large_image",
+    card: SITE_TWITTER_CARD,
     title: HOME_TITLE,
     description: HOME_DESCRIPTION,
-    images: ["/opengraph-image"],
+    images: [SITE_OG_IMAGE.url],
   },
 };
 

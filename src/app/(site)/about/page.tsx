@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { aboutContent } from "@/lib/content/about";
+import { SITE_OG_IMAGE, SITE_TWITTER_CARD } from "@/lib/seo/social";
 import { PersonJsonLd } from "@/lib/seo/json-ld";
 import type { ExperienceEntry, EducationEntry, ToolGroup } from "@/lib/content/about";
 import { Container } from "@/components/layout/container";
@@ -24,21 +25,14 @@ export const metadata: Metadata = {
     description:
       "Product Design Engineer working at the intersection of strategy, design, and front-end implementation.",
     url: "/about",
-    images: [
-      {
-        url: "/about/opengraph-image",
-        width: 1200,
-        height: 630,
-        alt: "Avinro — Product Design Engineer",
-      },
-    ],
+    images: [SITE_OG_IMAGE],
   },
   twitter: {
-    card: "summary_large_image",
+    card: SITE_TWITTER_CARD,
     title: "Avinro — Product Design Engineer",
     description:
       "Product Design Engineer working at the intersection of strategy, design, and front-end implementation.",
-    images: ["/about/opengraph-image"],
+    images: [SITE_OG_IMAGE.url],
   },
 };
 

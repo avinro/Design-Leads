@@ -19,7 +19,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "prepare": "husky",
-    "lighthouse:preview": "lighthouse --preset=perf --form-factor=mobile --throttling-method=simulate --output=html --output-path=./lighthouse-report.html --chrome-flags=\"--headless --no-sandbox\""
+    "lighthouse:preview": "lighthouse --preset=perf --form-factor=mobile --throttling-method=simulate --output=html --output-path=./lighthouse-report.html --chrome-flags=\"--headless --no-sandbox\"",
+    "generate:brand-assets": "node scripts/generate-brand-assets.mjs"
   },
   "lint-staged": {
     "*.{ts,tsx,js,mjs,cjs}": [

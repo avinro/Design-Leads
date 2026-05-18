@@ -5,7 +5,7 @@ import { getCaseStudyBySlug, getCaseStudySlugs } from "@/lib/content/case-studie
  * Per-slug Open Graph image for case study pages.
  *
  * Renders title, client, year, and an accent rule following the same visual
- * language as the global opengraph-image.tsx handler so all OG images feel
+ * language as the site-wide OG portrait card so all OG images feel
  * like a coherent system.
  *
  * runtime = "nodejs" uses Fluid Compute (recommended over Edge per Vercel

@@ -7,6 +7,7 @@ import { PostHogProvider } from "@/components/analytics/posthog-provider";
 import { AnalyticsClickDelegator } from "@/components/analytics/click-delegator";
 import { INTRO_BLOCK_FIRST_PAINT_SCRIPT } from "@/lib/intro/block-first-paint";
 import { SITE_URL, SITE_NAME, OWNER_JOB_TITLE } from "@/lib/seo/site";
+import { SITE_OG_IMAGE, SITE_TWITTER_CARD } from "@/lib/seo/social";
 
 /* Display/headings font */
 const googleSansFlex = Google_Sans_Flex({
@@ -39,14 +40,26 @@ const geistMono = Geist_Mono({
   variable: "--font-mono",
 });
 
+const DEFAULT_DESCRIPTION =
+  "Product designer crafting thoughtful UX systems, brand identities, and digital products.";
+
 export const metadata: Metadata = {
   title: {
     default: `${SITE_NAME} — ${OWNER_JOB_TITLE}`,
     template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Product designer crafting thoughtful UX systems, brand identities, and digital products.",
+  description: DEFAULT_DESCRIPTION,
   metadataBase: new URL(SITE_URL),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: SITE_NAME,
+    images: [SITE_OG_IMAGE],
+  },
+  twitter: {
+    card: SITE_TWITTER_CARD,
+    images: [SITE_OG_IMAGE.url],
+  },
 };
 
 export default function RootLayout({
