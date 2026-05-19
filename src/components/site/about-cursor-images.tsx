@@ -301,6 +301,7 @@ export function AboutCursorImages() {
 // ---------------------------------------------------------------------------
 
 interface AboutTeaser {
+  greeting: string;
   bio: string;
   linkLabel: string;
   linkHref: string;
@@ -310,9 +311,14 @@ function TextContent({ aboutTeaser }: { aboutTeaser: AboutTeaser }) {
   return (
     <Container width="narrow">
       <div className="mx-auto flex max-w-xl flex-col items-center gap-5 text-center">
-        <p className="font-display text-foreground text-2xl leading-snug font-semibold tracking-tight text-balance sm:text-3xl">
-          {aboutTeaser.bio}
-        </p>
+        <div className="flex flex-col gap-3">
+          <p className="font-display text-foreground text-2xl leading-snug font-semibold tracking-tight text-balance sm:text-3xl">
+            {aboutTeaser.greeting}
+          </p>
+          <p className="font-display text-foreground text-2xl leading-snug font-semibold tracking-tight text-balance sm:text-3xl">
+            {aboutTeaser.bio}
+          </p>
+        </div>
         <span className="relative z-20 inline-flex justify-center">
           <SiteTextLink href={aboutTeaser.linkHref} variant="inlineMono">
             {aboutTeaser.linkLabel}

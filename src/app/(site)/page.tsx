@@ -5,6 +5,7 @@ import { SITE_OG_IMAGE, SITE_TWITTER_CARD } from "@/lib/seo/social";
 import { PersonJsonLd } from "@/lib/seo/json-ld";
 import { getPublishedCaseStudies } from "@/lib/content/case-studies";
 import { getPublishedWorks } from "@/lib/content/works";
+import { siteMetaDescription } from "@/lib/content/home";
 import { testimonials } from "@/lib/content/testimonials";
 import { HomeHero } from "@/components/site/home-hero";
 import { WorkDivider } from "@/components/site/work-divider";
@@ -14,25 +15,23 @@ import { AboutCursorImages } from "@/components/site/about-cursor-images";
 import { TestimonialsCarousel } from "@/components/site/testimonials-carousel";
 
 const HOME_TITLE = `${SITE_NAME} — ${OWNER_JOB_TITLE}`;
-const HOME_DESCRIPTION =
-  "Product designer crafting thoughtful UX systems, brand identities, and digital products.";
 
 export const metadata: Metadata = {
   title: HOME_TITLE,
-  description: HOME_DESCRIPTION,
+  description: siteMetaDescription,
   alternates: {
     canonical: "/",
   },
   openGraph: {
     title: HOME_TITLE,
-    description: HOME_DESCRIPTION,
+    description: siteMetaDescription,
     url: SITE_URL,
     images: [SITE_OG_IMAGE],
   },
   twitter: {
     card: SITE_TWITTER_CARD,
     title: HOME_TITLE,
-    description: HOME_DESCRIPTION,
+    description: siteMetaDescription,
     images: [SITE_OG_IMAGE.url],
   },
 };

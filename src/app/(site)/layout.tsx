@@ -7,6 +7,7 @@ import { LenisProvider } from "@/components/site/lenis-provider";
 import { RouteScrollRestore } from "@/components/site/route-scroll-restore";
 import { SiteIntroGate } from "@/components/site/site-intro-gate";
 import { CalendlyPrefetch } from "@/components/site/calendly-prefetch";
+import { AiChatLoader } from "@/components/site/ai-chat-loader";
 
 /**
  * Marketing site layout — applies to all public portfolio pages.
@@ -62,6 +63,7 @@ export default function SiteLayout({ children }: { children: ReactNode }) {
         <div aria-hidden="true" className="h-[calc(100dvh-72px)] shrink-0" />
         <MobileCtaBar />
         <CalendlyPrefetch />
+        <AiChatLoader />
       </SiteIntroGate>
     </LenisProvider>
   );

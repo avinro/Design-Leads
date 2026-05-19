@@ -134,6 +134,7 @@ export function IntroOpener({ onComplete }: IntroOpenerProps) {
       aria-modal="true"
       aria-label="Intro"
       tabIndex={-1}
+      suppressHydrationWarning
       className="bg-foreground text-background fixed inset-0 z-[70] flex items-center justify-center px-6 text-center focus:outline-none"
     >
       <TextType

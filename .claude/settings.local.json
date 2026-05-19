@@ -5,7 +5,17 @@
       "Bash(npx tsc *)",
       "Bash(npm run *)",
       "Bash(git *)",
-      "Bash(awk '{print $NF}')"
+      "Bash(awk '{print $NF}')",
+      "Bash(kill 63503)",
+      "Bash(curl -X POST http://localhost:3000/api/chat -H 'Content-Type: application/json' -d '{\"messages\":[{\"role\":\"user\",\"content\":\"What is your name?\"}]}' --max-time 5)",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(curl -s -N -X POST http://localhost:3000/api/chat -H 'Content-Type: application/json' -d '{\"messages\":[{\"role\":\"user\",\"content\":\"Hi\"}]}' --max-time 8)",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(kill 68979)",
+      "Bash(timeout 3 curl -s -X POST http://localhost:3000/api/chat -H 'Content-Type: application/json' -d '{\"messages\":[{\"role\":\"user\",\"content\":\"test\"}]}')",
+      "Bash(curl *)",
+      "Bash(python3)",
+      "Bash(pkill -f \"npm run dev\")"
     ]
   }
 }

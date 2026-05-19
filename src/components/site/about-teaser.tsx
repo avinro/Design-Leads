@@ -24,10 +24,14 @@ export function AboutTeaser() {
     <Section>
       <Container width="narrow">
         <div className="max-w3xl mx-auto flex flex-col items-center gap-5 text-center">
-          {/* Bio — centred, acts as the section heading */}
-          <p className="font-display text-foreground text-2xl leading-snug font-semibold tracking-tight sm:text-3xl">
-            {aboutTeaser.bio}
-          </p>
+          <div className="flex flex-col gap-3">
+            <p className="font-display text-foreground text-2xl leading-snug font-semibold tracking-tight sm:text-3xl">
+              {aboutTeaser.greeting}
+            </p>
+            <p className="font-display text-foreground text-2xl leading-snug font-semibold tracking-tight sm:text-3xl">
+              {aboutTeaser.bio}
+            </p>
+          </div>
 
           {/* Mono link — meta/navigation register */}
           <SiteTextLink href={aboutTeaser.linkHref} variant="inlineMono">

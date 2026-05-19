@@ -82,6 +82,7 @@ export interface HomeContent {
   };
   aboutTeaser: {
     sectionTitle: string;
+    greeting: string;
     bio: string;
     linkLabel: string;
     linkHref: string;
@@ -145,7 +146,8 @@ export const homeContent: HomeContent = {
   },
   aboutTeaser: {
     sectionTitle: "About",
-    bio: "I'm Ary. Product Design Engineer working at the intersection of product, design and execution. I help teams go from unclear ideas to structured products — and ship them.",
+    greeting: "Hey, I'm Ary",
+    bio: "Designer, builder, problem solver. Outside of work, probably traveling, working out, watching anime, or spending time with people I care about.",
     linkLabel: "More about me",
     linkHref: "/about",
   },
@@ -169,3 +171,9 @@ export const homeContent: HomeContent = {
     { src: "/about/lifestyle/05.webp", alt: "" },
   ],
 };
+
+/**
+ * Meta description for the homepage and root layout SEO / social fallbacks.
+ * Single source of truth with the hero H1 (`hero.headline` in HomeHero).
+ */
+export const siteMetaDescription = homeContent.hero.headline;

@@ -570,3 +570,53 @@ html.lenis-smooth {
     opacity: 1;
   }
 }
+
+/* ────────────────────────────────────────────────────────────────────
+ * AI Chat — response HTML rendering
+ * ────────────────────────────────────────────────────────────────────
+ * The API returns semantic HTML: <h3>, <p>, <ul>, <li>, <strong>, <a>.
+ * These styles ensure proper hierarchy and visual integration into the
+ * chat sheet's minimal, editorial aesthetic.
+ */
+
+.prose-chat h3 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0.75rem 0 0.2rem;
+}
+
+.prose-chat p {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--foreground);
+  margin: 0.3rem 0;
+}
+
+.prose-chat ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  margin: 0.3rem 0;
+}
+
+.prose-chat li {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  margin: 0.1rem 0;
+}
+
+.prose-chat strong {
+  font-weight: 600;
+}
+
+.prose-chat a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: opacity 150ms;
+}
+
+.prose-chat a:hover {
+  opacity: 0.8;
+}

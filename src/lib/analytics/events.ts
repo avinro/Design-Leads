@@ -48,7 +48,9 @@ export type AppEvent =
       name: "case_study_scroll";
       props: { slug: string; threshold: ScrollThreshold };
     }
-  | { name: "calendly_modal_open"; props: { position: string } };
+  | { name: "calendly_modal_open"; props: { position: string } }
+  | { name: "ai_chat_open"; props: Record<string, never> }
+  | { name: "ai_chat_message_sent"; props: { messageCount: number } };
 
 // ---------------------------------------------------------------------------
 // Core track helper

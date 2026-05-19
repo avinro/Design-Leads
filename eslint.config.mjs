@@ -30,6 +30,7 @@ const eslintConfig = defineConfig([
     "coverage/**",
     "node_modules/**",
     "next-env.d.ts",
+    "src/app/*site*/layout.tsx", // Group route with special chars
   ]),
 ]);
 
