@@ -11,15 +11,23 @@ const SheetTrigger = DialogPrimitive.Trigger;
 const SheetClose = DialogPrimitive.Close;
 const SheetPortal = DialogPrimitive.Portal;
 
+type SheetVariant = "default" | "chat";
+
 function SheetOverlay({
   className,
+  variant = "default",
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
+}: React.ComponentProps<typeof DialogPrimitive.Overlay> & { variant?: SheetVariant }) {
   return (
     <DialogPrimitive.Overlay
       data-slot="sheet-overlay"
+      data-variant={variant}
       className={cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/60 backdrop-blur-sm",
+        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50",
+        "motion-reduce:transition-none motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
+        variant === "default" && "bg-black/60 backdrop-blur-sm",
+        variant === "chat" &&
+          "bg-black/40 backdrop-blur-none supports-[backdrop-filter]:backdrop-blur-[2px] motion-reduce:supports-[backdrop-filter]:backdrop-blur-none",
         className,
       )}
       {...props}
@@ -30,18 +38,25 @@ function SheetOverlay({
 function SheetContent({
   className,
   children,
+  overlayClassName,
+  variant = "default",
   ...props
-}: React.ComponentProps<typeof DialogPrimitive.Content>) {
+}: React.ComponentProps<typeof DialogPrimitive.Content> & {
+  overlayClassName?: string;
+  variant?: SheetVariant;
+}) {
   return (
     <SheetPortal>
-      <SheetOverlay />
+      <SheetOverlay variant={variant} className={overlayClassName} />
       <DialogPrimitive.Content
         data-slot="sheet-content"
+        data-variant={variant}
         className={cn(
           // Position — right side, full viewport height
           "fixed inset-y-0 right-0 z-50 h-dvh w-full sm:max-w-[480px] lg:max-w-[560px]",
           // Surface
           "bg-background sm:border-border sm:border-l",
+          variant === "chat" && "min-h-0 overflow-hidden sm:shadow-2xl",
           // Shape — square on mobile (full screen), rounded left edge on sm+
           "rounded-none sm:rounded-l-2xl",
           // Layout — flex column so the Calendly region can flex-1
@@ -49,6 +64,7 @@ function SheetContent({
           // Slide in/out from the right
           "data-[state=open]:animate-in data-[state=open]:slide-in-from-right",
           "data-[state=closed]:animate-out data-[state=closed]:slide-out-to-right",
+          "motion-reduce:transition-none motion-reduce:data-[state=closed]:animate-none motion-reduce:data-[state=open]:animate-none",
           // Timing — enter 300ms, exit 200ms for responsiveness
           "data-[state=closed]:duration-200 data-[state=open]:duration-300",
           "ease-out focus:outline-none",
@@ -59,10 +75,13 @@ function SheetContent({
         {children}
         <DialogPrimitive.Close
           data-slot="sheet-close"
-          className="focus-ring absolute top-4 right-4 rounded-full p-1.5 opacity-60 transition-opacity hover:opacity-100 disabled:pointer-events-none"
+          className={cn(
+            "focus-ring absolute flex min-h-11 min-w-11 items-center justify-center rounded-full opacity-60 transition-opacity hover:opacity-100 disabled:pointer-events-none",
+            "top-[max(1rem,env(safe-area-inset-top))] right-[max(1rem,env(safe-area-inset-right))]",
+          )}
           aria-label="Close"
         >
-          <X className="h-5 w-5" aria-hidden="true" />
+          <X className="h-5 w-5 shrink-0" aria-hidden="true" />
         </DialogPrimitive.Close>
       </DialogPrimitive.Content>
     </SheetPortal>

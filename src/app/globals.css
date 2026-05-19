@@ -572,6 +572,46 @@ html.lenis-smooth {
 }
 
 /* ────────────────────────────────────────────────────────────────────
+ * AI Chat — Vivi “thinking” indicator (three sequential dots)
+ * ────────────────────────────────────────────────────────────────────
+ */
+
+@keyframes vivi-thinking-dot {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+
+  35% {
+    transform: translateY(-3px);
+    opacity: 0.9;
+  }
+}
+
+.vivi-thinking-dot {
+  animation: vivi-thinking-dot 1.1s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* Dots follow the visually hidden status label (1st child). */
+.vivi-thinking-dot:nth-child(3) {
+  animation-delay: 0.15s;
+}
+
+.vivi-thinking-dot:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vivi-thinking-dot {
+    animation: none;
+    transform: none;
+    opacity: 0.65;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────
  * AI Chat — response HTML rendering
  * ────────────────────────────────────────────────────────────────────
  * The API returns semantic HTML: <h3>, <p>, <ul>, <li>, <strong>, <a>.
