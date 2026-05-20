@@ -53,7 +53,6 @@ Built a production-ready expense automation platform that turned restaurant pape
   alt="UMA — product overview: WhatsApp capture and web dashboard"
   width={2880}
   height={1620}
-  caption="WhatsApp-first capture, web dashboard for analysis. One product, two interfaces, purpose-built for the restaurant vertical."
 />
 
 ## Snapshot
@@ -83,7 +82,6 @@ My role was founding product design engineer. I owned product definition and UX 
   alt="UMA dual-interface concept — WhatsApp capture and web dashboard"
   width={2880}
   height={1620}
-  caption="WhatsApp = frictionless daily upload. Web dashboard = real-time visibility and exportable data for advisors. Two surfaces, one data layer."
 />
 
 ## Context
@@ -99,7 +97,6 @@ The company was attempting to establish a new category in the expense-management
   alt="UMA context — capture, extraction, insights, and export-grade data"
   width={2880}
   height={1620}
-  caption="Frictionless capture, reliable AI extraction, meaningful insights, and export-grade data quality — all had to be solved simultaneously."
 />
 
 ## Problem statement
@@ -125,7 +122,6 @@ I joined UMA as a **Founding Product Design Engineer** with **10% equity**, lead
   alt="UMA — founding product design engineer role and operating constraints"
   width={2880}
   height={1620}
-  caption="Operating constraints: team of three with design + frontend + ops on one person; one month to MVP, two more to launch-ready; validation through founder and peer chats only; first AI-assisted build with Cursor + Claude; 5–10s extraction latency requiring async UX; product built toward a launch that never closed."
 />
 
 ## Product strategy
@@ -137,7 +133,6 @@ The product strategy was shaped around three principles: **accessibility over co
   alt="UMA product strategy — accessibility, depth on demand, and restaurant-first focus"
   width={2880}
   height={1620}
-  caption="Three principles: meet owners on WhatsApp (accessibility over comprehensiveness), web for depth on demand (trends, drill-down, exports), and profitability first — “Am I making money?” before everything else."
 />
 
 ## Key decisions
@@ -197,8 +192,10 @@ The product was structured around complementary journeys across WhatsApp and web
 The system worked because it prioritized **speed and simplicity**. Receipt uploads happened directly through **WhatsApp**, removing friction from the process while giving users **immediate feedback** that their files were received. AI processing happened asynchronously in the background, allowing owners to continue their workflow without waiting, while a single conversation thread handled both **expense capture** and **financial questions**.
 
 <Figure
-  placeholderLabel="WhatsApp upload flow"
-  caption="Photo → AI extraction → confirmation message with summary and link to invoice table. The entire capture loop happens inside an existing WhatsApp conversation."
+  src="/case-studies/uma/images/receipt-upload.jpg"
+  alt="WhatsApp receipt upload flow showing phone camera, AI extraction icon, and web dashboard"
+  width={2880}
+  height={1620}
 />
 
 ### Flow 2: Dashboard + KPI Overview
@@ -210,8 +207,10 @@ The system worked because it prioritized **speed and simplicity**. Receipt uploa
 The dashboard worked because it focused on **clarity over complexity**. Core metrics like **revenue**, **expenses**, and **profit** answered the most important business question in seconds, while **semantic color coding** reduced cognitive load and made financial health instantly understandable. More detailed insights were progressively revealed through a clear **drill-down structure**, and the entire experience was designed with a **mobile-first layout** that remained easy to scan and navigate on smaller screens.
 
 <Figure
-  placeholderLabel="Dashboard — KPIs, expense breakdown, spending trends"
-  caption="Four KPI cards at top, top-five expense breakdown with color-coded category bars, six-month spending line chart. Mobile-first stacked layout — core question answered in the first scroll."
+  src="/case-studies/uma/images/dashboard-overview.jpg"
+  alt="UMA dashboard showing KPI cards, expenses breakdown, and spending trends"
+  width={2880}
+  height={1620}
 />
 
 ### Flow 3: Invoice Table + Categorization Control
@@ -223,108 +222,56 @@ The dashboard worked because it focused on **clarity over complexity**. Core met
 The expense management system worked because it combined **visibility**, **control**, and **operational clarity**. Every expense remained fully traceable through a complete **audit trail**, while users could quickly correct AI mistakes and improve data accuracy over time. Features like **payment status tracking**, **bulk management actions**, and **export-ready data structures** made it easier for restaurant owners to manage cash flow and collaborate with financial advisors without additional manual work.
 
 <Figure
-  placeholderLabel="Invoice table"
-  caption="Searchable, filterable, status- and payment-tracked. Inline category editing trains the AI model. Every receipt becomes a structured, auditable record."
+  src="/case-studies/uma/images/invoice-table.jpg"
+  alt="UMA invoice table with document management and modal interactions"
+  width={2880}
+  height={1620}
 />
 
-<StateGrid columns={4}>
-  <StateItem
-    icon="upload"
-    label="Uploaded"
-    hint="Waiting for the extraction worker"
-    tone="neutral"
-  />
-  <StateItem icon="loader" label="Processing" hint="AI is reading the receipt" tone="warning" />
-  <StateItem
-    icon="alert-triangle"
-    label="Needs review"
-    hint="Low confidence — user verifies"
-    tone="warning"
-  />
-  <StateItem
-    icon="check-circle-2"
-    label="Processed"
-    hint="Extracted and categorized"
-    tone="accent"
-  />
-  <StateItem icon="clock" label="Pending" hint="Due date in the future" tone="neutral" />
-  <StateItem icon="check" label="Paid" hint="Marked as settled" tone="positive" />
-  <StateItem icon="alert-octagon" label="Overdue" hint="Past due, still unpaid" tone="negative" />
-</StateGrid>
+### Flow 4: Reports + Year Breakdown
 
-### Flow 4: Conversational Q&A via Chat
+**Problem:** Owners need to understand expense patterns over time. Which months were profitable? Where did spending spike? They need this data in a format they can study and share with advisors.
 
-**Problem:** Owners have specific questions ("What were my expenses last month?" or "How much did I spend on labor?"). Dashboards show aggregates; chat allows natural-language queries.
+**Solution:** The Reports section shows a Year Breakdown table with rows for each expense category (Purchases, External Services, Personnel Expenses, Management Expenses, Revenue, Net Profit, Profitability) and columns for each month. Users can see exact amounts and trends at a glance. A toggle lets them switch between 6-month and 12-month views. An "Export data" button lets them download the entire dataset for accountants.
 
-**Solution:** A chat interface in the Reports section lets owners ask questions. The AI processes the query against the expense database and responds with a summary and relevant data.
-
-The AI assistant worked because it enabled a more **natural and conversational interaction model**. Instead of navigating filters or building reports manually, users could ask questions directly and receive **context-aware answers** tied to suppliers, categories, or time periods. It also created a valuable feedback loop, where unanswered questions exposed gaps in the product and opportunities for improvement. While not a core workflow, the feature added a layer of **speed**, **accessibility**, and **delight** that resonated especially well with power users.
+<p>
+  The reporting system worked because it provided 
+  <strong>complete financial visibility</strong> in a single structured view, making revenue, expenses, and category breakdowns easy to understand over time. 
+  Viewing data across longer periods helped owners identify 
+  <strong>seasonal patterns</strong>, 
+  <strong>cost anomalies</strong>, and operational trends that would otherwise remain hidden in spreadsheets or disconnected reports. 
+  The information was also designed to be 
+  <strong>export-ready</strong> and presented in a 
+  <strong>professional financial format</strong> familiar to accountants and advisors, reinforcing trust and making the platform feel operationally reliable rather than consumer-oriented.
+</p>
 
 <Figure
-  placeholderLabel="Chat — natural-language reports"
-  caption="Owners ask questions in plain language. The AI queries the expense database and responds with a summary and relevant data — no filters, no report builder."
+  src="/case-studies/uma/images/reports.jpg"
+  alt="UMA reports showing year breakdown table and mobile reports view"
+  width={2880}
+  height={1620}
 />
 
-## Design engineering
+## Design Engineering & Frontend Implementation
 
-The design system was built ground-up to support production scale:
+**UMA** became a defining moment in my transition from **Product Designer** to **Product Design Engineer**. I owned the **full frontend implementation layer**, combining product thinking, design systems, and **AI-assisted engineering workflows** to ship **production-ready interfaces**.
 
-**Variants & responsive behavior:**
+The **design system** was built ground-up to support scalable implementation across mobile, tablet, and desktop environments. Components were intentionally structured to map directly into **React architecture**, with **reusable behaviors**, **aligned prop structures**, and **synchronized design tokens** exported from Figma into the Tailwind configuration.
 
-Every component was designed with **mobile**, **tablet**, and **desktop variants** to ensure consistency across devices. Data-heavy interfaces like tables transformed into **card-based layouts on mobile**, while KPI sections adapted from stacked vertical views to multi-column desktop grids. Charts also simplified into **single-metric summaries** on smaller screens to preserve readability and reduce cognitive load. All interactive elements included fully defined **hover**, **active**, **disabled**, and **focus states**.
+Using **Figma, Cursor, Claude, and Figma MCP integration**, the workflow evolved into a tightly connected **design-to-code pipeline**. Components were designed, generated into React code, refined through prompting and implementation, connected to **real APIs**, and validated across **real devices** in an iterative loop that significantly reduced the gap between design and production.
 
-**Engineering handoff:**
+Beyond UI execution, the role required **close collaboration with the CTO** to align frontend behavior with backend and product logic. This included **dashboard data flows**, **invoice processing states**, **AI categorization behavior**, **export formatting requirements**, and **real-time synchronization between WhatsApp uploads and the web application**.
 
-To reduce inconsistencies between design and implementation, **Figma variables** were exported as JSON and connected directly to the **Tailwind configuration**, ensuring design tokens matched production tokens exactly. Component documentation included interaction states, accessibility requirements, and behavioral specifications, while alignment with engineering covered **React component APIs**, prop structures, and implementation logic to preserve design intent throughout development.
+**Responsive behavior and usability** were treated as core system requirements rather than post-launch adjustments. Complex data interfaces adapted dynamically across breakpoints, including **table-to-card transformations on mobile**, **simplified KPI visualizations**, and **fully defined interaction states** across all components.
 
-**Production considerations:**
-
-Figma components were intentionally structured to map directly to **React components**, minimizing visual drift between design and production. Using **Cursor** and **Figma MCP**, I could rapidly generate, review, and iterate on frontend code directly from the design system. Due to timeline constraints, testing relied primarily on **manual QA across real devices** rather than automated component testing, but the design system was stable enough that regression issues remained manageable throughout development.
+Due to timeline constraints, quality assurance relied primarily on **manual testing** across **iOS Safari, Android Chrome, and desktop browsers**. However, the consistency of the component system and shared architecture helped minimize regression risk throughout development.
 
 <Figure
-  placeholderLabel="Component inventory — 20+ components"
-  caption="KPI cards, charts, invoice tables, status badges, modals, forms, empty states, loading skeletons — all mobile-first with responsive variants and full interactive state coverage."
+  src="/case-studies/uma/images/design-engineering.jpg"
+  alt="Design-to-code workflow: Figma MCP to React to Supabase to UMA Agent, integrated into the web application"
+  width={2880}
+  height={1620}
 />
-
-<Bar
-  value={100}
-  label="Design tokens shared between Figma and Tailwind config"
-  caption="Single source of truth: Figma variables exported to JSON, fed directly into Tailwind config. Zero manual colour or spacing values in component files."
-/>
-
-## Frontend / implementation layer
-
-UMA became a defining moment in my transition from **Product Designer** to **Product Design Engineer**. It was the first time I used **AI-assisted code generation at production scale**, taking ownership of the entire frontend implementation layer, including **React architecture**, **Tailwind styling**, **API integrations**, and **state management**.
-
-**Tools & workflow:**
-
-The workflow combined **Figma**, **Cursor**, and **Figma MCP integration** to create a tightly connected design-to-code pipeline. I designed all components, responsive variants, and interaction states in Figma, then used Cursor with **Claude Opus** and **Sonnet** to generate production-ready React code directly from the design files. Styling was handled entirely through **Tailwind CSS**, with design tokens exported from Figma into the Tailwind configuration to keep spacing, typography, and colors synchronized between design and production.
-
-The process was highly iterative: design a component, generate code, review the output, refine interactions and layouts through prompting, connect real API data, and validate behavior across devices. Over time, I learned how to structure prompts that produced not only visually accurate UI, but also **clean, scalable, buildable code**.
-
-**Product logic alignment:**
-
-Building the frontend required deep understanding of the underlying product and backend logic. Together with the CTO, we aligned on critical implementation details such as **dashboard data flows**, **invoice processing states**, **AI category assignment logic**, **export formatting requirements**, and **real-time synchronization behavior** between WhatsApp uploads and the web application.
-
-This collaboration was essential to ensure the UX reflected **implementation reality** and avoided designing flows or interactions that could not be reliably supported by the system architecture.
-
-**Design-to-code bridge:**
-
-Figma components were intentionally structured to map directly into **React components** with aligned prop structures and reusable behaviors. Design tokens, responsive layouts, typography, and spacing systems remained synchronized between design and production, minimizing visual drift throughout development. All responsive behavior was validated on **real devices** rather than relying exclusively on browser breakpoints or emulators.
-
-**Quality control:**
-
-Quality assurance relied primarily on **manual testing** across **iOS Safari**, **Android Chrome**, and **desktop browsers**. Testing focused heavily on responsive layouts, modal interactions, form behavior, and mobile table usability. Although no automated testing infrastructure was implemented due to timeline constraints, the consistency of the design system and the reuse of shared components significantly reduced regression risk during development.
-
-<FlowChain highlightLast>
-  <FlowItem icon="palette" label="Design in Figma" hint="All states, all variants" />
-  <FlowItem icon="plug" label="Figma MCP" hint="Reads tokens and component spec" />
-  <FlowItem icon="code-2" label="Cursor generates React" hint="Claude Opus / Sonnet" />
-  <FlowItem icon="eye" label="Review" hint="Loop on prompts until pixel-perfect" tone="warning" />
-  <FlowItem icon="database" label="Wire Supabase API" />
-  <FlowItem icon="smartphone" label="Test on real devices" />
-  <FlowItem icon="rocket" label="Ship" />
-</FlowChain>
 
 ## Collaboration
 
@@ -350,7 +297,6 @@ UMA demonstrated that a small team could rapidly build a differentiated, multi-i
 
 <Figure
   placeholderLabel="Final state — production-ready, unfunded"
-  caption="All features end-to-end functional. Design system complete. Codebase clean. Funding closed before launch — a business failure, not a product failure."
 />
 
 ## What I would improve
@@ -382,5 +328,4 @@ The product didn't launch for business reasons, not product reasons. But the wor
   alt="UMA final reflection — from product designer to product design engineer"
   width={2880}
   height={1620}
-  caption="UMA was the proof of concept that design and code can be owned end-to-end, at production scale, by one person — without handoff gaps, without visual drift, without separate worlds."
 />

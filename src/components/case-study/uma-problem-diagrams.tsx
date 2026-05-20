@@ -617,7 +617,7 @@ const differentiators: DiffCardData[] = [
 export function UmaDifferentiators() {
   return (
     <div className="my-12 sm:my-16">
-      <div className="grid gap-6 sm:grid-cols-2 md:gap-7">
+      <div className="grid gap-4 sm:grid-cols-2 md:gap-5 lg:grid-cols-3">
         {differentiators.map((d) => (
           <DifferentiatorCard key={d.number} {...d} />
         ))}
