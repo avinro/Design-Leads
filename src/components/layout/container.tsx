@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
  *   narrow   ≈ long-form prose                      (max-w-prose)
  *   default  ≈ standard portfolio sections          (max-w-6xl)
  *   wide     ≈ hero blocks, gallery grids           (max-w-7xl)
+ *   caseStudy ≈ case study hero + chrome            (max-w-[1420px])
  *   full     ≈ edge-to-edge sections (no max-width)
  *
  * Gutters are not configurable on purpose — they enforce a single
@@ -27,6 +28,7 @@ const containerVariants = cva("mx-auto w-full px-4 sm:px-6 lg:px-8", {
       narrow: "max-w-prose",
       default: "max-w-6xl",
       wide: "max-w-7xl",
+      caseStudy: "max-w-[1420px]",
       full: "max-w-none",
     },
   },

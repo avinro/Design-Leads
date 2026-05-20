@@ -234,7 +234,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       {!frontmatter.draft && <CreativeWorkJsonLd cs={cs} slug={slug} />}
       {/* Hero section — cover + metadata strip */}
       <Section spacing="heroInternal">
-        <Container>
+        <Container width="caseStudy">
           {/* Page h1 — lives here, not in MDX body (heading-hierarchy rule) */}
           <h1 className="font-display mb-8 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             {frontmatter.title}
@@ -255,7 +255,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       {/* Outcome strip — top-level KPIs from frontmatter, visible before the body */}
       {Array.isArray(frontmatter.kpis) && frontmatter.kpis.length > 0 ? (
         <Section spacing="card">
-          <Container>
+          <Container width="caseStudy">
             <p className="text-muted-foreground mb-6 font-mono text-xs tracking-widest uppercase">
               Outcome
             </p>
@@ -264,7 +264,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </Section>
       ) : null}
 
-      {/* MDX body — full viewport width (max 2440px) for the three-column grid */}
+      {/* MDX body — full width, max 1080px (TOC + content + optional rail) */}
       <Section>
         <CaseStudyBodyShell>
           <CaseStudyBody

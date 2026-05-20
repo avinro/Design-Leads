@@ -26,6 +26,13 @@ describe("Container", () => {
     expect(html).not.toContain("max-w-6xl");
   });
 
+  it("applies width=caseStudy", () => {
+    const html = renderToStaticMarkup(<Container width="caseStudy">x</Container>);
+    expect(html).toContain('data-width="caseStudy"');
+    expect(html).toContain("max-w-[1420px]");
+    expect(html).not.toContain("max-w-6xl");
+  });
+
   it("applies width=full", () => {
     const html = renderToStaticMarkup(<Container width="full">x</Container>);
     expect(html).toContain("max-w-none");

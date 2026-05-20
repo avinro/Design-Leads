@@ -19,10 +19,11 @@
  *   Stats       — responsive grid of large display stat blocks
  *   BeforeAfter — two-up before/after comparison card
  *   Bar         — single horizontal proportion bar
+ *   TextImageSplit — side-by-side title, text, and 4:3 image for editorial sections
  */
 
 import Image from "next/image";
-import type { ComponentPropsWithoutRef } from "react";
+import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "@/lib/utils";
 import { MdxInternalBodyLink } from "./mdx-internal-body-link";
@@ -40,6 +41,11 @@ import {
   BranchTree,
   Branch,
 } from "./flow-primitives";
+import {
+  UmaPainPoints,
+  UmaTransformation,
+  UmaDifferentiators,
+} from "@/components/case-study/uma-problem-diagrams";
 
 // ---------------------------------------------------------------------------
 // Heading components
@@ -338,6 +344,119 @@ export function Figure({
 }
 
 // ---------------------------------------------------------------------------
+// TextImageSplit — side-by-side text and 4:3 image for editorial sections
+//
+// Usage:
+//   <TextImageSplit title="User problem" imagePosition="right" placeholderLabel="User problem" alt="...">
+//     Paragraph text…
+//   </TextImageSplit>
+// ---------------------------------------------------------------------------
+
+interface TextImageSplitProps {
+  title?: string;
+  imagePosition?: "left" | "right";
+  src?: string;
+  alt?: string;
+  placeholderLabel?: string;
+  children: ReactNode;
+  className?: string;
+}
+
+function SplitImagePlaceholder({ label }: { label?: string }) {
+  return (
+    <div
+      className="bg-muted/60 border-border/40 flex aspect-[4/3] w-full items-center justify-center rounded-xl border border-dashed"
+      aria-hidden={label ? undefined : true}
+      aria-label={label}
+    >
+      <div className="flex flex-col items-center gap-2 px-4 py-6 text-center">
+        <svg
+          width="28"
+          height="28"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-muted-foreground/40"
+          aria-hidden="true"
+        >
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" />
+          <path d="m21 15-5-5L5 21" />
+        </svg>
+        {label && (
+          <span className="text-muted-foreground/50 font-mono text-xs tracking-wide uppercase">
+            {label}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function TextImageSplit({
+  title,
+  imagePosition = "right",
+  src,
+  alt = "",
+  placeholderLabel,
+  children,
+  className,
+}: TextImageSplitProps) {
+  const imageBlock = (
+    <div className="w-full">
+      {src ? (
+        <Image
+          src={src}
+          alt={alt}
+          width={800}
+          height={600}
+          loading="lazy"
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="aspect-[4/3] w-full rounded-xl object-cover"
+        />
+      ) : (
+        <SplitImagePlaceholder label={placeholderLabel ?? alt} />
+      )}
+    </div>
+  );
+
+  const textBlock = (
+    <div className="w-full min-w-0">
+      {title && (
+        <h3 className="font-display mb-3 scroll-mt-24 text-xl font-semibold tracking-tight sm:text-2xl">
+          {title}
+        </h3>
+      )}
+      <div className="[&>p:last-child]:mb-0">{children}</div>
+    </div>
+  );
+
+  return (
+    <div
+      className={cn(
+        "my-6 flex flex-col gap-6 md:my-8 md:grid md:grid-cols-2 md:items-center md:gap-8",
+        className,
+      )}
+    >
+      {imagePosition === "left" ? (
+        <>
+          <div className="order-2 md:order-1">{imageBlock}</div>
+          <div className="order-1 md:order-2">{textBlock}</div>
+        </>
+      ) : (
+        <>
+          <div className="order-1">{textBlock}</div>
+          <div className="order-2">{imageBlock}</div>
+        </>
+      )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Stats — responsive grid of large display stat blocks
 //
 // Usage:
@@ -592,6 +711,7 @@ export const mdxComponents: MDXComponents = {
   Stats,
   BeforeAfter,
   Bar,
+  TextImageSplit,
   // Flow diagram primitives — visual replacements for narrative diagrams.
   // See src/components/mdx/flow-primitives.tsx for full API and tone system.
   // Wrapper components:
@@ -612,4 +732,8 @@ export const mdxComponents: MDXComponents = {
   // Project snapshot metadata — icon + label + value cards for case study intros.
   WorkMetadataGrid,
   WorkMetadataCard,
+  // UMA case study diagrams — interactive visualizations for problem statement.
+  UmaPainPoints,
+  UmaTransformation,
+  UmaDifferentiators,
 };
