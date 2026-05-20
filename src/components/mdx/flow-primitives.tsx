@@ -787,6 +787,27 @@ interface BranchTreeProps {
   className?: string;
 }
 
+/** Vertical drop from the shared bus into a branch column (column-track center). */
+function BranchColumnDrop({ className }: { className?: string }) {
+  return (
+    <div
+      aria-hidden="true"
+      className={cn("pointer-events-none flex w-full shrink-0 justify-center", className)}
+    >
+      <div className="bg-border min-h-5 w-0.5" />
+    </div>
+  );
+}
+
+/** Mobile-only: simple vertical connector above a stacked branch. */
+function BranchMobileConnector() {
+  return (
+    <div aria-hidden="true" className="flex justify-center py-3">
+      <div className="bg-border h-8 w-0.5" />
+    </div>
+  );
+}
+
 export function BranchTree({ icon, label, hint, children, className }: BranchTreeProps) {
   const branches = Children.toArray(children).filter((c): c is ReactElement<BranchProps> =>
     isValidElement(c),
@@ -802,72 +823,129 @@ export function BranchTree({ icon, label, hint, children, className }: BranchTre
         ? "md:grid-cols-3"
         : "md:grid-cols-2 lg:grid-cols-4";
 
-  return (
-    <div className={cn("my-10", className)}>
-      {/* Root node */}
-      <div className="flex justify-center">
-        <div className="bg-foreground text-background inline-flex max-w-md items-center gap-3 rounded-2xl px-5 py-3 shadow-sm sm:px-6 sm:py-4">
-          <IconBadge
-            icon={icon}
-            className="border-background/20 bg-background/10 text-background"
-          />
-          <div className="text-left">
-            <p className="font-display text-sm leading-tight font-semibold sm:text-base">{label}</p>
-            {hint && <p className="text-background/70 text-xs leading-snug">{hint}</p>}
-          </div>
-        </div>
-      </div>
+  const trunkColumnStart = count % 2 === 0 ? count / 2 : Math.floor(count / 2) + 1;
+  const trunkColumnSpan = count % 2 === 0 ? 2 : 1;
+  const branchGridClass = cn(
+    "grid grid-cols-1 gap-x-4 sm:gap-x-5",
+    gridClass,
+    "gap-y-0 md:[grid-template-rows:auto_auto_auto_auto]",
+  );
+  const branchRow = count > 1 ? 4 : 2;
 
-      {/* Vertical connector from root to branches */}
-      <div aria-hidden="true" className="bg-border/70 mx-auto my-4 h-6 w-px" />
-
-      {/* Branch columns */}
-      <div className={cn("grid grid-cols-1 gap-4 md:gap-5", gridClass)}>
-        {branches.map((branch, i) => {
-          const bp = branch.props;
-          const styles = toneStyles(bp.tone ?? "accent");
-
-          const items = Children.toArray(bp.children).filter(
-            (c): c is ReactElement<FlowItemProps> => isValidElement(c),
-          );
-
+  const renderBranchSection = (bp: BranchProps, items: ReactElement<FlowItemProps>[]) => (
+    <section className="border-border bg-muted/30 w-full rounded-2xl border p-5 sm:p-6">
+      <h3 className="font-display text-foreground mb-5 flex items-center gap-2.5 text-sm font-bold tracking-wide uppercase">
+        <span className="bg-muted/60 h-2.5 w-2.5 rounded-full" aria-hidden="true" />
+        <span className="text-xs tracking-widest">{bp.title}</span>
+      </h3>
+      <ol role="list" className="flex flex-col gap-3">
+        {items.map((item, j) => {
+          const ip = item.props;
+          const isLast = j === items.length - 1;
           return (
-            <section
-              key={i}
-              className="border-border/60 bg-muted/30 flex flex-col rounded-2xl border p-4 sm:p-5"
-            >
-              <h3 className="font-display mb-4 inline-flex items-center gap-2 text-sm font-semibold tracking-tight uppercase">
-                <span className={cn("h-2 w-2 rounded-full", styles.dot)} aria-hidden="true" />
-                <span className="text-foreground/80 text-xs tracking-widest">{bp.title}</span>
-              </h3>
-
-              <ol role="list" className="flex flex-col gap-3">
-                {items.map((item, j) => {
-                  const ip = item.props;
-                  const isLast = j === items.length - 1;
-                  return (
-                    <Fragment key={j}>
-                      <li className="w-full">
-                        <FlowItemCard
-                          icon={ip.icon}
-                          label={ip.label}
-                          hint={ip.hint}
-                          tone={ip.tone}
-                          index={j + 1}
-                        />
-                      </li>
-                      {!isLast && (
-                        <li aria-hidden="true" className="flex justify-center">
-                          <FlowConnector orientation="v" />
-                        </li>
-                      )}
-                    </Fragment>
-                  );
-                })}
-              </ol>
-            </section>
+            <Fragment key={j}>
+              <li className="w-full">
+                <FlowItemCard
+                  icon={ip.icon}
+                  label={ip.label}
+                  hint={ip.hint}
+                  tone={ip.tone}
+                  index={j + 1}
+                />
+              </li>
+              {!isLast && (
+                <li aria-hidden="true" className="flex justify-center">
+                  <FlowConnector orientation="v" />
+                </li>
+              )}
+            </Fragment>
           );
         })}
+      </ol>
+    </section>
+  );
+
+  return (
+    <div className={cn("my-12", className)}>
+      {/* Single grid: root, trunk, bus, and branch columns share column tracks */}
+      <div className={branchGridClass}>
+        {/* Row 1 — root */}
+        <div className="col-span-full flex justify-center" style={{ gridRow: 1 }}>
+          <div className="border-primary bg-foreground text-background inline-flex max-w-lg items-center gap-3 rounded-full border py-2 pr-5 pl-2.5 sm:py-3 sm:pr-7 sm:pl-3.5">
+            <IconBadge
+              icon={icon}
+              className="border-background/20 bg-background/10 text-background h-12 w-12 rounded-full [&_svg]:h-5 [&_svg]:w-5"
+            />
+            <div className="text-left">
+              <p className="font-display text-sm leading-tight font-bold sm:text-base">{label}</p>
+              {hint && <p className="text-background/70 mt-0.5 text-xs leading-snug">{hint}</p>}
+            </div>
+          </div>
+        </div>
+
+        {/* Row 2 — trunk (vertical, centered on the middle column boundary) */}
+        {count > 1 && (
+          <div
+            aria-hidden="true"
+            className="pointer-events-none hidden justify-center md:flex"
+            style={{
+              gridColumn: `${String(trunkColumnStart)} / span ${String(trunkColumnSpan)}`,
+              gridRow: 2,
+            }}
+          >
+            <div className="bg-border h-7 w-0.5" />
+          </div>
+        )}
+
+        {/* Row 3 — bus from first branch center to last (not full grid width) */}
+        {count > 1 && (
+          <div
+            aria-hidden="true"
+            className="border-border pointer-events-none col-span-full hidden justify-self-center border-t-2 md:block"
+            style={{
+              gridRow: 3,
+              width: `calc(${String((count - 1) / count)} * 100% + 16px)`,
+            }}
+          />
+        )}
+
+        {/* Row 4 — desktop: one branch per column track */}
+        <div className="contents hidden md:contents">
+          {branches.map((branch, i) => {
+            const bp = branch.props;
+            const items = Children.toArray(bp.children).filter(
+              (c): c is ReactElement<FlowItemProps> => isValidElement(c),
+            );
+
+            return (
+              <div
+                key={`desktop-${String(i)}`}
+                className="flex min-w-0 flex-col items-center"
+                style={{ gridColumn: i + 1, gridRow: branchRow }}
+              >
+                {count > 1 && <BranchColumnDrop />}
+                {renderBranchSection(bp, items)}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Mobile — stacked branches */}
+        <div className="contents md:hidden">
+          {branches.map((branch, i) => {
+            const bp = branch.props;
+            const items = Children.toArray(bp.children).filter(
+              (c): c is ReactElement<FlowItemProps> => isValidElement(c),
+            );
+
+            return (
+              <div key={`mobile-${String(i)}`} className="col-span-full flex flex-col">
+                <BranchMobileConnector />
+                {renderBranchSection(bp, items)}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

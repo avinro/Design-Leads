@@ -47,7 +47,7 @@ function CardOverlay({ title, badges }: { title: string; badges: readonly string
         )}
         style={{
           background:
-            "linear-gradient(to top, rgba(0,0,0,0.40) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0) 100%)",
+            "linear-gradient(to top, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0) 70%, rgba(0,0,0,0) 100%)",
         }}
       />
 
@@ -93,6 +93,9 @@ export function CaseStudyGridCard({ cs, className }: CaseStudyGridCardProps) {
       href={`/case-studies/${frontmatter.slug}`}
       data-slot="case-study-grid-card"
       data-work-slug={frontmatter.slug}
+      data-work-card-slug={frontmatter.slug}
+      data-work-card-title={frontmatter.title}
+      data-work-card-source="case_study_listing"
       className={cn("group focus-ring relative block cursor-pointer", className)}
       aria-label={`${frontmatter.title} — case study`}
     >

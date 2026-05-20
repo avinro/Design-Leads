@@ -17,6 +17,7 @@ import { Container } from "@/components/layout/container";
 import { Section } from "@/components/layout/section";
 import { CaseStudyScrollTracker } from "@/components/analytics/case-study-scroll-tracker";
 import { CaseStudyBody } from "@/components/case-study/case-study-body";
+import { CaseStudyBodyShell } from "@/components/case-study/case-study-body-shell";
 import { RelatedRail } from "@/components/case-study/related-rail";
 import { getRelatedItems } from "@/lib/content/related";
 
@@ -233,7 +234,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       {!frontmatter.draft && <CreativeWorkJsonLd cs={cs} slug={slug} />}
       {/* Hero section — cover + metadata strip */}
       <Section spacing="heroInternal">
-        <Container>
+        <Container width="caseStudy">
           {/* Page h1 — lives here, not in MDX body (heading-hierarchy rule) */}
           <h1 className="font-display mb-8 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             {frontmatter.title}
@@ -254,7 +255,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       {/* Outcome strip — top-level KPIs from frontmatter, visible before the body */}
       {Array.isArray(frontmatter.kpis) && frontmatter.kpis.length > 0 ? (
         <Section spacing="card">
-          <Container>
+          <Container width="caseStudy">
             <p className="text-muted-foreground mb-6 font-mono text-xs tracking-widest uppercase">
               Outcome
             </p>
@@ -263,9 +264,9 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
         </Section>
       ) : null}
 
-      {/* MDX body — widened to max-w-7xl to accommodate the two-column layout */}
+      {/* MDX body — full width, max 1080px (TOC + content + optional rail) */}
       <Section>
-        <Container width="wide">
+        <CaseStudyBodyShell>
           <CaseStudyBody
             headings={tocHeadings}
             rail={relatedItems.length > 0 ? <RelatedRail items={relatedItems} /> : undefined}
@@ -287,7 +288,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               />
             )}
           </CaseStudyBody>
-        </Container>
+        </CaseStudyBodyShell>
       </Section>
     </main>
   );

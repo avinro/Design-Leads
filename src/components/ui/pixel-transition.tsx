@@ -62,37 +62,65 @@ export function PixelTransition({
   const tlRef = useRef<gsap.core.Timeline | null>(null);
 
   // Build the pixel grid cells once on mount or when grid size / image source changes.
+  // Uses object-cover semantics so images with non-16:9 ratios aren't stretched.
   useEffect(() => {
     const grid = pixelGridRef.current;
-    if (!grid) return;
+    const container = containerRef.current;
+    if (!grid || !container) return;
 
+    let cancelled = false;
     grid.innerHTML = "";
 
     for (let row = 0; row < gridSize; row++) {
       for (let col = 0; col < gridSize; col++) {
         const cell = document.createElement("div");
-        const colPercent = (100 / gridSize).toFixed(2);
-        const rowPercent = (100 / gridSize).toFixed(2);
-        const leftPercent = ((col * 100) / gridSize).toFixed(2);
-        const topPercent = ((row * 100) / gridSize).toFixed(2);
-        const bgSizePercent = (gridSize * 100).toFixed(0);
-        const posX = gridSize > 1 ? ((col / (gridSize - 1)) * 100).toFixed(2) : "0";
-        const posY = gridSize > 1 ? ((row / (gridSize - 1)) * 100).toFixed(2) : "0";
-
         cell.style.cssText = [
           "position:absolute",
-          `width:${colPercent}%`,
-          `height:${rowPercent}%`,
-          `left:${leftPercent}%`,
-          `top:${topPercent}%`,
+          `width:${(100 / gridSize).toFixed(2)}%`,
+          `height:${(100 / gridSize).toFixed(2)}%`,
+          `left:${((col * 100) / gridSize).toFixed(2)}%`,
+          `top:${((row * 100) / gridSize).toFixed(2)}%`,
           `background-image:url(${defaultImageSrc})`,
-          `background-size:${bgSizePercent}% ${bgSizePercent}%`,
-          `background-position:${posX}% ${posY}%`,
           "background-repeat:no-repeat",
         ].join(";");
         grid.appendChild(cell);
       }
     }
+
+    const applyCover = () => {
+      if (cancelled || !img.naturalWidth || !img.naturalHeight) return;
+      const { width: cW, height: cH } = container.getBoundingClientRect();
+      if (!cW || !cH) return;
+
+      const scale = Math.max(cW / img.naturalWidth, cH / img.naturalHeight);
+      const rW = img.naturalWidth * scale;
+      const rH = img.naturalHeight * scale;
+      const oX = (cW - rW) / 2;
+      const oY = (cH - rH) / 2;
+      const cellW = cW / gridSize;
+      const cellH = cH / gridSize;
+      const cells = Array.from(grid.children) as HTMLElement[];
+
+      cells.forEach((cell, idx) => {
+        const col = idx % gridSize;
+        const row = Math.floor(idx / gridSize);
+        cell.style.backgroundSize = `${rW.toFixed(2)}px ${rH.toFixed(2)}px`;
+        cell.style.backgroundPosition = `${(oX - col * cellW).toFixed(2)}px ${(oY - row * cellH).toFixed(2)}px`;
+      });
+    };
+
+    const img = new window.Image();
+    img.onload = applyCover;
+    img.src = defaultImageSrc;
+    if (img.complete && img.naturalWidth) applyCover();
+
+    const ro = new ResizeObserver(applyCover);
+    ro.observe(container);
+
+    return () => {
+      cancelled = true;
+      ro.disconnect();
+    };
   }, [gridSize, defaultImageSrc]);
 
   const animate = useCallback(

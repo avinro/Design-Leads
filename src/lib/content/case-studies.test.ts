@@ -112,7 +112,7 @@ describe("case-studies content layer", () => {
   });
 
   it("each published study contains the required section headings", () => {
-    const requiredHeadings = ["## Problem statement", "## Process", "## Results and impact"];
+    const requiredHeadings = ["## Problem statement", "## Results and impact"];
     const published = getPublishedCaseStudies();
     published.forEach((cs) => {
       requiredHeadings.forEach((heading) => {

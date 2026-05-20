@@ -2,12 +2,15 @@ import type { LucideIcon } from "lucide-react";
 import {
   Building2,
   Calendar,
+  Clock,
   ExternalLink,
   Hexagon,
   LayoutGrid,
   Layers,
   Tag,
+  Target,
   UserRound,
+  Users,
   Zap,
 } from "lucide-react";
 import type { ReactNode } from "react";
@@ -21,19 +24,32 @@ import type {
  * Fixed palette + icon per metadata row. Keys are stable so colors never
  * change between renders or projects.
  */
-export type WorkMetadataKind = "type" | "industry" | "year" | "platform" | "status" | "role";
+export type WorkMetadataKind =
+  | "type"
+  | "industry"
+  | "year"
+  | "timeline"
+  | "platform"
+  | "status"
+  | "role"
+  | "client"
+  | "team"
+  | "scope";
 
-export type WorkMetadataVisualKind = WorkMetadataKind | "category" | "client" | "live";
+export type WorkMetadataVisualKind = WorkMetadataKind | "category" | "live";
 
 const METADATA_LABEL: Record<WorkMetadataVisualKind, string> = {
   type: "Type",
   industry: "Industry",
   year: "Year",
+  timeline: "Timeline",
   platform: "Platform",
   status: "Status",
   role: "Role",
-  category: "Category",
   client: "Client",
+  team: "Team",
+  scope: "Scope",
+  category: "Category",
   live: "Live",
 };
 
@@ -41,11 +57,14 @@ const METADATA_ICON: Record<WorkMetadataVisualKind, LucideIcon> = {
   type: LayoutGrid,
   industry: Building2,
   year: Calendar,
+  timeline: Clock,
   platform: Hexagon,
   status: Zap,
   role: Layers,
-  category: Tag,
   client: UserRound,
+  team: Users,
+  scope: Target,
+  category: Tag,
   live: ExternalLink,
 };
 
@@ -54,13 +73,23 @@ const METADATA_ICON_TONE: Record<WorkMetadataVisualKind, string> = {
   type: "text-sky-600 dark:text-sky-400/95",
   industry: "text-violet-600 dark:text-violet-400/95",
   year: "text-amber-700 dark:text-amber-500/95",
+  timeline: "text-amber-700 dark:text-amber-500/95",
   platform: "text-emerald-700 dark:text-emerald-400/95",
   status: "text-orange-600 dark:text-orange-400/95",
   role: "text-rose-600 dark:text-rose-400/95",
+  client: "text-fuchsia-700 dark:text-fuchsia-400/95",
+  team: "text-cyan-700 dark:text-cyan-400/95",
+  scope: "text-indigo-700 dark:text-indigo-400/95",
   category: "text-muted-foreground",
-  client: "text-muted-foreground",
   live: "text-accent",
 };
+
+/** Shared value typography — 16px / 110% line height. */
+const METADATA_VALUE_CLASS = "font-display text-foreground text-base leading-[1.1] font-semibold";
+
+/** MDX may wrap multiline card children in <p>; reset body paragraph styles. */
+const METADATA_VALUE_MDX_CHILD =
+  "[&>p]:text-foreground [&>p]:mb-0 [&>p]:text-base [&>p]:leading-[1.1] [&>p]:font-semibold [&>p]:sm:text-base [&>p]:lg:leading-[1.1]";
 
 export function WorkMetadataGrid({
   children,
@@ -104,9 +133,9 @@ export function WorkMetadataCard({ kind, children, className }: WorkMetadataCard
           {label}
         </span>
       </div>
-      <p className="metadata-value font-display text-foreground text-sm leading-snug font-semibold">
+      <div className={cn("metadata-value", METADATA_VALUE_CLASS, METADATA_VALUE_MDX_CHILD)}>
         {children}
-      </p>
+      </div>
     </div>
   );
 }
@@ -136,15 +165,16 @@ function WorkHeaderMetaItem({ kind, value, href }: WorkHeaderMetaItemProps) {
           href={href}
           target="_blank"
           rel="noreferrer noopener"
-          className="text-accent hover:text-accent/80 font-display inline-flex min-h-[44px] items-center gap-1.5 text-sm leading-snug font-semibold break-words transition-colors"
+          className={cn(
+            "text-accent hover:text-accent/80 inline-flex min-h-[44px] items-center gap-1.5 break-words transition-colors",
+            METADATA_VALUE_CLASS,
+          )}
         >
           {value}
           <span aria-hidden="true">↗</span>
         </a>
       ) : (
-        <p className="font-display text-foreground text-sm leading-snug font-semibold break-words">
-          {value}
-        </p>
+        <p className={cn("break-words", METADATA_VALUE_CLASS)}>{value}</p>
       )}
     </div>
   );

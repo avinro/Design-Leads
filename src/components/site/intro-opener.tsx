@@ -42,9 +42,7 @@ export function IntroOpener({ onComplete }: IntroOpenerProps) {
   const lenis = useLenis();
 
   const [introPhrases] = useState(() => {
-    const desktop =
-      typeof window !== "undefined" &&
-      window.matchMedia(`(min-width: ${String(INTRO_MD_MIN_WIDTH_PX)}px)`).matches;
+    const desktop = window.matchMedia(`(min-width: ${String(INTRO_MD_MIN_WIDTH_PX)}px)`).matches;
     const first = desktop ? homeContent.intro.phrase1.desktop : homeContent.intro.phrase1.mobile;
     return [first, homeContent.intro.phrase2];
   });

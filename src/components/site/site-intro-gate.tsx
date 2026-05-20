@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useSyncExternalStore } from "react";
 import type { ReactNode } from "react";
 
 import { IntroOpener } from "@/components/site/intro-opener";
@@ -15,10 +15,10 @@ import { scheduleRefreshLenisBounds } from "@/lib/scroll/refresh-lenis-bounds";
 // Hard render gate for the first-session intro experience.
 //
 // State machine:
-//   Client: reads sessionStorage synchronously in the useState initializer.
-//   Server: always "ready" so marketing HTML stays in the document for SEO.
+//   Server and hydration: getServerSnapshot returns "ready" so HTML matches.
+//   After hydration, getSnapshot reads sessionStorage and switches to "intro" when needed.
 //   First visit pairs with INTRO_BLOCK_FIRST_PAINT_SCRIPT in the root layout,
-//   which covers the SSR homepage until React mounts IntroOpener.
+//   which covers the SSR homepage until IntroOpener mounts.
 //   - "intro"     — first visit: renders IntroOpener only
 //   - "ready"     — returning visit OR after intro completes: mounts children
 //
@@ -27,9 +27,27 @@ import { scheduleRefreshLenisBounds } from "@/lib/scroll/refresh-lenis-bounds";
 
 type GateState = "intro" | "ready";
 
-function readGateState(): GateState {
-  if (typeof window === "undefined") return "ready";
+const introGateListeners = new Set<() => void>();
+
+function subscribeIntroGate(onStoreChange: () => void) {
+  introGateListeners.add(onStoreChange);
+  return () => {
+    introGateListeners.delete(onStoreChange);
+  };
+}
+
+function notifyIntroGateChange() {
+  introGateListeners.forEach((listener) => {
+    listener();
+  });
+}
+
+function getIntroGateSnapshot(): GateState {
   return sessionStorage.getItem(INTRO_SEEN_SESSION_KEY) ? "ready" : "intro";
+}
+
+function getIntroGateServerSnapshot(): GateState {
+  return "ready";
 }
 
 interface SiteIntroGateProps {
@@ -37,7 +55,11 @@ interface SiteIntroGateProps {
 }
 
 export function SiteIntroGate({ children }: SiteIntroGateProps) {
-  const [state, setState] = useState<GateState>(readGateState);
+  const state = useSyncExternalStore(
+    subscribeIntroGate,
+    getIntroGateSnapshot,
+    getIntroGateServerSnapshot,
+  );
   const lenis = useLenis();
 
   // Returning visitors: inline script does not add the pending class; clear if present.
@@ -57,7 +79,7 @@ export function SiteIntroGate({ children }: SiteIntroGateProps) {
     sessionStorage.setItem(INTRO_SEEN_SESSION_KEY, "1");
     sessionStorage.setItem(INTRO_JUST_COMPLETED_SESSION_KEY, "1");
     clearIntroPendingMark();
-    setState("ready");
+    notifyIntroGateChange();
   };
 
   if (state === "intro") {

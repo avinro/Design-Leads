@@ -73,6 +73,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${googleSansFlex.variable} ${manrope.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
