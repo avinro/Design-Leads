@@ -802,59 +802,28 @@ export function BranchTree({ icon, label, hint, children, className }: BranchTre
         ? "md:grid-cols-3"
         : "md:grid-cols-2 lg:grid-cols-4";
 
-  // Semantic cadence colors for different branch types
-  const cadenceColors = [
-    {
-      dot: "bg-cyan-500",
-      border: "border-cyan-400/30",
-      bg: "bg-cyan-50/40 dark:bg-cyan-950/20",
-      label: "text-cyan-700 dark:text-cyan-300",
-    },
-    {
-      dot: "bg-blue-500",
-      border: "border-blue-400/30",
-      bg: "bg-blue-50/40 dark:bg-blue-950/20",
-      label: "text-blue-700 dark:text-blue-300",
-    },
-    {
-      dot: "bg-purple-500",
-      border: "border-purple-400/30",
-      bg: "bg-purple-50/40 dark:bg-purple-950/20",
-      label: "text-purple-700 dark:text-purple-300",
-    },
-    {
-      dot: "bg-emerald-500",
-      border: "border-emerald-400/30",
-      bg: "bg-emerald-50/40 dark:bg-emerald-950/20",
-      label: "text-emerald-700 dark:text-emerald-300",
-    },
-  ];
-
   return (
     <div className={cn("my-12", className)}>
-      {/* Root node with enhanced styling */}
+      {/* Root node — minimal styling */}
       <div className="mb-8 flex justify-center">
-        <div className="inline-flex max-w-lg items-center gap-3 rounded-xl border border-slate-700/50 bg-gradient-to-br from-slate-900 to-slate-800 px-5 py-4 text-slate-50 shadow-md sm:px-7 sm:py-5 dark:from-slate-800 dark:to-slate-900">
-          <IconBadge icon={icon} className="border-slate-600/30 bg-slate-700/40 text-slate-100" />
+        <div className="border-border bg-muted/30 text-foreground inline-flex max-w-lg items-center gap-3 rounded-2xl border px-5 py-4 sm:px-7 sm:py-5">
+          <IconBadge icon={icon} className="border-border/50 bg-muted text-foreground" />
           <div className="text-left">
             <p className="font-display text-sm leading-tight font-bold sm:text-base">{label}</p>
-            {hint && <p className="mt-0.5 text-xs leading-snug text-slate-300">{hint}</p>}
+            {hint && <p className="text-muted-foreground mt-0.5 text-xs leading-snug">{hint}</p>}
           </div>
         </div>
       </div>
 
-      {/* Enhanced vertical connector with gradient effect */}
+      {/* Vertical connector — subtle divider */}
       <div aria-hidden="true" className="mb-6 flex justify-center">
-        <div className="relative h-8 w-px">
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-400/60 to-slate-300/20 dark:from-slate-600/60 dark:to-slate-700/20" />
-        </div>
+        <div className="bg-border/50 h-8 w-px" />
       </div>
 
-      {/* Branch columns with semantic color coding */}
-      <div className={cn("grid grid-cols-1 gap-5 md:gap-6", gridClass)}>
+      {/* Branch columns — neutral styling */}
+      <div className={cn("grid grid-cols-1 gap-4 sm:gap-6", gridClass)}>
         {branches.map((branch, i) => {
           const bp = branch.props;
-          const cadenceStyle = cadenceColors[i % cadenceColors.length];
 
           const items = Children.toArray(bp.children).filter(
             (c): c is ReactElement<FlowItemProps> => isValidElement(c),
@@ -863,24 +832,11 @@ export function BranchTree({ icon, label, hint, children, className }: BranchTre
           return (
             <section
               key={i}
-              className={cn(
-                "flex flex-col rounded-xl border p-5 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md sm:p-6",
-                cadenceStyle.border,
-                cadenceStyle.bg,
-              )}
+              className="border-border bg-muted/30 flex flex-col rounded-2xl border p-5 transition-opacity duration-200 hover:opacity-80 sm:p-6"
             >
-              <h3
-                className={cn(
-                  "font-display mb-5 flex items-center gap-2.5 text-sm font-bold tracking-wide uppercase",
-                )}
-              >
-                <span
-                  className={cn("h-2.5 w-2.5 rounded-full", cadenceStyle.dot)}
-                  aria-hidden="true"
-                />
-                <span className={cn("text-xs tracking-widest", cadenceStyle.label)}>
-                  {bp.title}
-                </span>
+              <h3 className="font-display text-foreground mb-5 flex items-center gap-2.5 text-sm font-bold tracking-wide uppercase">
+                <span className="bg-muted/60 h-2.5 w-2.5 rounded-full" aria-hidden="true" />
+                <span className="text-xs tracking-widest">{bp.title}</span>
               </h3>
 
               <ol role="list" className="flex flex-col gap-3">

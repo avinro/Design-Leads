@@ -186,44 +186,6 @@ The product was structured around complementary journeys across WhatsApp and web
   </Branch>
 </BranchTree>
 
-**Important states:**
-
-<StateGrid columns={3}>
-  <StateItem
-    icon="loader"
-    label="Processing"
-    hint="Receipt uploaded — AI extracting; status in WhatsApp"
-    tone="warning"
-  />
-  <StateItem
-    icon="check-circle-2"
-    label="Processed"
-    hint="Categorized — summary in WhatsApp + link to table"
-    tone="positive"
-  />
-  <StateItem
-    icon="alert-triangle"
-    label="Needs review"
-    hint="Low confidence or off categorization — flagged in table"
-    tone="warning"
-  />
-  <StateItem icon="clock" label="Pending" hint="Payment due in the future" tone="neutral" />
-  <StateItem icon="check" label="Paid" hint="Invoice marked as settled" tone="positive" />
-  <StateItem icon="alert-octagon" label="Overdue" hint="Past due, still unpaid" tone="negative" />
-  <StateItem
-    icon="scroll-text"
-    label="Empty state"
-    hint="New user — onboarding prompt in web app"
-    tone="neutral"
-  />
-  <StateItem
-    icon="layout-dashboard"
-    label="Loading"
-    hint="Dashboard fetching — skeleton cards and charts"
-    tone="neutral"
-  />
-</StateGrid>
-
 ## Final solution
 
 ### Flow 1: Receipt Upload via WhatsApp
